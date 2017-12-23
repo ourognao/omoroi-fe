@@ -1,9 +1,8 @@
+const { join } = require('path')
+const webpack = require('webpack')
 module.exports = {
-  /*
-  ** Headers of the page
-  */
   head: {
-    title: 'omoroi-fe',
+    title: 'Omoroi',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -23,9 +22,9 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** Run ESLint on save
-    */
+    vendor: [
+      'vuetify'
+    ],
     extend (config, ctx) {
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({
@@ -35,6 +34,24 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
-  }
+    },
+    plugins: [
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          stylus: {
+            import: ['~assets/css/func']
+          }
+        }
+      })
+    ]
+  },
+  plugins: [
+    '~plugins/vuetify'
+  ],
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000'
+  },
+  css: [
+    { src: join(__dirname, 'assets/css/app.styl'), lang: 'styl' }
+  ],
 }

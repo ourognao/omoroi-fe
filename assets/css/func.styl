@@ -1,0 +1,119 @@
+t(val)
+  unit(val / 16px, rem)
+
+p(large, small)
+  "calc(%s + (1rem - 14px) * (%s - %s) / (16 - 14))" % (unit(small, px) large small)
+
+vmax()
+  calc(100vh - 56px - (16px + (16px - 14px) * (24 - 16) / (16 - 14)) * 2)
+  // calc(100vh - 56px - (16px + (1rem - 14px) * (24 - 16) / (16 - 14)) * 2)
+
+.f-middle
+  display flex
+  align-items center
+
+.f-center
+  display flex
+  justify-content center
+
+.f-horizontal
+  display flex
+  flex-direction row
+
+.f-wrap
+  display flex
+  flex-wrap wrap
+
+.f-right
+  display flex
+  justify-content flex-end
+
+.f-layout-input
+  .flex
+    padding 0
+  .subheader
+    padding-bottom t(18)
+  .input-group
+    margin 0
+  .checkbox label
+    top t(-2)
+
+.f-label
+  color #5c5c5c
+  font-size 12px
+  font-weight 200
+
+.f-flash
+  @keyframes flash {
+    0% {
+      background: none
+    }
+    50% {
+      background: #cfd8dc
+    }
+    100% {
+      background: none
+    }
+  }
+  animation: flash 1.5s ease-in-out
+
+$my-spacers := {
+  zero: 0,
+  one: t(6),
+  two: t(12),
+  three: t(24),
+  four: t(48),
+  five: t(96)
+}
+$i = 0
+for level, spacer in $my-spacers
+  .f-mt{$i}
+    margin-top: spacer !important
+  .f-mr{$i}
+    margin-right: spacer !important
+  .f-mb{$i}
+    margin-bottom: spacer !important
+  .f-ml{$i}
+    margin-left: spacer !important
+  .f-mx{$i}
+    margin-left: spacer !important
+    margin-right: spacer !important
+  .f-my{$i}
+    margin-top: spacer !important
+    margin-bottom: spacer !important
+  .f-ma{$i}
+    margin: spacer spacer !important
+
+  .f-pt{$i}
+    padding-top: spacer !important
+  .f-pr{$i}
+    padding-right: spacer !important
+  .f-pb{$i}
+    padding-bottom: spacer !important
+  .f-pl{$i}
+    padding-left: spacer !important
+  .f-px{$i}
+    padding-left: spacer !important
+    padding-right: spacer !important
+  .f-py{$i}
+    padding-top: spacer !important
+    padding-bottom: spacer !important
+  .f-pa{$i}
+    padding: spacer spacer !important
+
+  $i = $i + 1
+
+$my-weights := {
+  zero: 0,
+  one: 100,
+  two: 300,
+  three: 500,
+  four: 700,
+  five: 900
+}
+$i = 0
+for level, weight in $my-weights
+  .f-fw{$i}
+    font-weight: weight !important
+
+  $i = $i + 1
