@@ -1,0 +1,21 @@
+base:
+  head:
+    title: Omoroi
+  menu:
+    english: English
+    japanese: 日本語
+    sign_up: Sign up
+    sign_out: Sign out
+
+top:
+  index:
+    title: Top
+  event:
+    title: Events
+  secret:
+    title: Secret
+  team:
+    title: Team
+    sub:
+      i01: Login
+      i02: Registration

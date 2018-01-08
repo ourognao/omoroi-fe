@@ -11,6 +11,8 @@ module.exports = {
     'html'
   ],
   // add your custom rules here
-  rules: {},
+  rules: {
+    "import/no-webpack-loader-syntax": "off"
+  },
   globals: {}
 }

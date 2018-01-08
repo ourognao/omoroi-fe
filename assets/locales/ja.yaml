@@ -1,0 +1,21 @@
+base:
+  head:
+    title: おもろい
+  menu:
+    english: English
+    japanese: 日本語
+    sign_up: ユーザー登録
+    sign_out: ログアウト
+
+top:
+  index:
+    title: トップ
+  event:
+    title: イベント
+  secret:
+    title: 秘密のページ
+  team:
+    title: チーム
+    sub:
+      i01: ログイン
+      i02: 登録

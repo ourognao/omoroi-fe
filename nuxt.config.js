@@ -23,7 +23,8 @@ module.exports = {
   */
   build: {
     vendor: [
-      'vuetify'
+      'vuetify',
+      'vue-i18n'
     ],
     extend (config, ctx) {
       if (ctx.dev && ctx.isClient) {
@@ -45,8 +46,14 @@ module.exports = {
       })
     ]
   },
+  router: {
+    middleware: [
+      'i18n'
+    ]
+  },
   plugins: [
-    '~plugins/vuetify'
+    '~plugins/vuetify',
+    '~plugins/i18n'
   ],
   env: {
     baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000'
