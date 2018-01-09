@@ -1,1 +1,0 @@
-/Users/bago/RailsProjects/omoroi/omoroi-fe/pages/index.vue
