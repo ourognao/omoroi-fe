@@ -1,2 +1,4 @@
 1 mettre le tourniquer
 2 mettre login
+
+ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
