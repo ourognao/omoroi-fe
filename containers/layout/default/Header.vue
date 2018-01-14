@@ -1,6 +1,19 @@
 <template lang="pug">
 v-app#layout-default-header
+  v-toolbar.primary(dark fixed)
+    v-toolbar-items
+      v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
+        v-icon public
+        span.f-ml1 {{ $t('base.menu.english') }}
+      v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact)
+        v-icon public
+        span.f-ml1 {{ $t('base.menu.japanese') }}
+    v-toolbar-title {{ $store.state.base.layout.current ? $t(`${$store.state.base.layout.current}.title`) : '' }}
+    v-spacer
+    v-toolbar-side-icon(@click.native.stop="drawer = !drawer")
+  
   v-navigation-drawer(
+    right
     persistent
     light
     :mini-variant.sync="mini"
@@ -56,20 +69,6 @@ v-app#layout-default-header
           v-icon public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
-
-  v-toolbar.primary(dark fixed)
-    v-toolbar-side-icon(@click.native.stop="drawer = !drawer")
-    v-toolbar-title {{ $store.state.base.layout.current ? $t(`${$store.state.base.layout.current}.title`) : '' }}
-    v-spacer
-    v-toolbar-items
-      v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
-        v-icon public
-        span.f-ml1 {{ $t('base.menu.english') }}
-      v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact)
-        v-icon public
-        span.f-ml1 {{ $t('base.menu.japanese') }}
-  slot
-
 </template>
 
 <!-- ============================================================================ -->

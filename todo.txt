@@ -1,5 +1,2 @@
-1 mettre nodeJS folder
-2 mettre color bar en bleu
-3 mettre menu a droite
-4 mettre le tourniquer
-5 mettre login
+1 mettre le tourniquer
+2 mettre login
