@@ -2,12 +2,8 @@
 v-app#layout-default-header
   v-navigation-drawer(
     right
-    persistent
-    light
-    :mini-variant.sync="mini"
+    temporary
     v-model="drawer"
-    overflow
-    enable-resize-watcher
   )
     v-list.f-pa0
       v-list-tile(avatar tag="div")
@@ -15,9 +11,6 @@ v-app#layout-default-header
           img(src="/images/logo/simplified.jpg")
         v-list-tile-content
           v-list-tile-title.l-logo.grey--text {{ $t('base.head.title') }}
-        v-list-tile-action
-          v-btn(icon @click.native.stop="mini = !mini")
-            v-icon chevron_left
 
     v-list.f-pt0(dense)
       v-divider
@@ -43,28 +36,48 @@ v-app#layout-default-header
             v-list-tile-title.f-fw2 {{ $t(item.title) }}
           v-list-tile-action
             v-icon keyboard_arrow_down
-        v-list-tile(v-for="subItem in item.subItems" :key="subItem.subTitleKey" ripple @click="goto($router, subItem.href)")
+        v-list-tile(
+          v-for="subItem in item.subItems"
+          :key="subItem.subTitleKey"
+          ripple
+          @click="goto($router, subItem.href)"
+        )
           v-list-tile-title.f-fw2 {{ $t(subItem.subTitleKey) }}
 
-      v-list-tile(key="100" v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`" exact)
+      v-list-tile(
+        key="100"
+        v-if="$store.state.base.locale.selected === 'ja'"
+        nuxt
+        ripple
+        :to="`/en${fullPath}`"
+        exact
+      )
         v-list-tile-action
           v-icon public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.english') }}
 
-      v-list-tile(key="101" v-else nuxt router ripple :href="fullPath.replace(/^\\/[^\/]+/, '')" exact)
+      v-list-tile(
+        key="101"
+        v-else
+        nuxt
+        router
+        ripple
+        :href="fullPath.replace(/^\\/[^\/]+/, '')"
+        exact
+      )
         v-list-tile-action
           v-icon public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
 
   v-toolbar(fixed class="border-blue")
-    img(src="/images/logo/original.png" height="100%")
+    img.original-logo(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
     v-spacer
     v-toolbar-items
-      v-btn(flat nuxt :to="$store.state.base.locale.selected === 'ja' ? `/en${fullPath}` : ''")
+      v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
         img(src="/images/language/32/en.png")
-      v-btn(flat nuxt :to="fullPath ? fullPath.replace(/^\\/[^\/]+/, '') : ''" exact)
+      v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact)
         img(src="/images/language/32/jp.png")
     v-toolbar-side-icon(@click.native.stop="drawer = !drawer")
   slot
@@ -75,7 +88,10 @@ v-app#layout-default-header
 <style lang="stylus">
 #layout-default-header
   .border-blue
-    border-top: 7px solid #1a237e
+    border-top: 5px solid #1a237e
+  
+  .original-logo
+    cursor pointer
   
   .l-logo
     font-weight 600
@@ -93,7 +109,9 @@ v-app#layout-default-header
 <!-- ============================================================================ -->
 
 <script>
+import mixins from '~/utils/mixins'
 export default {
+  mixins: [mixins],
   data () {
     return {
       expensionList: [
@@ -110,8 +128,7 @@ export default {
         { titleKey: 'top.event.title', icon: 'event', href: '/event', visible: true },
         { titleKey: 'top.secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
       ],
-      drawer: true,
-      mini: false
+      drawer: false
     }
   },
   computed: {

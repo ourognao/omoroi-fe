@@ -2,3 +2,35 @@
 2 mettre login
 
 ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+
+
+- can the thin blue line be a little thinner? Same as cry55
+-> I reduce from 7px to 5px, is it OK ?
+
+- yah I guess only need 1 flag
+-> OK I put only one flag :)
+
+- also it is highlighted (can we just have it be the same as the background color always)
+-> Fixed
+
+- can we make the flag more square, to match dimensions of fb and Twitter buttons 
+I'm using iconfinder to find flags. Could you have a look at it and tell me which set of flag you like 
+https://www.iconfinder.com/flag-icons?price=free
+
+- let’s keep background that kind of light grey (looks good)
+-> Understood
+
+- the menu doesn’t seem to be on the mobile version
+-> I reframed the menu can you see it and click it ?
+
+- can we make the left logo clickable, so always links back to home/top page?
+-> Done
+
+- yah need better resolution pics (deleted the bad res pics and added maybe better ones)
+-> Waiting for your new pics :)
+
+- yah mobile version pics are too big
+-Working on it now
+
+- also both versions seem to load slow
+-> What do you mean by slow ? You mean the rotation of the pictures ?
