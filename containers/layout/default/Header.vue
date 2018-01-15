@@ -7,7 +7,7 @@ v-app#layout-default-header
   )
     v-list.f-pa0
       v-list-tile(avatar tag="div")
-        v-list-tile-avatar.l-list-tile
+        v-list-tile-avatar
           img(src="/images/logo/simplified.jpg")
         v-list-tile-content
           v-list-tile-title.l-logo.grey--text {{ $t('base.head.title') }}
