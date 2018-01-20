@@ -28,6 +28,8 @@ Social
 Language 
 Sports
 
+Just had a thought... can put a really thin line between language and sns buttons?
+
 
 
 img.original-logo(v-if="$store.state.base.locale.selected === 'ja'" src="/images/language/128/en.png" @click="goto($router, `/en${fullPath}`)")

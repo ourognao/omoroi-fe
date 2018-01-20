@@ -1,12 +1,18 @@
 <template lang="pug">
-  v-carousel
-    v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
-    v-container#top-index-main(fluid)
+  div#top-index-main(fluid)
+    v-carousel(class="hidden-sm-and-down")
+      v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
+    v-carousel(class="carouselHeight hidden-md-only hidden-lg-only hidden-xl-only" hide-controls lazy)
+      v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
+    v-container
 </template>
 
 <!-- ============================================================================ -->
 
 <style lang="stylus">
+#top-index-main
+  .carouselHeight
+    height:200px
 </style>
 
 <!-- ============================================================================ -->
