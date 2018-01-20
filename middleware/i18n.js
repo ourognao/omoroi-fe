@@ -4,6 +4,7 @@ export default function ({ app, store, route, params, error, redirect, hotReload
   if (store.state.base.locale.locales.indexOf(locale) === -1) {
     return error({ message: 'This page could not be found.', statusCode: 404 })
   }
+  console.log(locale)
   store.commit('merge', ['base.locale', { selected: locale }])
   app.i18n.locale = locale
   // app.validator.setLocale(locale)

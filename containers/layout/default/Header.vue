@@ -11,6 +11,9 @@ v-app#layout-default-header
           img(src="/images/logo/simplified.jpg")
         v-list-tile-content
           v-list-tile-title.l-logo.grey--text {{ $t('base.head.title') }}
+        v-list-tile-action
+          v-btn(icon @click.native.stop="drawer = false")
+            v-icon close
 
     v-list.f-pt0(dense)
       v-divider
@@ -72,13 +75,37 @@ v-app#layout-default-header
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
 
   v-toolbar(fixed class="border-blue")
-    img.original-logo(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
+    img.pointable(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
     v-spacer
     v-toolbar-items
-      v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
-        img(src="/images/language/32/en.png")
-      v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact)
-        img(src="/images/language/32/jp.png")
+      v-list(class="white-background")
+        v-list-tile(
+          key="100"
+          v-if="$store.state.base.locale.selected === 'ja'"
+          nuxt
+          ripple
+          :to="`/en${fullPath}`"
+          exact
+        )
+          img.pointable(
+            src="/images/language/128/en.png"
+            width="32"
+            height="32"
+          )
+        v-list-tile(
+          key="101"
+          v-else
+          nuxt
+          router
+          ripple
+          :href="fullPath.replace(/^\\/[^\/]+/, '')"
+          exact
+        )
+          img.pointable(
+            src="/images/language/128/jp.png"
+            width="32"
+            height="32"
+          )
     v-toolbar-side-icon(@click.native.stop="drawer = !drawer")
   slot
 </template>
@@ -87,12 +114,12 @@ v-app#layout-default-header
 
 <style lang="stylus">
 #layout-default-header
+  .white-background
+    background-color: #f5f5f5
   .border-blue
     border-top: 5px solid #1a237e
-  
-  .original-logo
+  .pointable
     cursor pointer
-  
   .l-logo
     font-weight 600
     font-size t(28)

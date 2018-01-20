@@ -18,9 +18,11 @@ export default {
       pictures: [
         { language: 'jp', src: '/images/top/1.jpg' },
         { language: 'jp', src: '/images/top/2.jpg' },
-        { language: 'en', src: '/images/top/3.jpg' },
-        { language: 'en', src: '/images/top/4.jpg' },
-        { language: 'en', src: '/images/top/5.jpg' }
+        { language: 'jp', src: '/images/top/3.jpg' },
+        { language: 'jp', src: '/images/top/4.jpg' },
+        { language: 'en', src: '/images/top/5.jpg' },
+        { language: 'en', src: '/images/top/6.jpg' },
+        { language: 'en', src: '/images/top/7.jpg' }
       ]
     }
   }

@@ -1,36 +1,39 @@
-1 mettre le tourniquer
-2 mettre login
-
 ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 
+- I uploaded an extra pic in the folder can you see it?
+-> Yeah I saw it and put it in the carousel. Btw, you need to tell me in what order you the pictures to slide
 
-- can the thin blue line be a little thinner? Same as cry55
--> I reduce from 7px to 5px, is it OK ?
+- The menu is now visible and expands, but can we have it drop downward like the cry55 site?
+Or can we have a closing “x” on the top right, so it can collapse back?
+-> I added the 'x' on the top right, so give it a try :)
 
-- yah I guess only need 1 flag
--> OK I put only one flag :)
-
-- also it is highlighted (can we just have it be the same as the background color always)
--> Fixed
-
-- can we make the flag more square, to match dimensions of fb and Twitter buttons 
-I'm using iconfinder to find flags. Could you have a look at it and tell me which set of flag you like 
-https://www.iconfinder.com/flag-icons?price=free
-
-- let’s keep background that kind of light grey (looks good)
--> Understood
-
-- the menu doesn’t seem to be on the mobile version
--> I reframed the menu can you see it and click it ?
-
-- can we make the left logo clickable, so always links back to home/top page?
+- can we have the “omoroi” first o be lowercase?
 -> Done
 
-- yah need better resolution pics (deleted the bad res pics and added maybe better ones)
--> Waiting for your new pics :)
+- can the flag be a bit closer to the menu bars
+-> I moved it as closer as I could, put it more closer will break the menu icon
 
-- yah mobile version pics are too big
--Working on it now
+- Also can we have it say menu above like cry55?
+-> which menu ? Are you talking about 3 links (social language and sport ?)
 
-- also both versions seem to load slow
--> What do you mean by slow ? You mean the rotation of the pictures ?
+- pic timing is good, just the first time I tried to open the page it took sometime to load
+-> Should not be a problem as soon as I will found a way to reduce the size of pictures
+
+- as for mobile picture size, can we make them the same size as either cry55 or our current site?
+But before the pictures, again want the 3 categories like the cry55 site
+-> working on it..
+
+
+Social 
+Language 
+Sports
+
+
+
+img.original-logo(v-if="$store.state.base.locale.selected === 'ja'" src="/images/language/128/en.png" @click="goto($router, `/en${fullPath}`)")
+      img.original-logo(v-else src="/images/language/128/jp.png" @click="goto($router, fullPath.replace(/^\\/[^\/]+/, ''))")
+
+v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
+        img(src="/images/language/128/en.png" width="32" class="pa-0")
+      v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact class="pa-0")
+        img(src="/images/language/128/jp.png" width="32" class="pa-0")
