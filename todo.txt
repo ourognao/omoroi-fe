@@ -39,3 +39,11 @@ v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/
         img(src="/images/language/128/en.png" width="32" class="pa-0")
       v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact class="pa-0")
         img(src="/images/language/128/jp.png" width="32" class="pa-0")
+
+
+
+Yeeeah I modified the size of the pictures on mobile :) !!
+It's so beautifile on mobile now, I really like it.
+Since all images are smaller, not only the quality of the image look better, but also the loading time has been greatly reduced.
+(I had new pics, so the first time you load the website it's a bit long but once you refresh, since images are cached, it should be fast)
+Tell me what do you think :).

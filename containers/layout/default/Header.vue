@@ -89,8 +89,8 @@ v-app#layout-default-header
         )
           img.pointable(
             src="/images/language/128/en.png"
-            width="32"
-            height="32"
+            width="24"
+            height="24"
           )
         v-list-tile(
           key="101"
@@ -103,8 +103,8 @@ v-app#layout-default-header
         )
           img.pointable(
             src="/images/language/128/jp.png"
-            width="32"
-            height="32"
+            width="24"
+            height="24"
           )
     v-toolbar-side-icon(@click.native.stop="drawer = !drawer")
   slot
