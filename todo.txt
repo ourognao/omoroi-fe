@@ -47,3 +47,50 @@ It's so beautifile on mobile now, I really like it.
 Since all images are smaller, not only the quality of the image look better, but also the loading time has been greatly reduced.
 (I had new pics, so the first time you load the website it's a bit long but once you refresh, since images are cached, it should be fast)
 Tell me what do you think :).
+
+
+
+v-list(class="white-background displayInline")
+        v-list-tile.border-grey(
+          class="half-scaled"
+          key="99"
+          v-if="$store.state.base.locale.selected === 'ja'"
+          nuxt
+          ripple
+          :to="`/en${fullPath}`"
+          exact
+        )
+          img.pointable(
+            src="/images/language/128/en.png"
+            width="48"
+            height="48"
+          )
+        v-list-tile.border-grey(
+          class="half-scaled"
+          key="100"
+          v-if="$store.state.base.locale.selected === 'ja'"
+          nuxt
+          ripple
+          :to="`/en${fullPath}`"
+          exact
+        )
+          img.pointable(
+            src="/images/language/128/en.png"
+            width="48"
+            height="48"
+          )
+        v-list-tile.border-grey(
+          class="half-scaled"
+          key="101"
+          v-else
+          nuxt
+          router
+          ripple
+          :href="fullPath.replace(/^\\/[^\/]+/, '')"
+          exact
+        )
+          img.pointable(
+            src="/images/language/128/jp.png"
+            width="48"
+            height="48"
+          )
