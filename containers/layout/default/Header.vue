@@ -77,35 +77,25 @@ v-app#layout-default-header
   v-toolbar(fixed class="border-blue")
     img.pointable(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
     v-spacer
-    v-toolbar-items
-      v-list(class="white-background")
-        v-list-tile(
-          key="100"
-          v-if="$store.state.base.locale.selected === 'ja'"
-          nuxt
-          ripple
-          :to="`/en${fullPath}`"
-          exact
+    v-toolbar-items.half-scaled
+      v-btn(flat nuxt ripple :to="`/en${fullPath}`")
+        img.pointable(
+          src="/images/sns/fb.png"
+          width="48"
+          height="48"
         )
-          img.pointable(
-            src="/images/language/128/en.png"
-            width="24"
-            height="24"
-          )
-        v-list-tile(
-          key="101"
-          v-else
-          nuxt
-          router
-          ripple
-          :href="fullPath.replace(/^\\/[^\/]+/, '')"
-          exact
+      v-btn.border-grey(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
+        img.pointable(
+          src="/images/language/128/en.png"
+          width="48"
+          height="48"
         )
-          img.pointable(
-            src="/images/language/128/jp.png"
-            width="24"
-            height="24"
-          )
+      v-btn.border-grey(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact)
+        img.pointable(
+          src="/images/language/128/jp.png"
+          width="48"
+          height="48"
+        )
     v-toolbar-side-icon(@click.native.stop="drawer = !drawer")
   slot
 </template>
@@ -114,12 +104,23 @@ v-app#layout-default-header
 
 <style lang="stylus">
 #layout-default-header
+  .half-scaled
+    transform: scale(0.5, 0.5)  translate(100px, 0px)
+    -ms-transform: scale(0.5, 0.5) translate(100px, 0px)
+    -webkit-transform: scale(0.5, 0.5) translate(100px, 0px)
+  
+  .border-grey
+    border-left: 2px solid #424242
+  
   .white-background
     background-color: #f5f5f5
+  
   .border-blue
     border-top: 5px solid #1a237e
+  
   .pointable
     cursor pointer
+  
   .l-logo
     font-weight 600
     font-size t(28)
