@@ -13,9 +13,9 @@
 #top-index-main
   .delimiterBackground div.carousel__controls
     background: none
-    transform: scale(0.7, 0.7)
-    -ms-transform: scale(0.7, 0.7)
-    -webkit-transform: scale(0.7, 0.7)
+    transform: scale(0.5, 0.5)
+    -ms-transform: scale(0.5, 0.5)
+    -webkit-transform: scale(0.5, 0.5)
   .carouselHeight
     height:200px
 </style>
