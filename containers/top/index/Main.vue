@@ -1,6 +1,6 @@
 <template lang="pug">
   div#top-index-main(fluid)
-    v-carousel(class="hidden-sm-and-down")
+    v-carousel( delimiter-icon="lens" class="hidden-sm-and-down delimiterBackground")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-carousel(class="carouselHeight hidden-md-only hidden-lg-only hidden-xl-only" hide-controls)
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
@@ -11,6 +11,11 @@
 
 <style lang="stylus">
 #top-index-main
+  .delimiterBackground div.carousel__controls
+    background: none
+    transform: scale(0.7, 0.7)
+    -ms-transform: scale(0.7, 0.7)
+    -webkit-transform: scale(0.7, 0.7)
   .carouselHeight
     height:200px
 </style>
