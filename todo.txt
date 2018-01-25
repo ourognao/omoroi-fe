@@ -1,96 +1,15 @@
 ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 
-- I uploaded an extra pic in the folder can you see it?
--> Yeah I saw it and put it in the carousel. Btw, you need to tell me in what order you the pictures to slide
-
-- The menu is now visible and expands, but can we have it drop downward like the cry55 site?
-Or can we have a closing “x” on the top right, so it can collapse back?
--> I added the 'x' on the top right, so give it a try :)
-
-- can we have the “omoroi” first o be lowercase?
--> Done
-
-- can the flag be a bit closer to the menu bars
--> I moved it as closer as I could, put it more closer will break the menu icon
-
-- Also can we have it say menu above like cry55?
--> which menu ? Are you talking about 3 links (social language and sport ?)
-
-- pic timing is good, just the first time I tried to open the page it took sometime to load
--> Should not be a problem as soon as I will found a way to reduce the size of pictures
-
 - as for mobile picture size, can we make them the same size as either cry55 or our current site?
 But before the pictures, again want the 3 categories like the cry55 site
--> working on it..
+-> working on it.. (Social, Language, Sports)
 
 
-Social 
-Language 
-Sports
-
-Just had a thought... can put a really thin line between language and sns buttons?
-
-
-
-img.original-logo(v-if="$store.state.base.locale.selected === 'ja'" src="/images/language/128/en.png" @click="goto($router, `/en${fullPath}`)")
-      img.original-logo(v-else src="/images/language/128/jp.png" @click="goto($router, fullPath.replace(/^\\/[^\/]+/, ''))")
-
-v-btn(flat v-if="$store.state.base.locale.selected === 'ja'" nuxt ripple :to="`/en${fullPath}`")
-        img(src="/images/language/128/en.png" width="32" class="pa-0")
-      v-btn(flat v-else nuxt ripple :to="fullPath.replace(/^\\/[^\/]+/, '')" exact class="pa-0")
-        img(src="/images/language/128/jp.png" width="32" class="pa-0")
-
-
-
-Yeeeah I modified the size of the pictures on mobile :) !!
-It's so beautifile on mobile now, I really like it.
-Since all images are smaller, not only the quality of the image look better, but also the loading time has been greatly reduced.
-(I had new pics, so the first time you load the website it's a bit long but once you refresh, since images are cached, it should be fast)
-Tell me what do you think :).
-
-
-
-v-list(class="white-background displayInline")
-        v-list-tile.border-grey(
-          class="half-scaled"
-          key="99"
-          v-if="$store.state.base.locale.selected === 'ja'"
-          nuxt
-          ripple
-          :to="`/en${fullPath}`"
-          exact
-        )
-          img.pointable(
-            src="/images/language/128/en.png"
-            width="48"
-            height="48"
-          )
-        v-list-tile.border-grey(
-          class="half-scaled"
-          key="100"
-          v-if="$store.state.base.locale.selected === 'ja'"
-          nuxt
-          ripple
-          :to="`/en${fullPath}`"
-          exact
-        )
-          img.pointable(
-            src="/images/language/128/en.png"
-            width="48"
-            height="48"
-          )
-        v-list-tile.border-grey(
-          class="half-scaled"
-          key="101"
-          v-else
-          nuxt
-          router
-          ripple
-          :href="fullPath.replace(/^\\/[^\/]+/, '')"
-          exact
-        )
-          img.pointable(
-            src="/images/language/128/jp.png"
-            width="48"
-            height="48"
-          )
+- Sorry but made a new menu image, because the previous one looked like the letters were getting cut off a bit
+-> I uploaded the new pic, it looks good :)
+- also can you please change the left Omoroi logo (I raised the lettering to align with the buttons... hopefully)
+-> I uploaded the new pic, and it's aligned with buttons :)
+- small point (but might be the device thing again), the thin vertical line seems to move down/up a bit when switching between English and japanese
+-> Good eyes ! I didn't notice -> Fixed !
+- also on mobile, English seems to first option. Can you please make japanese page first (with British flag showing)?
+Really ? Do know what the problem could be since the default is definetely japanese...Are you sure you access the page from the root ?
