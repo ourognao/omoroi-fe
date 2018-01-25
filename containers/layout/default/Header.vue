@@ -78,19 +78,19 @@ v-app#layout-default-header
     img.pointable(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
     v-spacer
     a(href="https://twitter.com/lifeomoroi" target="_blank")
-      img.pointable(src="/images/sns/twitter.png" class="menu-icons")
+      img.pointable(src="/images/sns/twitter.png" class="menu-icons mt-1")
     a(href="https://facebook.com/omoroilife" target="_blank")
-      img.pointable(src="/images/sns/facebook.png" class="menu-icons")
+      img.pointable(src="/images/sns/facebook.png" class="menu-icons border-grey mt-1")
     img.pointable(
       v-if="$store.state.base.locale.selected === 'ja'"
       src="/images/language/128/en.png"
-      class="menu-icons border-grey"
+      class="menu-icons"
       @click="goto($router, `/en${fullPath}`)"
     )
     a(v-else :href="fullPath.replace(/^\\/[^\/]+/, '')")
       img.pointable(
         src="/images/language/128/jp.png"
-        class="menu-icons border-grey"
+        class="menu-icons"
       )
     img.pointable(src="/images/menu.png" class="menu-icons v-toolbar-side-icon" @click="drawer = !drawer")
   slot
@@ -110,9 +110,9 @@ v-app#layout-default-header
     -webkit-transform: scale(0.5, 0.5) translate(100px, 0px)
 
   .border-grey
-    border-left: 2px solid #424242
-    margin-left: 7px
-    padding-left: 5px
+    border-right: 2px solid #424242
+    margin-right: 1px
+    padding-right: 5px
     width: 32px
   
   .white-background
