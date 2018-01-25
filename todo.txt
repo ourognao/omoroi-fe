@@ -3,13 +3,3 @@ ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 - as for mobile picture size, can we make them the same size as either cry55 or our current site?
 But before the pictures, again want the 3 categories like the cry55 site
 -> working on it.. (Social, Language, Sports)
-
-
-- Sorry but made a new menu image, because the previous one looked like the letters were getting cut off a bit
--> I uploaded the new pic, it looks good :)
-- also can you please change the left Omoroi logo (I raised the lettering to align with the buttons... hopefully)
--> I uploaded the new pic, and it's aligned with buttons :)
-- small point (but might be the device thing again), the thin vertical line seems to move down/up a bit when switching between English and japanese
--> Good eyes ! I didn't notice -> Fixed !
-- also on mobile, English seems to first option. Can you please make japanese page first (with British flag showing)?
-Really ? Do know what the problem could be since the default is definetely japanese...Are you sure you access the page from the root ?

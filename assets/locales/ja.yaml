@@ -8,6 +8,10 @@ base:
     sign_out: ログアウト
 
 top:
+  tabs:
+    social: ソーシャル
+    language: 言語交換
+    sports: スポーツ
   index:
     title: トップ
   event:
