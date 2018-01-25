@@ -8,6 +8,10 @@ base:
     sign_out: Sign out
 
 top:
+  tabs:
+    social: Social
+    language: Language
+    sports: Sports
   index:
     title: Top
   event:
