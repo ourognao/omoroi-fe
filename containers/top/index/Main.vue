@@ -27,16 +27,16 @@
     width: 1px
     position: absolute
     right: 0
-    top: 12px
+    top: 6px
     background-color: #FFF!important
   .tabs div
     background-color: red
     color: #FFF
     text-align: center
     font-size: 12px
-    font-weight: 400
-    min-height: 30px
-    padding-top: 9px
+    font-weight: 600
+    min-height: 20px
+    padding-top: 2px
   .delimiter-background div.carousel__controls
     background: none
     transform: scale(0.5, 0.5)
