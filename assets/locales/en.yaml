@@ -9,9 +9,9 @@ base:
 
 top:
   tabs:
-    social: Social
-    language: Language
-    sports: Sports
+    social: SOCIAL
+    language: LANGUAGE
+    sports: SPORTS
   index:
     title: Top
   event:
