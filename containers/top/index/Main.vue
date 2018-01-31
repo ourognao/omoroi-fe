@@ -18,7 +18,7 @@
     position:fixed
     top:60px
     width:100%
-    z-index:100
+    z-index:2
   .delimitor
     position: relative
   .delimitor:after
@@ -34,7 +34,7 @@
     color: #FFF
     text-align: center
     font-size: 12px
-    font-weight: 600
+    font-weight: 500
     min-height: 20px
     padding-top: 2px
   .delimiter-background div.carousel__controls
