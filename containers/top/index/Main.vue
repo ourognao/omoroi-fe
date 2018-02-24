@@ -16,7 +16,7 @@
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i01') }}
-        v-flex.caption(xs7 class="text-xs-right current-months")
+        v-flex.caption(xs7 class="text-xs-right")
           a(
             href="#"
             v-if="currentMonth.date !== $currentDate"
@@ -81,8 +81,6 @@
 #top-index-main
   .eventHeader
     border-bottom 1px solid #1a237e
-    .current-months
-      margin-top:-14px
     .month
       padding 0 3px 0 3px
     button
