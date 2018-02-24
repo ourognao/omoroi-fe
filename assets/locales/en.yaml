@@ -1,3 +1,19 @@
+labels:
+  common:
+    months:
+      jan: Jan
+      feb: Feb
+      mar: Mar
+      apr: Apr
+      may: May
+      jun: Jun
+      jul: Jul
+      aug: Aug
+      sept: Sept
+      oct: Oct
+      nov: Nov
+      dec: Dec
+
 base:
   head:
     title: omoroi
@@ -8,16 +24,29 @@ base:
     sign_out: Sign out
 
 top:
+  index:
+    title: Top
+  
   tabs:
     social: SOCIAL
     language: LANGUAGE
     sports: SPORTS
-  index:
-    title: Top
-  event:
+  
+  events:
     title: Events
+    list:
+      common:
+        more: More Info
+        frame: ''
+      title:
+        i01: Events
+      info:
+        i01: Attending
+        i02: Waiting list
+  
   secret:
     title: Secret
+  
   team:
     title: Team
     sub:

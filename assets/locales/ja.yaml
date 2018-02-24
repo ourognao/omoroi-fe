@@ -1,3 +1,19 @@
+labels:
+  common:
+    months:
+      jan: 1月
+      feb: 2月
+      mar: 3月
+      apr: 4月
+      may: 5月
+      jun: 6月
+      jul: 7月
+      aug: 8月
+      sept: 9月
+      oct: 10月
+      nov: 11月
+      dec: 12月
+
 base:
   head:
     title: おもろい
@@ -12,12 +28,25 @@ top:
     social: ソーシャル
     language: ランゲージ
     sports: スポーツ
+  
   index:
     title: トップ
-  event:
+  
+  events:
     title: イベント
+    list:
+      common:
+        more: 詳細
+        frame: 枠
+      title:
+        i01: イベント
+      info:
+        i01: 残り枠
+        i02: キャンセル待ち名簿
+  
   secret:
     title: 秘密のページ
+  
   team:
     title: チーム
     sub:
