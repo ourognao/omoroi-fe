@@ -40,6 +40,8 @@ top:
         frame: ''
       title:
         i01: Events
+        i02: Past Events
+        i03: View All
       info:
         i01: Attending
         i02: Waiting list

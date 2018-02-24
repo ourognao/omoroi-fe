@@ -23,36 +23,68 @@
             @click.stop.prevent.native="setMonths(false, currentMonths[0].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_before
           span(v-for="(month, index) in currentMonths" :key="index")
-            span.month(
+            a.month(
+              href="#"
               :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
               @click="setMonth(month.date)")
               | {{ $t(`labels.common.months.${month.name}`) }}
           v-btn.navigate-btn(icon @click="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
-      
-      v-layout(v-for="(event, index) in events" :key="index" class="eventDetails")
-        v-flex(xs4)
-          img(:src="event.picture" style="border-radius:10px")
-        v-flex(xs8 class="rightSection")
-          v-layout(row)
-            v-flex.body-1(xs12) {{ event.title }}
-          v-layout.pt-1(row)
-            v-flex.location(xs12)
-              v-icon location_on
-              span {{ event.location }}
-          v-layout.mt-2(row)
-            v-flex(xs6)
-              v-icon event
-              span {{ event.date }}
-            v-flex.attending(xs6)
-              | {{ $t('top.events.list.info.i01') }}
-              span.ml-1.red-text {{ setAttending(event) }}
-          v-layout.mt-2(row)
-            v-flex(xs6)
-              v-icon access_time
-              span {{ setTime(event) }}
-            v-flex(xs6)
-              v-btn.primary {{ $t('top.events.list.common.more') }}
+      div(class="event-container")
+        v-layout(v-for="(event, index) in events" :key="index" class="eventDetails")
+          v-flex(xs4)
+            img(:src="event.picture" style="border-radius:10px")
+          v-flex(xs8 class="rightSection")
+            v-layout(row)
+              v-flex.body-1(xs12) {{ event.title }}
+            v-layout.pt-1(row)
+              v-flex.location(xs12)
+                v-icon location_on
+                span {{ event.location }}
+            v-layout.mt-2(row)
+              v-flex(xs6)
+                v-icon event
+                span {{ event.date }}
+              v-flex.attending(xs6)
+                | {{ $t('top.events.list.info.i01') }}
+                span.ml-1.red-text {{ setAttending(event) }}
+            v-layout.mt-2(row)
+              v-flex(xs6)
+                v-icon access_time
+                span {{ setTime(event) }}
+              v-flex(xs6)
+                v-btn.primary {{ $t('top.events.list.common.more') }}
+
+      v-layout.mt-4(row class="eventHeader")
+        v-flex.body-1(xs5)
+          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+          | {{ $t('top.events.list.title.i02') }}
+        v-flex.body-1(xs7 class="text-xs-right")
+          a(:href="pastEventsHref") {{ $t('top.events.list.title.i03') }}
+      div(class="event-container")
+        v-layout(v-for="(event, index) in events" :key="index" class="eventDetails")
+          v-flex(xs4)
+            img(:src="event.picture" style="border-radius:10px")
+          v-flex(xs8 class="rightSection")
+            v-layout(row)
+              v-flex.body-1(xs12) {{ event.title }}
+            v-layout.pt-1(row)
+              v-flex.location(xs12)
+                v-icon location_on
+                span {{ event.location }}
+            v-layout.mt-2(row)
+              v-flex(xs6)
+                v-icon event
+                span {{ event.date }}
+              v-flex.attending(xs6)
+                | {{ $t('top.events.list.info.i01') }}
+                span.ml-1.red-text {{ setAttending(event) }}
+            v-layout.mt-2(row)
+              v-flex(xs6)
+                v-icon access_time
+                span {{ setTime(event) }}
+              v-flex(xs6)
+                v-btn.primary {{ $t('top.events.list.common.more') }}
 </template>
 
 <!-- ============================================================================ -->
@@ -63,9 +95,6 @@
     border-bottom 1px solid #1a237e
     .month
       padding 0 3px 0 3px
-      cursor pointer
-      &:hover
-        background-color rgba(0, 0, 0, .12)
     
     button
       width 20px
@@ -74,6 +103,10 @@
     height 0
     margin 0
     margin-bottom 20px
+  
+  .event-container
+    height 15em
+    overflow scroll
   
   .eventDetails
     font-size 11px
@@ -161,6 +194,7 @@ export default {
   mixins: [mixins],
   data () {
     return {
+      pastEventsHref: '/team/login',
       pictures: [
         { language: 'jp', src: '/images/top/1.jpg' },
         { language: 'jp', src: '/images/top/2.jpg' },
