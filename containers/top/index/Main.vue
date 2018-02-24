@@ -16,7 +16,7 @@
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i01') }}
-        v-flex.caption(xs7 class="text-xs-right")
+        v-flex.caption(xs7)
           v-btn.navigate-btn(
             icon
             v-if="currentMonth.date !== $currentDate"
@@ -26,14 +26,14 @@
             a.month(
               href="#"
               :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
-              @click="setMonth(month.date)")
+              @click.stop.prevent="setMonth(month.date)")
               | {{ $t(`labels.common.months.${month.name}`) }}
           v-btn.navigate-btn(icon @click="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
       div(class="event-container")
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs4)
-            img(:src="event.picture" style="border-radius:10px")
+            img.future(:src="event.picture" style="border-radius:10px")
           v-flex(xs8 class="rightSection")
             v-layout(row)
               v-flex.caption(xs12) {{ event.title }}
@@ -62,28 +62,15 @@
         v-flex.caption(xs7 class="text-xs-right")
           a(:href="pastEventsHref") {{ $t('top.events.list.title.i03') }}
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
-        v-flex(xs4)
-          img(:src="event.picture" style="border-radius:10px")
-        v-flex(xs8 class="rightSection")
+        v-flex(xs2)
+          img.past(:src="event.picture" style="border-radius:10px")
+        v-flex.ml-3(xs9 class="rightSection")
+          v-layout(row)
+            v-flex.grey-text(xs12) {{ event.date }}
           v-layout(row)
             v-flex.caption(xs12) {{ event.title }}
-          v-layout.pt-1(row)
-            v-flex.location(xs12)
-              v-icon location_on
-              span {{ event.location }}
-          v-layout.mt-2(row)
-            v-flex(xs6)
-              v-icon event
-              span {{ event.date }}
-            v-flex.attending(xs6)
-              | {{ $t('top.events.list.info.i01') }}
-              span.ml-1.red-text {{ setAttending(event) }}
-          v-layout.mt-2(row)
-            v-flex(xs6)
-              v-icon access_time
-              span {{ setTime(event) }}
-            v-flex(xs6)
-              v-btn.primary {{ $t('top.events.list.common.more') }}
+        v-flex(xs1 style="line-height: 50px")
+          v-icon.past-details(class="icon-blue icons events") navigate_next
 </template>
 
 <!-- ============================================================================ -->
@@ -108,15 +95,22 @@
     overflow scroll
   
   .eventDetails
-    font-size 11px
+    font-size 10px
     padding 5px 0 2px 0
     border-bottom 1px solid #bdbdbd
     img
-      width 100px
-      height 85px
-    i 
+      &.future
+        width 100px
+        height 85px
+      &.past
+        width 60px
+        height 60px
+    i
       font-size 15px
       margin 0 5px 1px 0
+      &.past-details
+        color #bdbdbd
+        font-size 35px
   
   .rightSection
     margin-left 10px
