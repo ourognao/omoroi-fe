@@ -70,7 +70,7 @@
           v-layout(row)
             v-flex.caption(xs12) {{ event.title }}
         v-flex(xs1 style="line-height: 50px")
-          v-icon.past-details(class="icon-blue icons events") navigate_next
+          v-icon.past-details(class="icon-blue icons events") chevron_right
 </template>
 
 <!-- ============================================================================ -->
