@@ -17,10 +17,10 @@
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i01') }}
         v-flex.caption(xs7 class="text-xs-right current-months")
-          v-btn(
-            icon
+          a(
+            href="#"
             v-if="currentMonth.date !== $currentDate"
-            @click.stop.prevent.native="setMonths(false, currentMonths[0].date)")
+            @click.stop.prevent="setMonths(false, currentMonths[0].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_before
           span(v-for="(month, index) in currentMonths" :key="index")
             a.month(
@@ -28,7 +28,9 @@
               :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
               @click.stop.prevent="setMonth(month.date)")
               | {{ $t(`labels.common.months.${month.name}`) }}
-          v-btn(icon @click="setMonths(true, currentMonths[2].date)")
+          a(
+            href="#"
+            @click="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
       div(class="event-container")
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
