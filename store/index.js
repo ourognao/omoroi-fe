@@ -56,6 +56,15 @@ export const state = () => ({
       userId: null,
       dialog: false
     }
+  },
+
+  events: {
+    index: {
+      events: null,
+      scroll: 0,
+      eventId: null,
+      dialog: false
+    }
   }
 })
 

@@ -3,3 +3,21 @@ ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 - as for mobile picture size, can we make them the same size as either cry55 or our current site?
 But before the pictures, again want the 3 categories like the cry55 site
 -> working on it.. (Social, Language, Sports)
+
+レベル・クラス日程集合時間会場残り枠
+
+if current month is May then display
+< May June July >
+when you click on right button '>' then display 
+< August September October > 
+when you click on left button '<' then display 
+< February March April > 
+
+If currently may I display on the right
+< May June July >
+and display  events of May (by default)
+But the user can click June or July as well
+
+cursor pointer
+      &:hover
+        background-color rgba(0, 0, 0, .12)

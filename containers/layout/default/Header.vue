@@ -77,8 +77,8 @@ v-app#layout-default-header
   v-toolbar(fixed class="border-blue")
     img.pointable(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
     v-spacer
-    a(href="https://twitter.com/lifeomoroi" target="_blank")
-      img.pointable(src="/images/sns/twitter.png" class="menu-icons mt-1")
+    a(href="https://www.instagram.com/omoroilife" target="_blank")
+      img.pointable(src="/images/sns/instagram.png" class="menu-icons mt-1")
     a(href="https://facebook.com/omoroilife" target="_blank")
       img.pointable(src="/images/sns/facebook.png" class="menu-icons border-grey mt-1")
     img.pointable(
@@ -156,7 +156,7 @@ export default {
       ],
       items: [
         { titleKey: 'top.index.title', icon: 'dashboard', href: '/', visible: true },
-        { titleKey: 'top.event.title', icon: 'event', href: '/event', visible: true },
+        { titleKey: 'top.events.title', icon: 'event', href: '/event', visible: true },
         { titleKey: 'top.secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
       ],
       drawer: false
