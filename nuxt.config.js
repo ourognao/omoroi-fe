@@ -52,7 +52,8 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: '/images/favicon-16.png', sizes: '16x16' },
       { rel: 'icon', type: 'image/png', href: '/images/favicon-32.png', sizes: '32x32' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   loading: { color: '#3B8070' }
