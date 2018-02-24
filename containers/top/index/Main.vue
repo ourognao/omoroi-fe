@@ -13,10 +13,10 @@
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-container
       v-layout(row class="eventHeader")
-        v-flex.body-1(xs5)
+        v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i01') }}
-        v-flex.body-1(xs7 class="text-xs-right")
+        v-flex.caption(xs7 class="text-xs-right")
           v-btn.navigate-btn(
             icon
             v-if="currentMonth.date !== $currentDate"
@@ -31,12 +31,12 @@
           v-btn.navigate-btn(icon @click="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
       div(class="event-container")
-        v-layout(v-for="(event, index) in events" :key="index" class="eventDetails")
+        v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs4)
             img(:src="event.picture" style="border-radius:10px")
           v-flex(xs8 class="rightSection")
             v-layout(row)
-              v-flex.body-1(xs12) {{ event.title }}
+              v-flex.caption(xs12) {{ event.title }}
             v-layout.pt-1(row)
               v-flex.location(xs12)
                 v-icon location_on
@@ -56,35 +56,34 @@
                 v-btn.primary {{ $t('top.events.list.common.more') }}
 
       v-layout.mt-4(row class="eventHeader")
-        v-flex.body-1(xs5)
+        v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i02') }}
-        v-flex.body-1(xs7 class="text-xs-right")
+        v-flex.caption(xs7 class="text-xs-right")
           a(:href="pastEventsHref") {{ $t('top.events.list.title.i03') }}
-      div(class="event-container")
-        v-layout(v-for="(event, index) in events" :key="index" class="eventDetails")
-          v-flex(xs4)
-            img(:src="event.picture" style="border-radius:10px")
-          v-flex(xs8 class="rightSection")
-            v-layout(row)
-              v-flex.body-1(xs12) {{ event.title }}
-            v-layout.pt-1(row)
-              v-flex.location(xs12)
-                v-icon location_on
-                span {{ event.location }}
-            v-layout.mt-2(row)
-              v-flex(xs6)
-                v-icon event
-                span {{ event.date }}
-              v-flex.attending(xs6)
-                | {{ $t('top.events.list.info.i01') }}
-                span.ml-1.red-text {{ setAttending(event) }}
-            v-layout.mt-2(row)
-              v-flex(xs6)
-                v-icon access_time
-                span {{ setTime(event) }}
-              v-flex(xs6)
-                v-btn.primary {{ $t('top.events.list.common.more') }}
+      v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
+        v-flex(xs4)
+          img(:src="event.picture" style="border-radius:10px")
+        v-flex(xs8 class="rightSection")
+          v-layout(row)
+            v-flex.caption(xs12) {{ event.title }}
+          v-layout.pt-1(row)
+            v-flex.location(xs12)
+              v-icon location_on
+              span {{ event.location }}
+          v-layout.mt-2(row)
+            v-flex(xs6)
+              v-icon event
+              span {{ event.date }}
+            v-flex.attending(xs6)
+              | {{ $t('top.events.list.info.i01') }}
+              span.ml-1.red-text {{ setAttending(event) }}
+          v-layout.mt-2(row)
+            v-flex(xs6)
+              v-icon access_time
+              span {{ setTime(event) }}
+            v-flex(xs6)
+              v-btn.primary {{ $t('top.events.list.common.more') }}
 </template>
 
 <!-- ============================================================================ -->
@@ -220,7 +219,8 @@ export default {
         { text: this.$t('labels.common.months.nov'), value: 'nov', calendarMonth: '11' },
         { text: this.$t('labels.common.months.dec'), value: 'dec', calendarMonth: '12' }
       ],
-      events: []
+      futurEvents: [],
+      pastEvents: []
     }
   },
   computed: {
@@ -241,9 +241,19 @@ export default {
         : `${event.remaining}/${event.capacity}`
     },
     getEventsByMonth () {
-      this.events = this.$events.filter(
+      this.futurEvents = this.$events.filter(
         event => event.date.substr(0, 7) === this.currentMonth.date
       )
+    },
+    setPastEvents () {
+      let context = this
+      this.$events.filter(function (event) {
+        let date = event.date.substr(0, 7)
+        let difference = moment(date).diff(context.$currentDate)
+        if (context.pastEvents.length < 3 && difference < 0) {
+          context.pastEvents.push(event)
+        }
+      })
     },
     setMonth (date) {
       this.currentMonth = {
@@ -287,6 +297,7 @@ export default {
         context.currentMonth = currentThreeMonths[0]
         context.currentMonths = currentThreeMonths
         context.getEventsByMonth()
+        context.setPastEvents()
       }, 100)
     }
   }
