@@ -4,5 +4,14 @@ create user development with password 'omoroi2018';
 grant select on all tables in schema public to development;
 alter role development with superuser;
 
-v-btn.navigate-btn(icon @click="setMonths(true, currentMonths[2].date)")
-            v-icon.mb-1(class="icon-blue icons events") navigate_next
+picture:
+title:
+location:
+date:
+startTime:
+endTime:
+remaining:
+capacity:
+type:
+tags:
+explanation:
