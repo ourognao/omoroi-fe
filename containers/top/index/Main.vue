@@ -28,7 +28,7 @@
               :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
               @click.stop.prevent="setMonth(month.date)")
               | {{ $t(`labels.common.months.${month.name}`) }}
-          a(
+          a.next-months(
             href="#"
             @click="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
@@ -71,6 +71,8 @@
             v-flex.grey-text(xs12) {{ event.date }}
           v-layout(row)
             v-flex.caption(xs12) {{ event.title }}
+          v-layout(row)
+            v-flex(xs12 class="explanation") {{ setBeginningOfText(event.explanation) }}
         v-flex(xs1 style="line-height: 50px")
           v-icon.past-details(class="icon-blue icons events") chevron_right
 </template>
@@ -83,6 +85,8 @@
     border-bottom 1px solid #1a237e
     .month
       padding 0 3px 0 3px
+    .next-months
+      margin-right:-6px
     button
       width 20px
   
@@ -94,6 +98,8 @@
     font-size 10px
     padding 5px 0 2px 0
     border-bottom 1px solid #bdbdbd
+    .explanation
+      font-size:11px
     img
       &.future
         width 100px
@@ -222,6 +228,12 @@ export default {
     }
   },
   methods: {
+    setBeginningOfText (text) {
+      if (text.length > 70) {
+        return text.substring(0, 70) + '...'
+      }
+      return text
+    },
     setTime (event) {
       return event.endTime ? `${event.startTime}-${event.endTime}` : event.startTime
     },

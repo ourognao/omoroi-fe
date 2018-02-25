@@ -31,7 +31,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -43,7 +44,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -55,7 +57,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -67,7 +70,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -79,7 +83,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/soccer.jpg',
@@ -91,7 +96,8 @@ export default {
           remaining: 6,
           capacity: 11,
           type: 'SP',
-          tags: ['soccer']
+          tags: ['soccer'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -103,7 +109,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -115,7 +122,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -127,7 +135,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -139,7 +148,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -151,7 +161,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -163,7 +174,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -175,7 +187,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -187,7 +200,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'SP',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -199,7 +213,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'SC',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/basketball.jpg',
@@ -211,7 +226,8 @@ export default {
           remaining: 2,
           capacity: 8,
           type: 'LX',
-          tags: ['basketball']
+          tags: ['basketball'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -223,7 +239,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -235,7 +252,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
           picture: '/images/tmp/party.jpg',
@@ -247,7 +265,8 @@ export default {
           remaining: 5,
           capacity: 30,
           type: 'SC',
-          tags: ['party']
+          tags: ['party'],
+          explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         }
       ]
     }])
