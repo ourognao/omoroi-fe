@@ -68,7 +68,7 @@
           img.past(:src="event.picture" style="border-radius:10px")
         v-flex.ml-3(xs9 class="rightSection")
           v-layout(row)
-            v-flex.grey-text(xs12) {{ event.date }}
+            v-flex.grey-text.dark(xs12) {{ event.date }}
           v-layout(row)
             v-flex.caption(xs12) {{ event.title }}
           v-layout(row)
@@ -105,8 +105,8 @@
         width 100px
         height 85px
       &.past
-        width 60px
-        height 60px
+        width 40px
+        height 40px
     i
       font-size 15px
       margin 0 5px 1px 0
@@ -127,6 +127,8 @@
   
   .grey-text
     color #bdbdbd
+    &.dark
+      color #616161
 
   .red-text
     color #C62828
@@ -229,8 +231,8 @@ export default {
   },
   methods: {
     setBeginningOfText (text) {
-      if (text.length > 70) {
-        return text.substring(0, 70) + '...'
+      if (text.length > 30) {
+        return text.substring(0, 30) + '...'
       }
       return text
     },
@@ -252,7 +254,7 @@ export default {
       this.$events.filter(function (event) {
         let date = event.date.substr(0, 7)
         let difference = moment(date).diff(context.$currentDate)
-        if (context.pastEvents.length < 3 && difference < 0) {
+        if (context.pastEvents.length < 5 && difference < 0) {
           context.pastEvents.push(event)
         }
       })
