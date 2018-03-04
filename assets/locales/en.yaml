@@ -45,6 +45,8 @@ top:
       info:
         i01: Attending
         i02: Waiting list
+  footer:
+    copyright: © 2015 - 2018 Omoroilife, Inc
   
   secret:
     title: Secret

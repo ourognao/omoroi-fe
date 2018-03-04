@@ -15,14 +15,3 @@ capacity:
 type:
 tags:
 explanation:
-
-
-
-- 3 lines (max of 30 letters + '...')
-- picture shorter
-- 5 events listed
-- date darker
-currently #616161 but if you want more 
-https://material.io/guidelines/style/color.html#color-color-palette
-and tell me the code
-- I have actually space between picture and info :/

@@ -36,7 +36,7 @@
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs4)
             img.future(:src="event.picture" style="border-radius:10px")
-          v-flex(xs8 class="rightSection")
+          v-flex.ml-3(xs8 class="rightSection")
             v-layout(row)
               v-flex.caption(xs12) {{ event.title }}
             v-layout.pt-1(row)
@@ -64,9 +64,9 @@
         v-flex.caption(xs7 class="text-xs-right")
           a(:href="pastEventsHref") {{ $t('top.events.list.title.i03') }}
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
-        v-flex(xs2)
+        v-flex(xs1)
           img.past(:src="event.picture" style="border-radius:10px")
-        v-flex.ml-3(xs9 class="rightSection")
+        v-flex.ml-4(xs11)
           v-layout(row)
             v-flex.grey-text.dark(xs12) {{ event.date }}
           v-layout(row)
@@ -75,6 +75,8 @@
             v-flex(xs12 class="explanation") {{ setBeginningOfText(event.explanation) }}
         v-flex(xs1 style="line-height: 50px")
           v-icon.past-details(class="icon-blue icons events") chevron_right
+    
+    
 </template>
 
 <!-- ============================================================================ -->
@@ -115,7 +117,6 @@
         font-size 35px
   
   .rightSection
-    margin-left 10px
     button
       height 20px
       font-size 11px
@@ -193,13 +194,13 @@ export default {
     return {
       pastEventsHref: '/team/login',
       pictures: [
-        { language: 'jp', src: '/images/top/1.jpg' },
-        { language: 'jp', src: '/images/top/2.jpg' },
-        { language: 'jp', src: '/images/top/3.jpg' },
-        { language: 'jp', src: '/images/top/4.jpg' },
-        { language: 'en', src: '/images/top/5.jpg' },
-        { language: 'en', src: '/images/top/6.jpg' },
-        { language: 'en', src: '/images/top/7.jpg' }
+        { language: 'jp', src: '/images/top/carousel/1.jpg' },
+        { language: 'jp', src: '/images/top/carousel/2.jpg' },
+        { language: 'jp', src: '/images/top/carousel/3.jpg' },
+        { language: 'jp', src: '/images/top/carousel/4.jpg' },
+        { language: 'en', src: '/images/top/carousel/5.jpg' },
+        { language: 'en', src: '/images/top/carousel/6.jpg' },
+        { language: 'en', src: '/images/top/carousel/7.jpg' }
       ],
       currentMonth: [],
       currentMonths: this.setMonths(true),
