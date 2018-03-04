@@ -29,6 +29,11 @@
 <!-- ============================================================================ -->
 
 <style lang="stylus">
+$bg-color = #212121
+$dot-color = black
+$dot-size = 2px
+$dot-space = 5px
+
 #layout-default-footer
   .grey-text
     color #bdbdbd
@@ -38,14 +43,11 @@
 
   .footer-main
     &.dotted-background
-      background-color #212121
-      background-image -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%)
-      background-image -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%)
-      background-image -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%)
-      background-image repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%)
-      -webkit-background-size 3px 3px
-      -moz-background-size 3px 3px
-      background-size 3px 3px
+      background:
+        linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+        $dot-color;
+      background-size: $dot-space $dot-space;
     &.top-arrow
       area:hover, area:active, area:focus
           outline none
@@ -62,7 +64,7 @@
     &.sns
       img
         width 24px
-        margin 15px 10px 15px 10px
+        margin 8px 10px 5px 10px
     &.copyright
       padding 0.3em 0 0.3em 0
 </style>

@@ -1,5 +1,13 @@
 labels:
   common:
+    sports:
+      volleyball: バレーボール
+      kickboxing: キックボクシング
+      basketball: バスケットボール
+      pingpong: 卓球
+      badminton: バドミントン
+      futsal: フットサル
+      other: その他
     months:
       jan: 1月
       feb: 2月
@@ -42,6 +50,7 @@ top:
         i01: イベント
         i02: 過去のイベント
         i03: 全て見る
+        i04: スポーツカテゴリー
       info:
         i01: 残り枠
         i02: キャンセル待ち名簿

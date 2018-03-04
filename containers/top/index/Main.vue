@@ -13,6 +13,21 @@
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-container
       v-layout(row class="eventHeader")
+        v-flex.caption(xs120)
+          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+          | {{ $t('top.events.list.title.i04') }}
+      div.ma-2(class="search-container dotted-background")
+        v-layout.pl-2(row wrap)
+          v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
+            v-checkbox.pt-0(
+              :label="sport.text"
+              v-model="sports"
+              :value="sport.value"
+              hide-details
+              @change="getEventsBySport()"
+            )
+      
+      v-layout(row class="eventHeader")
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i01') }}
@@ -82,16 +97,41 @@
 <!-- ============================================================================ -->
 
 <style lang="stylus">
+$bg-color = white
+$dot-color = #bdbdbd
+$dot-size = 1px
+$dot-space = 2px
+
 #top-index-main
   .eventHeader
     border-bottom 1px solid #1a237e
     .month
       padding 0 3px 0 3px
     .next-months
-      margin-right:-6px
+      margin-right -6px
     button
       width 20px
   
+  .search-container
+    border 3px solid #bdbdbd
+    i
+      font-size 17px
+      width 11px
+      height 11px
+      &.material-icons
+        background: white
+    label
+      margin-left -10px
+      font-size 12px
+      font-weight 500
+      color black
+    &.dotted-background
+      background:
+        linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+        $dot-color;
+      background-size: $dot-space $dot-space;
+
   .event-container
     height 15em
     overflow scroll
@@ -187,11 +227,22 @@
 <script>
 import mixins from '~/utils/mixins'
 import moment from 'moment'
+// import Vue from 'vue'
 
 export default {
   mixins: [mixins],
   data () {
     return {
+      sports: [],
+      sportItems: [
+        { text: this.$t('labels.common.sports.volleyball'), value: 'volleyball' },
+        { text: this.$t('labels.common.sports.kickboxing'), value: 'kickboxing' },
+        { text: this.$t('labels.common.sports.basketball'), value: 'basketball' },
+        { text: this.$t('labels.common.sports.pingpong'), value: 'pingpong' },
+        { text: this.$t('labels.common.sports.badminton'), value: 'badminton' },
+        { text: this.$t('labels.common.sports.futsal'), value: 'futsal' },
+        { text: this.$t('labels.common.sports.other'), value: 'other' }
+      ],
       pastEventsHref: '/team/login',
       pictures: [
         { language: 'jp', src: '/images/top/carousel/1.jpg' },
@@ -245,17 +296,32 @@ export default {
         ? this.$t('top.events.list.info.i02')
         : `${event.remaining}/${event.capacity}`
     },
+    getEventsBySport () {
+      this.$nextTick(function () {
+        this.getEventsByMonth()
+      })
+    },
     getEventsByMonth () {
-      this.futurEvents = this.$events.filter(
-        event => event.date.substr(0, 7) === this.currentMonth.date
-      )
+      let context = this
+      let sports = this.sports.length === 0 ? this.sportItems.map(sport => sport.value) : this.sports
+      let futurEvents = []
+      this.futurEvents = this.$events.filter(function (event) {
+        if (event.date.substr(0, 7) === context.currentMonth.date) {
+          event.tags.forEach(function (tags) {
+            if (sports.includes(tags)) {
+              futurEvents.push(event)
+            }
+          })
+        }
+      })
+      this.futurEvents = futurEvents
     },
     setPastEvents () {
       let context = this
       this.$events.filter(function (event) {
         let date = event.date.substr(0, 7)
         let difference = moment(date).diff(context.$currentDate)
-        if (context.pastEvents.length < 5 && difference < 0) {
+        if (context.pastEvents.length < 3 && difference < 0) {
           context.pastEvents.push(event)
         }
       })

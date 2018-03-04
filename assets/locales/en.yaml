@@ -1,5 +1,14 @@
 labels:
   common:
+    sports:
+      volleyball: Volleyball
+      kickboxing: Kickboxing
+      basketball: Basketball
+      pingpong: Ping Pong
+      badminton: Badminton
+      futsal: Futsal
+      other: Other
+    
     months:
       jan: Jan
       feb: Feb
@@ -42,6 +51,7 @@ top:
         i01: Events
         i02: Past Events
         i03: View All
+        i04: Sport Category
       info:
         i01: Attending
         i02: Waiting list
