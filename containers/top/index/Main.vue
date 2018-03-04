@@ -227,7 +227,6 @@ $dot-space = 2px
 <script>
 import mixins from '~/utils/mixins'
 import moment from 'moment'
-// import Vue from 'vue'
 
 export default {
   mixins: [mixins],
