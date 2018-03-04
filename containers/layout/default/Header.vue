@@ -1,5 +1,5 @@
 <template lang="pug">
-v-app#layout-default-header
+#layout-default-header
   v-navigation-drawer(
     right
     temporary
@@ -92,7 +92,7 @@ v-app#layout-default-header
         src="/images/language/128/jp.png"
         class="menu-icons"
       )
-    img.pointable(src="/images/menu.png" class="menu-icons v-toolbar-side-icon" @click="drawer = !drawer")
+    img.pointable(src="/images/top/menu.png" class="menu-icons v-toolbar-side-icon" @click="drawer = !drawer")
   slot
 </template>
 

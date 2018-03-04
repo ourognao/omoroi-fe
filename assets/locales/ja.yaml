@@ -45,6 +45,8 @@ top:
       info:
         i01: 残り枠
         i02: キャンセル待ち名簿
+  footer:
+    copyright: © 2015 - 2018 Omoroilife, Inc
   
   secret:
     title: 秘密のページ
