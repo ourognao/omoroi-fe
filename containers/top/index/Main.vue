@@ -11,15 +11,16 @@
       hide-controls
       style="box-shadow:")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
-    v-container
+    v-container.pt-3
       v-layout(row class="eventHeader")
         v-flex.caption(xs120)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i04') }}
-      div.ma-2(class="search-container dotted-background")
+      div.ma-2.mb-3(class="search-container dotted-background")
         v-layout.pl-2(row wrap)
           v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
             v-checkbox.pt-0(
+              color="primary"
               :label="sport.text"
               v-model="sports"
               :value="sport.value"
@@ -47,32 +48,35 @@
             href="#"
             @click="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
+      
       div(class="event-container")
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
-          v-flex(xs4)
+          v-flex(xs3)
             img.future(:src="event.picture" style="border-radius:10px")
-          v-flex.ml-3(xs8 class="rightSection")
+          v-flex.ml-3(xs8)
             v-layout(row)
-              v-flex.caption(xs12) {{ event.title }}
-            v-layout.pt-1(row)
+              v-flex.caption.future(xs12) {{ event.title }}
+            v-layout(row)
+              v-flex(xs12)
+                v-icon event
+                span {{ formatDate(event.date) }}
+            v-layout(row)
+              v-flex(xs12)
+                v-icon access_time
+                span {{ setTime(event) }}
+            v-layout(row)
               v-flex.location(xs12)
                 v-icon location_on
                 span {{ event.location }}
-            v-layout.mt-2(row)
-              v-flex(xs6)
-                v-icon event
-                span {{ event.date }}
-              v-flex.attending(xs6)
-                | {{ $t('top.events.list.info.i01') }}
-                span.ml-1.red-text {{ setAttending(event) }}
-            v-layout.mt-2(row)
-              v-flex(xs6)
-                v-icon access_time
-                span {{ setTime(event) }}
-              v-flex(xs6)
-                v-btn.primary {{ $t('top.events.list.common.more') }}
+            v-layout(row)
+              v-flex.attending(xs12)
+                v-icon people_outline
+                span {{ $t('top.events.list.info.i01') }}
+                span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
+          v-flex(xs1 style="line-height: 75px")
+            v-icon.details(class="icon-blue icons events") chevron_right
 
-      v-layout.mt-4(row class="eventHeader")
+      v-layout.mt-3(row class="eventHeader")
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
           | {{ $t('top.events.list.title.i02') }}
@@ -81,7 +85,7 @@
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
         v-flex(xs1)
           img.past(:src="event.picture" style="border-radius:10px")
-        v-flex.ml-4(xs11)
+        v-flex.ml-4(xs10)
           v-layout(row)
             v-flex.grey-text.dark(xs12) {{ event.date }}
           v-layout(row)
@@ -89,7 +93,7 @@
           v-layout(row)
             v-flex(xs12 class="explanation") {{ setBeginningOfText(event.explanation) }}
         v-flex(xs1 style="line-height: 50px")
-          v-icon.past-details(class="icon-blue icons events") chevron_right
+          v-icon.details(class="icon-blue icons events") chevron_right
     
     
 </template>
@@ -142,26 +146,22 @@ $dot-space = 2px
     border-bottom 1px solid #bdbdbd
     .explanation
       font-size:11px
+    .caption
+      &.future
+        margin-left:2px
     img
       &.future
-        width 100px
-        height 85px
+        width 75px
+        height 75px
       &.past
         width 40px
         height 40px
     i
       font-size 15px
       margin 0 5px 1px 0
-      &.past-details
+      &.details
         color #bdbdbd
         font-size 35px
-  
-  .rightSection
-    button
-      height 20px
-      font-size 11px
-      margin-top -5px
-      margin-left 0
   
   .table tr
     border 0
@@ -281,6 +281,11 @@ export default {
     }
   },
   methods: {
+    setThreshold (event) {
+      if (!event.threshold) return
+      let threshold = Math.round((event.capacity * event.threshold) / 100)
+      return event.remaining <= threshold ? 'red-text' : ''
+    },
     setBeginningOfText (text) {
       if (text.length > 30) {
         return text.substring(0, 30) + '...'
@@ -306,6 +311,7 @@ export default {
       let futurEvents = []
       this.futurEvents = this.$events.filter(function (event) {
         if (event.date.substr(0, 7) === context.currentMonth.date) {
+          console.log(event.date.substr(0, 7))
           event.tags.forEach(function (tags) {
             if (sports.includes(tags)) {
               futurEvents.push(event)
