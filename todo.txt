@@ -15,3 +15,16 @@ capacity:
 type:
 tags:
 explanation:
+
+
+v-layout(row)
+              v-icon access_time
+                span {{ setTime(event) }}  
+            v-layout(row)
+              v-flex.location(xs12)
+                v-icon location_on
+                span {{ event.location }}
+            v-layout.mt-2(row)
+              v-flex.attending(xs12)
+                | {{ $t('top.events.list.info.i01') }}
+                span.ml-1.red-text {{ setAttending(event) }}
