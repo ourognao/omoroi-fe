@@ -46,7 +46,7 @@
               | {{ $t(`labels.common.months.${month.name}`) }}
           a.next-months(
             href="#"
-            @click="setMonths(true, currentMonths[2].date)")
+            @click.stop.prevent="setMonths(true, currentMonths[2].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_next
       
       div(class="event-container")
