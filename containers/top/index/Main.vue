@@ -71,7 +71,7 @@
             v-layout(row)
               v-flex.attending(xs12)
                 v-icon people_outline
-                span {{ $t('top.events.list.info.i01') }}
+                span {{ setThreshold(event) === 'red-text' ? $t('top.events.list.info.i01') : $t('top.events.list.info.i03') }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
           v-flex(xs1 style="line-height: 75px")
             v-icon.details(class="icon-blue icons events") chevron_right
@@ -300,9 +300,12 @@ export default {
       return event.endTime ? `${event.startTime}-${event.endTime}` : event.startTime
     },
     setAttending (event) {
+      let format = this.setThreshold(event) === 'red-text'
+        ? `${event.remaining}/${event.capacity}`
+        : `${event.remaining}`
       return event.remaining === event.capacity
         ? this.$t('top.events.list.info.i02')
-        : `${event.remaining}/${event.capacity}`
+        : format
     },
     getEventsBySport () {
       this.$nextTick(function () {
