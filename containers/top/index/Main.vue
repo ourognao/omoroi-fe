@@ -35,7 +35,7 @@
         v-flex.caption(xs7 class="text-xs-right")
           a(
             href="#"
-            v-if="currentMonth.date !== $currentDate"
+            v-if="!$currentDate.includes(currentMonth.date)"
             @click.stop.prevent="setMonths(false, currentMonths[0].date)")
             v-icon.mb-1(class="icon-blue icons events") navigate_before
           span(v-for="(month, index) in currentMonths" :key="index")
@@ -274,7 +274,11 @@ export default {
   },
   computed: {
     $currentDate () {
-      return moment().format('YYYY-MM')
+      return [
+        moment().format('YYYY-MM'),
+        moment().add(1, 'months').format('YYYY-MM'),
+        moment().add(2, 'months').format('YYYY-MM')
+      ]
     },
     $events () {
       return this.$store.state.events.index.events
@@ -324,7 +328,7 @@ export default {
       let context = this
       this.$events.filter(function (event) {
         let date = event.date.substr(0, 7)
-        let difference = moment(date).diff(context.$currentDate)
+        let difference = moment(date).diff(context.$currentDate[0])
         if (context.pastEvents.length < 3 && difference < 0) {
           context.pastEvents.push(event)
         }
@@ -350,7 +354,7 @@ export default {
       let monthIndex = moment(date)
       let currentMonth = moment().format('YYYY-MM')
       setTimeout(function () {
-        let currentDate = !date ? context.$currentDate : date
+        let currentDate = !date ? context.$currentDate[0] : date
         for (let i = 0; i < 3; i++) {
           if (currentDate === currentMonth) {
             currentThreeMonths.push({
