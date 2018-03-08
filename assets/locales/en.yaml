@@ -53,8 +53,9 @@ top:
         i03: View All
         i04: Sport Category
       info:
-        i01: Space Remaining
+        i01: 'Spaces Remaining:'
         i02: Waiting list
+        i03: 'Attending:'
   footer:
     copyright: © 2015 - 2018 Omoroilife, Inc
   

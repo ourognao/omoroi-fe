@@ -52,8 +52,9 @@ top:
         i03: 全て見る
         i04: スポーツカテゴリー
       info:
-        i01: 残り枠
+        i01: 残り枠：
         i02: キャンセル待ち名簿
+        i03: 参加予定：
   footer:
     copyright: © 2015 - 2018 Omoroilife, Inc
   
