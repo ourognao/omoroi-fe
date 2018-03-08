@@ -274,7 +274,6 @@ export default {
   },
   computed: {
     $currentDate () {
-      // return moment().format('YYYY-MM')
       return [
         moment().format('YYYY-MM'),
         moment().add(1, 'months').format('YYYY-MM'),
