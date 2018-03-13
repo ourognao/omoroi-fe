@@ -87,7 +87,7 @@ export default {
 
   methods: {
     scrollTop () {
-      document.documentElement.scroll({
+      window.scroll({
         top: 0,
         behavior: 'smooth'
       })
