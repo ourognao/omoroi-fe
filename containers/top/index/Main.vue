@@ -139,6 +139,8 @@ $dot-space = 2px
   .event-container
     height 15em
     overflow scroll
+    max-width 100%
+    overflow-x hidden
   
   .eventDetails
     font-size 10px
