@@ -1,16 +1,19 @@
 <template lang="pug">
 #top-index
   top-index-main
+  top-index-dialog
 </template>
 
 <!-- ============================================================================ -->
 
 <script>
 import TopIndexMain from '~/containers/top/index/Main'
+import TopIndexDialog from '~/containers/top/index/Dialog'
 
 export default {
   components: {
-    TopIndexMain
+    TopIndexMain,
+    TopIndexDialog
   },
   head () {
     return {
@@ -20,8 +23,11 @@ export default {
   async asyncData ({ query, route, store, redirect }) {
     store.commit('merge', ['base.layout', { current: 'top.index', fullPath: route.fullPath }])
     store.commit('merge', ['events.index', {
+      scroll: parseInt(query.scroll) || 0,
+      dialog: (query.dialog === 'true'),
       events: [
         {
+          id: 1,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -36,6 +42,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 2,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -50,6 +57,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 3,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -64,6 +72,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 4,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -78,6 +87,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 5,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -92,6 +102,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 6,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -106,6 +117,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 7,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Miyakojima Sports Center',
@@ -120,6 +132,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 8,
           picture: '/images/tmp/party.jpg',
           title: 'Volleyball event',
           location: 'Miyakojima Sports Center',
@@ -134,6 +147,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 9,
           picture: '/images/tmp/soccer.jpg',
           title: 'Kickboxing events',
           location: 'Roppongi',
@@ -148,6 +162,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 10,
           picture: '/images/tmp/basketball.jpg',
           title: 'Basketball Tournament',
           location: 'Ebisu',
@@ -162,6 +177,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 11,
           picture: '/images/tmp/basketball.jpg',
           title: 'Other Sport Event',
           location: 'Ebisu',
@@ -176,6 +192,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 12,
           picture: '/images/tmp/basketball.jpg',
           title: 'Ping Pong Tournament',
           location: 'Ebisu',
@@ -190,6 +207,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 13,
           picture: '/images/tmp/basketball.jpg',
           title: 'Badminton Tournament',
           location: 'Ebisu',
@@ -204,6 +222,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 14,
           picture: '/images/tmp/basketball.jpg',
           title: 'Basketball Tournament',
           location: 'Ebisu',
@@ -218,6 +237,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 15,
           picture: '/images/tmp/basketball.jpg',
           title: 'Basketball Tournament',
           location: 'Ebisu',
@@ -232,6 +252,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 16,
           picture: '/images/tmp/basketball.jpg',
           title: 'Futsal Tournament',
           location: 'Ebisu',
@@ -246,6 +267,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 17,
           picture: '/images/tmp/basketball.jpg',
           title: 'Kickboxing Tournament',
           location: 'Ebisu',
@@ -260,6 +282,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 18,
           picture: '/images/tmp/basketball.jpg',
           title: 'Basketball Tournament',
           location: 'Ebisu',
@@ -274,6 +297,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 19,
           picture: '/images/tmp/basketball.jpg',
           title: 'Pingpong Tournament',
           location: 'Ebisu',
@@ -288,6 +312,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 20,
           picture: '/images/tmp/basketball.jpg',
           title: 'Basketball Tournament',
           location: 'Ebisu',
@@ -302,6 +327,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 21,
           picture: '/images/tmp/basketball.jpg',
           title: 'Basketball Tournament',
           location: 'Ebisu',
@@ -316,6 +342,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 22,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party !!',
           location: 'Shibuya',
@@ -330,6 +357,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 23,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party 2 !!',
           location: 'Shibuya',
@@ -344,6 +372,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 24,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party 3!!',
           location: 'Shibuya',
@@ -358,6 +387,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 25,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party 3!!',
           location: 'Shibuya',
@@ -372,6 +402,7 @@ export default {
           explanation: 'Learn Swift Tokyo is a weekly meetup for people interested in learning Swift and Xcode for iOS Development. All experience levels are welcome. '
         },
         {
+          id: 26,
           picture: '/images/tmp/party.jpg',
           title: 'Language Exchange Party 3!!',
           location: 'Shibuya',
