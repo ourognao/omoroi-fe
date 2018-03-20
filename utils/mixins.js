@@ -1,3 +1,5 @@
+import changeCase from 'change-case'
+import queryString from 'query-string'
 import moment from 'moment'
 
 export default {
@@ -11,6 +13,20 @@ export default {
     path (url) {
       let locale = this.$store.state.base.locale.selected
       return (locale === 'ja' ? url : '/' + locale + url)
+    },
+    push (store, key, path, hash) {
+      store.commit('merge', [key, hash])
+
+      let hash2 = {}
+      for (let key in hash) {
+        hash2[changeCase.snakeCase(key)] = hash[key]
+      }
+      let params = queryString.stringify(hash2)
+      let localePath = store.state.base.locale.selected === 'en' ? `/en${path}` : path
+      window.history.pushState(null, null, `${localePath}?${params}`)
+      store.commit('merge', ['base.layout', {
+        fullPath: `${localePath}?${params}`
+      }])
     },
     goto (router, url) {
       let t = Date.now()

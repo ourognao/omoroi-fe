@@ -54,7 +54,7 @@
           v-flex(xs3)
             img.future(:src="event.picture" style="border-radius:10px")
           v-flex.ml-3(xs8)
-            v-layout(row)
+            v-layout.mb-1(row)
               v-flex.caption.future(xs12) {{ event.title }}
             v-layout(row)
               v-flex(xs12)
@@ -74,7 +74,8 @@
                 span {{ setThreshold(event) === 'red-text' ? $t('top.events.list.info.i01') : $t('top.events.list.info.i03') }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
           v-flex(xs1 style="line-height: 75px")
-            v-icon.details(class="icon-blue icons events") chevron_right
+            v-btn.pr-3(flat icon @click.stop.prevent.native="details(event)")
+              v-icon.details(class="icon-blue icons events") chevron_right
 
       v-layout.mt-3(row class="eventHeader")
         v-flex.caption(xs5)
@@ -153,8 +154,8 @@ $dot-space = 2px
         margin-left:2px
     img
       &.future
-        width 75px
-        height 75px
+        width 80px
+        height 80px
       &.past
         width 40px
         height 40px
@@ -284,9 +285,23 @@ export default {
     },
     $events () {
       return this.$store.state.events.index.events
+    },
+    $s () {
+      return this.$store.state.events.index
+    },
+    dialog () {
+      return this.$s.dialog
     }
   },
   methods: {
+    details (event) {
+      console.log(event)
+      this.push(this.$store, 'events.index', '/events', {
+        scroll: window.pageYOffset,
+        dialog: true,
+        eventId: event.id
+      })
+    },
     setThreshold (event) {
       if (!event.threshold) return
       let threshold = Math.round((event.capacity * event.threshold) / 100)
