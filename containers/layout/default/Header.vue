@@ -147,17 +147,17 @@ export default {
     return {
       expensionList: [
         { action: 'team',
-          title: 'top.team.title',
+          title: 'team.title',
           subItems: [
-            { subTitleKey: 'top.team.sub.i01', href: '/team/login', visible: true },
-            { subTitleKey: 'top.team.sub.i02', href: '/team/registration', visible: true }
+            { subTitleKey: 'team.sub.i01', href: '/team/login', visible: true },
+            { subTitleKey: 'team.sub.i02', href: '/team/registration', visible: true }
           ]
         }
       ],
       items: [
         { titleKey: 'top.index.title', icon: 'dashboard', href: '/', visible: true },
-        { titleKey: 'top.events.title', icon: 'event', href: '/event', visible: true },
-        { titleKey: 'top.secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
+        { titleKey: 'top.index.events.title', icon: 'event', href: '/event', visible: true },
+        { titleKey: 'secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
       ],
       drawer: false
     }

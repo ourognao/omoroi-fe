@@ -23,7 +23,8 @@
       a(href="https://www.linkedin.com/company/omoroilife" target="_blank")
         img.pointable(src="/images/sns/linked-in-mc.png")
   v-layout.footer-main.dotted-background.copyright(row)
-    v-flex.ma-0(xs12 class="text-xs-center grey-text") {{ $t('top.footer.copyright') }}
+    v-flex.ma-0(xs12 class="text-xs-center grey-text")
+      | {{ $t('footer.copyright.i01') }} {{ $currentYear }} {{ $t('footer.copyright.i02') }}
 </template>
 
 <!-- ============================================================================ -->
@@ -73,6 +74,7 @@ $dot-space = 5px
 
 <script>
 import mixins from '~/utils/mixins'
+import moment from 'moment'
 
 export default {
   mixins: [mixins],
@@ -84,7 +86,11 @@ export default {
   mounted () {
     this.topArrowCoords = window.innerWidth <= 320 ? '125,10,195,41' : '155,10,215,41'
   },
-
+  computed: {
+    $currentYear () {
+      return moment().format('YYYY')
+    }
+  },
   methods: {
     scrollTop () {
       window.scroll({

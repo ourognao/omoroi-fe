@@ -1,3 +1,9 @@
+attr:
+  # Reservation
+  reservation-name: Name
+  reservation-email: Email
+  reservation-total-guests: Number of Guests
+
 labels:
   common:
     sports:
@@ -31,39 +37,59 @@ base:
     japanese: 日本語
     sign_up: Sign up
     sign_out: Sign out
+  form:
+    more: 以上
 
 top:
   index:
     title: Top
+    tabs:
+      social: SOCIAL
+      language: LANGUAGE
+      sports: SPORTS
   
-  tabs:
-    social: SOCIAL
-    language: LANGUAGE
-    sports: SPORTS
+    events:
+      title: Events
+      list:
+        common:
+          more: More Info
+          frame: ''
+        title:
+          i01: Events
+          i02: Past Events
+          i03: View All
+          i04: Sport Category
+        info:
+          i01: 'Spaces Remaining:'
+          i02: Waiting list
+          i03: 'Attending:'
+  dialog:
+    title: Event Details
+    common:
+      next: Next Event
+      previous: Previous Event
+      share: Share
+    details:
+      title: Event Details
+      i01: Access
+      i02: Cost
+      i03: Contact
+      i04: LINE ID
+    reservation:
+      title: Event Reservation
+      button:
+        i01: Reservation
   
-  events:
-    title: Events
-    list:
-      common:
-        more: More Info
-        frame: ''
-      title:
-        i01: Events
-        i02: Past Events
-        i03: View All
-        i04: Sport Category
-      info:
-        i01: 'Spaces Remaining:'
-        i02: Waiting list
-        i03: 'Attending:'
-  footer:
-    copyright: © 2015 - 2018 Omoroilife, Inc
+secret:
+  title: Secret
   
-  secret:
-    title: Secret
-  
-  team:
-    title: Team
-    sub:
-      i01: Login
-      i02: Registration
+team:
+  title: Team
+  sub:
+    i01: Login
+    i02: Registration
+
+footer:
+  copyright:
+    i01: © 2015 - 
+    i02: Omoroilife, Inc

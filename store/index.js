@@ -58,6 +58,15 @@ export const state = () => ({
     }
   },
 
+  top: {
+    index: {
+      events: null,
+      scroll: 0,
+      eventId: null,
+      dialog: false
+    }
+  },
+
   events: {
     index: {
       events: null,

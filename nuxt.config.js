@@ -28,11 +28,14 @@ module.exports = {
   },
   router: {
     middleware: [
-      'i18n'
+      'i18n',
+      'vee-validate'
     ]
   },
   plugins: [
+    '~plugins/gmap',
     '~plugins/vuetify',
+    '~plugins/vee-validate',
     '~plugins/i18n'
   ],
   env: {
