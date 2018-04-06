@@ -1,9 +1,13 @@
 import changeCase from 'change-case'
 import queryString from 'query-string'
 import moment from 'moment'
+import constants from '~/utils/constants'
 
 export default {
   methods: {
+    defaultUrl (layer) {
+      return constants.defaultUrl[layer][process.env.real]
+    },
     getSelectOptionsFor (initialIndex, capacity, context = null) {
       let selectOptions = []
       let more = context ? context.$t('base.form.more') : ''

@@ -27,3 +27,12 @@ a(
   @click="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
 )
   img.pointable(src="/images/sns/facebook.png" class="menu-icons border-grey mt-1")
+
+
+if (process.browser) {
+  window.onNuxtReady(() => {
+    const VueFullCalendar = require('vue-fullcalendar')
+    Vue.component('full-calendar', VueFullCalendar)
+    Vue.use(VueFullCalendar)
+  })
+}

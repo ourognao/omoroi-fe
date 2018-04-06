@@ -178,11 +178,6 @@ export default {
         return menus
       }
     }
-  },
-  methods: {
-    rara () {
-      console.log('ss')
-    }
   }
 }
 </script>

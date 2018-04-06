@@ -103,19 +103,23 @@ v-dialog(v-model="visible" scrollable width="100%")
             v-flex(xs6)
               div(class="sns")
                 v-layout(row)
-                  v-flex(xs4)
+                  v-flex.ml-2.mt-3(xs4)
                     span {{ $t('top.dialog.common.share') }}:
-                  v-flex(xs8)
-                    div(
-                      class="fb-share-button"
-                      data-href="https://developers.facebook.com/docs/plugins/"
-                      data-layout="button"
-                      data-size="large"
-                      data-mobile-iframe="true")
-                      a(
-                        target="_blank"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                        class="fb-xfbml-parse-ignore") {{ $t('top.dialog.common.share') }}
+                  v-flex.mt-2(xs8)
+                    social-sharing(
+                      :url="$fullPath"
+                      :title="event.title"
+                      :description="event.explanation"
+                      :quote="event.title"
+                      :hashtags="hashtags"
+                      twitter-user="lifeomoroi"
+                      inline-template
+                    )
+                      div
+                        network(network="facebook")
+                          img.pointable(src="/images/sns/facebook.png" class="border-grey mt-1")
+                        network(network="twitter")
+                          img.pointable(src="/images/sns/twitter.png" class="border-grey mt-1")
           v-layout(row)
             v-flex(xs12)
               v-text-field(
@@ -178,6 +182,10 @@ v-dialog(v-model="visible" scrollable width="100%")
       font-size 10px
 
     .reservation
+      .sns img
+        height: 26px
+        width: 26px
+        margin-right 15px
       span
         font-size 12px
       i
@@ -194,6 +202,9 @@ v-dialog(v-model="visible" scrollable width="100%")
       button
         font-size 12px
         height 20px
+  
+  .pointable
+    cursor pointer
   
   .bold
     font-weight 300
@@ -222,7 +233,7 @@ v-dialog(v-model="visible" scrollable width="100%")
 
 <script>
 import mixins from '~/utils/mixins'
-import constants from '~/utils/constants.js'
+import constants from '~/utils/constants'
 
 export default {
   mixins: [mixins],
@@ -250,27 +261,31 @@ export default {
             }
           }
         ],
-        zoom: constants.gmap['zoom'],
+        zoom: constants.gmap.zoom,
         icon: {
-          url: constants.gmap['markerIcon'],
+          url: constants.gmap.markerIcon,
           size: {
-            width: constants.gmap['width'],
-            height: constants.gmap['height'],
-            f: constants.gmap['pixel'],
-            b: constants.gmap['pixel']
+            width: constants.gmap.width,
+            height: constants.gmap.height,
+            f: constants.gmap.pixel,
+            b: constants.gmap.pixel
           },
           scaledSize: {
-            width: constants.gmap['width'],
-            height: constants.gmap['height'],
-            f: constants.gmap['pixel'],
-            b: constants.gmap['pixel']
+            width: constants.gmap.width,
+            height: constants.gmap.height,
+            f: constants.gmap.pixel,
+            b: constants.gmap.pixel
           }
         },
         options: { fullscreenControl: false, clickableIcons: false }
-      }
+      },
+      hashtags: constants.sns.hashtags
     }
   },
   computed: {
+    $fullPath () {
+      return this.defaultUrl('frontend') + this.$store.state.base.layout.fullPath
+    },
     $users () {
       return this.$store.state.users.index.users
     },
@@ -303,7 +318,6 @@ export default {
   },
   watch: {
     dialog (val) {
-      console.log('caca')
       if (!val) return
       this.setEvent()
       this.visible = true
@@ -330,15 +344,14 @@ export default {
   methods: {
     getOrganizerInfos (organizerId) {
       let organizer = this.$users.filter(user => user.id === organizerId)
-      console.log(organizerId)
       if (!organizer) return
       return organizer[0]
     },
     setGmapMarker () {
-      this.gmap['center']['lat'] = this.event.position[0]
-      this.gmap['center']['lng'] = this.event.position[1]
-      this.gmap['markers'][0]['position']['lat'] = this.event.position[0]
-      this.gmap['markers'][0]['position']['lng'] = this.event.position[1]
+      this.gmap.center.lat = this.event.position[0]
+      this.gmap.center.lng = this.event.position[1]
+      this.gmap.markers[0].position.lat = this.event.position[0]
+      this.gmap.markers[0].position.lng = this.event.position[1]
     },
     findEvent () {
       let eventId = this.$store.state.top.index.eventId
