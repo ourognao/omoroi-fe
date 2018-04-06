@@ -17,14 +17,22 @@ tags:
 explanation:
 
 
-v-layout(row)
-              v-icon access_time
-                span {{ setTime(event) }}  
-            v-layout(row)
-              v-flex.location(xs12)
-                v-icon location_on
-                span {{ event.location }}
-            v-layout.mt-2(row)
-              v-flex.attending(xs12)
-                | {{ $t('top.events.list.info.i01') }}
-                span.ml-1.red-text {{ setAttending(event) }}
+ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../index.vue /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/top/
+
+a(
+  href="https://www.facebook.com/dialog/share?app_id=662150777228299&display=popup&href=https%3A%2F%2Fwww.noritomosan.com%2Flifts%2Fsearch%3Flocale%3D<%= I18n.locale %>%26lid%3D<%= @lift_details.id %>"
+  title="<%= @og_title %>"
+  target="_blank"
+  @click="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+)
+  img.pointable(src="/images/sns/facebook.png" class="menu-icons border-grey mt-1")
+
+
+if (process.browser) {
+  window.onNuxtReady(() => {
+    const VueFullCalendar = require('vue-fullcalendar')
+    Vue.component('full-calendar', VueFullCalendar)
+    Vue.use(VueFullCalendar)
+  })
+}

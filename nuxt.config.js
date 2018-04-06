@@ -4,7 +4,8 @@ module.exports = {
   build: {
     vendor: [
       'vuetify',
-      'vue-i18n'
+      'vue-i18n',
+      'vue-social-sharing'
     ],
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
@@ -28,15 +29,20 @@ module.exports = {
   },
   router: {
     middleware: [
-      'i18n'
+      'i18n',
+      'vee-validate'
     ]
   },
   plugins: [
+    '~plugins/gmap',
     '~plugins/vuetify',
+    '~plugins/vee-validate',
+    '~plugins/social-sharing',
     '~plugins/i18n'
   ],
   env: {
-    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000'
+    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000',
+    real: process.env.REAL_ENV || 'development'
   },
   css: [
     { src: join(__dirname, 'assets/css/app.styl'), lang: 'styl' }

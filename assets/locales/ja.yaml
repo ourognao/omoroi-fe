@@ -1,3 +1,9 @@
+attr:
+  # Reservation
+  reservation-name: 氏名
+  reservation-email: メールアドレス
+  reservation-total-guests: ゲストの数
+
 labels:
   common:
     sports:
@@ -8,6 +14,7 @@ labels:
       badminton: バドミントン
       futsal: フットサル
       other: その他
+    
     months:
       jan: 1月
       feb: 2月
@@ -30,39 +37,59 @@ base:
     japanese: 日本語
     sign_up: ユーザー登録
     sign_out: ログアウト
+  form:
+    more: ' or more'
 
 top:
-  tabs:
-    social: ソーシャル
-    language: ランゲージ
-    sports: スポーツ
-  
   index:
     title: トップ
+    tabs:
+      social: ソーシャル
+      language: ランゲージ
+      sports: スポーツ    
   
-  events:
-    title: イベント
-    list:
-      common:
-        more: 詳細
-        frame: 枠
-      title:
-        i01: イベント
-        i02: 過去のイベント
-        i03: 全て見る
-        i04: スポーツカテゴリー
-      info:
-        i01: 残り枠：
-        i02: キャンセル待ち名簿
-        i03: 参加予定：
-  footer:
-    copyright: © 2015 - 2018 Omoroilife, Inc
+    events:
+      title: イベント
+      list:
+        common:
+          more: 詳細
+          frame: 枠
+        title:
+          i01: イベント
+          i02: 過去のイベント
+          i03: 全て見る
+          i04: スポーツカテゴリー
+        info:
+          i01: 残り枠：
+          i02: キャンセル待ち名簿
+          i03: 参加予定：
+  dialog:
+    title: イベント詳細
+    common:
+      next: 次のイベント
+      previous: 前のイベント
+      share: シェア
+    details:
+      title: イベント詳細
+      i01: アクセス
+      i02: コスト
+      i03: 担当者連絡先
+      i04: LINE ID
+    reservation:
+      title: イベント予約
+      button:
+        i01: 予約
   
-  secret:
-    title: 秘密のページ
+secret:
+  title: 秘密のページ
   
-  team:
-    title: チーム
-    sub:
-      i01: ログイン
-      i02: 登録
+team:
+  title: チーム
+  sub:
+    i01: ログイン
+    i02: 登録
+
+footer:
+  copyright:
+    i01: © 2015 - 
+    i02: Omoroilife, Inc

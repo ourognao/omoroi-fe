@@ -1,9 +1,9 @@
 <template lang="pug">
   div#top-index-main(fluid)
     v-layout.tabs(row class="hidden-md-only hidden-lg-only hidden-xl-only fixedTabs")
-      v-flex.primary(xs4 class="delimitor") {{ $t('top.tabs.social')}}
-      v-flex.primary(xs4 class="delimitor") {{ $t('top.tabs.language')}}
-      v-flex.primary(xs4) {{ $t('top.tabs.sports')}}
+      v-flex.primary(xs4 class="delimitor") {{ $t('top.index.tabs.social')}}
+      v-flex.primary(xs4 class="delimitor") {{ $t('top.index.tabs.language')}}
+      v-flex.primary(xs4) {{ $t('top.index.tabs.sports')}}
     v-carousel(delimiter-icon="lens" class="hidden-sm-and-down delimiter-background")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-carousel(
@@ -13,9 +13,9 @@
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-container.pt-3
       v-layout(row class="eventHeader")
-        v-flex.caption(xs120)
+        v-flex.caption(xs12)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-          | {{ $t('top.events.list.title.i04') }}
+          | {{ $t('top.index.events.list.title.i04') }}
       div.ma-2.mb-3(class="search-container dotted-background")
         v-layout.pl-2(row wrap)
           v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
@@ -31,7 +31,7 @@
       v-layout(row class="eventHeader")
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-          | {{ $t('top.events.list.title.i01') }}
+          | {{ $t('top.index.events.list.title.i01') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(
             href="#"
@@ -53,7 +53,7 @@
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs3)
             img.future(:src="event.picture" style="border-radius:10px")
-          v-flex.ml-3(xs8)
+          v-flex.ml-3(xs7)
             v-layout.mb-1(row)
               v-flex.caption.future(xs12) {{ event.title }}
             v-layout(row)
@@ -71,18 +71,18 @@
             v-layout(row)
               v-flex.attending(xs12)
                 v-icon people_outline
-                span {{ setThreshold(event) === 'red-text' ? $t('top.events.list.info.i01') : $t('top.events.list.info.i03') }}
+                span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
-          v-flex(xs1 style="line-height: 75px")
-            v-btn.pr-3(flat icon @click.stop.prevent.native="details(event)")
+          v-flex(xs2 style="line-height: 75px")
+            v-btn(flat icon @click.stop.prevent.native="details(event)")
               v-icon.details(class="icon-blue icons events") chevron_right
 
       v-layout.mt-3(row class="eventHeader")
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-          | {{ $t('top.events.list.title.i02') }}
+          | {{ $t('top.index.events.list.title.i02') }}
         v-flex.caption(xs7 class="text-xs-right")
-          a(:href="pastEventsHref") {{ $t('top.events.list.title.i03') }}
+          a(:href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
         v-flex(xs1)
           img.past(:src="event.picture" style="border-radius:10px")
@@ -173,12 +173,6 @@ $dot-space = 2px
     color #bdbdbd
     &.dark
       color #616161
-
-  .red-text
-    color #C62828
-
-  .blue-text
-    color #1a237e
   
   i.icon-blue
     color #1a237e
@@ -284,45 +278,35 @@ export default {
       ]
     },
     $events () {
-      return this.$store.state.events.index.events
+      return this.$store.state.top.index.events
     },
     $s () {
-      return this.$store.state.events.index
+      return this.$store.state.top.index
     },
     dialog () {
       return this.$s.dialog
     }
   },
+  mounted () {
+    this.fakeData(
+      this.$store,
+      this.getUrlParams().hasOwnProperty('event_id'),
+      this.getUrlParams()['event_id']
+    )
+  },
   methods: {
     details (event) {
-      console.log(event)
-      this.push(this.$store, 'events.index', '/events', {
+      this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,
         dialog: true,
         eventId: event.id
       })
-    },
-    setThreshold (event) {
-      if (!event.threshold) return
-      let threshold = Math.round((event.capacity * event.threshold) / 100)
-      return event.remaining <= threshold ? 'red-text' : ''
     },
     setBeginningOfText (text) {
       if (text.length > 30) {
         return text.substring(0, 30) + '...'
       }
       return text
-    },
-    setTime (event) {
-      return event.endTime ? `${event.startTime}-${event.endTime}` : event.startTime
-    },
-    setAttending (event) {
-      let format = this.setThreshold(event) === 'red-text'
-        ? `${event.remaining}/${event.capacity}`
-        : `${event.remaining}`
-      return event.remaining === event.capacity
-        ? this.$t('top.events.list.info.i02')
-        : format
     },
     getEventsBySport () {
       this.$nextTick(function () {
@@ -333,6 +317,7 @@ export default {
       let context = this
       let sports = this.sports.length === 0 ? this.sportItems.map(sport => sport.value) : this.sports
       let futurEvents = []
+      if (!this.$events) return
       this.futurEvents = this.$events.filter(function (event) {
         if (event.date.substr(0, 7) === context.currentMonth.date) {
           event.tags.forEach(function (tags) {
@@ -346,6 +331,7 @@ export default {
     },
     setPastEvents () {
       let context = this
+      if (!this.$events) return
       this.$events.filter(function (event) {
         let date = event.date.substr(0, 7)
         let difference = moment(date).diff(context.$currentDate[0])
