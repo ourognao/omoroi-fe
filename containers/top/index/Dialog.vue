@@ -295,20 +295,6 @@ export default {
     $eventId () {
       return this.$store.state.top.index.eventId
     },
-    // $event () {
-    //   let eventId = this.$store.state.top.index.eventId
-    //   let event = this.$events.filter(event => event.id === eventId)
-    //   if (!event) return
-    //   return event[0]
-    // },
-    // $lat () {
-    //   if (!this.$event) return 0
-    //   return this.$event.position[0]
-    // },
-    // $lng () {
-    //   if (!this.$event) return 0
-    //   return this.$event.position[1]
-    // },
     $s () {
       return this.$store.state.top.index
     },
