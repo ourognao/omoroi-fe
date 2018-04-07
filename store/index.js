@@ -1,8 +1,8 @@
 export const state = () => ({
   base: {
     locale: {
-      locales: ['ja', 'en'],
-      selected: 'ja'
+      selected: 'ja',
+      locales: ['ja', 'en']
     },
     auth: {
       token: null,
@@ -82,7 +82,14 @@ export const mutations = {
   merge (state, array) {
     let keys = array[0].split('.')
     let data = array[1]
-    state[keys[0]][keys[1]] = { ...state[keys[0]][keys[1]], ...data }
+    switch (keys.length) {
+      case 2:
+        state[keys[0]][keys[1]] = { ...state[keys[0]][keys[1]], ...data }
+        break
+      case 3:
+        state[keys[0]][keys[1]][keys[2]] = { ...state[keys[0]][keys[1]][keys[2]], ...data }
+        break
+    }
   }
 }
 

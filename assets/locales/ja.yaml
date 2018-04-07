@@ -4,6 +4,14 @@ attr:
   reservation-email: メールアドレス
   reservation-total-guests: ゲストの数
 
+  # ユーザー一覧画面
+  user-name: お名前
+  user-email: メールアドレス
+  user-password: パスワード
+  user-password-confirm: パスワード（確認）
+  user-kind: 権限
+  user-status: ステータス
+
 labels:
   common:
     sports:
@@ -39,6 +47,56 @@ base:
     sign_out: ログアウト
   form:
     more: ' or more'
+  snackbar:
+    close: 閉じる
+  confirm:
+    title: 確認
+    agree: はい
+    disagree: いいえ
+  logout:
+    confirm: 本当ですか？
+  axios:
+    success: 成功
+    failure: エラーが発生しました
+
+auth:
+  login:
+    title: ログイン
+    i01: ログイン
+    i02: ログイン情報が間違っています
+    i03: ブラウザに記録する
+    i04: パスワードを忘れた
+    i05: パスワードリセット
+    i06: 送信
+    i07: 閉じる
+    i08: パスワード変更用メールを送信しました。
+    i09: ユーザー登録
+
+  sign-up:
+    title: ユーザー登録
+    i01: ユーザー登録
+    i02: 送信
+    i03: 確認用メールを送信しました。
+    i04: ログイン
+
+  update:
+    title: アカウント編集
+    i01: アカウント編集
+    i02: 送信
+    i03: ユーザー情報を更新しました。
+    i04: 変更しない場合は空欄のまま
+
+  password:
+    title: パスワード再設定
+    i01: パスワード再設定
+    i02: 送信
+    i03: パスワードを再設定しました。
+    i04: ログイン
+
+  start:
+    title: 登録完了
+    i01: 登録完了
+    i02: ログインしています..
 
 top:
   index:
@@ -78,10 +136,9 @@ top:
     reservation:
       title: イベント予約
       button:
-        i01: 予約
-  
-secret:
-  title: 秘密のページ
+        i01: 予約 
+  secret:
+    title: 秘密のページ
   
 team:
   title: チーム
