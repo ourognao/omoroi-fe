@@ -13,13 +13,15 @@ v-dialog(v-model="visible" scrollable width="100%")
       v-container.pa-0(fluid class="event" v-if="event")
         v-layout(row class="border-blue-bottom")
           v-flex.caption(xs6)
-            v-icon.mb-1(class="icon-blue icons events") navigate_before
-            a(href="#" @click.stop.prevent="send()")
-              | {{ $t('top.dialog.common.previous') }}
+            span(v-if="$futurEvents[0].id !== $eventId")
+              v-icon.mb-1(class="icon-blue icons events") navigate_before
+              a(href="#" @click.stop.prevent="navigate('before')")
+                | {{ $t('top.dialog.common.previous') }}
           v-flex.caption(xs6 class="text-xs-right")
-            a(href="#" @click.stop.prevent="send()")
-              | {{ $t('top.dialog.common.previous') }}
-            v-icon.mb-1(class="icon-blue icons events") navigate_next
+            span(v-if="$futurEvents[$futurEvents.length-1].id !== $eventId")
+              a(href="#" @click.stop.prevent="navigate('next')")
+                | {{ $t('top.dialog.common.previous') }}
+              v-icon.mb-1(class="icon-blue icons events") navigate_next
          
         v-layout(row class="main-image")
          v-flex.mt-2(xs12)
@@ -234,6 +236,7 @@ v-dialog(v-model="visible" scrollable width="100%")
 <script>
 import mixins from '~/utils/mixins'
 import constants from '~/utils/constants'
+import moment from 'moment'
 
 export default {
   mixins: [mixins],
@@ -283,6 +286,9 @@ export default {
     }
   },
   computed: {
+    $currentMonth () {
+      return moment().format('YYYY-MM')
+    },
     $fullPath () {
       return this.defaultUrl('frontend') + this.$store.state.base.layout.fullPath
     },
@@ -291,6 +297,16 @@ export default {
     },
     $events () {
       return this.$store.state.top.index.events
+    },
+    $futurEvents () {
+      let context = this
+      let futurEvents = []
+      this.$events.filter(function (event) {
+        if (event.date.substr(0, 7) >= context.$currentMonth) {
+          futurEvents.push(event)
+        }
+      })
+      return futurEvents
     },
     $eventId () {
       return this.$store.state.top.index.eventId
@@ -341,7 +357,7 @@ export default {
     },
     findEvent () {
       let eventId = this.$store.state.top.index.eventId
-      let event = this.$events.filter(event => event.id === eventId)
+      let event = this.$futurEvents.filter(event => event.id === eventId)
       if (!event) return
       this.event = event[0]
       this.organizer = this.getOrganizerInfos(this.event.organizerId)
@@ -357,6 +373,15 @@ export default {
     },
     cancel () {
       this.visible = false
+    },
+    navigate (direction) {
+      let eventId = direction === 'next' ? this.$eventId + 1 : this.$eventId - 1
+      this.push(this.$store, 'top.index', '/top', {
+        scroll: window.pageYOffset,
+        dialog: true,
+        eventId: eventId
+      })
+      this.setEvent()
     },
     send (e) {
       this.$validator.validateAll().then(async result => {
