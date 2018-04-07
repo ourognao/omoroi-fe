@@ -13,12 +13,12 @@ v-dialog(v-model="visible" scrollable width="100%")
       v-container.pa-0(fluid class="event" v-if="event")
         v-layout(row class="border-blue-bottom")
           v-flex.caption(xs6)
-            span(v-if="$futurEvents[0].id !== $eventId")
+            span(v-if="!$firstEventIds.includes($eventId)")
               v-icon.mb-1(class="icon-blue icons events") navigate_before
               a(href="#" @click.stop.prevent="navigate('before')")
                 | {{ $t('top.dialog.common.previous') }}
           v-flex.caption(xs6 class="text-xs-right")
-            span(v-if="$futurEvents[$futurEvents.length-1].id !== $eventId")
+            span(v-if="!$lastEventIds.includes($eventId)")
               a(href="#" @click.stop.prevent="navigate('next')")
                 | {{ $t('top.dialog.common.previous') }}
               v-icon.mb-1(class="icon-blue icons events") navigate_next
@@ -242,6 +242,7 @@ export default {
   mixins: [mixins],
   data () {
     return {
+      futureEvent: null,
       visible: false,
       event: null,
       organizer: null,
@@ -286,6 +287,9 @@ export default {
     }
   },
   computed: {
+    $futureEvent () {
+      return this.$store.state.top.index.futureEvent
+    },
     $currentMonth () {
       return moment().format('YYYY-MM')
     },
@@ -298,6 +302,15 @@ export default {
     $events () {
       return this.$store.state.top.index.events
     },
+    $firstEventIds () {
+      return [this.$futurEvents[0].id, this.$pastEvents[0].id]
+    },
+    $lastEventIds () {
+      return [
+        this.$futurEvents[this.$futurEvents.length - 1].id,
+        this.$pastEvents[this.$pastEvents.length - 1].id
+      ]
+    },
     $futurEvents () {
       let context = this
       let futurEvents = []
@@ -307,6 +320,16 @@ export default {
         }
       })
       return futurEvents
+    },
+    $pastEvents () {
+      let context = this
+      let pastEvents = []
+      this.$events.filter(function (event) {
+        if (event.date.substr(0, 7) < context.$currentMonth) {
+          pastEvents.push(event)
+        }
+      })
+      return pastEvents
     },
     $eventId () {
       return this.$store.state.top.index.eventId
@@ -321,6 +344,7 @@ export default {
   watch: {
     dialog (val) {
       if (!val) return
+      this.futureEvent = this.$futureEvent
       this.setEvent()
       this.visible = true
     },
@@ -357,7 +381,10 @@ export default {
     },
     findEvent () {
       let eventId = this.$store.state.top.index.eventId
-      let event = this.$futurEvents.filter(event => event.id === eventId)
+      let events = this.futureEvent ? this.$futurEvents : this.$pastEvents
+      console.log(this.futureEvent)
+      console.log(events)
+      let event = events.filter(event => event.id === eventId)
       if (!event) return
       this.event = event[0]
       this.organizer = this.getOrganizerInfos(this.event.organizerId)

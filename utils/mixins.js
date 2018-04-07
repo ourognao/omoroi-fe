@@ -77,6 +77,7 @@ export default {
         scroll: 0,
         dialog: dialog,
         eventId: parseInt(eventId),
+        futureEvent: true,
         events: [
           {
             id: 1,
