@@ -74,6 +74,12 @@
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
 
+      v-list-tile.l-list-tile(key="102" v-if="$store.getters.isLogined" ripple @click.stop.prevent.native="signOut")
+        v-list-tile-action
+          v-icon directions_run
+        v-list-tile-content
+          v-list-tile-title.f-fw2 {{ $t('base.menu.sign_out') }}
+
   v-toolbar(fixed class="border-blue")
     img.pointable(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
     v-spacer
@@ -94,12 +100,36 @@
       )
     img.pointable(src="/images/top/menu.png" class="menu-icons v-toolbar-side-icon" @click="drawer = !drawer")
   slot
+
+  v-snackbar(top right vertical v-model="snackbarVisible")
+    span {{ $store.state.base.snackbar.message }}
+    v-btn(flat dark @click.prevent.stop.native="closeSnackbar()") {{ $t('base.snackbar.close') }}
+
+  v-dialog(v-model="confirmVisible" persistent content-class="l-confirm")
+    v-card
+      v-card-title.headline(v-if="$store.state.base.confirm.title") {{ $store.state.base.confirm.title }}
+      v-card-text.pt-0.pb-3 {{ $store.state.base.confirm.text }}
+      v-divider
+      v-card-actions
+        v-container.pa-0(fluid)
+          v-layout(wrap)
+            v-flex(xs6)
+              v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(false)")
+                v-icon remove_circle_outline
+                span.ml-1 {{ $t('base.confirm.disagree') }}
+            v-flex(xs6)
+              v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(true)")
+                v-icon check_circle
+                span.ml-1 {{ $t('base.confirm.agree') }}
 </template>
 
 <!-- ============================================================================ -->
 
 <style lang="stylus">
 #layout-default-header
+  .l-confirm-btn
+    width 100%
+
   .menu-icons
     height: 26px
     width: 26px
@@ -141,6 +171,8 @@
 
 <script>
 import mixins from '~/utils/mixins'
+import { unsetToken } from '~/utils/auth'
+
 export default {
   mixins: [mixins],
   data () {
@@ -156,8 +188,10 @@ export default {
       ],
       items: [
         { titleKey: 'top.index.title', icon: 'dashboard', href: '/', visible: true },
+        { titleKey: 'auth.login.title', icon: 'input', href: '/auth/login', visible: !this.$store.getters.isLogined },
+        { titleKey: 'auth.sign-up.title', icon: 'person_add', href: '/auth/sign-up', visible: !this.$store.getters.isLogined },
         { titleKey: 'top.index.events.title', icon: 'event', href: '/event', visible: true },
-        { titleKey: 'secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
+        { titleKey: 'top.secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
       ],
       drawer: false
     }
@@ -165,6 +199,26 @@ export default {
   computed: {
     fullPath () {
       return this.$store.state.base.layout.fullPath
+    },
+    snackbarVisible: {
+      get () {
+        return this.$store.state.base.snackbar.visible
+      },
+      set (val) {
+        this.$store.commit('merge', ['base.snackbar', {
+          visible: val
+        }])
+      }
+    },
+    confirmVisible: {
+      get () {
+        return this.$store.state.base.confirm.visible
+      },
+      set (val) {
+        this.$store.commit('merge', ['base.confirm', {
+          visible: val
+        }])
+      }
     },
     selected: {
       get () {
@@ -177,6 +231,40 @@ export default {
         menus[this.$route.name] = true
         return menus
       }
+    }
+  },
+  methods: {
+    signOut (e) {
+      let confirmationText = this.$t('base.logout.confirm')
+      console.log(e)
+      this.confirm({ text: confirmationText })
+        .then(async agreed => {
+          if (agreed) {
+            try {
+              unsetToken()
+              this.$store.commit('merge', ['base.auth', {
+                token: null,
+                uid: null,
+                client: null,
+                email: null,
+                name: null,
+                kind: null
+              }])
+              this.reload()
+            } catch (error) {
+              this.message(this.$t('base.axios.failure'))
+              console.error(error)
+            }
+          }
+        })
+    },
+    closeSnackbar (e) {
+      this.snackbarVisible = false
+    },
+    closeConfirm (agree) {
+      agree && this.$store.state.base.confirm.agreed()
+      !agree && this.$store.state.base.confirm.disagreed()
+      this.confirmVisible = false
     }
   }
 }

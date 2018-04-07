@@ -4,6 +4,7 @@ module.exports = {
   build: {
     vendor: [
       'vuetify',
+      'axios',
       'vue-i18n',
       'vue-social-sharing'
     ],
@@ -30,7 +31,8 @@ module.exports = {
   router: {
     middleware: [
       'i18n',
-      'vee-validate'
+      'vee-validate',
+      'check-auth'
     ]
   },
   plugins: [

@@ -4,6 +4,14 @@ attr:
   reservation-email: Email
   reservation-total-guests: Number of Guests
 
+  # User Screen
+  user-name: Name
+  user-email: Email
+  user-password: Password
+  user-password-confirm: Password confirmation
+  user-kind: Permission
+  user-status: Status
+
 labels:
   common:
     sports:
@@ -39,6 +47,56 @@ base:
     sign_out: Sign out
   form:
     more: 以上
+  snackbar:
+    close: Close
+  confirm:
+    title: Confirm
+    agree: Agree
+    disagree: Disagree
+  logout:
+    confirm: Are you sure ?
+  axios:
+    success: Success
+    failure: An error has occured
+
+auth:
+  login:
+    title: Sign in
+    i01: Sign in
+    i02: Wrong credentials.
+    i03: Remember me
+    i04: Reset password
+    i05: Reset password
+    i06: Send
+    i07: Cancel
+    i08: Sent confirmation mail for password reset.
+    i09: Sign up
+
+  sign-up:
+    title: Sign up
+    i01: Sign up
+    i02: Send
+    i03: Sent confirmation mail for signing up.
+    i04: Sign in
+
+  update:
+    title: Update account
+    i01: Update account
+    i02: Send
+    i03: Account updated.
+    i04: "Leave blank if you don't want to change it."
+
+  password:
+    title: Password reset
+    i01: Password reset
+    i02: Send
+    i03: Reset password done.
+    i04: Sign in
+
+  start:
+    title: Signing up completed
+    i01: Signing up completed
+    i02: Signing in..
 
 top:
   index:
@@ -79,9 +137,8 @@ top:
       title: Event Reservation
       button:
         i01: Reservation
-  
-secret:
-  title: Secret
+  secret:
+    title: Secret
   
 team:
   title: Team

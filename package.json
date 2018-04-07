@@ -17,7 +17,9 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "change-case": "^3.0.2",
+    "js-cookie": "^2.2.0",
     "json": "^9.0.6",
     "json-loader": "^0.5.7",
     "moment": "^2.20.1",

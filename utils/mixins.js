@@ -5,6 +5,44 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    reload () {
+      this.$router.go(this.$router.currentRoute)
+    },
+    confirm (options) {
+      return new Promise((resolve, reject) => {
+        this.$store.commit('merge', ['base.confirm', {
+          title: options.title || this.$t('base.confirm.title'),
+          text: options.text,
+          agreed () { resolve(true) },
+          disagreed () { resolve(false) },
+          visible: true
+        }])
+        setTimeout(() => {
+          let dialogContent = document.getElementsByClassName('l-confirm')[0].parentElement
+          dialogContent.style.zIndex = 1001
+          let overlays = document.getElementsByClassName('overlay')
+          let overlay = overlays[overlays.length - 1]
+          overlay.style.zIndex = 1000
+        }, 0)
+      })
+    },
+    message (message) {
+      this.$store.commit('merge', ['base.snackbar', {
+        message: message,
+        visible: true
+      }])
+    },
+    auth (headers, data) {
+      return {
+        token: headers['access-token'],
+        uid: headers.uid,
+        client: headers.client,
+        id: data.data.id,
+        email: data.data.email,
+        name: data.data.name,
+        kind: data.data.kind
+      }
+    },
     defaultUrl (layer) {
       return constants.defaultUrl[layer][process.env.real]
     },
