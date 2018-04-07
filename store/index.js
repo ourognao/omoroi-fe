@@ -63,7 +63,8 @@ export const state = () => ({
       events: null,
       scroll: 0,
       eventId: null,
-      dialog: false
+      dialog: false,
+      futureEvent: null
     }
   },
 

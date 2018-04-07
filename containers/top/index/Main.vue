@@ -74,7 +74,7 @@
                 span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
           v-flex(xs2 style="line-height: 75px")
-            v-btn(flat icon @click.stop.prevent.native="details(event)")
+            v-btn(flat icon @click.stop.prevent.native="details(event, true)")
               v-icon.details(class="icon-blue icons events") chevron_right
 
       v-layout.mt-3(row class="eventHeader")
@@ -94,7 +94,8 @@
           v-layout(row)
             v-flex(xs12 class="explanation") {{ setBeginningOfText(event.explanation) }}
         v-flex(xs1 style="line-height: 50px")
-          v-icon.details(class="icon-blue icons events") chevron_right
+          v-btn(flat icon @click.stop.prevent.native="details(event, false)")
+            v-icon.details(class="icon-blue icons events") chevron_right
     
     
 </template>
@@ -295,11 +296,12 @@ export default {
     )
   },
   methods: {
-    details (event) {
+    details (event, futurEvent) {
       this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,
         dialog: true,
-        eventId: event.id
+        eventId: event.id,
+        futureEvent: futurEvent
       })
     },
     setBeginningOfText (text) {
