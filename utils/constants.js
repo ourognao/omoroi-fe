@@ -1,7 +1,7 @@
 export default {
   defaultUrl: {
     frontend: {
-      development: 'http://192.168.1.9:3000',
+      development: 'http://127.0.0.1:3000',
       staging: 'https://omoroi-staging-fe.herokuapp.com',
       production: 'https://omoroi-fe.herokuapp.com'
     },

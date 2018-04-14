@@ -225,6 +225,8 @@ $dot-space = 2px
 <script>
 import mixins from '~/utils/mixins'
 import moment from 'moment'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
 
 export default {
   mixins: [mixins],
@@ -271,6 +273,9 @@ export default {
     }
   },
   computed: {
+    $currentDay () {
+      return moment().format('YYYY-MM-DD')
+    },
     $currentDate () {
       return [
         moment().format('YYYY-MM'),
@@ -288,20 +293,13 @@ export default {
       return this.$s.dialog
     }
   },
-  mounted () {
-    this.fakeData(
-      this.$store,
-      this.getUrlParams().hasOwnProperty('event_id'),
-      this.getUrlParams()['event_id']
-    )
-  },
   methods: {
     details (event, futurEvent) {
       this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,
         dialog: true,
         eventId: event.id,
-        futureEvent: futurEvent
+        futurEvent: futurEvent
       })
     },
     setBeginningOfText (text) {
@@ -314,6 +312,20 @@ export default {
       this.$nextTick(function () {
         this.getEventsByMonth()
       })
+    },
+    async getThreeNextEvents () {
+      try {
+        let params = queryString.stringify({
+          screen: 'top',
+          bom: moment(this.currentMonth.date).format('YYYY-MM-DD'),
+          eom: this.currentMonths[this.currentMonths.length - 1].date
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
+        this.$store.commit('merge', ['top.index', { events: data.data.events }])
+        this.getEventsByMonth()
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') this.reload()
+      }
     },
     getEventsByMonth () {
       let context = this
@@ -332,15 +344,10 @@ export default {
       this.futurEvents = futurEvents
     },
     setPastEvents () {
-      let context = this
       if (!this.$events) return
-      this.$events.filter(function (event) {
-        let date = event.date.substr(0, 7)
-        let difference = moment(date).diff(context.$currentDate[0])
-        if (context.pastEvents.length < 3 && difference < 0) {
-          context.pastEvents.push(event)
-        }
-      })
+      this.pastEvents = this.$events.filter(
+        event => event.date.substr(0, 10) < this.$currentDay
+      )
     },
     setMonth (date) {
       this.currentMonth = {
@@ -383,8 +390,10 @@ export default {
         currentThreeMonths = forward ? currentThreeMonths : currentThreeMonths.reverse()
         context.currentMonth = currentThreeMonths[0]
         context.currentMonths = currentThreeMonths
-        context.getEventsByMonth()
+        if (date) context.getThreeNextEvents()
+        // !date ? context.setPastEvents() : context.getThreeNextEvents()
         context.setPastEvents()
+        context.getEventsByMonth()
       }, 100)
     }
   }

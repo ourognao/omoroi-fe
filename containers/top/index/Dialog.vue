@@ -1,5 +1,5 @@
 <template lang="pug">
-v-dialog(v-model="visible" scrollable width="100%")
+v-dialog(v-model="visible" scrollable persistent width="100%")
   v-card#top-index-dialog
     v-card-title.pa-0.grey.lighten-5
       span.ml-2 {{ $t('top.dialog.title')}}
@@ -13,12 +13,12 @@ v-dialog(v-model="visible" scrollable width="100%")
       v-container.pa-0(fluid class="event" v-if="event")
         v-layout(row class="border-blue-bottom")
           v-flex.caption(xs6)
-            span(v-if="!$firstEventIds.includes($eventId)")
+            span(v-if="!firstEventIds.includes($s.eventId)")
               v-icon.mb-1(class="icon-blue icons events") navigate_before
               a(href="#" @click.stop.prevent="navigate('before')")
                 | {{ $t('top.dialog.common.previous') }}
           v-flex.caption(xs6 class="text-xs-right")
-            span(v-if="!$lastEventIds.includes($eventId)")
+            span(v-if="!lastEventIds.includes($s.eventId)")
               a(href="#" @click.stop.prevent="navigate('next')")
                 | {{ $t('top.dialog.common.previous') }}
               v-icon.mb-1(class="icon-blue icons events") navigate_next
@@ -77,12 +77,13 @@ v-dialog(v-model="visible" scrollable width="100%")
             v-flex(xs12)
               span.bold.underline.mr-1 {{ $t('top.dialog.details.i02') }}
               span {{ event.cost }}
-          v-layout.mt-2(row v-if="organizer")
+          v-layout.mt-2(row)
             v-flex(xs12)
               span.bold.underline.mr-1 {{ $t('top.dialog.details.i03') }}
-              span {{ organizer.name }}
+              span {{ getOrganizerInfos(event.userId).name }}
               span.ml-1 {{ $t('top.dialog.details.i04') }}:
-              span {{ organizer.line }}
+              span {{ getOrganizerInfos(event.userId).line }}
+              
 
         v-layout.mt-2(row class="border-blue-bottom")
           v-flex.caption(xs12)
@@ -99,6 +100,7 @@ v-dialog(v-model="visible" scrollable width="100%")
                 prepend-icon="assignment_ind"
                 v-validate="'required'"
                 :error-messages="veeErrors.first('reservation-name') || []"
+                :readonly="$currentUser ? true : false"
                 hide-details
                 @keypress.enter.native="send"
               )
@@ -132,6 +134,7 @@ v-dialog(v-model="visible" scrollable width="100%")
                 prepend-icon="email"
                 v-validate="'required|email'"
                 :error-messages="veeErrors.first('reservation-email') || []"
+                :readonly="$currentUser ? true : false"
                 hide-details
                 @keypress.enter.native="send"
               )
@@ -237,15 +240,17 @@ v-dialog(v-model="visible" scrollable width="100%")
 import mixins from '~/utils/mixins'
 import constants from '~/utils/constants'
 import moment from 'moment'
+import Vue from 'vue'
 
 export default {
   mixins: [mixins],
   data () {
     return {
-      futureEvent: null,
       visible: false,
-      event: null,
-      organizer: null,
+      firstEventIds: [],
+      lastEventIds: [],
+      futurEvents: [],
+      pastEvents: [],
       name: null,
       email: null,
       totalGuests: null,
@@ -287,55 +292,44 @@ export default {
     }
   },
   computed: {
-    $futureEvent () {
-      return this.$store.state.top.index.futureEvent
+    $s () {
+      return this.$store.state.top.index
+    },
+    $currentUser () {
+      return this.$store.getters.currentUser
+    },
+    $currentDay () {
+      return moment().format('YYYY-MM-DD')
     },
     $currentMonth () {
       return moment().format('YYYY-MM')
     },
     $fullPath () {
-      return this.defaultUrl('frontend') + this.$store.state.base.layout.fullPath
+      return `${this.defaultUrl('frontend')}/${this.$store.state.base.layout.fullPath}`
     },
     $users () {
       return this.$store.state.users.index.users
     },
-    $events () {
-      return this.$store.state.top.index.events
-    },
-    $firstEventIds () {
-      return [this.$futurEvents[0].id, this.$pastEvents[0].id]
-    },
-    $lastEventIds () {
-      return [
-        this.$futurEvents[this.$futurEvents.length - 1].id,
-        this.$pastEvents[this.$pastEvents.length - 1].id
+    event () {
+      if (!this.$s.eventId) return
+      this.getFuturEvents()
+      this.getPastEvents()
+      this.name = this.$currentUser ? this.$currentUser.name : null
+      this.email = this.$currentUser ? this.$currentUser.email : null
+      console.log(this.futurEvents)
+      console.log(this.pastEvents)
+      this.firstEventIds = [this.futurEvents[0].id, this.pastEvents[0].id]
+      console.log(this.futurEvents.length)
+      console.log(this.futurEvents.length - 1)
+      this.lastEventIds = [
+        this.futurEvents[this.futurEvents.length - 1].id,
+        this.pastEvents[this.pastEvents.length - 1].id
       ]
-    },
-    $futurEvents () {
-      let context = this
-      let futurEvents = []
-      this.$events.filter(function (event) {
-        if (event.date.substr(0, 7) >= context.$currentMonth) {
-          futurEvents.push(event)
-        }
-      })
-      return futurEvents
-    },
-    $pastEvents () {
-      let context = this
-      let pastEvents = []
-      this.$events.filter(function (event) {
-        if (event.date.substr(0, 7) < context.$currentMonth) {
-          pastEvents.push(event)
-        }
-      })
-      return pastEvents
-    },
-    $eventId () {
-      return this.$store.state.top.index.eventId
-    },
-    $s () {
-      return this.$store.state.top.index
+      let events = this.$s.futurEvent ? this.futurEvents : this.pastEvents
+      let event = events.filter(event => event.id === this.$s.eventId)
+      if (!event.length) return
+      this.setGmapMarker(event[0].positions)
+      return event[0]
     },
     dialog () {
       return this.$s.dialog
@@ -344,8 +338,6 @@ export default {
   watch: {
     dialog (val) {
       if (!val) return
-      this.futureEvent = this.$futureEvent
-      this.setEvent()
       this.visible = true
     },
     visible (val) {
@@ -361,54 +353,46 @@ export default {
     }
   },
   mounted () {
-    this.setEvent()
-    window.scrollTo(0, this.$s.scroll)
     setTimeout(() => {
       this.visible = this.$s.dialog
+      window.scrollTo(0, this.$s.scroll)
     }, 500)
   },
   methods: {
+    getFuturEvents () {
+      if (!this.$s.events) return
+      this.futurEvents = this.$s.events.filter(
+        event => event.date.substr(0, 10) >= this.$currentDay
+      )
+    },
+    getPastEvents () {
+      if (!this.$s.events) return
+      this.pastEvents = this.$s.events.filter(
+        event => event.date.substr(0, 10) < this.$currentDay
+      )
+    },
     getOrganizerInfos (organizerId) {
       let organizer = this.$users.filter(user => user.id === organizerId)
       if (!organizer) return
       return organizer[0]
     },
-    setGmapMarker () {
-      this.gmap.center.lat = this.event.position[0]
-      this.gmap.center.lng = this.event.position[1]
-      this.gmap.markers[0].position.lat = this.event.position[0]
-      this.gmap.markers[0].position.lng = this.event.position[1]
-    },
-    findEvent () {
-      let eventId = this.$store.state.top.index.eventId
-      let events = this.futureEvent ? this.$futurEvents : this.$pastEvents
-      console.log(this.futureEvent)
-      console.log(events)
-      let event = events.filter(event => event.id === eventId)
-      if (!event) return
-      this.event = event[0]
-      this.organizer = this.getOrganizerInfos(this.event.organizerId)
-    },
-    setEvent () {
-      if (!this.$eventId) return
-      this.fakeData(this.$store, true, this.$eventId)
-      this.findEvent()
-      this.lat = this.event.position[0]
-      this.lng = this.event.position[1]
-      if (!this.event) return
-      this.setGmapMarker()
+    setGmapMarker (positions) {
+      this.gmap.markers[0].position.lat = this.gmap.center.lat = this.lat = parseFloat(positions[0])
+      this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])
+      Vue.$gmapDefaultResizeBus.$emit('resize')
     },
     cancel () {
       this.visible = false
     },
     navigate (direction) {
-      let eventId = direction === 'next' ? this.$eventId + 1 : this.$eventId - 1
+      let events = this.$s.futurEvent ? this.futurEvents : this.pastEvents
+      let oldIndex = events.findIndex(arr => arr.id === this.$s.eventId)
+      let newIndex = direction === 'next' ? oldIndex + 1 : oldIndex - 1
       this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,
         dialog: true,
-        eventId: eventId
+        eventId: events[newIndex].id
       })
-      this.setEvent()
     },
     send (e) {
       this.$validator.validateAll().then(async result => {
