@@ -9,6 +9,9 @@
 <script>
 import TopIndexMain from '~/containers/top/index/Main'
 import TopIndexDialog from '~/containers/top/index/Dialog'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
+import moment from 'moment'
 
 export default {
   components: {
@@ -22,19 +25,29 @@ export default {
   },
   async asyncData ({ query, route, store, redirect }) {
     store.commit('merge', ['base.layout', { current: 'top.index', fullPath: route.fullPath }])
-    store.commit('merge', ['top.index', {
-      scroll: parseInt(query.scroll) || 0,
-      dialog: (query.dialog === 'true')
-    }])
-    store.commit('merge', ['users.index', {
-      users: [
-        { id: 1, name: 'George', email: 'george@gmail.com', kind: 'admin', line: 'fishgutts' },
-        { id: 2, name: 'Bago', email: 'bago@hotmail.fr', kind: 'engineer', line: 'bago25' },
-        { id: 3, name: 'Maki', email: 'maki@hotmail.fr', kind: 'organizer', line: 'maki369' },
-        { id: 4, name: 'Chikako', email: 'chikako@hotmail.fr', kind: 'organizer', line: 'chikako333' },
-        { id: 5, name: 'Sakamoto', email: 'sakamoto@hotmail.fr', kind: 'staff', line: 'sakamoto98566' }
-      ]
-    }])
+    try {
+      let params = queryString.stringify({
+        screen: 'top',
+        bom: moment().format('YYYY-MM-DD'),
+        eom: moment().add(2, 'months').format('YYYY-MM')
+      }, { arrayFormat: 'bracket' })
+      let { data } = await axios.get(`/events?${params}`, store.getters.options)
+      store.commit('merge', ['top.index', {
+        events: data.data.events,
+        scroll: parseInt(query.scroll) || 0,
+        eventId: parseInt(query.event_id) || 0,
+        futurEvent: (query.futur_event === 'true'),
+        dialog: (query.dialog === 'true')
+      }])
+      store.commit('merge', ['users.index', {
+        users: data.data.users
+      }])
+    } catch (error) {
+      if (error.message === 'Request failed with status code 401') {
+        redirect('/auth/login')
+      }
+      console.error(error.message)
+    }
   }
 }
 </script>

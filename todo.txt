@@ -37,3 +37,49 @@ if (process.browser) {
     Vue.use(VueFullCalendar)
   })
 }
+
+/* Migration */
+heroku run rake db:migrate --app omoroi-be
+heroku run rake db:migrate --app omoroi-be-staging
+
+/* Reset Staging Database */
+heroku pg:reset DATABASE_URL --app omoroi-be
+heroku pg:reset DATABASE_URL --app omoroi-be-staging
+
+/* Load Schema Staging Database */
+heroku run rake db:schema:load --app omoroi-be
+heroku run rake db:schema:load --app omoroi-be-staging
+
+/* Seed Staging Database */
+heroku run rake db:seed_fu --app omoroi-be-staging
+
+
+git remote add omoroi-be git@github.com:ourognao/omoroi-be
+git remote add omoroi-be git@heroku.com:omoroi-be
+
+git remote remove heroku
+
+
+heroku run console --app omoroi-be
+heroku logs --tail --app omoroi-be
+
+heroku restart --app omoroi-fe
+
+
+04/27（Fri.）Tōkyō → Kyoto Ridesharing wanted !
+Passenger can cost share until 3000yen. She has small lugguage.
+Can speak French and english. Save money and find friends :) !
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon
+#sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+
+04/27（金）東京都 → 京都府 に行く方を募集しています！同乗者は3000円までコストシェアができます。
+移動費を節約したい方若しくは新しい友達を作りたいなら是非ご覧ください。
+#国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+Date.parse("2018/04").beginning_of_month
+Date.parse("2018/06").end_of_month
+
+startMonth  = Date.parse("2018/04/14")
+endMonth    = Date.parse("2018/06").end_of_month
+@events     = Event.where('date BETWEEN ? AND ?', startMonth, endMonth)

@@ -236,7 +236,6 @@ export default {
   methods: {
     signOut (e) {
       let confirmationText = this.$t('base.logout.confirm')
-      console.log(e)
       this.confirm({ text: confirmationText })
         .then(async agreed => {
           if (agreed) {

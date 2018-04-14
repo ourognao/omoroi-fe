@@ -64,13 +64,16 @@ export const state = () => ({
       scroll: 0,
       eventId: null,
       dialog: false,
-      futureEvent: null
+      futurEvent: null
     }
   },
 
   events: {
     index: {
       events: null,
+      totalPages: null,
+      page: null,
+      q: [],
       scroll: 0,
       eventId: null,
       dialog: false

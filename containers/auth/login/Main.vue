@@ -97,11 +97,11 @@ export default {
           })
           setToken(this.auth(headers, data), this.rememberMe)
           this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
+          this.$router.replace(this.path('/'))
         } catch (error) {
           this.veeErrors.add('user-password', error.response.data.errors[0])
           console.error(error)
         }
-        this.$router.replace(this.path('/'))
       })
     },
     open (e) {
