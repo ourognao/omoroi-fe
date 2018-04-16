@@ -51,7 +51,8 @@ heroku run rake db:schema:load --app omoroi-be
 heroku run rake db:schema:load --app omoroi-be-staging
 
 /* Seed Staging Database */
-heroku run rake db:seed_fu --app omoroi-be-staging
+heroku run rake db:seed --app omoroi-be
+heroku run rake db:seed --app omoroi-be-staging
 
 
 git remote add omoroi-be git@github.com:ourognao/omoroi-be
@@ -83,3 +84,17 @@ Date.parse("2018/06").end_of_month
 startMonth  = Date.parse("2018/04/14")
 endMonth    = Date.parse("2018/06").end_of_month
 @events     = Event.where('date BETWEEN ? AND ?', startMonth, endMonth)
+
+開発者的
+● バゴ：
+・ 特区民泊画面 (domain名の変更（SSLを含む） + 画像アプロード　+　検索機能)
+
+● けいすけさん：
+・Go To Airbnbのエクステンションの見直し→完了
+・GSTメンバーと連携してPMS4のメッセージ画面を修正する
+・社内からカレンダーをブロックする実験および実装(デザイン)
+・清掃画面の開始（ヒアリング）
+
+● パンパン：
+・ 社内からカレンダーをブロックする実験および実装 -> 完了
+・リスティング画面の開始

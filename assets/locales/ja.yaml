@@ -1,7 +1,5 @@
 attr:
   # Reservation
-  reservation-name: 氏名
-  reservation-email: メールアドレス
   reservation-total-guests: ゲストの数
 
   # ユーザー一覧画面
@@ -135,8 +133,14 @@ top:
       i04: LINE ID
     reservation:
       title: イベント予約
+      i01: 予約するため、ユーザー登録を行ってください
+      i02: 登録しましt
+      i03: 本当ですか
       button:
-        i01: 予約 
+        i01: 予約
+        i02: ユーザー登録
+        i03: 編集
+        i04: キャンセル
   secret:
     title: 秘密のページ
   
