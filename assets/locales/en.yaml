@@ -1,7 +1,5 @@
 attr:
   # Reservation
-  reservation-name: Name
-  reservation-email: Email
   reservation-total-guests: Number of Guests
 
   # User Screen
@@ -135,8 +133,14 @@ top:
       i04: LINE ID
     reservation:
       title: Event Reservation
+      i01: You need to register to make a reservation
+      i02: Successfully registered
+      i03: Are you sure ?
       button:
         i01: Reservation
+        i02: Sign up
+        i03: Edit
+        i04: Cancel
   secret:
     title: Secret
   

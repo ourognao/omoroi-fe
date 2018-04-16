@@ -64,7 +64,9 @@ export const state = () => ({
       scroll: 0,
       eventId: null,
       dialog: false,
-      futurEvent: null
+      futurEvent: null,
+      currentMonth: null,
+      currentMonths: null
     }
   },
 

@@ -299,7 +299,9 @@ export default {
         scroll: window.pageYOffset,
         dialog: true,
         eventId: event.id,
-        futurEvent: futurEvent
+        futurEvent: futurEvent,
+        currentMonth: this.currentMonth,
+        currentMonths: this.currentMonths
       })
     },
     setBeginningOfText (text) {
@@ -391,7 +393,6 @@ export default {
         context.currentMonth = currentThreeMonths[0]
         context.currentMonths = currentThreeMonths
         if (date) context.getThreeNextEvents()
-        // !date ? context.setPastEvents() : context.getThreeNextEvents()
         context.setPastEvents()
         context.getEventsByMonth()
       }, 100)

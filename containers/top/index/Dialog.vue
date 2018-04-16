@@ -85,24 +85,19 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
               span {{ getOrganizerInfos(event.userId).line }}
               
 
-        v-layout.mt-2(row class="border-blue-bottom")
+        v-layout.mt-2(row class="border-blue-bottom" v-if="$s.futurEvent")
           v-flex.caption(xs12)
             v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
             span {{ $t('top.dialog.reservation.title') }}
-        div(class="reservation")
+        div(class="reservation" v-if="$s.futurEvent && $currentUser.id")
           v-layout(row)
             v-flex(xs6)
               v-text-field(
                 type="text"
                 v-model="name"
-                name="reservation-name"
-                :placeholder="$t('attr.reservation-name')"
                 prepend-icon="assignment_ind"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('reservation-name') || []"
-                :readonly="$currentUser ? true : false"
+                :readonly="true"
                 hide-details
-                @keypress.enter.native="send"
               )
             v-flex(xs6)
               div(class="sns")
@@ -129,20 +124,15 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
               v-text-field(
                 type="text"
                 v-model="email"
-                name="reservation-email"
-                :placeholder="$t('attr.reservation-email')"
                 prepend-icon="email"
-                v-validate="'required|email'"
-                :error-messages="veeErrors.first('reservation-email') || []"
-                :readonly="$currentUser ? true : false"
+                :readonly="true"
                 hide-details
-                @keypress.enter.native="send"
               )
           v-layout(row)
             v-flex(xs6)
               v-select(
-                v-bind:items="totalGuestItems"
-                v-model="totalGuests"
+                v-bind:items="expectedPeopleItems"
+                v-model="expectedPeople"
                 :placeholder="$t('attr.reservation-total-guests')"
                 :error-messages="veeErrors.first('reservation-total-guests') || []"
                 v-validate="'required'"
@@ -151,7 +141,17 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
               )
             v-flex.text-xs-right(xs6)
               v-btn.primary.mt-3(small @click.stop.prevent.native="send()")
-                span {{ $t('top.dialog.reservation.button.i01') }}
+                span {{ hasAlreadyReserved ? $t('top.dialog.reservation.button.i03') : $t('top.dialog.reservation.button.i01') }}
+              v-btn.primary.mt-3(v-if="hasAlreadyReserved" small @click.stop.prevent.native="destroy()")
+                span {{ $t('top.dialog.reservation.button.i04') }}
+        div(class="reservation" v-if="$s.futurEvent && !$currentUser.id")
+          v-layout(row)
+            v-flex(xs12) 
+              span {{ $t('top.dialog.reservation.i01') }}
+          v-layout(row)
+            v-flex.text-xs-center(xs12)
+              v-btn.primary.mt-3(small @click.stop.prevent.native="goto($router, '/auth/sign-up')")
+                span {{ $t('top.dialog.reservation.button.i02') }}
 
 </template>
 
@@ -241,6 +241,8 @@ import mixins from '~/utils/mixins'
 import constants from '~/utils/constants'
 import moment from 'moment'
 import Vue from 'vue'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
 
 export default {
   mixins: [mixins],
@@ -253,8 +255,10 @@ export default {
       pastEvents: [],
       name: null,
       email: null,
-      totalGuests: null,
-      totalGuestItems: this.getSelectOptionsFor(0, 10),
+      expectedPeople: null,
+      expectedPeopleItems: this.getSelectOptionsFor(0, 10),
+      reservationId: null,
+      hasAlreadyReserved: null,
       lat: 0,
       lng: 0,
       gmap: {
@@ -302,7 +306,10 @@ export default {
       return moment().format('YYYY-MM-DD')
     },
     $currentMonth () {
-      return moment().format('YYYY-MM')
+      return this.$store.state.top.index.currentMonth
+    },
+    $currentMonths () {
+      return this.$store.state.top.index.currentMonths
     },
     $fullPath () {
       return `${this.defaultUrl('frontend')}/${this.$store.state.base.layout.fullPath}`
@@ -314,13 +321,9 @@ export default {
       if (!this.$s.eventId) return
       this.getFuturEvents()
       this.getPastEvents()
-      this.name = this.$currentUser ? this.$currentUser.name : null
-      this.email = this.$currentUser ? this.$currentUser.email : null
-      console.log(this.futurEvents)
-      console.log(this.pastEvents)
+      this.name = this.$currentUser.name
+      this.email = this.$currentUser.email
       this.firstEventIds = [this.futurEvents[0].id, this.pastEvents[0].id]
-      console.log(this.futurEvents.length)
-      console.log(this.futurEvents.length - 1)
       this.lastEventIds = [
         this.futurEvents[this.futurEvents.length - 1].id,
         this.pastEvents[this.pastEvents.length - 1].id
@@ -328,6 +331,7 @@ export default {
       let events = this.$s.futurEvent ? this.futurEvents : this.pastEvents
       let event = events.filter(event => event.id === this.$s.eventId)
       if (!event.length) return
+      this.setExpectedPeople(event[0].reservations)
       this.setGmapMarker(event[0].positions)
       return event[0]
     },
@@ -376,6 +380,17 @@ export default {
       if (!organizer) return
       return organizer[0]
     },
+    setExpectedPeople (reservations) {
+      let reservation = reservations.filter(arr => arr.userId === this.$currentUser.id)
+      if (reservation.length) {
+        this.reservationId = reservation[0].id
+        this.expectedPeople = reservation[0].expectedPeople
+        this.hasAlreadyReserved = true
+      } else {
+        this.expectedPeople = null
+        this.hasAlreadyReserved = false
+      }
+    },
     setGmapMarker (positions) {
       this.gmap.markers[0].position.lat = this.gmap.center.lat = this.lat = parseFloat(positions[0])
       this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])
@@ -394,52 +409,76 @@ export default {
         eventId: events[newIndex].id
       })
     },
+    destroy () {
+      let confirmationText = this.$t('top.dialog.reservation.i03')
+      this.confirm({ text: confirmationText })
+        .then(async agreed => {
+          if (agreed) {
+            try {
+              await axios({
+                ...{
+                  method: 'delete',
+                  url: `/reservations/${this.reservationId}`,
+                  data: {
+                    locale: this.$store.state.base.locale.selected
+                  }
+                },
+                ...this.$store.getters.options
+              })
+              this.getThreeNextEvents()
+            } catch (error) {
+              this.message(this.$t('base.axios.failure'))
+              console.error(error)
+            }
+          }
+        })
+    },
     send (e) {
       this.$validator.validateAll().then(async result => {
         if (!result) return
         try {
-          // let newUser = {
-          //   name: this.name,
-          //   email: this.email,
-          //   password: this.password,
-          //   comment: this.comment,
-          //   kind: this.kind,
-          //   states: this.states,
-          //   airbnb_email: this.airbnbEmail || null,
-          //   airbnb_password: this.airbnbPassword || null
-          // }
-          // let res = await axios({
-          //   ...{
-          //     method: this.$s.userId ? 'put' : 'post',
-          //     url: this.$s.userId ? `/users/${this.$s.userId}` : '/users',
-          //     data: {
-          //       user: newUser,
-          //       locale: this.$store.state.base.locale.selected
-          //     }
-          //   },
-          //   ...this.$store.getters.options
-          // })
+          let reservation = {
+            event_id: this.$s.eventId,
+            user_id: this.$currentUser.id,
+            expected_people: this.expectedPeople
+          }
+          let res = await axios({
+            ...{
+              method: this.reservationId ? 'put' : 'post',
+              url: this.reservationId ? `/reservations/${this.reservationId}` : '/reservations',
+              data: {
+                reservation: reservation,
+                locale: this.$store.state.base.locale.selected
+              }
+            },
+            ...this.$store.getters.options
+          })
 
-          // if (res.data.status === 'error') {
-          //   res.data.errors.name && this.veeErrors.add('user-name', `${this.$t('attr.user-name')}${res.data.errors.name[0]}`)
-          //   res.data.errors.email && this.veeErrors.add('user-email', `${this.$t('attr.user-email')}${res.data.errors.email[0]}`)
-          //   res.data.errors.password && this.veeErrors.add('user-password', `${this.$t('attr.user-password')}${res.data.errors.password[0]}`)
-          //   return
-          // }
-
-          // let { data } = await axios.get(`/users?page=${this.$s.page}`, this.$store.getters.options)
-          // this.$store.commit('merge', ['users.index', {
-          //   users: data.data.users,
-          //   totalPages: data.data.totalPages
-          // }])
-
-          // this.message(this.$t('users.index.i08'))
-          // this.visible = false
+          if (res.data.status === 'error') {
+            this.message(this.$t('base.axios.failure'))
+            console.log('error reservation')
+            return
+          }
+          this.getThreeNextEvents()
+          this.message(this.$t('top.dialog.reservation.i02'))
         } catch (error) {
           // this.message(this.$t('users.index.i09'))
           console.error(error)
         }
       })
+    },
+    async getThreeNextEvents () {
+      try {
+        let params = queryString.stringify({
+          screen: 'top',
+          bom: moment(this.$currentMonth.date).format('YYYY-MM-DD'),
+          eom: this.$currentMonths[this.$currentMonths.length - 1].date
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
+        this.$store.commit('merge', ['top.index', { events: data.data.events }])
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') this.reload()
+      }
     }
   }
 }
