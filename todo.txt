@@ -70,9 +70,10 @@ heroku restart --app omoroi-fe
 04/27（Fri.）Tōkyō → Kyoto Ridesharing wanted !
 Passenger can cost share until 3000yen. She has small lugguage.
 Can speak French and english. Save money and find friends :) !
-#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel
 #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
 
+#osaka #kansai 
 
 04/27（金）東京都 → 京都府 に行く方を募集しています！同乗者は3000円までコストシェアができます。
 移動費を節約したい方若しくは新しい友達を作りたいなら是非ご覧ください。
@@ -85,16 +86,7 @@ startMonth  = Date.parse("2018/04/14")
 endMonth    = Date.parse("2018/06").end_of_month
 @events     = Event.where('date BETWEEN ? AND ?', startMonth, endMonth)
 
-開発者的
-● バゴ：
-・ 特区民泊画面 (domain名の変更（SSLを含む） + 画像アプロード　+　検索機能)
 
-● けいすけさん：
-・Go To Airbnbのエクステンションの見直し→完了
-・GSTメンバーと連携してPMS4のメッセージ画面を修正する
-・社内からカレンダーをブロックする実験および実装(デザイン)
-・清掃画面の開始（ヒアリング）
+05/06（Sun.）Osaka → Hamamatsu, rideshare (1 seat) wanted ! Passenger can cost share until 2000yen. If you are travelling by car this day, meet a new girl and save money at the same time ! Small luggage, can speak english, spanish and japanese.
 
-● パンパン：
-・ 社内からカレンダーをブロックする実験および実装 -> 完了
-・リスティング画面の開始
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア

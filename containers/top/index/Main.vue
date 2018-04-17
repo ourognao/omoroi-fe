@@ -276,6 +276,9 @@ export default {
     $currentDay () {
       return moment().format('YYYY-MM-DD')
     },
+    $actualMonth () {
+      return moment().format('YYYY-MM')
+    },
     $currentDate () {
       return [
         moment().format('YYYY-MM'),
@@ -317,9 +320,12 @@ export default {
     },
     async getThreeNextEvents () {
       try {
+        let bom = this.currentMonth.date === this.$actualMonth
+          ? this.$currentDay
+          : moment(this.currentMonth.date).format('YYYY-MM-DD')
         let params = queryString.stringify({
           screen: 'top',
-          bom: moment(this.currentMonth.date).format('YYYY-MM-DD'),
+          bom: bom,
           eom: this.currentMonths[this.currentMonths.length - 1].date
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
@@ -350,6 +356,7 @@ export default {
       this.pastEvents = this.$events.filter(
         event => event.date.substr(0, 10) < this.$currentDay
       )
+      console.log(this.pastEvents)
     },
     setMonth (date) {
       this.currentMonth = {
@@ -371,7 +378,7 @@ export default {
       let monthIndex = moment(date)
       let currentMonth = moment().format('YYYY-MM')
       setTimeout(function () {
-        let currentDate = !date ? context.$currentDate[0] : date
+        let currentDate = !date ? context.$actualMonth : date
         for (let i = 0; i < 3; i++) {
           if (currentDate === currentMonth) {
             currentThreeMonths.push({
