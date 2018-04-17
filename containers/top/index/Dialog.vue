@@ -142,7 +142,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
             v-flex.text-xs-right(xs6)
               v-btn.primary.mt-3(small @click.stop.prevent.native="send()")
                 span {{ hasAlreadyReserved ? $t('top.dialog.reservation.button.i03') : $t('top.dialog.reservation.button.i01') }}
-              v-btn.primary.mt-3(v-if="hasAlreadyReserved" small @click.stop.prevent.native="destroy()")
+              v-btn.red.white--text.mt-3(v-if="hasAlreadyReserved" small @click.stop.prevent.native="destroy()")
                 span {{ $t('top.dialog.reservation.button.i04') }}
         div(class="reservation" v-if="$s.futurEvent && !$currentUser.id")
           v-layout(row)
@@ -256,9 +256,10 @@ export default {
       name: null,
       email: null,
       expectedPeople: null,
-      expectedPeopleItems: this.getSelectOptionsFor(0, 10),
+      expectedPeopleItems: this.getSelectOptionsFor(1, 10),
       reservationId: null,
       hasAlreadyReserved: null,
+      remainingSpaces: null,
       lat: 0,
       lng: 0,
       gmap: {
@@ -305,6 +306,9 @@ export default {
     $currentDay () {
       return moment().format('YYYY-MM-DD')
     },
+    $actualMonth () {
+      return moment().format('YYYY-MM')
+    },
     $currentMonth () {
       return this.$store.state.top.index.currentMonth
     },
@@ -331,6 +335,7 @@ export default {
       let events = this.$s.futurEvent ? this.futurEvents : this.pastEvents
       let event = events.filter(event => event.id === this.$s.eventId)
       if (!event.length) return
+      this.remainingSpaces = this.setRemainingSpaces(event[0])
       this.setExpectedPeople(event[0].reservations)
       this.setGmapMarker(event[0].positions)
       return event[0]
@@ -425,6 +430,7 @@ export default {
                 },
                 ...this.$store.getters.options
               })
+              this.reservationId = null
               this.getThreeNextEvents()
             } catch (error) {
               this.message(this.$t('base.axios.failure'))
@@ -456,22 +462,24 @@ export default {
 
           if (res.data.status === 'error') {
             this.message(this.$t('base.axios.failure'))
-            console.log('error reservation')
             return
           }
           this.getThreeNextEvents()
           this.message(this.$t('top.dialog.reservation.i02'))
         } catch (error) {
-          // this.message(this.$t('users.index.i09'))
+          this.message(this.$t('base.axios.failure'))
           console.error(error)
         }
       })
     },
     async getThreeNextEvents () {
       try {
+        let bom = this.$currentMonth.date === this.$actualMonth
+          ? this.$currentDay
+          : moment(this.$currentMonth.date).format('YYYY-MM-DD')
         let params = queryString.stringify({
           screen: 'top',
-          bom: moment(this.$currentMonth.date).format('YYYY-MM-DD'),
+          bom: bom,
           eom: this.$currentMonths[this.$currentMonths.length - 1].date
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)

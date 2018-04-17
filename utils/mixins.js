@@ -69,17 +69,26 @@ export default {
       return event.endTime ? `${event.startTime}-${event.endTime}` : event.startTime
     },
     setAttending (event) {
+      if (!event) return
+      let remainingSpaces = this.setRemainingSpaces(event)
+      let participants = event.capacity - remainingSpaces
       let format = this.setThreshold(event) === 'red-text'
-        ? `${event.remaining}/${event.capacity}`
-        : `${event.remaining}`
-      return event.remaining === event.capacity
+        ? `${participants}/${event.capacity}`
+        : `${participants}`
+      return participants === event.capacity
         ? this.$t('top.index.events.list.info.i02')
         : format
     },
     setThreshold (event) {
       if (!event.threshold) return
+      let remainingSpaces = this.setRemainingSpaces(event)
       let threshold = Math.round((event.capacity * event.threshold) / 100)
-      return event.remaining <= threshold ? 'red-text' : ''
+      return remainingSpaces <= threshold ? 'red-text' : ''
+    },
+    setRemainingSpaces (event) {
+      let reducer = (accumulator, currentValue) => accumulator + currentValue
+      let expectedPeoples = event.reservations.map(reservation => reservation.expectedPeople)
+      return expectedPeoples.length > 0 ? (event.capacity - expectedPeoples.reduce(reducer)) : event.capacity
     },
     formatDate (date) {
       let locale = this.$store.state.base.locale.selected
