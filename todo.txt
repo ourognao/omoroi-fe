@@ -90,3 +90,7 @@ endMonth    = Date.parse("2018/06").end_of_month
 05/06（Sun.）Osaka → Hamamatsu, rideshare (1 seat) wanted ! Passenger can cost share until 2000yen. If you are travelling by car this day, meet a new girl and save money at the same time ! Small luggage, can speak english, spanish and japanese.
 
 #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+1) fix design of details screen
+2) create event maker screen
+3) create facebook login
