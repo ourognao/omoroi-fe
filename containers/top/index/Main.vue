@@ -296,6 +296,11 @@ export default {
       return this.$s.dialog
     }
   },
+  watch: {
+    $events () {
+      this.getEventsByMonth()
+    }
+  },
   methods: {
     details (event, futurEvent) {
       this.push(this.$store, 'top.index', '/top', {
@@ -356,7 +361,6 @@ export default {
       this.pastEvents = this.$events.filter(
         event => event.date.substr(0, 10) < this.$currentDay
       )
-      console.log(this.pastEvents)
     },
     setMonth (date) {
       this.currentMonth = {
