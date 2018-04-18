@@ -5,6 +5,9 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    truncate (string, maxCharacters) {
+      return string.length > maxCharacters ? string.substr(0, maxCharacters) + '...' : string
+    },
     reload () {
       this.$router.go(this.$router.currentRoute)
     },

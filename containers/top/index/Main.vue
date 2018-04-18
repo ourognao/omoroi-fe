@@ -53,7 +53,7 @@
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs3)
             img.future(:src="event.picture" style="border-radius:10px")
-          v-flex.ml-3(xs7)
+          v-flex.ml-4(xs8)
             v-layout.mb-1(row)
               v-flex.caption.future(xs12) {{ event.title }}
             v-layout(row)
@@ -67,14 +67,15 @@
             v-layout(row)
               v-flex.location(xs12)
                 v-icon location_on
-                span {{ event.location }}
+                span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event.location, 20) }}
+                span(class="hidden-sm-and-down") {{ event.location }}
             v-layout(row)
               v-flex.attending(xs12)
                 v-icon people_outline
                 span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
-          v-flex(xs2 style="line-height: 75px")
-            v-btn(flat icon @click.stop.prevent.native="details(event, true)")
+          v-flex(xs1 style="line-height: 75px")
+            v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
               v-icon.details(class="icon-blue icons events") chevron_right
 
       v-layout.mt-3(row class="eventHeader")
@@ -92,7 +93,8 @@
           v-layout(row)
             v-flex.caption(xs12) {{ event.title }}
           v-layout(row)
-            v-flex(xs12 class="explanation") {{ setBeginningOfText(event.explanation) }}
+            v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event.explanation, 30) }}
+            v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event.explanation, 160) }}
         v-flex(xs1 style="line-height: 50px")
           v-btn(flat icon @click.stop.prevent.native="details(event, false)")
             v-icon.details(class="icon-blue icons events") chevron_right
@@ -166,6 +168,7 @@ $dot-space = 2px
       &.details
         color #bdbdbd
         font-size 35px
+        margin-left -20px
   
   .table tr
     border 0
@@ -311,12 +314,6 @@ export default {
         currentMonth: this.currentMonth,
         currentMonths: this.currentMonths
       })
-    },
-    setBeginningOfText (text) {
-      if (text.length > 30) {
-        return text.substring(0, 30) + '...'
-      }
-      return text
     },
     getEventsBySport () {
       this.$nextTick(function () {

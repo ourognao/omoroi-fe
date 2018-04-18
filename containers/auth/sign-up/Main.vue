@@ -92,10 +92,10 @@ export default {
     return {
       mask: true,
       mask2: true,
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirm: ''
+      name: null,
+      email: null,
+      password: null,
+      passwordConfirm: null
     }
   },
   methods: {
