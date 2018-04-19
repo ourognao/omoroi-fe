@@ -1,9 +1,18 @@
 <template lang="pug">
   div#top-index-main(fluid)
     v-layout.tabs(row class="hidden-md-only hidden-lg-only hidden-xl-only fixedTabs")
-      v-flex.primary(xs4 class="delimitor") {{ $t('top.index.tabs.social')}}
-      v-flex.primary(xs4 class="delimitor") {{ $t('top.index.tabs.language')}}
-      v-flex.primary(xs4) {{ $t('top.index.tabs.sports')}}
+      v-flex.primary.delimitor(
+        xs4
+        :class="sectionFilterColor('SC')"
+        @click="changeSection('SC')") {{ $t('top.index.tabs.social') }}
+      v-flex.primary.delimitor(
+        xs4
+        :class="sectionFilterColor('LX')"
+        @click="changeSection('LX')") {{ $t('top.index.tabs.language') }}
+      v-flex.primary(
+        xs4
+        :class="sectionFilterColor('SP')"
+        @click="changeSection('SP')") {{ $t('top.index.tabs.sports') }}
     v-carousel(delimiter-icon="lens" class="hidden-sm-and-down delimiter-background")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-carousel(
@@ -12,21 +21,22 @@
       style="box-shadow:")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-container.pt-3
-      v-layout(row class="eventHeader")
-        v-flex.caption(xs12)
-          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-          | {{ $t('top.index.events.list.title.i04') }}
-      div.ma-2.mb-3(class="search-container dotted-background")
-        v-layout.pl-2(row wrap)
-          v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
-            v-checkbox.pt-0(
-              color="primary"
-              :label="sport.text"
-              v-model="sports"
-              :value="sport.value"
-              hide-details
-              @change="getEventsBySport()"
-            )
+      div(v-if="section === 'SP'")
+        v-layout(row class="eventHeader")
+          v-flex.caption(xs12)
+            v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+            | {{ $t('top.index.events.list.title.i04') }}
+        div.ma-2.mb-3(class="search-container dotted-background")
+          v-layout.pl-2(row wrap)
+            v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
+              v-checkbox.pt-0(
+                color="primary"
+                :label="sport.text"
+                v-model="sports"
+                :value="sport.value"
+                hide-details
+                @change="getEventsBySport()"
+              )
       
       v-layout(row class="eventHeader")
         v-flex.caption(xs5)
@@ -235,15 +245,21 @@ export default {
   mixins: [mixins],
   data () {
     return {
+      section: null,
+      sectionItems: [
+        { text: this.$t('top.index.tabs.social'), value: 'SC' },
+        { text: this.$t('top.index.tabs.language'), value: 'LX' },
+        { text: this.$t('top.index.tabs.sports'), value: 'SP' }
+      ],
       sports: [],
       sportItems: [
-        { text: this.$t('labels.common.sports.volleyball'), value: 'volleyball' },
-        { text: this.$t('labels.common.sports.kickboxing'), value: 'kickboxing' },
-        { text: this.$t('labels.common.sports.basketball'), value: 'basketball' },
-        { text: this.$t('labels.common.sports.pingpong'), value: 'pingpong' },
-        { text: this.$t('labels.common.sports.badminton'), value: 'badminton' },
-        { text: this.$t('labels.common.sports.futsal'), value: 'futsal' },
-        { text: this.$t('labels.common.sports.other'), value: 'other' }
+        { text: this.$t('labels.sports.volleyball'), value: 'volleyball' },
+        { text: this.$t('labels.sports.kickboxing'), value: 'kickboxing' },
+        { text: this.$t('labels.sports.basketball'), value: 'basketball' },
+        { text: this.$t('labels.sports.pingpong'), value: 'pingpong' },
+        { text: this.$t('labels.sports.badminton'), value: 'badminton' },
+        { text: this.$t('labels.sports.futsal'), value: 'futsal' },
+        { text: this.$t('labels.sports.other'), value: 'other' }
       ],
       pastEventsHref: '/team/login',
       pictures: [
@@ -305,6 +321,12 @@ export default {
     }
   },
   methods: {
+    changeSection (section) {
+      this.section = section
+    },
+    sectionFilterColor (section) {
+      return this.section === section ? 'grey' : ''
+    },
     details (event, futurEvent) {
       this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,

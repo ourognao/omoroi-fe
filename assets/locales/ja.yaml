@@ -12,15 +12,6 @@ attr:
 
 labels:
   common:
-    sports:
-      volleyball: バレーボール
-      kickboxing: キックボクシング
-      basketball: バスケットボール
-      pingpong: 卓球
-      badminton: バドミントン
-      futsal: フットサル
-      other: その他
-    
     months:
       jan: 1月
       feb: 2月
@@ -34,6 +25,14 @@ labels:
       oct: 10月
       nov: 11月
       dec: 12月
+  sports:
+    volleyball: バレーボール
+    kickboxing: キックボクシング
+    basketball: バスケットボール
+    pingpong: 卓球
+    badminton: バドミントン
+    futsal: フットサル
+    other: その他
 
 base:
   head:

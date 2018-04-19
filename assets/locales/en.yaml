@@ -12,15 +12,6 @@ attr:
 
 labels:
   common:
-    sports:
-      volleyball: Volleyball
-      kickboxing: Kickboxing
-      basketball: Basketball
-      pingpong: Ping Pong
-      badminton: Badminton
-      futsal: Futsal
-      other: Other
-    
     months:
       jan: Jan
       feb: Feb
@@ -34,6 +25,14 @@ labels:
       oct: Oct
       nov: Nov
       dec: Dec
+  sports:
+    volleyball: Volleyball
+    kickboxing: Kickboxing
+    basketball: Basketball
+    pingpong: Ping Pong
+    badminton: Badminton
+    futsal: Futsal
+    other: Other
 
 base:
   head:
