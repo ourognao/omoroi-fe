@@ -51,7 +51,7 @@ export default {
         })
         setToken(this.auth(headers, data), true)
         this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-        this.$router.replace(this.path('/'))
+        window.location.href = '/'
       } catch (error) {
         console.error(error)
       }
