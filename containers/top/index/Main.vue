@@ -343,7 +343,8 @@ export default {
       let futurEvents = []
       if (!this.$events) return
       this.futurEvents = this.$events.filter(function (event) {
-        if (event.date.substr(0, 7) === context.currentMonth.date) {
+        if ((event.date.substr(0, 7) === context.currentMonth.date) &&
+          (event.date >= context.$currentDay)) {
           event.tags.forEach(function (tags) {
             if (sports.includes(tags)) {
               futurEvents.push(event)
