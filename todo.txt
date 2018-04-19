@@ -94,5 +94,6 @@ endMonth    = Date.parse("2018/06").end_of_month
 1) fix design of details screen
 2) create event maker screen
 3) create facebook login
-5) add reactivite to tabs
-7) past event in the current months are stil appearing ion the futur list
+4) add reactivite to tabs
+5) change section field to is array
+6) change title to text with scema section: SC, title: X
