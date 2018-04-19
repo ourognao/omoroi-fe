@@ -94,3 +94,6 @@ endMonth    = Date.parse("2018/06").end_of_month
 1) fix design of details screen
 2) create event maker screen
 3) create facebook login
+5) add reactivite to tabs
+6) after logged, the login link is still appearing in the menu
+7) past event in the current months are stil appearing ion the futur list
