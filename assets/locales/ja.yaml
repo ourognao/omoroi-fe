@@ -32,6 +32,7 @@ labels:
     pingpong: 卓球
     badminton: バドミントン
     futsal: フットサル
+    tennis: テニス
     other: その他
 
 base:
