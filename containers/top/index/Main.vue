@@ -323,8 +323,6 @@ export default {
   methods: {
     changeSection (section) {
       this.section = section
-      // let futurEventsBySection = this.futurEvents.filter(event => event.section.includes(section))
-      // this.futurEvents = futurEventsBySection
       this.getEventsByMonth()
     },
     sectionFilterColor (section) {
