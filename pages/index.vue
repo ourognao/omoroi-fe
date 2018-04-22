@@ -36,6 +36,7 @@ export default {
         events: data.data.events,
         scroll: parseInt(query.scroll) || 0,
         eventId: parseInt(query.event_id) || 0,
+        section: query.section,
         futurEvent: (query.futur_event === 'true'),
         dialog: (query.dialog === 'true')
       }])

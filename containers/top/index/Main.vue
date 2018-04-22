@@ -65,7 +65,7 @@
             img.future(:src="event.picture" style="border-radius:10px")
           v-flex.ml-4(xs8)
             v-layout.mb-1(row)
-              v-flex.caption.future(xs12) {{ event.title }}
+              v-flex.caption.future(xs12) {{ displayEventTitle(section, event) }}
             v-layout(row)
               v-flex(xs12)
                 v-icon event
@@ -101,7 +101,7 @@
           v-layout(row)
             v-flex.grey-text.dark(xs12) {{ event.date }}
           v-layout(row)
-            v-flex.caption(xs12) {{ event.title }}
+            v-flex.caption(xs12) {{ displayEventTitle(null, event) }}
           v-layout(row)
             v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event.explanation, 30) }}
             v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event.explanation, 160) }}
@@ -323,6 +323,9 @@ export default {
   methods: {
     changeSection (section) {
       this.section = section
+      // let futurEventsBySection = this.futurEvents.filter(event => event.section.includes(section))
+      // this.futurEvents = futurEventsBySection
+      this.getEventsByMonth()
     },
     sectionFilterColor (section) {
       return this.section === section ? 'grey' : ''
@@ -332,6 +335,7 @@ export default {
         scroll: window.pageYOffset,
         dialog: true,
         eventId: event.id,
+        section: this.section,
         futurEvent: futurEvent,
         currentMonth: this.currentMonth,
         currentMonths: this.currentMonths
@@ -359,19 +363,34 @@ export default {
         if (error.message === 'Request failed with status code 401') this.reload()
       }
     },
+    getEventFilter () {
+      switch (this.section) {
+        case 'SC':
+          return []
+        case 'LX':
+          return []
+        case 'SP':
+          return this.sports.length === 0 ? this.sportItems.map(sport => sport.value) : this.sports
+      }
+    },
     getEventsByMonth () {
       let context = this
-      let sports = this.sports.length === 0 ? this.sportItems.map(sport => sport.value) : this.sports
       let futurEvents = []
+      let section = this.section
+      let eventFilter = this.getEventFilter()
       if (!this.$events) return
-      this.futurEvents = this.$events.filter(function (event) {
+      this.$events.filter(function (event) {
         if ((event.date.substr(0, 7) === context.currentMonth.date) &&
           (event.date >= context.$currentDay)) {
-          event.tags.forEach(function (tags) {
-            if (sports.includes(tags)) {
-              futurEvents.push(event)
-            }
-          })
+          if (!section) {
+            futurEvents.push(event)
+          } else if (event.section.includes(section)) {
+            event.tags.forEach(function (tags) {
+              if (eventFilter.length === 0 || eventFilter.includes(tags)) {
+                futurEvents.push(event)
+              }
+            })
+          }
         }
       })
       this.futurEvents = futurEvents
