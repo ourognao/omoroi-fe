@@ -140,7 +140,7 @@ $dot-space = 2px
         background: white
     label
       margin-left -10px
-      font-size 12px
+      font-size 10px
       font-weight 500
       color black
     &.dotted-background
@@ -259,6 +259,7 @@ export default {
         { text: this.$t('labels.sports.pingpong'), value: 'pingpong' },
         { text: this.$t('labels.sports.badminton'), value: 'badminton' },
         { text: this.$t('labels.sports.futsal'), value: 'futsal' },
+        { text: this.$t('labels.sports.tennis'), value: 'tennis' },
         { text: this.$t('labels.sports.other'), value: 'other' }
       ],
       pastEventsHref: '/team/login',

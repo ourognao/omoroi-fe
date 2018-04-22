@@ -93,10 +93,6 @@ endMonth    = Date.parse("2018/06").end_of_month
 1) fix design of details screen
 2) create event maker screen
 3) create facebook login
-4) add reactivite to tabs
-5) display only section events
-6) display event title
-7) remove remaining field in event
 
 
 <div id="lyrics" class="lyrics" style="font-size: 100%;">咲き乱れし夜の街に真昼間の眼<br>届くはずもない心情障害よ<br>輝けしき時の罠に足をとられ<br>この絶望を夢に描く<br><br>足早に人々は今どこへ帰る<br>ただ日々の続きなのだろうか<br><br>座り込む影に呼ばれ<br>失くした声<br>枯れた瞼に溢れ出した<br><br>泣き濡れていたのさ<br>この世の終わりでさ<br>虚しく笑う風<br>さらば 心は歪んだ<br><br>咲き乱れし夜の街に真昼間の眼<br>届くはずもない心情障害よ<br>招かれざる援護射撃に 足を撃たれ<br>悲しくも希望を託した<br><br>立ち止まるあの人は戻るだろうか<br>いまさらだと前向くだろうか<br>空を見た 鳥に呼ばれ<br>この心は 眩しさの色にこぼれゆく<br><br>泣き濡れていたのさ<br>この世の終わりでさ<br>静かに目を閉じたならば<br>心はうたった<br><br>咲き乱れし夜の街に真昼間の眼<br>届くはずもない心情 論外だ<br><br>泣き濡れていたのさ<br>この世の終わりでさ<br>風待つこともない<br>さらば 心は巣立った</div>
