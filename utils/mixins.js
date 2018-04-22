@@ -5,6 +5,12 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    displayEventTitle (currentSection, event) {
+      let eventTitles = JSON.parse(event.title)
+      let section = !currentSection ? event.section[0] : currentSection
+      let index = eventTitles.findIndex(arr => arr.section === section)
+      return eventTitles[index].title
+    },
     truncate (string, maxCharacters) {
       return string.length > maxCharacters ? string.substr(0, maxCharacters) + '...' : string
     },

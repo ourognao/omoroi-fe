@@ -30,7 +30,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
         v-layout(row class="border-blue-bottom")
           v-flex.caption(xs6)
             v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-            span {{ event.title }}
+            span {{ displayEventTitle($s.section, event) }}
           v-flex.caption(xs6 class="text-xs-right")
             v-flex.attending(xs12)
               v-icon people_outline

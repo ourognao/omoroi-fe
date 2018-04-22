@@ -63,6 +63,7 @@ export const state = () => ({
       events: null,
       scroll: 0,
       eventId: null,
+      section: null,
       dialog: false,
       futurEvent: null,
       currentMonth: null,
