@@ -10,6 +10,18 @@ attr:
   user-kind: Permission
   user-status: Status
 
+  # Event Screen
+  event-date: Date
+  event-access: Access
+  event-start-time: Start Time
+  event-end-time: End Time
+  event-cost: Cost
+  event-capacity: Capacity
+  event-threshold: Threshold
+  event-section: Section
+  event-tags: Tags
+  event-explanation: Details
+
 labels:
   common:
     months:
@@ -38,15 +50,18 @@ labels:
 base:
   head:
     title: omoroi
+  common:
+    yen: ¥
   menu:
     english: English
     japanese: 日本語
     sign_up: Sign up
     sign_out: Sign out
   form:
-    more: 以上
-  snackbar:
+    more: ' or more'
     close: Close
+    send: Send
+    select-anytime: Anytime
   confirm:
     title: Confirm
     agree: Agree
@@ -96,6 +111,16 @@ auth:
     i01: Signing up completed
     i02: Signing in..
 
+events:
+  index:
+    title: Events
+    i01: New
+    i02: Edit
+  dialog:
+    title:
+      new: Create new event
+      edit: Edit an event
+
 top:
   index:
     title: Top
@@ -141,14 +166,6 @@ top:
         i02: Sign up
         i03: Edit
         i04: Cancel
-  secret:
-    title: Secret
-  
-team:
-  title: Team
-  sub:
-    i01: Login
-    i02: Registration
 
 footer:
   copyright:

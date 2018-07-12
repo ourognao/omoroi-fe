@@ -101,7 +101,7 @@ export default {
           this.message(this.$t('auth.password.i03'))
           setToken(this.auth(headers, data), true)
           this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-          this.$router.replace(this.path('/'))
+          window.location.href = '/'
         } catch (error) {
           let names = {
             'user-password': 'password',
