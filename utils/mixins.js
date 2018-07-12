@@ -5,6 +5,53 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    rangeOptionsForSelect (start, end, suffixForMore = '') {
+      let selectOptions = []
+      for (let i = start; i <= end; i++) {
+        const text = i === end ? i + suffixForMore : i
+        selectOptions.push({text: text, value: i})
+      }
+      return selectOptions
+    },
+    costOptions (args) {
+      let costItems = []
+      for (var price = args.min; price <= args.max; price += args.step) {
+        costItems.push({
+          text: `${this.$t('base.common.yen')}${price}`,
+          value: price
+        })
+      }
+      return costItems
+    },
+    timeOptions () {
+      let timeItems = []
+      let timeTypes = ['00', '30']
+      let timeOtherItem = {
+        text: this.$t('base.form.select-anytime'),
+        value: 'any'
+      }
+      for (var index = 0; index < 24; index++) {
+        let prefix = index < 10 ? '0' : ''
+        timeTypes.forEach(
+          function (timeType) {
+            let timeItem = {
+              text: `${prefix}${index}:${timeType}`,
+              value: `${prefix}${index}:${timeType}`
+            }
+            timeItems.push(timeItem)
+          }
+        )
+      }
+      timeItems.push(timeOtherItem)
+      return timeItems
+    },
+    nl2br (text) {
+      if (!text) return
+      return text.split('\n').join('<br/>')
+    },
+    formatDatetime (date, formatString = 'YYYY/MM/DD HH:mm') {
+      return moment(date).format(formatString)
+    },
     displayEventTitle (currentSection, event) {
       let eventTitles = JSON.parse(event.title)
       let section = !currentSection ? event.section[0] : currentSection

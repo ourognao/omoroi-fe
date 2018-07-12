@@ -10,6 +10,18 @@ attr:
   user-kind: 権限
   user-status: ステータス
 
+  # イベント画面
+  event-date: 日付
+  event-access: アクセス
+  event-start-time: 開始時間
+  event-end-time: 終了時間
+  event-cost: コスト
+  event-capacity: 最大参加人数
+  event-threshold: 閾値
+  event-section: 区分
+  event-tags: タグ
+  event-explanation: 詳細
+
 labels:
   common:
     months:
@@ -38,15 +50,18 @@ labels:
 base:
   head:
     title: おもろい
+  common:
+    yen: ¥
   menu:
     english: English
     japanese: 日本語
     sign_up: ユーザー登録
     sign_out: ログアウト
   form:
-    more: ' or more'
-  snackbar:
+    more: 以上
     close: 閉じる
+    send: 送信
+    select-anytime: いつでも
   confirm:
     title: 確認
     agree: はい
@@ -96,6 +111,18 @@ auth:
     i01: 登録完了
     i02: ログインしています..
 
+events:
+  index:
+    title: イベント
+    i01: 新規イベント
+    i02: 編集
+  dialog:
+    title:
+      new: 新規イベントを登録する
+      edit: イベントを変種する
+    common:
+
+
 top:
   index:
     title: トップ
@@ -141,14 +168,6 @@ top:
         i02: ユーザー登録
         i03: 編集
         i04: キャンセル
-  secret:
-    title: 秘密のページ
-  
-team:
-  title: チーム
-  sub:
-    i01: ログイン
-    i02: 登録
 
 footer:
   copyright:

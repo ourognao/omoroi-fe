@@ -31,22 +31,6 @@
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t(item.titleKey) }}
 
-      v-list-group(v-for="item in expensionList" v-bind:key="item.title")
-        v-list-tile(slot="item" @click="")
-          v-list-tile-action
-            v-icon people
-          v-list-tile-content
-            v-list-tile-title.f-fw2 {{ $t(item.title) }}
-          v-list-tile-action
-            v-icon keyboard_arrow_down
-        v-list-tile(
-          v-for="subItem in item.subItems"
-          :key="subItem.subTitleKey"
-          ripple
-          @click="goto($router, subItem.href)"
-        )
-          v-list-tile-title.f-fw2 {{ $t(subItem.subTitleKey) }}
-
       v-list-tile(
         key="100"
         v-if="$store.state.base.locale.selected === 'ja'"
@@ -103,7 +87,7 @@
 
   v-snackbar(top right vertical v-model="snackbarVisible")
     span {{ $store.state.base.snackbar.message }}
-    v-btn(flat dark @click.prevent.stop.native="closeSnackbar()") {{ $t('base.snackbar.close') }}
+    v-btn(flat dark @click.prevent.stop.native="closeSnackbar()") {{ $t('base.form.close') }}
 
   v-dialog(v-model="confirmVisible" persistent content-class="l-confirm")
     v-card
@@ -177,21 +161,11 @@ export default {
   mixins: [mixins],
   data () {
     return {
-      expensionList: [
-        { action: 'team',
-          title: 'team.title',
-          subItems: [
-            { subTitleKey: 'team.sub.i01', href: '/team/login', visible: true },
-            { subTitleKey: 'team.sub.i02', href: '/team/registration', visible: true }
-          ]
-        }
-      ],
       items: [
         { titleKey: 'top.index.title', icon: 'dashboard', href: '/', visible: true },
         { titleKey: 'auth.login.title', icon: 'input', href: '/auth/login', visible: !this.$store.getters.isLogined },
         { titleKey: 'auth.sign-up.title', icon: 'person_add', href: '/auth/sign-up', visible: !this.$store.getters.isLogined },
-        { titleKey: 'top.index.events.title', icon: 'event', href: '/event', visible: true },
-        { titleKey: 'top.secret.title', icon: 'vpn_key', href: '/top/secret', visible: true }
+        { titleKey: 'events.index.title', icon: 'event', href: '/events', visible: this.$store.getters.currentUser.kind !== 'customer' }
       ],
       drawer: false
     }

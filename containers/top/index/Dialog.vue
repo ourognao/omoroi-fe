@@ -9,7 +9,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
     
     v-divider
     
-    v-card-text.p-card-text
+    v-card-text.top-event-view
       v-container.pa-0(fluid class="event" v-if="event")
         v-layout(row class="border-blue-bottom")
           v-flex.caption(xs6)
@@ -227,7 +227,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
     font-size 18px
     margin 3px 3px 0 0
   
-  .p-card-text
+  .top-event-view
     max-height 70vh
 
   .p-layout
@@ -352,7 +352,7 @@ export default {
     visible (val) {
       if (val) {
         setTimeout(() => {
-          document.querySelector('#top-index-dialog .p-card-text').scrollTop = 0
+          document.querySelector('#top-index-dialog .top-event-view').scrollTop = 0
         }, 0)
         return
       }
