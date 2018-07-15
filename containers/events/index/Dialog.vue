@@ -13,6 +13,42 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
     v-card-text.event-view
       v-container.pa-0(fluid)
         v-layout.pa-1(wrap align-center)
+          v-flex(xs12 v-if="sectionItems.length > 0")
+            v-layout(row)
+              v-flex(xs3)
+                 v-select(
+                  :items="sectionItems"
+                  v-model="section"
+                  name="event-section"
+                  :label="$t('attr.event-section')"
+                  v-validate="titles.length > 0 ? '' : 'required'"
+                  :error-messages="veeErrors.first('event-section') || []"
+                  prepend-icon="hdr_weak"
+                )
+              v-flex(xs7)
+                v-text-field(
+                  type="text"
+                  v-model="title"
+                  name="event-title"
+                  :label="$t('attr.event-title')"
+                  v-validate="titles.length > 0 ? '' : 'required'"
+                  :error-messages="veeErrors.first('event-title') || []"
+                )
+              v-flex(xs2)
+                v-btn.primary(
+                  :disabled="section && title ? false : true"
+                  @click.stop.prevent.native="addSectionTitle()"
+                )
+                  span {{ $t('base.form.add') }}
+
+          v-flex(xs12 v-for="(title, index) in titles" :key="index")
+            v-layout(row)
+              v-flex(xs2) {{ title.section }}
+              v-flex(xs9) {{ title.title }}
+              v-flex(xs1)
+                v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
+                  v-icon close
+          
           v-flex(xs12 md6)
             v-menu(
               lazy
@@ -41,7 +77,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :label="$t('attr.event-access')"
               v-validate="'required'"
               :error-messages="veeErrors.first('event-access') || []"
-              prepend-icon="face"
+              prepend-icon="business"
               @keypress.enter.native="send()"
             )
           v-flex(xs12 md6)
@@ -96,26 +132,21 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :error-messages="veeErrors.first('event-threshold') || []"
               prepend-icon="hdr_weak"
             )
-          v-flex(xs12 md6)
-            v-select(
-              :items="sectionItems"
-              v-model="section"
-              name="event-section"
-              :label="$t('attr.event-section')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-section') || []"
-              prepend-icon="hdr_weak"
-            )
-          v-flex(xs12)
-            div.subheading {{ $t('attr.event-tags') }}
+          v-flex(xs12 v-if="titles.map(title => title.section).includes('SP')")
+            div.subheading {{ $t('labels.event.tags') }}
+            div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
+              | {{ veeErrors.first('event-sport-tags') }}
             v-layout(row wrap)
-              v-flex(xs12 md3 v-for="(tag, index) in sportTags" :key="index")
+              v-flex(xs12 md3 v-for="(tag, index) in sportTags" :key="tag.value")
                 v-checkbox(
                   :label="tag.text"
-                  :true-value="tag.value"
-                  v-model="desiredSportTags[index]"
+                  v-model="desiredSportTags"
+                  v-validate="'required'"
+                  :value="tag.value"
+                  name="event-sport-tags"
                   hide-details
                 )
+          
           v-flex(xs12)
             v-text-field(
               textarea
@@ -160,6 +191,14 @@ export default {
   data () {
     return {
       visible: false,
+      section: null,
+      sectionItems: [
+        { text: 'SC', value: 'SC' },
+        { text: 'LX', value: 'LX' },
+        { text: 'SP', value: 'SP' }
+      ],
+      title: null,
+      titles: [],
       date: null,
       access: null,
       startTime: null,
@@ -172,12 +211,6 @@ export default {
       threshold: null,
       thresholdItems: [],
       explanation: null,
-      section: null,
-      sectionItems: [
-        { text: 'SC', value: 'SC' },
-        { text: 'LX', value: 'LX' },
-        { text: 'SP', value: 'SP' }
-      ],
       desiredSportTags: [],
       sportTags: [
         { text: this.$t('labels.sports.volleyball'), value: 'volleyball' },
@@ -223,7 +256,7 @@ export default {
     visible (val) {
       if (val) {
         setTimeout(() => {
-          document.querySelector('#events-index-dialog .p-card-text').scrollTop = 0
+          document.querySelector('#events-index-dialog .event-view').scrollTop = 0
         }, 0)
         return
       }
@@ -233,6 +266,25 @@ export default {
     }
   },
   methods: {
+    addSectionTitle () {
+      this.titles.push({ section: this.section, title: this.title })
+      this.updateSectionTitle(this.section, 'add')
+      this.section = null
+      this.title = null
+    },
+    removeSectionTitle (section) {
+      let index = this.titles.findIndex(titleItem => titleItem.section === section)
+      this.titles.splice(index, 1)
+      this.updateSectionTitle(section, 'remove')
+    },
+    updateSectionTitle (section, action) {
+      if (action === 'remove') {
+        this.sectionItems.push({ text: section, value: section })
+        return
+      }
+      let index = this.sectionItems.findIndex(sectionItem => sectionItem.value === section)
+      this.sectionItems.splice(index, 1)
+    },
     setthresholdItems () {
       this.$nextTick(function () {
         this.thresholdItems = this.rangeOptionsForSelect(0, this.capacity - 1)
