@@ -11,6 +11,8 @@ attr:
   user-status: ステータス
 
   # イベント画面
+  event-title: タイトル
+  event-section: 区分
   event-date: 日付
   event-access: アクセス
   event-start-time: 開始時間
@@ -18,8 +20,7 @@ attr:
   event-cost: コスト
   event-capacity: 最大参加人数
   event-threshold: 閾値
-  event-section: 区分
-  event-tags: タグ
+  event-sport-tags: スポーツタグ
   event-explanation: 詳細
 
 labels:
@@ -46,6 +47,8 @@ labels:
     futsal: フットサル
     tennis: テニス
     other: その他
+  event:
+    tags: タグ
 
 base:
   head:
@@ -62,6 +65,7 @@ base:
     close: 閉じる
     send: 送信
     select-anytime: いつでも
+    add: 追加
   confirm:
     title: 確認
     agree: はい

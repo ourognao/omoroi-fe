@@ -11,6 +11,8 @@ attr:
   user-status: Status
 
   # Event Screen
+  event-section: Section
+  event-title: Title
   event-date: Date
   event-access: Access
   event-start-time: Start Time
@@ -18,8 +20,7 @@ attr:
   event-cost: Cost
   event-capacity: Capacity
   event-threshold: Threshold
-  event-section: Section
-  event-tags: Tags
+  event-sport-tags: Sport Tags
   event-explanation: Details
 
 labels:
@@ -47,6 +48,9 @@ labels:
     tennis: Tennis
     other: Other
 
+  event:
+    tags: Tags
+
 base:
   head:
     title: omoroi
@@ -62,6 +66,7 @@ base:
     close: Close
     send: Send
     select-anytime: Anytime
+    add: Add
   confirm:
     title: Confirm
     agree: Agree
@@ -120,6 +125,7 @@ events:
     title:
       new: Create new event
       edit: Edit an event
+
 
 top:
   index:
