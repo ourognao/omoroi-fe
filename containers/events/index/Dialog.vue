@@ -165,7 +165,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               hide-details
             )
 
-          v-flex(xs12)
+          v-flex(xs12).mt-3
             v-uploader(:setting="uploadConfig" @done="uploadDone")
     
     v-divider
@@ -228,10 +228,12 @@ export default {
           'jpg',
           'gif',
           'png',
-          ['event', 129]
-        ]
+          'event'
+        ],
+        papa: true
       },
       explanation: null,
+      allowedExtensions: '<div data-v-fb284a6e="">file size limit：<span data-v-fb284a6e="">5MB</span><br data-v-fb284a6e="">file extensions：<span data-v-fb284a6e="">jpeg,jpg,gif,png</span></div>',
       desiredSportTags: [],
       sportTags: [
         { text: this.$t('labels.sports.volleyball'), value: 'volleyball' },
@@ -249,6 +251,7 @@ export default {
     this.setForm()
     setTimeout(() => {
       this.visible = this.$s.dialog
+      document.getElementsByClassName('info-show')[0].innerHTML = this.allowedExtensions
       window.scrollTo(0, this.$s.scroll)
     }, 500)
   },
