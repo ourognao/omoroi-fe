@@ -69,6 +69,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 readonly
               )
               v-date-picker(v-model="date" no-title scrollable actions)
+          
           v-flex(xs12 md6)
             v-text-field(
               type="text"
@@ -80,6 +81,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               prepend-icon="business"
               @keypress.enter.native="send()"
             )
+          
           v-flex(xs12 md6)
             v-select(
               :items="eventTimeItems"
@@ -90,6 +92,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :error-messages="veeErrors.collect('event-start-time')"
               prepend-icon="access_time"
             )
+          
           v-flex(xs12 md6)
             v-select(
               :items="eventTimeItems"
@@ -100,6 +103,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :error-messages="veeErrors.first('event-end-time') || []"
               prepend-icon="access_time"
             )
+          
           v-flex(xs12 md6)
             v-select(
               :items="costItems"
@@ -110,6 +114,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :error-messages="veeErrors.first('event-cost') || []"
               prepend-icon="attach_money"
             )
+          
           v-flex(xs12 md6)
             v-select(
               :items="capacityItems"
@@ -121,6 +126,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               prepend-icon="people_outline"
               @change="setthresholdItems()"
             )
+          
           v-flex(xs12 md6)
             v-select(
               :disabled="capacity ? false : true"
@@ -132,6 +138,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :error-messages="veeErrors.first('event-threshold') || []"
               prepend-icon="hdr_weak"
             )
+          
           v-flex(xs12 v-if="titles.map(title => title.section).includes('SP')")
             div.subheading {{ $t('labels.event.tags') }}
             div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
@@ -157,6 +164,9 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               :error-messages="veeErrors.first('event-explanation') || []"
               hide-details
             )
+
+          v-flex(xs12)
+            v-uploader(:setting="uploadConfig" @done="uploadDone")
     
     v-divider
 
@@ -210,6 +220,17 @@ export default {
       capacityItems: this.rangeOptionsForSelect(0, 20),
       threshold: null,
       thresholdItems: [],
+      uploadConfig: {
+        multiple: true,
+        language: 'en',
+        fileTypeExts: [
+          'jpeg',
+          'jpg',
+          'gif',
+          'png',
+          ['event', 129]
+        ]
+      },
       explanation: null,
       desiredSportTags: [],
       sportTags: [
@@ -232,6 +253,9 @@ export default {
     }, 500)
   },
   computed: {
+    $uploadedPictureIds () {
+      return this.$store.state.picture.index.uploadedPictureIds
+    },
     $s () {
       return this.$store.state.events.index
     },
@@ -266,6 +290,14 @@ export default {
     }
   },
   methods: {
+    uploadDone (files) {
+      if (files && Array.isArray(files) && files.length) {
+        let uploadedPictureIds = files.map(arr => arr.id)
+        this.$store.commit('merge', ['picture.index', {
+          uploadedPictureIds: uploadedPictureIds
+        }])
+      }
+    },
     addSectionTitle () {
       this.titles.push({ section: this.section, title: this.title })
       this.updateSectionTitle(this.section, 'add')

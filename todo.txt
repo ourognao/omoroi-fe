@@ -116,3 +116,5 @@ endMonth    = Date.parse("2018/06").end_of_month
 Hello guys and good Golden Week if you are in Japan ! This time we need a rideshare from Tokyo to Osaka. Passenger is willing to cost share until 4500yen. Can speak English and Japanese. If you are going to Osaka for golden week, that's a good opportunity to cost share and find new friend :).
 #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel
 #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+今仕方確認したが、過去の投稿を見れば通常は毎週の月曜日7時50分にスクリプトが実行されそうなので、おそらく毎週の月曜日に待つ必要があると思います

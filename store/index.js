@@ -71,6 +71,11 @@ export const state = () => ({
     }
   },
 
+  picture: {
+    index: {
+      uploadedPictureIds: []
+    }
+  },
   events: {
     index: {
       events: null,

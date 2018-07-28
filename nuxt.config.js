@@ -6,7 +6,8 @@ module.exports = {
       'vuetify',
       'axios',
       'vue-i18n',
-      'vue-social-sharing'
+      'vue-social-sharing',
+      'v-uploader'
     ],
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
@@ -40,7 +41,8 @@ module.exports = {
     '~plugins/vuetify',
     '~plugins/vee-validate',
     '~plugins/social-sharing',
-    '~plugins/i18n'
+    '~plugins/i18n',
+    { src: '~plugins/v-uploader', ssr: false }
   ],
   env: {
     baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000',
