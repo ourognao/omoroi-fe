@@ -1,185 +1,214 @@
 <template lang="pug">
 v-dialog(v-model="visible" persistent scrollable width="auto")
-  v-card#events-index-dialog
-    v-card-title.grey.lighten-5
-      v-icon edit
-      span {{ $s.eventId ? $t('events.dialog.title.edit') : $t('events.dialog.title.new') }}
-      v-spacer
-      v-btn(small icon flat @click.stop.prevent.native="cancel")
-        v-icon close
+  no-ssr
+    v-card#events-index-dialog
+      v-card-title.grey.lighten-5
+        v-icon edit
+        span {{ $s.eventId ? $t('events.dialog.title.edit') : $t('events.dialog.title.new') }}
+        v-spacer
+        v-btn(small icon flat @click.stop.prevent.native="cancel")
+          v-icon close
 
-    v-divider
-    
-    v-card-text.event-view
-      v-container.pa-0(fluid)
-        v-layout.pa-1(wrap align-center)
-          v-flex(xs12 v-if="sectionItems.length > 0")
-            v-layout(row)
-              v-flex(xs3)
-                 v-select(
-                  :items="sectionItems"
-                  v-model="section"
-                  name="event-section"
-                  :label="$t('attr.event-section')"
-                  v-validate="titles.length > 0 ? '' : 'required'"
-                  :error-messages="veeErrors.first('event-section') || []"
-                  prepend-icon="hdr_weak"
-                )
-              v-flex(xs7)
-                v-text-field(
-                  type="text"
-                  v-model="title"
-                  name="event-title"
-                  :label="$t('attr.event-title')"
-                  v-validate="titles.length > 0 ? '' : 'required'"
-                  :error-messages="veeErrors.first('event-title') || []"
-                )
-              v-flex(xs2)
-                v-btn.primary(
-                  :disabled="section && title ? false : true"
-                  @click.stop.prevent.native="addSectionTitle()"
-                )
-                  span {{ $t('base.form.add') }}
+      v-divider
+      
+      v-card-text.event-view
+        v-container.pa-0(fluid)
+          v-layout.pa-1(wrap align-center)
+            v-flex(xs12 v-if="sectionItems.length > 0")
+              v-layout(row)
+                v-flex(xs3)
+                   v-select(
+                    :items="sectionItems"
+                    v-model="section"
+                    name="event-section"
+                    :label="$t('attr.event-section')"
+                    v-validate="titles.length > 0 ? '' : 'required'"
+                    :error-messages="veeErrors.first('event-section') || []"
+                    prepend-icon="hdr_weak"
+                  )
+                v-flex.pl-4(xs7)
+                  v-text-field(
+                    type="text"
+                    v-model="title"
+                    name="event-title"
+                    :label="$t('attr.event-title')"
+                    v-validate="titles.length > 0 ? '' : 'required'"
+                    :error-messages="veeErrors.first('event-title') || []"
+                  )
+                v-flex.pl-4(xs2)
+                  v-btn.primary(
+                    :disabled="section && title ? false : true"
+                    @click.stop.prevent.native="addSectionTitle()"
+                  )
+                    span {{ $t('base.form.add') }}
+                  div.mt-1(class="errorColor" v-if="!isTitleAdded")
+                    | {{ $t('events.dialog.errors.title') }}
 
-          v-flex(xs12 v-for="(title, index) in titles" :key="index")
-            v-layout(row)
-              v-flex(xs2) {{ title.section }}
-              v-flex(xs9) {{ title.title }}
-              v-flex(xs1)
-                v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
-                  v-icon close
-          
-          v-flex(xs12 md6)
-            v-menu(
-              lazy
-              :close-on-content-click="true"
-              transition="scale-transition"
-              offset-y full-width
-              max-width="290px"
-              min-width="290px"
-            )
-              v-text-field(
-                slot="activator"
-                :label="$t('attr.event-date')"
-                name="event-date"
-                v-model="date"
-                prepend-icon="event"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('event-date') || []"
-                readonly
+            v-flex(xs12 v-for="(title, index) in titles" :key="index")
+              v-layout(row)
+                v-flex(xs2) {{ title.section }}
+                v-flex(xs9) {{ title.title }}
+                v-flex(xs1)
+                  v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
+                    v-icon close
+            
+            v-flex(xs12 md6)
+              v-menu(
+                lazy
+                :close-on-content-click="true"
+                transition="scale-transition"
+                offset-y full-width
+                max-width="290px"
+                min-width="290px"
               )
-              v-date-picker(v-model="date" no-title scrollable actions)
-          
-          v-flex(xs12 md6)
-            v-text-field(
-              type="text"
-              v-model="access"
-              name="event-access"
-              :label="$t('attr.event-access')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-access') || []"
-              prepend-icon="business"
-              @keypress.enter.native="send()"
-            )
-          
-          v-flex(xs12 md6)
-            v-select(
-              :items="eventTimeItems"
-              v-model="startTime"
-              name="event-start-time"
-              :label="$t('attr.event-start-time')"
-              v-validate="'required'"
-              :error-messages="veeErrors.collect('event-start-time')"
-              prepend-icon="access_time"
-            )
-          
-          v-flex(xs12 md6)
-            v-select(
-              :items="eventTimeItems"
-              v-model="endTime"
-              name="event-end-time"
-              :label="$t('attr.event-end-time')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-end-time') || []"
-              prepend-icon="access_time"
-            )
-          
-          v-flex(xs12 md6)
-            v-select(
-              :items="costItems"
-              v-model="cost"
-              name="event-cost"
-              :label="$t('attr.event-cost')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-cost') || []"
-              prepend-icon="attach_money"
-            )
-          
-          v-flex(xs12 md6)
-            v-select(
-              :items="capacityItems"
-              v-model="capacity"
-              name="event-capacity"
-              :label="$t('attr.event-capacity')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-capacity') || []"
-              prepend-icon="people_outline"
-              @change="setthresholdItems()"
-            )
-          
-          v-flex(xs12 md6)
-            v-select(
-              :disabled="capacity ? false : true"
-              :items="thresholdItems"
-              v-model="threshold"
-              name="event-threshold"
-              :label="$t('attr.event-threshold')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-threshold') || []"
-              prepend-icon="hdr_weak"
-            )
-          
-          v-flex(xs12 v-if="titles.map(title => title.section).includes('SP')")
-            div.subheading {{ $t('labels.event.tags') }}
-            div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
-              | {{ veeErrors.first('event-sport-tags') }}
-            v-layout(row wrap)
-              v-flex(xs12 md3 v-for="(tag, index) in sportTags" :key="tag.value")
-                v-checkbox(
-                  :label="tag.text"
-                  v-model="desiredSportTags"
+                v-text-field(
+                  slot="activator"
+                  :label="$t('attr.event-date')"
+                  name="event-date"
+                  v-model="date"
+                  prepend-icon="event"
                   v-validate="'required'"
-                  :value="tag.value"
-                  name="event-sport-tags"
-                  hide-details
+                  :error-messages="veeErrors.first('event-date') || []"
+                  readonly
                 )
-          
-          v-flex(xs12)
-            v-text-field(
-              textarea
-              v-model="explanation"
-              name="event-explanation"
-              :label="$t('attr.event-explanation')"
-              v-validate="'required'"
-              :error-messages="veeErrors.first('event-explanation') || []"
-              hide-details
-            )
+                v-date-picker(v-model="date" no-title scrollable actions)
+            
+            v-flex.pl-4(xs12 md6)
+              div(class="input-group__input")
+                gmap-autocomplete(
+                  id="gmap-location"
+                  @place_changed="setPlace"
+                  :select-first-on-enter="true"
+                  style="width: 100%"
+                )
+              div.mt-1(class="errorColor" v-if="!isLocationCAutocompleted")
+                | {{ $t('events.dialog.errors.location') }}
 
-          v-flex(xs12).mt-3
-            v-uploader(:setting="uploadConfig" @done="uploadDone")
-    
-    v-divider
+            v-flex(xs12 class="gmap-section")
+              gmap-map(
+                :center="gmap['center']"
+                :zoom="gmap['zoom']"
+                :options="gmap['options']"
+                style="height: 200px")
+                gmap-marker(
+                  v-for="(marker, index) in gmap['markers']"
+                  :key="index"
+                  :icon="gmap['icon']"
+                  :position="marker.position")
 
-    v-card-actions.grey.lighten-5
-      v-btn(flat primary @click.stop.prevent.native="cancel")
-        v-icon.ml-1 play_for_work
-        span {{ $t('base.form.close') }}
+            v-flex(xs12 md6)
+              v-text-field(
+                type="text"
+                v-model="access"
+                name="event-access"
+                :label="$t('attr.event-access')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-access') || []"
+                prepend-icon="business"
+                @keypress.enter.native="send()"
+              )
+            
+            v-flex.pl-4(xs12 md6)
+              v-select(
+                :items="eventTimeItems"
+                v-model="startTime"
+                name="event-start-time"
+                :label="$t('attr.event-start-time')"
+                v-validate="'required'"
+                :error-messages="veeErrors.collect('event-start-time')"
+                prepend-icon="access_time"
+              )
+            
+            v-flex(xs12 md6)
+              v-select(
+                :items="eventTimeItems"
+                v-model="endTime"
+                name="event-end-time"
+                :label="$t('attr.event-end-time')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-end-time') || []"
+                prepend-icon="access_time"
+              )
+            
+            v-flex.pl-4(xs12 md6)
+              v-select(
+                :items="costItems"
+                v-model="cost"
+                name="event-cost"
+                :label="$t('attr.event-cost')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-cost') || []"
+                prepend-icon="attach_money"
+              )
+            
+            v-flex(xs12 md6)
+              v-select(
+                :items="capacityItems"
+                v-model="capacity"
+                name="event-capacity"
+                :label="$t('attr.event-capacity')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-capacity') || []"
+                prepend-icon="people_outline"
+                @change="setthresholdItems()"
+              )
+            
+            v-flex.pl-4(xs12 md6)
+              v-select(
+                :disabled="capacity ? false : true"
+                :items="thresholdItems"
+                v-model="threshold"
+                name="event-threshold"
+                :label="$t('attr.event-threshold')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-threshold') || []"
+                prepend-icon="hdr_weak"
+              )
+            
+            v-flex(xs12 v-if="titles.map(title => title.section).includes('SP')")
+              div.subheading {{ $t('labels.event.tags') }}
+              div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
+                | {{ veeErrors.first('event-sport-tags') }}
+              v-layout(row wrap)
+                v-flex(xs12 md3 v-for="(tag, index) in sportTags" :key="tag.value")
+                  v-checkbox(
+                    :label="tag.text"
+                    v-model="desiredSportTags"
+                    v-validate="'required'"
+                    :value="tag.value"
+                    name="event-sport-tags"
+                    hide-details
+                  )
+            
+            v-flex(xs12 md6)
+              v-text-field(
+                textarea
+                rows="13"
+                v-model="explanation"
+                name="event-explanation"
+                :label="$t('attr.event-explanation')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-explanation') || []"
+                hide-details
+              )
 
-      v-spacer
+            v-flex.pl-4(xs12 md6).mt-3
+              v-uploader(:setting="uploadConfig" @done="uploadDone")
+              div.mt-1(class="errorColor" v-if="!isPictureUploaded")
+                | {{ $t('events.dialog.errors.picture') }}
+      
+      v-divider
 
-      v-btn(flat @click.stop.prevent.native="send()")
-        span {{ $t('base.form.send') }}
-        v-icon.ml-1 check_circle
+      v-card-actions.grey.lighten-5
+        v-btn(flat primary @click.stop.prevent.native="cancel")
+          v-icon.ml-1 play_for_work
+          span {{ $t('base.form.close') }}
+
+        v-spacer
+
+        v-btn(flat @click.stop.prevent.native="send()")
+          span {{ $t('base.form.send') }}
+          v-icon.ml-1 check_circle
 </template>
 
 <!-- ============================================================================ -->
@@ -195,6 +224,9 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
 <script>
 import mixins from '~/utils/mixins'
 import axios from '~/plugins/axios'
+import queryString from 'query-string'
+import moment from 'moment'
+import constants from '~/utils/constants'
 
 export default {
   mixins: [mixins],
@@ -210,6 +242,9 @@ export default {
       title: null,
       titles: [],
       date: null,
+      location: null,
+      locationForm: null,
+      locationHidden: null,
       access: null,
       startTime: null,
       endTime: null,
@@ -220,6 +255,7 @@ export default {
       capacityItems: this.rangeOptionsForSelect(0, 20),
       threshold: null,
       thresholdItems: [],
+      positions: [],
       uploadConfig: {
         multiple: true,
         language: 'en',
@@ -229,8 +265,7 @@ export default {
           'gif',
           'png',
           'event'
-        ],
-        papa: true
+        ]
       },
       explanation: null,
       allowedExtensions: '<div data-v-fb284a6e="">file size limit：<span data-v-fb284a6e="">5MB</span><br data-v-fb284a6e="">file extensions：<span data-v-fb284a6e="">jpeg,jpg,gif,png</span></div>',
@@ -244,16 +279,53 @@ export default {
         { text: this.$t('labels.sports.futsal'), value: 'futsal' },
         { text: this.$t('labels.sports.tennis'), value: 'tennis' },
         { text: this.$t('labels.sports.other'), value: 'other' }
-      ]
+      ],
+      lat: 0,
+      lng: 0,
+      gmap: {
+        center: {
+          lat: 0,
+          lng: 0
+        },
+        markers: [
+          {
+            position: {
+              lat: 0,
+              lng: 0
+            }
+          }
+        ],
+        zoom: constants.gmap.zoom,
+        icon: {
+          url: constants.gmap.markerIcon,
+          size: {
+            width: constants.gmap.width,
+            height: constants.gmap.height,
+            f: constants.gmap.pixel,
+            b: constants.gmap.pixel
+          },
+          scaledSize: {
+            width: constants.gmap.width,
+            height: constants.gmap.height,
+            f: constants.gmap.pixel,
+            b: constants.gmap.pixel
+          }
+        },
+        options: { fullscreenControl: false, clickableIcons: false }
+      },
+      isTitleAdded: true,
+      isLocationCAutocompleted: true,
+      isPictureUploaded: true,
+      currentUser: this.$store.getters.currentUser
     }
   },
   mounted () {
     this.setForm()
     setTimeout(() => {
       this.visible = this.$s.dialog
-      document.getElementsByClassName('info-show')[0].innerHTML = this.allowedExtensions
+      // document.getElementsByClassName('info-show')[0].innerHTML = this.allowedExtensions
       window.scrollTo(0, this.$s.scroll)
-    }, 500)
+    }, 1000)
   },
   computed: {
     $uploadedPictureIds () {
@@ -293,12 +365,32 @@ export default {
     }
   },
   methods: {
+    hasAddedTitle () {
+      console.log(this.section)
+      console.log(this.title)
+      if ((this.section && this.section.length === 0) || !this.title) return true
+      this.isTitleAdded = this.titles.length >= this.titles.length + 1
+    },
+    hasUploadedPicture () {
+      this.isPictureUploaded = this.$uploadedPictureIds.length >= 1
+    },
+    hasBeenAutocompleted () {
+      this.isLocationCAutocompleted = (this.locationForm && (this.locationForm === this.locationHidden))
+    },
+    setPlace (place) {
+      this.locationForm = this.locationHidden = document.getElementById('gmap-location').value
+      this.location = place.formatted_address
+      this.positions = [place.geometry.location.lat(), place.geometry.location.lng()]
+      this.setGmapMarker(this.positions)
+      this.hasBeenAutocompleted()
+    },
     uploadDone (files) {
       if (files && Array.isArray(files) && files.length) {
-        let uploadedPictureIds = files.map(arr => arr.id)
+        let uploadedPictureIds = files.map(arr => arr.qquuid)
         this.$store.commit('merge', ['picture.index', {
           uploadedPictureIds: uploadedPictureIds
         }])
+        this.hasUploadedPicture()
       }
     },
     addSectionTitle () {
@@ -306,6 +398,7 @@ export default {
       this.updateSectionTitle(this.section, 'add')
       this.section = null
       this.title = null
+      this.isTitleAdded = true
     },
     removeSectionTitle (section) {
       let index = this.titles.findIndex(titleItem => titleItem.section === section)
@@ -326,18 +419,40 @@ export default {
       })
     },
     send () {
+      let context = this
+      context.hasAddedTitle()
+      context.hasBeenAutocompleted()
+      context.hasUploadedPicture()
+      this.locationForm = document.getElementById('gmap-location').value
       this.$validator.validateAll().then(async result => {
-        if (!result) return
+        if (!result ||
+          !context.isTitleAdded ||
+          !context.isLocationCAutocompleted ||
+          !context.isPictureUploaded) return
         try {
           let newEvent = {
-            access: this.access
+            user_id: this.currentUser.id,
+            title: JSON.stringify(this.titles),
+            date: this.date,
+            location: this.location,
+            access: this.access,
+            start_time: this.startTime,
+            end_time: this.endTime,
+            cost: this.cost,
+            capacity: this.capacity,
+            threshold: this.threshold,
+            explanation: this.explanation,
+            picture_ids: this.$uploadedPictureIds,
+            positions: this.positions,
+            tags: this.desiredSportTags,
+            section: this.titles.map(title => title.section)
           }
           let res = await axios({
             ...{
               method: this.$s.eventId ? 'put' : 'post',
               url: this.$s.eventId ? `/events/${this.$s.eventId}` : '/events',
               data: {
-                user: newEvent,
+                event: newEvent,
                 locale: this.$store.state.base.locale.selected
               }
             },
@@ -348,20 +463,33 @@ export default {
             res.data.errors.name && this.veeErrors.add('event-access', `${this.$t('attr.event-access')}${res.data.errors.access[0]}`)
             return
           }
-
-          let { data } = await axios.get(`/events`, this.$store.getters.options)
-          console.log(data)
-          this.$store.commit('update', ['events.index', {
-            events: data.data.events
-          }])
-
-          this.message(this.$t('base.form.axios.success'))
+          this.reloadList()
+          this.message(this.$t('base.axios.success'))
           this.visible = false
         } catch (error) {
-          this.message(this.$t('base.form.axios.error'))
+          this.message(this.$t('base.axios.failure'))
           console.error(error)
         }
       })
+    },
+    async reloadList () {
+      try {
+        let params = queryString.stringify({
+          bom: moment().subtract(1, 'months').format('YYYY-MM-DD'),
+          eom: moment().add(1, 'months').format('YYYY-MM')
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
+        console.log(data)
+        this.$store.commit('update', ['events.index', {
+          events: data.data.events
+        }])
+        window.scrollTo(0, 0)
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') {
+          this.$router.replace(this.path('/auth/login'))
+        }
+        console.error(error.message)
+      }
     },
     setForm () {
       this.veeErrors.clear()
@@ -370,10 +498,28 @@ export default {
         this.startTime = this.event.startTime
         this.endTime = this.event.endTime
       } else {
+        this.title = null
+        this.date = null
+        this.location = null
         this.access = null
         this.startTime = null
         this.endTime = null
+        this.cost = null
+        this.capacity = null
+        this.threshold = null
+        this.explanation = null
+        this.positions = constants.gmap.positions.osaka
+        this.tags = []
+        this.section = []
+        this.isLocationCAutocompleted = true
+        this.isPictureUploaded = true
+        this.$store.commit('merge', ['picture.index', {
+          uploadedPictureIds: []
+        }])
       }
+      setTimeout(() => {
+        this.setGmapMarker(this.positions)
+      }, 500)
     },
     cancel () {
       this.visible = false

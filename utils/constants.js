@@ -19,6 +19,9 @@ export default {
     zoom: 17,
     width: 23,
     height: 23,
-    pixel: 'px'
+    pixel: 'px',
+    positions: {
+      osaka: [34.6937378, 135.50216509999996]
+    }
   }
 }

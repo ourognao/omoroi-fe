@@ -17,6 +17,7 @@ explanation:
 
 
 ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../events/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../auth/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../index.vue /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/top/
 
@@ -118,3 +119,8 @@ Hello guys and good Golden Week if you are in Japan ! This time we need a ridesh
 #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
 
 今仕方確認したが、過去の投稿を見れば通常は毎週の月曜日7時50分にスクリプトが実行されそうなので、おそらく毎週の月曜日に待つ必要があると思います
+
+
+- remove image field from event
+- chnage seed script to display picture from event picture
+- tanslate japanese address to englishand the backend with geocoder

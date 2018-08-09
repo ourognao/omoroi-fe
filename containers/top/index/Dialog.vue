@@ -240,7 +240,6 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
 import mixins from '~/utils/mixins'
 import constants from '~/utils/constants'
 import moment from 'moment'
-import Vue from 'vue'
 import axios from '~/plugins/axios'
 import queryString from 'query-string'
 
@@ -395,11 +394,6 @@ export default {
         this.expectedPeople = null
         this.hasAlreadyReserved = false
       }
-    },
-    setGmapMarker (positions) {
-      this.gmap.markers[0].position.lat = this.gmap.center.lat = this.lat = parseFloat(positions[0])
-      this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])
-      Vue.$gmapDefaultResizeBus.$emit('resize')
     },
     cancel () {
       this.visible = false

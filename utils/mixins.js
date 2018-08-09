@@ -5,6 +5,11 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    setGmapMarker (positions) {
+      this.gmap.markers[0].position.lat = this.gmap.center.lat = this.lat = parseFloat(positions[0])
+      this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])
+      // Vue.$gmapDefaultResizeBus.$emit('resize')
+    },
     rangeOptionsForSelect (start, end, suffixForMore = '') {
       let selectOptions = []
       for (let i = start; i <= end; i++) {
