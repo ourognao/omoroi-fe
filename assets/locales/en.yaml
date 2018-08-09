@@ -47,7 +47,6 @@ labels:
     futsal: Futsal
     tennis: Tennis
     other: Other
-
   event:
     tags: Tags
 
@@ -125,7 +124,10 @@ events:
     title:
       new: Create new event
       edit: Edit an event
-
+    errors:
+      title: ADD button must be clicked.
+      location: Location is required.
+      picture: Picture is required.
 
 top:
   index:

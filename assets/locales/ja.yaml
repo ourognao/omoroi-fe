@@ -124,8 +124,10 @@ events:
     title:
       new: 新規イベントを登録する
       edit: イベントを変種する
-    common:
-
+    errors:
+      title: 追加ボタンを押してください
+      location: 場所は必須項目です
+      picture: 写真は必須項目です
 
 top:
   index:
