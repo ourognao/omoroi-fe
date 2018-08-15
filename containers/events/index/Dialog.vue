@@ -323,7 +323,7 @@ export default {
     this.setForm()
     setTimeout(() => {
       this.visible = this.$s.dialog
-      // document.getElementsByClassName('info-show')[0].innerHTML = this.allowedExtensions
+      document.getElementsByClassName('info-show')[0].innerHTML = this.allowedExtensions
       window.scrollTo(0, this.$s.scroll)
     }, 1000)
   },
@@ -351,6 +351,7 @@ export default {
     dialog (val) {
       if (!val) return
       this.visible = true
+      this.setForm()
     },
     visible (val) {
       if (val) {
@@ -366,8 +367,6 @@ export default {
   },
   methods: {
     hasAddedTitle () {
-      console.log(this.section)
-      console.log(this.title)
       if ((this.section && this.section.length === 0) || !this.title) return true
       this.isTitleAdded = this.titles.length >= this.titles.length + 1
     },
@@ -491,8 +490,15 @@ export default {
         console.error(error.message)
       }
     },
+    clearPreviewPicture () {
+      let qqUploadSuccess = document.getElementsByClassName('qq-upload-success')
+      Array.from(qqUploadSuccess).forEach(function (uploadedPicture) {
+        uploadedPicture.parentNode.removeChild(uploadedPicture)
+      })
+    },
     setForm () {
       this.veeErrors.clear()
+      this.clearPreviewPicture()
       if (this.event) {
         this.access = this.event.access
         this.startTime = this.event.startTime
