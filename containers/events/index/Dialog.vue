@@ -329,7 +329,7 @@ export default {
   },
   computed: {
     $uploadedPictureIds () {
-      return this.$store.state.picture.index.uploadedPictureIds
+      return this.$store.state.pictures.index.uploadedPictureIds
     },
     $s () {
       return this.$store.state.events.index
@@ -386,7 +386,8 @@ export default {
     uploadDone (files) {
       if (files && Array.isArray(files) && files.length) {
         let uploadedPictureIds = files.map(arr => arr.qquuid)
-        this.$store.commit('merge', ['picture.index', {
+        console.log(uploadedPictureIds)
+        this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: uploadedPictureIds
         }])
         this.hasUploadedPicture()
@@ -479,7 +480,7 @@ export default {
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
         console.log(data)
-        this.$store.commit('update', ['events.index', {
+        this.$store.commit('merge', ['events.index', {
           events: data.data.events
         }])
         window.scrollTo(0, 0)
@@ -519,7 +520,7 @@ export default {
         this.section = []
         this.isLocationCAutocompleted = true
         this.isPictureUploaded = true
-        this.$store.commit('merge', ['picture.index', {
+        this.$store.commit('merge', ['pictures', {
           uploadedPictureIds: []
         }])
       }

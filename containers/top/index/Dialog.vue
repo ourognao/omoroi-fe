@@ -23,9 +23,9 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
                 | {{ $t('top.dialog.common.previous') }}
               v-icon.mb-1(class="icon-blue icons events") navigate_next
          
-        v-layout(row class="main-image")
+        v-layout(row class="main-image" v-if="originalPictures.length > 0")
          v-flex.mt-2(xs12)
-           img(:src="event.picture")
+           img(:src="originalPictures[0].original")
 
         v-layout(row class="border-blue-bottom")
           v-flex.caption(xs6)
@@ -292,7 +292,9 @@ export default {
         },
         options: { fullscreenControl: false, clickableIcons: false }
       },
-      hashtags: constants.sns.hashtags
+      hashtags: constants.sns.hashtags,
+      event: null,
+      originalPictures: []
     }
   },
   computed: {
@@ -320,25 +322,6 @@ export default {
     $users () {
       return this.$store.state.users.index.users
     },
-    event () {
-      if (!this.$s.eventId) return
-      this.getFuturEvents()
-      this.getPastEvents()
-      this.name = this.$currentUser.name
-      this.email = this.$currentUser.email
-      this.firstEventIds = [this.futurEvents[0].id, this.pastEvents[0].id]
-      this.lastEventIds = [
-        this.futurEvents[this.futurEvents.length - 1].id,
-        this.pastEvents[this.pastEvents.length - 1].id
-      ]
-      let events = this.$s.futurEvent ? this.futurEvents : this.pastEvents
-      let event = events.filter(event => event.id === this.$s.eventId)
-      if (!event.length) return
-      this.remainingSpaces = this.setRemainingSpaces(event[0])
-      this.setExpectedPeople(event[0].reservations)
-      this.setGmapMarker(event[0].positions)
-      return event[0]
-    },
     dialog () {
       return this.$s.dialog
     }
@@ -346,6 +329,7 @@ export default {
   watch: {
     dialog (val) {
       if (!val) return
+      this.setForm()
       this.visible = true
     },
     visible (val) {
@@ -362,11 +346,54 @@ export default {
   },
   mounted () {
     setTimeout(() => {
+      this.setForm()
       this.visible = this.$s.dialog
       window.scrollTo(0, this.$s.scroll)
     }, 500)
   },
   methods: {
+    async getOriginalPictures () {
+      try {
+        let params = queryString.stringify({
+          id: this.$s.eventId,
+          picture_type: 'event'
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/pictures/show?${params}`, this.$store.getters.options)
+        if (data.status === 'error') {
+          console.log(data)
+          return
+        }
+        console.log(data.data.pictures)
+        this.originalPictures = data.data.pictures
+      } catch (error) {
+        this.message(this.$t('base.axios.failure'))
+        console.log(error)
+      }
+    },
+    setForm () {
+      if (!this.$s.eventId) return
+      this.getOriginalPictures()
+      let context = this
+      context.getFuturEvents()
+      context.getPastEvents()
+      context.name = context.$currentUser.name
+      context.email = context.$currentUser.email
+      // console.log(context.futurEvents[0]['id'])
+      context.firstEventIds = [context.futurEvents[0].id, context.pastEvents[0].id]
+      context.lastEventIds = [
+        context.futurEvents[context.futurEvents.length - 1].id,
+        context.pastEvents[context.pastEvents.length - 1].id
+      ]
+      let events = context.$s.futurEvent ? context.futurEvents : context.pastEvents
+      let event = events.filter(event => event.id === context.$s.eventId)
+      if (!event.length) return
+      context.remainingSpaces = context.setRemainingSpaces(event[0])
+      context.setExpectedPeople(event[0].reservations)
+      context.setGmapMarker(event[0].positions)
+      // console.log(event[0])
+      // return event[0]
+      this.event = event[0]
+    },
     getFuturEvents () {
       if (!this.$s.events) return
       this.futurEvents = this.$s.events.filter(
@@ -407,6 +434,8 @@ export default {
         dialog: true,
         eventId: events[newIndex].id
       })
+      this.setForm()
+      this.getOriginalPictures()
     },
     destroy () {
       let confirmationText = this.$t('top.dialog.reservation.i03')

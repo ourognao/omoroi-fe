@@ -71,7 +71,7 @@ export const state = () => ({
     }
   },
 
-  picture: {
+  pictures: {
     index: {
       uploadedPictureIds: []
     }
