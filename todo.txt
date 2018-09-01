@@ -121,6 +121,9 @@ Hello guys and good Golden Week if you are in Japan ! This time we need a ridesh
 今仕方確認したが、過去の投稿を見れば通常は毎週の月曜日7時50分にスクリプトが実行されそうなので、おそらく毎週の月曜日に待つ必要があると思います
 
 
-- remove image field from event
-- chnage seed script to display picture from event picture
+
+- add setform in dialog and display picture
+- find a way to handle large data with base64
 - tanslate japanese address to englishand the backend with geocoder
+
+img.future(:src="event.pictures[0]" style="border-radius:10px")

@@ -62,7 +62,7 @@
       div(class="event-container")
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs3)
-            img.future(:src="event.picture" style="border-radius:10px")
+            img(:src="event.thumbnail" style="border-radius:10px")
           v-flex.ml-4(xs8)
             v-layout.mb-1(row)
               v-flex.caption.future(xs12) {{ displayEventTitle(section, event) }}
@@ -96,7 +96,7 @@
           a(:href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
         v-flex(xs1)
-          img.past(:src="event.picture" style="border-radius:10px")
+          img.past(:src="event.thumbnail" style="border-radius:10px")
         v-flex.ml-4(xs10)
           v-layout(row)
             v-flex.grey-text.dark(xs12) {{ event.date }}
