@@ -393,7 +393,6 @@ export default {
           return
         }
         this.originalPictures = data.data.pictures
-        console.log(this.originalPictures.map(picture => picture.original))
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
         console.log(error)
