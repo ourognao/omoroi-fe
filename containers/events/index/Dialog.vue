@@ -398,6 +398,7 @@ export default {
       this.isTitleAdded = this.titles.length >= this.titles.length + 1
     },
     hasUploadedPicture () {
+      console.log(this.$uploadedPictureIds)
       this.isPictureUploaded = this.$uploadedPictureIds.length >= 1
     },
     hasBeenAutocompleted () {
@@ -550,6 +551,7 @@ export default {
         this.pictures = this.event.pictures.map(picture => picture.original)
       } else {
         this.title = null
+        this.titles = []
         this.date = null
         this.locationJp = null
         this.accessJp = null
@@ -566,7 +568,7 @@ export default {
         this.section = []
         this.isLocationAutocompleted = true
         this.isPictureUploaded = true
-        this.$store.commit('merge', ['pictures', {
+        this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: []
         }])
       }
