@@ -398,7 +398,6 @@ export default {
       this.isTitleAdded = this.titles.length >= this.titles.length + 1
     },
     hasUploadedPicture () {
-      console.log(this.$uploadedPictureIds)
       this.isPictureUploaded = this.$uploadedPictureIds.length >= 1
     },
     hasBeenAutocompleted () {
