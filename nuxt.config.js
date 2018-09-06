@@ -42,7 +42,8 @@ module.exports = {
     '~plugins/social-sharing',
     '~plugins/i18n',
     { src: '~plugins/v-uploader', ssr: false },
-    { src: '~plugins/gmap', ssr: false }
+    { src: '~plugins/gmap', ssr: false },
+    { src: '~plugins/viewer', ssr: false }
   ],
   env: {
     baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000',

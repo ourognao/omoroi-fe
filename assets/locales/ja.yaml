@@ -14,14 +14,16 @@ attr:
   event-title: タイトル
   event-section: 区分
   event-date: 日付
-  event-access: アクセス
+  event-access-jp: アクセス（日本語）
+  event-access-en: アクセス（英語）
   event-start-time: 開始時間
   event-end-time: 終了時間
   event-cost: コスト
   event-capacity: 最大参加人数
   event-threshold: 閾値
   event-sport-tags: スポーツタグ
-  event-explanation: 詳細
+  event-explanation-jp: 詳細（日本語）
+  event-explanation-en: 詳細（英語）
 
 labels:
   common:

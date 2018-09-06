@@ -50,8 +50,19 @@ export default {
       timeItems.push(timeOtherItem)
       return timeItems
     },
-    nl2br (text) {
-      if (!text) return
+    nl2br (object, type) {
+      if (!object) return
+      let locale = this.$store.state.base.locale.selected
+      let text = null
+      switch (type) {
+        case 'location':
+          text = locale === 'ja' ? object.locationJp : object.locationEn
+          break
+        case 'explanation':
+          text = locale === 'ja' ? object.explanationJp : object.explanationEn
+          break
+      }
+      console.log(locale)
       return text.split('\n').join('<br/>')
     },
     formatDatetime (date, formatString = 'YYYY/MM/DD HH:mm') {
@@ -63,8 +74,18 @@ export default {
       let index = eventTitles.findIndex(arr => arr.section === section)
       return eventTitles[index].title
     },
-    truncate (string, maxCharacters) {
-      return string.length > maxCharacters ? string.substr(0, maxCharacters) + '...' : string
+    truncate (event, maxCharacters, type) {
+      let locale = this.$store.state.base.locale.selected
+      let text = null
+      switch (type) {
+        case 'location':
+          text = locale === 'ja' ? event.locationJp : event.locationEn
+          break
+        case 'explanation':
+          text = locale === 'ja' ? event.explanationJp : event.explanationEn
+          break
+      }
+      return text.length > maxCharacters ? text.substr(0, maxCharacters) + '...' : text
     },
     reload () {
       this.$router.go(this.$router.currentRoute)

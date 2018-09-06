@@ -25,7 +25,7 @@ v-container#events-index-main(fluid)
             v-layout(wrap)
               v-flex(xs12 md6)
               v-flex(xs12 md6 text-md-right)
-              v-flex(xs12).grey.lighten-4(v-html="nl2br(event.explanation)")
+              v-flex(xs12).grey.lighten-4(v-html="nl2br(event, 'explanation')")
 
         v-card-actions
           v-spacer

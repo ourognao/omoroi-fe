@@ -9,149 +9,162 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
     
     v-divider
     
-    v-card-text.top-event-view
-      v-container.pa-0(fluid class="event" v-if="event")
-        v-layout(row class="border-blue-bottom")
-          v-flex.caption(xs6)
-            span(v-if="!firstEventIds.includes($s.eventId)")
-              v-icon.mb-1(class="icon-blue icons events") navigate_before
-              a(href="#" @click.stop.prevent="navigate('before')")
-                | {{ $t('top.dialog.common.previous') }}
-          v-flex.caption(xs6 class="text-xs-right")
-            span(v-if="!lastEventIds.includes($s.eventId)")
-              a(href="#" @click.stop.prevent="navigate('next')")
-                | {{ $t('top.dialog.common.previous') }}
-              v-icon.mb-1(class="icon-blue icons events") navigate_next
-         
-        v-layout(row class="main-image" v-if="originalPictures.length > 0")
-         v-flex.mt-2(xs12)
-           img(:src="originalPictures[0].original")
+    no-ssr
+      v-card-text.top-event-view
+        v-container.pa-0(fluid class="event" v-if="event")
+          v-layout(row class="border-blue-bottom")
+            v-flex.caption(xs6)
+              span(v-if="!firstEventIds.includes($s.eventId)")
+                v-icon.mb-1(class="icon-blue icons events") navigate_before
+                a(href="#" @click.stop.prevent="navigate('before')")
+                  | {{ $t('top.dialog.common.previous') }}
+            v-flex.caption(xs6 class="text-xs-right")
+              span(v-if="!lastEventIds.includes($s.eventId)")
+                a(href="#" @click.stop.prevent="navigate('next')")
+                  | {{ $t('top.dialog.common.previous') }}
+                v-icon.mb-1(class="icon-blue icons events") navigate_next
 
-        v-layout(row class="border-blue-bottom")
-          v-flex.caption(xs6)
-            v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-            span {{ displayEventTitle($s.section, event) }}
-          v-flex.caption(xs6 class="text-xs-right")
-            v-flex.attending(xs12)
-              v-icon people_outline
-              span.ml-1 {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
-              span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
-        v-layout.mt-2(row)
-          v-flex(xs6 class="date-location")
-            v-layout(row)
-              v-flex(xs12)
-                v-icon event
-                span {{ formatDate(event.date) }}
-            v-layout(row)
-              v-flex(xs12)
-                v-icon access_time
-                span {{ setTime(event) }}
-            v-layout(row)
-              v-flex(xs12)
-                v-icon location_on
-                span {{ event.location }}
-          v-flex(xs6 class="gmap-section")
-            gmap-map(
-              :center="gmap['center']"
-              :zoom="gmap['zoom']"
-              :options="gmap['options']"
-              style="height: 100px")
-              gmap-marker(
-                v-for="(marker, index) in gmap['markers']"
-                :key="index"
-                :icon="gmap['icon']"
-                :position="marker.position")
-        
-        v-layout(row class="border-blue-bottom")
-          v-flex.caption(xs12)
-            v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-            span {{ $t('top.dialog.details.title') }}
-        div(class="details")
-          v-layout.mt-2(row)
-            v-flex(xs12 v-html="event.explanation")
-          v-layout.mt-2(row)
-            v-flex(xs12)
-              span.bold.underline.mr-1 {{ $t('top.dialog.details.i01') }}
-              span {{ event.access }}
-          v-layout.mt-2(row)
-            v-flex(xs12)
-              span.bold.underline.mr-1 {{ $t('top.dialog.details.i02') }}
-              span {{ event.cost }}
-          v-layout.mt-2(row)
-            v-flex(xs12)
-              span.bold.underline.mr-1 {{ $t('top.dialog.details.i03') }}
-              span {{ getOrganizerInfos(event.userId).name }}
-              span.ml-1 {{ $t('top.dialog.details.i04') }}:
-              span {{ getOrganizerInfos(event.userId).line }}
-              
+          viewer(:images="originalPictures.map(picture => picture.original)")
+            v-layout(row class="main-image" v-if="originalPictures.length > 0")
+             v-flex.mt-2(xs12)
+               img(:src="originalPictures[0].original")
 
-        v-layout.mt-2(row class="border-blue-bottom" v-if="$s.futurEvent")
-          v-flex.caption(xs12)
-            v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
-            span {{ $t('top.dialog.reservation.title') }}
-        div(class="reservation" v-if="$s.futurEvent && $currentUser.id")
-          v-layout(row)
-            v-flex(xs6)
-              v-text-field(
-                type="text"
-                v-model="name"
-                prepend-icon="assignment_ind"
-                :readonly="true"
-                hide-details
-              )
-            v-flex(xs6)
-              div(class="sns")
-                v-layout(row)
-                  v-flex.ml-2.mt-3(xs4)
-                    span {{ $t('top.dialog.common.share') }}:
-                  v-flex.mt-2(xs8)
-                    social-sharing(
-                      :url="$fullPath"
-                      :title="event.title"
-                      :description="event.explanation"
-                      :quote="event.title"
-                      :hashtags="hashtags"
-                      twitter-user="lifeomoroi"
-                      inline-template
-                    )
-                      div
-                        network(network="facebook")
-                          img.pointable(src="/images/sns/facebook.png" class="border-grey mt-1")
-                        network(network="twitter")
-                          img.pointable(src="/images/sns/twitter.png" class="border-grey mt-1")
-          v-layout(row)
-            v-flex(xs12)
-              v-text-field(
-                type="text"
-                v-model="email"
-                prepend-icon="email"
-                :readonly="true"
-                hide-details
-              )
-          v-layout(row)
-            v-flex(xs6)
-              v-select(
-                v-bind:items="expectedPeopleItems"
-                v-model="expectedPeople"
-                :placeholder="$t('attr.reservation-total-guests')"
-                :error-messages="veeErrors.first('reservation-total-guests') || []"
-                v-validate="'required'"
-                data-vv-name="reservation-total-guests"
-                prepend-icon="people_outline"
-              )
-            v-flex.text-xs-right(xs6)
-              v-btn.primary.mt-3(small @click.stop.prevent.native="send()")
-                span {{ hasAlreadyReserved ? $t('top.dialog.reservation.button.i03') : $t('top.dialog.reservation.button.i01') }}
-              v-btn.red.white--text.mt-3(v-if="hasAlreadyReserved" small @click.stop.prevent.native="destroy()")
-                span {{ $t('top.dialog.reservation.button.i04') }}
-        div(class="reservation" v-if="$s.futurEvent && !$currentUser.id")
-          v-layout(row)
-            v-flex(xs12) 
-              span {{ $t('top.dialog.reservation.i01') }}
-          v-layout(row)
-            v-flex.text-xs-center(xs12)
-              v-btn.primary.mt-3(small @click.stop.prevent.native="goto($router, '/auth/sign-up')")
-                span {{ $t('top.dialog.reservation.button.i02') }}
+            div.sub-pictures-view.mt-2
+              v-layout(row).sub-pictures
+                v-flex(
+                  v-for="(picture, index) in originalPictures"
+                  :key="index"
+                  wrap
+                  md3
+                  class="sub-image mr-2"
+                  v-if="originalPictures.length >= 2 && index > 0")
+                  img(:src="originalPictures[index].original")
+
+          v-layout(row class="border-blue-bottom")
+            v-flex.caption(xs6)
+              v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+              span {{ displayEventTitle($s.section, event) }}
+            v-flex.caption(xs6 class="text-xs-right")
+              v-flex.attending(xs12)
+                v-icon people_outline
+                span.ml-1 {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
+                span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
+          v-layout.mt-2(row)
+            v-flex(xs6 class="date-location")
+              v-layout(row)
+                v-flex(xs12)
+                  v-icon event
+                  span {{ formatDate(event.date) }}
+              v-layout(row)
+                v-flex(xs12)
+                  v-icon access_time
+                  span {{ setTime(event) }}
+              v-layout(row)
+                v-flex(xs12)
+                  v-icon location_on
+                  span {{ $local === 'ja' ? event.locationJp : event.locationEn }}
+            v-flex(xs6 class="gmap-section")
+              gmap-map(
+                :center="gmap['center']"
+                :zoom="gmap['zoom']"
+                :options="gmap['options']"
+                style="height: 100px")
+                gmap-marker(
+                  v-for="(marker, index) in gmap['markers']"
+                  :key="index"
+                  :icon="gmap['icon']"
+                  :position="marker.position")
+          
+          v-layout(row class="border-blue-bottom")
+            v-flex.caption(xs12)
+              v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+              span {{ $t('top.dialog.details.title') }}
+          div(class="details")
+            v-layout.mt-2(row)
+              v-flex(xs12 v-html="event.explanation")
+            v-layout.mt-2(row)
+              v-flex(xs12)
+                span.bold.underline.mr-1 {{ $t('top.dialog.details.i01') }}
+                span {{ $local === 'ja' ? event.accessJp : event.accessEn }}
+            v-layout.mt-2(row)
+              v-flex(xs12)
+                span.bold.underline.mr-1 {{ $t('top.dialog.details.i02') }}
+                span {{ event.cost }}
+            v-layout.mt-2(row)
+              v-flex(xs12)
+                span.bold.underline.mr-1 {{ $t('top.dialog.details.i03') }}
+                span {{ getOrganizerInfos(event.userId).name }}
+                span.ml-1 {{ $t('top.dialog.details.i04') }}:
+                span {{ getOrganizerInfos(event.userId).line }}
+                
+
+          v-layout.mt-2(row class="border-blue-bottom" v-if="$s.futurEvent")
+            v-flex.caption(xs12)
+              v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+              span {{ $t('top.dialog.reservation.title') }}
+          div(class="reservation" v-if="$s.futurEvent && $currentUser.id")
+            v-layout(row)
+              v-flex(xs6)
+                v-text-field(
+                  type="text"
+                  v-model="name"
+                  prepend-icon="assignment_ind"
+                  :readonly="true"
+                  hide-details
+                )
+              v-flex(xs6)
+                div(class="sns")
+                  v-layout(row)
+                    v-flex.ml-2.mt-3(xs4)
+                      span {{ $t('top.dialog.common.share') }}:
+                    v-flex.mt-2(xs8)
+                      social-sharing(
+                        :url="$fullPath"
+                        :title="event.title"
+                        :description="event.explanation"
+                        :quote="event.title"
+                        :hashtags="hashtags"
+                        twitter-user="lifeomoroi"
+                        inline-template
+                      )
+                        div
+                          network(network="facebook")
+                            img.pointable(src="/images/sns/facebook.png" class="border-grey mt-1")
+                          network(network="twitter")
+                            img.pointable(src="/images/sns/twitter.png" class="border-grey mt-1")
+            v-layout(row)
+              v-flex(xs12)
+                v-text-field(
+                  type="text"
+                  v-model="email"
+                  prepend-icon="email"
+                  :readonly="true"
+                  hide-details
+                )
+            v-layout(row)
+              v-flex(xs6)
+                v-select(
+                  v-bind:items="expectedPeopleItems"
+                  v-model="expectedPeople"
+                  :placeholder="$t('attr.reservation-total-guests')"
+                  :error-messages="veeErrors.first('reservation-total-guests') || []"
+                  v-validate="'required'"
+                  data-vv-name="reservation-total-guests"
+                  prepend-icon="people_outline"
+                )
+              v-flex.text-xs-right(xs6)
+                v-btn.primary.mt-3(small @click.stop.prevent.native="send()")
+                  span {{ hasAlreadyReserved ? $t('top.dialog.reservation.button.i03') : $t('top.dialog.reservation.button.i01') }}
+                v-btn.red.white--text.mt-3(v-if="hasAlreadyReserved" small @click.stop.prevent.native="destroy()")
+                  span {{ $t('top.dialog.reservation.button.i04') }}
+          div(class="reservation" v-if="$s.futurEvent && !$currentUser.id")
+            v-layout(row)
+              v-flex(xs12) 
+                span {{ $t('top.dialog.reservation.i01') }}
+            v-layout(row)
+              v-flex.text-xs-center(xs12)
+                v-btn.primary.mt-3(small @click.stop.prevent.native="goto($router, '/auth/sign-up')")
+                  span {{ $t('top.dialog.reservation.button.i02') }}
 
 </template>
 
@@ -164,7 +177,20 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
       img
         width 100%
         height auto
-
+    
+    .sub-pictures-view
+      max-width 100%
+      overflow-x auto
+      overflow-y hidden
+    
+    .sub-pictures
+      width p(1500, 312)
+    
+    .sub-image
+      img
+        width 100%
+        height auto
+    
     .date-location
       font-size 10px
       i
@@ -324,6 +350,9 @@ export default {
     },
     dialog () {
       return this.$s.dialog
+    },
+    $local () {
+      return this.$store.state.base.locale.selected
     }
   },
   watch: {
@@ -363,7 +392,6 @@ export default {
           console.log(data)
           return
         }
-        console.log(data.data.pictures)
         this.originalPictures = data.data.pictures
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
@@ -378,7 +406,6 @@ export default {
       context.getPastEvents()
       context.name = context.$currentUser.name
       context.email = context.$currentUser.email
-      // console.log(context.futurEvents[0]['id'])
       context.firstEventIds = [context.futurEvents[0].id, context.pastEvents[0].id]
       context.lastEventIds = [
         context.futurEvents[context.futurEvents.length - 1].id,
@@ -390,8 +417,6 @@ export default {
       context.remainingSpaces = context.setRemainingSpaces(event[0])
       context.setExpectedPeople(event[0].reservations)
       context.setGmapMarker(event[0].positions)
-      // console.log(event[0])
-      // return event[0]
       this.event = event[0]
     },
     getFuturEvents () {

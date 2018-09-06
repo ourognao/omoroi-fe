@@ -77,8 +77,8 @@
             v-layout(row)
               v-flex.location(xs12)
                 v-icon location_on
-                span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event.location, 20) }}
-                span(class="hidden-sm-and-down") {{ event.location }}
+                span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
+                span(class="hidden-sm-and-down") {{ $local === 'ja' ? event.locationJp : event.locationEn }}
             v-layout(row)
               v-flex.attending(xs12)
                 v-icon people_outline
@@ -103,8 +103,8 @@
           v-layout(row)
             v-flex.caption(xs12) {{ displayEventTitle(null, event) }}
           v-layout(row)
-            v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event.explanation, 30) }}
-            v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event.explanation, 160) }}
+            v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event, 30, 'explanation') }}
+            v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event, 160, 'explanation') }}
         v-flex(xs1 style="line-height: 50px")
           v-btn(flat icon @click.stop.prevent.native="details(event, false)")
             v-icon.details(class="icon-blue icons events") chevron_right
@@ -314,6 +314,9 @@ export default {
     },
     dialog () {
       return this.$s.dialog
+    },
+    $local () {
+      return this.$store.state.base.locale.selected
     }
   },
   watch: {
