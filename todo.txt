@@ -176,35 +176,6 @@ https://www.facebook.com/events/348425552366423/
 
 pip3 install --upgrade "urllib3==1.22" awscli
 
------BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEAtyqlcU0YP2E/Xv+bInmYOLjtDfAMzveLvxCnbSFv70yP+szK9baplHVMzTNq
-/pRce8XPZG36thdRa0gy12JZLjGo2cqabg6KwzLJvZ3V5uyDKRPyU/4rAWK0odcSRB/bpKr2usSt
-uM4wmrfSXrdWIaPdr6xdtuwN6JOo3k3jynPs+Zc8XDcWEK2x6Ejw8RivHv5U5cRbZt6S+nbbVDOD
-vN+84ms2RHER4QTZKQIKrfSq8cyKaG+QDbrl/YS/+799sbV/7Ra0fd9vtwhxq4loxXKy94jkqUhZ
-5dBMZgJMkz5RnSxMgRdilnPsekmnpOoADl81x6CdWJZDSariRI33XQIDAQABAoIBAD7vQkU5zhkI
-2vNTNASWbv0eXSUq09vRJo0RtdVDZeh9EAOGlj3y8zV1UFw5TIwIgfZtMyM4vqoOPQV1mzJyMl4y
-5edfO8yQ5pDHRJYIQ1TC8xYMKnk9nZ0uQw5QjZAmuhtMOtZVebND9WNTwc6Vg9yvJx6TROfzF5xQ
-D/fCH4CR2uz6jS0aBNNZ4QWywKlQRvNNqn6MhiXeZOQG2NFvUZyHIPg3Jooyw26OX9ksWEcTocUa
-r2KCGPXk3hGJFGiNJ3IfP/qBbNMX9taCFC8HUBAd5h0f/b50FHOkthzUyL7pgEfZkE5wWSSNxAK+
-FDh/5Ve8ufF8Vb7NLssWV47en4ECgYEA7WWsoAEg5dhGaMJi8S0R5zQAXGjN6bn9F/DpUOMHuLwd
-x3acCGxaMnmSZZqNjcKvxSNO2yWpx2qoV0dgMtZSqnWYbLqxpz34lKNqdPbm4nuK8XadNtQU7UTN
-66r0yGcotipegplNoIZ8IxCQW+w2dGKL+WAExAU3JzENBZKz9a0CgYEAxYUTLCaeNECDP5poQeKe
-zMnbUjrmJ/qi6+abyZpwFYmsdHCDulh+w479U52YjkBgSV17J7uJYGi1Jx2P31K+4mLZooNkWsFh
-0fnvrLP1XftZHyt+wdYuOtwon/fu6qcosWuNatz6/TzLsU47uqaIaiNDhEZuiscjv0GlCi2tXnEC
-gYEA1PjD9v9MLibqc40ACnFugEaMlFqJcEckoVfFWIV0JezNomXr8TqTaHjcNz6CA01HNspIMh4F
-xBsRTst/p9vSaY354oFSY0EbQu2f0bK2yzQeICVTQR7eb0WsnuHNnAO/6Dz2cJ9rnrlHoIV5nJ26
-9Ip8HIphfCFZq1U742YLADkCgYBCGBekTH/f6D6DB/4fHeAZkupLB96APkRKP+6ddYpQCrOkewn5
-TyeL9MscMb4cy7nsktVlJEIB+sezgRblmeC6DG3bDbCFFfTPuJzU45sVicf2wC04W504oPcPIH3Y
-E3twcxbtTWjHWJKokA84lAVNzuMG3jKbSavSkfrR/xrmYQKBgELVh23RC/JaXFC2eFtqCpQviBNx
-wtVRSE7y0Hmc7cqkGQA82gpEkII7wGaCDSVCwBKL46dBn3MAvMBJOUrSRlZHcAJJT7rdZ+f0/GwK
-EWYR44BANn97L5zb0/7DD9/hTBfTjyfTXeubKJnIzOzOIlZIfJL1AhepO/lmK60/whlq
------END RSA PRIVATE KEY-----
-
-AWS_ACCESS_KEY_ID=AKIAJ4NNCCRZU6F6IP5Q
-AWS_SECRET_ACCESS_KEY=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
-
-
-
 
 恵比寿駅から徒歩7分
 Sport event by bago at Ebisu
@@ -214,3 +185,8 @@ Sport event by bago at Ebisu
 Ebisu es a really cool town. As foreigner I suggest you consider it as a best place to live in Tokyo
 
 style="overflow-x:auto"
+
+heroku pg:reset DATABASE_URL --app omoroi-be --confirm omoroi-be
+heroku rake db:migrate --app omoroi-be
+heroku rake db:seed --app omoroi-be
+heroku run console --app omoroi-be
