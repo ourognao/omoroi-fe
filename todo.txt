@@ -190,3 +190,19 @@ heroku pg:reset DATABASE_URL --app omoroi-be --confirm omoroi-be
 heroku rake db:migrate --app omoroi-be
 heroku rake db:seed --app omoroi-be
 heroku run console --app omoroi-be
+
+7.times {
+  for i in 1..14 do
+    dupPicture = EventPicture.find(i).dup
+    dupPicture.save
+  end 
+}
+
+Event.all.each_with_index do |event, index|
+  i = index + 1
+  EventPicture.find(i).update(event_id: i)
+end
+
+EventPicture.where(event_id: nil).count
+ids = EventPicture.where(event_id: nil).pluck(:id)
+EventPicture.where(id: ids).destroy_all

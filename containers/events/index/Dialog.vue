@@ -550,6 +550,7 @@ export default {
         this.pictures = this.event.pictures.map(picture => picture.original)
       } else {
         this.title = null
+        this.titles = []
         this.date = null
         this.locationJp = null
         this.accessJp = null
@@ -566,7 +567,7 @@ export default {
         this.section = []
         this.isLocationAutocompleted = true
         this.isPictureUploaded = true
-        this.$store.commit('merge', ['pictures', {
+        this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: []
         }])
       }
