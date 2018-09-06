@@ -2,7 +2,7 @@
   "name": "omoroi-fe",
   "version": "1.0.0",
   "engines": {
-    "node": "8.2.1"
+    "node": "8.9.4"
   },
   "description": "Nuxt.js project",
   "author": "Bago <b.ourognao@gmail.com>",
