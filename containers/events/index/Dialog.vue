@@ -81,7 +81,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   :select-first-on-enter="true"
                   style="width: 100%"
                 )
-              div.mt-1(class="errorColor" v-if="!isLocationCAutocompleted")
+              div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
                 | {{ $t('events.dialog.errors.location') }}
 
             v-flex(xs12 class="gmap-section")
@@ -96,19 +96,31 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   :icon="gmap['icon']"
                   :position="marker.position")
 
-            v-flex(xs12 md6)
+            v-flex(xs12)
               v-text-field(
                 type="text"
-                v-model="access"
-                name="event-access"
-                :label="$t('attr.event-access')"
+                v-model="accessJp"
+                name="event-access-jp"
+                :label="$t('attr.event-access-jp')"
                 v-validate="'required'"
-                :error-messages="veeErrors.first('event-access') || []"
+                :error-messages="veeErrors.first('event-access-jp') || []"
+                prepend-icon="business"
+                @keypress.enter.native="send()"
+              )
+
+            v-flex(xs12)
+              v-text-field(
+                type="text"
+                v-model="accessEn"
+                name="event-access-en"
+                :label="$t('attr.event-access-en')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-access-en') || []"
                 prepend-icon="business"
                 @keypress.enter.native="send()"
               )
             
-            v-flex.pl-4(xs12 md6)
+            v-flex(xs12 md6)
               v-select(
                 :items="eventTimeItems"
                 v-model="startTime"
@@ -119,7 +131,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="access_time"
               )
             
-            v-flex(xs12 md6)
+            v-flex.pl-4(xs12 md6)
               v-select(
                 :items="eventTimeItems"
                 v-model="endTime"
@@ -130,7 +142,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="access_time"
               )
             
-            v-flex.pl-4(xs12 md6)
+            v-flex(xs12 md6)
               v-select(
                 :items="costItems"
                 v-model="cost"
@@ -141,7 +153,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="attach_money"
               )
             
-            v-flex(xs12 md6)
+            v-flex.pl-4(xs12 md6)
               v-select(
                 :items="capacityItems"
                 v-model="capacity"
@@ -153,7 +165,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @change="setthresholdItems()"
               )
             
-            v-flex.pl-4(xs12 md6)
+            v-flex(xs12 md6)
               v-select(
                 :disabled="capacity ? false : true"
                 :items="thresholdItems"
@@ -165,6 +177,11 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="hdr_weak"
               )
             
+            v-flex.pl-4(xs12 md6).mt-3
+              v-uploader(:setting="uploadConfig" @done="uploadDone")
+              div.mt-1(class="errorColor" v-if="!isPictureUploaded")
+                | {{ $t('events.dialog.errors.picture') }}
+
             v-flex(xs12 v-if="titles.map(title => title.section).includes('SP')")
               div.subheading {{ $t('labels.event.tags') }}
               div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
@@ -184,18 +201,25 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               v-text-field(
                 textarea
                 rows="13"
-                v-model="explanation"
-                name="event-explanation"
-                :label="$t('attr.event-explanation')"
+                v-model="explanationJp"
+                name="event-explanation-jp"
+                :label="$t('attr.event-explanation-jp')"
                 v-validate="'required'"
-                :error-messages="veeErrors.first('event-explanation') || []"
+                :error-messages="veeErrors.first('event-explanation-jp') || []"
                 hide-details
               )
 
-            v-flex.pl-4(xs12 md6).mt-3
-              v-uploader(:setting="uploadConfig" @done="uploadDone")
-              div.mt-1(class="errorColor" v-if="!isPictureUploaded")
-                | {{ $t('events.dialog.errors.picture') }}
+            v-flex.pl-4(xs12 md6)
+              v-text-field(
+                textarea
+                rows="13"
+                v-model="explanationEn"
+                name="event-explanation-en"
+                :label="$t('attr.event-explanation-en')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-explanation-en') || []"
+                hide-details
+              )
       
       v-divider
 
@@ -242,10 +266,11 @@ export default {
       title: null,
       titles: [],
       date: null,
-      location: null,
+      locationJp: null,
       locationForm: null,
       locationHidden: null,
-      access: null,
+      accessJp: null,
+      accessEn: null,
       startTime: null,
       endTime: null,
       eventTimeItems: this.timeOptions(),
@@ -267,7 +292,8 @@ export default {
           'event'
         ]
       },
-      explanation: null,
+      explanationJp: null,
+      explanationEn: null,
       allowedExtensions: '<div data-v-fb284a6e="">file size limit：<span data-v-fb284a6e="">5MB</span><br data-v-fb284a6e="">file extensions：<span data-v-fb284a6e="">jpeg,jpg,gif,png</span></div>',
       desiredSportTags: [],
       sportTags: [
@@ -314,9 +340,10 @@ export default {
         options: { fullscreenControl: false, clickableIcons: false }
       },
       isTitleAdded: true,
-      isLocationCAutocompleted: true,
+      isLocationAutocompleted: true,
       isPictureUploaded: true,
-      currentUser: this.$store.getters.currentUser
+      currentUser: this.$store.getters.currentUser,
+      pictures: []
     }
   },
   mounted () {
@@ -374,11 +401,12 @@ export default {
       this.isPictureUploaded = this.$uploadedPictureIds.length >= 1
     },
     hasBeenAutocompleted () {
-      this.isLocationCAutocompleted = (this.locationForm && (this.locationForm === this.locationHidden))
+      this.isLocationAutocompleted = (this.locationForm && (this.locationForm === this.locationHidden))
     },
     setPlace (place) {
       this.locationForm = this.locationHidden = document.getElementById('gmap-location').value
-      this.location = place.formatted_address
+      this.locationJp = place.formatted_address
+      console.log(this.locationJp)
       this.positions = [place.geometry.location.lat(), place.geometry.location.lng()]
       this.setGmapMarker(this.positions)
       this.hasBeenAutocompleted()
@@ -427,21 +455,23 @@ export default {
       this.$validator.validateAll().then(async result => {
         if (!result ||
           !context.isTitleAdded ||
-          !context.isLocationCAutocompleted ||
+          !context.isLocationAutocompleted ||
           !context.isPictureUploaded) return
         try {
           let newEvent = {
             user_id: this.currentUser.id,
             title: JSON.stringify(this.titles),
             date: this.date,
-            location: this.location,
-            access: this.access,
+            location_jp: this.locationJp,
+            access_jp: this.accessJp,
+            access_en: this.accessEn,
             start_time: this.startTime,
             end_time: this.endTime,
             cost: this.cost,
             capacity: this.capacity,
             threshold: this.threshold,
-            explanation: this.explanation,
+            explanation_jp: this.explanationJp,
+            explanation_en: this.explanationEn,
             picture_ids: this.$uploadedPictureIds,
             positions: this.positions,
             tags: this.desiredSportTags,
@@ -479,7 +509,6 @@ export default {
           eom: moment().add(1, 'months').format('YYYY-MM')
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
-        console.log(data)
         this.$store.commit('merge', ['events.index', {
           events: data.data.events
         }])
@@ -501,24 +530,41 @@ export default {
       this.veeErrors.clear()
       this.clearPreviewPicture()
       if (this.event) {
-        this.access = this.event.access
+        this.title = this.event.event
+        this.date = this.event.date
+        this.locationJp = this.event.locationJp
+        this.accessJp = this.event.accessJp
+        this.accessEn = this.event.accessEn
         this.startTime = this.event.startTime
         this.endTime = this.event.endTime
+        this.cost = this.event.cost
+        this.capacity = this.event.capacity
+        this.threshold = this.event.threshold
+        this.explanationJp = this.event.explanationJp
+        this.explanationEn = this.event.explanationEn
+        this.positions = this.event.positions
+        this.tags = this.event.tags
+        this.section = this.event.section
+        this.isLocationAutocompleted = true
+        this.isPictureUploaded = true
+        this.pictures = this.event.pictures.map(picture => picture.original)
       } else {
         this.title = null
         this.date = null
-        this.location = null
-        this.access = null
+        this.locationJp = null
+        this.accessJp = null
+        this.accessEn = null
         this.startTime = null
         this.endTime = null
         this.cost = null
         this.capacity = null
         this.threshold = null
-        this.explanation = null
+        this.explanationJp = null
+        this.explanationEn = null
         this.positions = constants.gmap.positions.osaka
         this.tags = []
         this.section = []
-        this.isLocationCAutocompleted = true
+        this.isLocationAutocompleted = true
         this.isPictureUploaded = true
         this.$store.commit('merge', ['pictures', {
           uploadedPictureIds: []

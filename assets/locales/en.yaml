@@ -14,14 +14,16 @@ attr:
   event-section: Section
   event-title: Title
   event-date: Date
-  event-access: Access
+  event-access-jp: Access (JP)
+  event-access-en: Access (EN)
   event-start-time: Start Time
   event-end-time: End Time
   event-cost: Cost
   event-capacity: Capacity
   event-threshold: Threshold
   event-sport-tags: Sport Tags
-  event-explanation: Details
+  event-explanation-jp: Details (JP)
+  event-explanation-en: Details (EN)
 
 labels:
   common:
