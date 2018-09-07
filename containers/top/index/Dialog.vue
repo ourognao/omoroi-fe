@@ -21,7 +21,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
             v-flex.caption(xs6 class="text-xs-right")
               span(v-if="!lastEventIds.includes($s.eventId)")
                 a(href="#" @click.stop.prevent="navigate('next')")
-                  | {{ $t('top.dialog.common.previous') }}
+                  | {{ $t('top.dialog.common.next') }}
                 v-icon.mb-1(class="icon-blue icons events") navigate_next
 
           viewer(:images="originalPictures.map(picture => picture.original)")
