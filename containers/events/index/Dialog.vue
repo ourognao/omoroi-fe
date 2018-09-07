@@ -406,7 +406,6 @@ export default {
     setPlace (place) {
       this.locationForm = this.locationHidden = document.getElementById('gmap-location').value
       this.locationJp = place.formatted_address
-      console.log(this.locationJp)
       this.positions = [place.geometry.location.lat(), place.geometry.location.lng()]
       this.setGmapMarker(this.positions)
       this.hasBeenAutocompleted()
@@ -414,7 +413,6 @@ export default {
     uploadDone (files) {
       if (files && Array.isArray(files) && files.length) {
         let uploadedPictureIds = files.map(arr => arr.qquuid)
-        console.log(uploadedPictureIds)
         this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: uploadedPictureIds
         }])
