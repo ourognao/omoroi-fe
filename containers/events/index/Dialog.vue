@@ -52,7 +52,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
                     v-icon close
             
-            v-flex(xs12 md6)
+            v-flex(xs12 md3)
               v-menu(
                 lazy
                 :close-on-content-click="true"
@@ -73,12 +73,14 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 )
                 v-date-picker(v-model="date" no-title scrollable actions)
             
-            v-flex.pl-4(xs12 md6)
+            v-flex.pl-4(xs12 md9)
               div(class="input-group__input")
                 gmap-autocomplete(
                   id="gmap-location"
                   @place_changed="setPlace"
                   :select-first-on-enter="true"
+                  :placeholder="$t('attr.event-location')"
+                  :value="locationJp"
                   style="width: 100%"
                 )
               div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
@@ -162,7 +164,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 v-validate="'required'"
                 :error-messages="veeErrors.first('event-capacity') || []"
                 prepend-icon="people_outline"
-                @change="setthresholdItems()"
+                @change="setThresholdItems()"
               )
             
             v-flex(xs12 md6)
@@ -182,7 +184,28 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               div.mt-1(class="errorColor" v-if="!isPictureUploaded")
                 | {{ $t('events.dialog.errors.picture') }}
 
-            v-flex(xs12 v-if="titles.map(title => title.section).includes('SP')")
+            viewer(:images="originalPictures.map(picture => picture.original)" v-if="originalPictures")
+              div.sub-pictures-view.mt-2
+                v-layout(row).sub-pictures
+                  v-flex(
+                    v-for="(picture, index) in originalPictures"
+                    :key="index"
+                    wrap
+                    md3
+                    class="sub-image mr-2"
+                  )
+                    v-icon.pointable(
+                      v-if="originalPictures.length === 1"
+                      class="icon-grey"
+                    ) delete
+                    v-icon.pointable(
+                      v-else
+                      class="icon-red"
+                      @click="deletePicture(originalPictures[index].qquuid)"
+                    ) delete
+                    img(:src="originalPictures[index].original")
+
+            v-flex(xs12 v-if="isSportEvent()")
               div.subheading {{ $t('labels.event.tags') }}
               div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
                 | {{ veeErrors.first('event-sport-tags') }}
@@ -196,7 +219,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     name="event-sport-tags"
                     hide-details
                   )
-            
+
             v-flex(xs12 md6)
               v-text-field(
                 textarea
@@ -241,6 +264,25 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
 #events-index-dialog
   .event-view
     max-height 70vh
+
+    .sub-pictures-view
+      max-width 210vh
+      overflow-x auto
+      overflow-y hidden
+
+    .sub-pictures
+      width p(1100, 312)
+
+    .sub-image
+      img
+        width 100%
+        height auto
+    
+    i.icon-red
+      color #C62828
+    
+    i.icon-grey
+      color #bdbdbd
 </style>
 
 <!-- ============================================================================ -->
@@ -258,11 +300,7 @@ export default {
     return {
       visible: false,
       section: null,
-      sectionItems: [
-        { text: 'SC', value: 'SC' },
-        { text: 'LX', value: 'LX' },
-        { text: 'SP', value: 'SP' }
-      ],
+      sectionItems: [],
       title: null,
       titles: [],
       date: null,
@@ -343,15 +381,16 @@ export default {
       isLocationAutocompleted: true,
       isPictureUploaded: true,
       currentUser: this.$store.getters.currentUser,
-      pictures: []
+      pictures: [],
+      originalPictures: []
     }
   },
   mounted () {
-    this.setForm()
     setTimeout(() => {
       this.visible = this.$s.dialog
       document.getElementsByClassName('info-show')[0].innerHTML = this.allowedExtensions
       window.scrollTo(0, this.$s.scroll)
+      this.setForm()
     }, 1000)
   },
   computed: {
@@ -398,6 +437,7 @@ export default {
       this.isTitleAdded = this.titles.length >= this.titles.length + 1
     },
     hasUploadedPicture () {
+      if (this.event) return true
       this.isPictureUploaded = this.$uploadedPictureIds.length >= 1
     },
     hasBeenAutocompleted () {
@@ -417,6 +457,13 @@ export default {
           uploadedPictureIds: uploadedPictureIds
         }])
         this.hasUploadedPicture()
+        if (this.event) {
+          let firstPicture = files[0]
+          if (firstPicture.type && firstPicture.type === 'event') {
+            this.linkPicturesToEvent(uploadedPictureIds)
+          }
+          this.getOriginalPictures(this.event.id)
+        }
       }
     },
     addSectionTitle () {
@@ -439,10 +486,14 @@ export default {
       let index = this.sectionItems.findIndex(sectionItem => sectionItem.value === section)
       this.sectionItems.splice(index, 1)
     },
-    setthresholdItems () {
+    setThresholdItems () {
       this.$nextTick(function () {
+        if (this.capacity <= this.threshold) this.threshold = null
         this.thresholdItems = this.rangeOptionsForSelect(0, this.capacity - 1)
       })
+    },
+    isSportEvent () {
+      return this.titles.map(title => title.section).includes('SP')
     },
     send () {
       let context = this
@@ -472,7 +523,7 @@ export default {
             explanation_en: this.explanationEn,
             picture_ids: this.$uploadedPictureIds,
             positions: this.positions,
-            tags: this.desiredSportTags,
+            tags: this.isSportEvent() ? this.desiredSportTags : [],
             section: this.titles.map(title => title.section)
           }
           let res = await axios({
@@ -518,34 +569,111 @@ export default {
         console.error(error.message)
       }
     },
+    async linkPicturesToEvent (qquuids) {
+      try {
+        let params = queryString.stringify({
+          qquuids: qquuids,
+          picture_type: 'event',
+          event_id: this.event.id
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.put(`/pictures/update?${params}`, this.$store.getters.options)
+        if (data.status === 'error') {
+          console.error(data)
+          return
+        }
+        this.getOriginalPictures(this.event.id)
+        this.clearPreviewPicture()
+        this.message(this.$t('base.axios.success'))
+        window.scrollTo(0, 0)
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') {
+          this.$router.replace(this.path('/auth/login'))
+        }
+        console.error(error.message)
+      }
+    },
     clearPreviewPicture () {
       let qqUploadSuccess = document.getElementsByClassName('qq-upload-success')
       Array.from(qqUploadSuccess).forEach(function (uploadedPicture) {
         uploadedPicture.parentNode.removeChild(uploadedPicture)
       })
+      this.$store.commit('merge', ['pictures.index', {
+        uploadedPictureIds: []
+      }])
+    },
+    async deletePicture (qquuid) {
+      let confirmationText = this.$t('base.logout.confirm')
+      this.confirm({ text: confirmationText })
+        .then(async agreed => {
+          if (agreed) {
+            try {
+              let { data } = await axios.post(`/pictures/delete?qquuid=${qquuid}`, this.$store.getters.options)
+              if (data.status === 'error') {
+                console.error(data)
+                return
+              }
+              this.getOriginalPictures(this.event.id)
+              this.message(this.$t('base.axios.success'))
+            } catch (error) {
+              this.message(this.$t('base.axios.failure'))
+              console.error(error)
+            }
+          }
+        })
+    },
+    async getOriginalPictures (eventId) {
+      try {
+        let params = queryString.stringify({
+          id: eventId,
+          picture_type: 'event'
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/pictures/show?${params}`, this.$store.getters.options)
+        if (data.status === 'error') {
+          console.log(data)
+          return
+        }
+        this.originalPictures = data.data.pictures
+      } catch (error) {
+        this.message(this.$t('base.axios.failure'))
+        console.log(error)
+      }
     },
     setForm () {
+      let context = this
       this.veeErrors.clear()
       this.clearPreviewPicture()
+      this.sectionItems = [
+        { text: 'SC', value: 'SC' },
+        { text: 'LX', value: 'LX' },
+        { text: 'SP', value: 'SP' }
+      ]
+      console.log(this.sectionItems)
       if (this.event) {
-        this.title = this.event.event
+        this.titles = []
+        JSON.parse(this.event.title).forEach(function (titleItem) {
+          context.updateSectionTitle(titleItem.section, 'add')
+          context.titles.push({ section: titleItem.section, title: titleItem.title })
+        })
         this.date = this.event.date
-        this.locationJp = this.event.locationJp
+        this.locationJp = this.locationForm = this.locationHidden = this.event.locationJp
         this.accessJp = this.event.accessJp
         this.accessEn = this.event.accessEn
         this.startTime = this.event.startTime
         this.endTime = this.event.endTime
         this.cost = this.event.cost
         this.capacity = this.event.capacity
-        this.threshold = this.event.threshold
+        this.setThresholdItems()
         this.explanationJp = this.event.explanationJp
         this.explanationEn = this.event.explanationEn
         this.positions = this.event.positions
-        this.tags = this.event.tags
+        this.desiredSportTags = this.event.tags
         this.section = this.event.section
         this.isLocationAutocompleted = true
         this.isPictureUploaded = true
-        this.pictures = this.event.pictures.map(picture => picture.original)
+        this.getOriginalPictures(this.event.id)
+        setTimeout(() => {
+          this.threshold = this.event.threshold
+        }, 500)
       } else {
         this.title = null
         this.titles = []
@@ -561,17 +689,16 @@ export default {
         this.explanationJp = null
         this.explanationEn = null
         this.positions = constants.gmap.positions.osaka
-        this.tags = []
+        this.desiredSportTags = []
         this.section = []
         this.isLocationAutocompleted = true
         this.isPictureUploaded = true
         this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: []
         }])
+        this.originalPictures = []
       }
-      setTimeout(() => {
-        this.setGmapMarker(this.positions)
-      }, 500)
+      this.setGmapMarker(this.positions)
     },
     cancel () {
       this.visible = false

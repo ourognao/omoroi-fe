@@ -98,11 +98,11 @@
         v-container.pa-0(fluid)
           v-layout(wrap)
             v-flex(xs6)
-              v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(false)")
+              v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(false)" style="width:100%")
                 v-icon remove_circle_outline
                 span.ml-1 {{ $t('base.confirm.disagree') }}
             v-flex(xs6)
-              v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(true)")
+              v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(true)" style="width:100%")
                 v-icon check_circle
                 span.ml-1 {{ $t('base.confirm.agree') }}
 </template>
@@ -111,9 +111,6 @@
 
 <style lang="stylus">
 #layout-default-header
-  .l-confirm-btn
-    width 100%
-
   .menu-icons
     height: 26px
     width: 26px
@@ -134,9 +131,6 @@
   
   .border-blue
     border-top: 5px solid #1a237e
-  
-  .pointable
-    cursor pointer
   
   .l-logo
     font-weight 600

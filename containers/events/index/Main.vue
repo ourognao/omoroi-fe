@@ -105,7 +105,7 @@ export default {
         eventId: null
       })
     },
-    edit (user) {
+    edit (event) {
       this.push(this.$store, 'events.index', '/events', {
         scroll: window.pageYOffset,
         dialog: true,

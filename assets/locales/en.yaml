@@ -14,6 +14,7 @@ attr:
   event-section: Section
   event-title: Title
   event-date: Date
+  event-location: Location
   event-access-jp: Access (JP)
   event-access-en: Access (EN)
   event-start-time: Start Time
