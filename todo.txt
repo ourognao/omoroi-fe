@@ -97,44 +97,12 @@ endMonth    = Date.parse("2018/06").end_of_month
 3) create facebook login
 
 
-<div id="lyrics" class="lyrics" style="font-size: 100%;">咲き乱れし夜の街に真昼間の眼<br>届くはずもない心情障害よ<br>輝けしき時の罠に足をとられ<br>この絶望を夢に描く<br><br>足早に人々は今どこへ帰る<br>ただ日々の続きなのだろうか<br><br>座り込む影に呼ばれ<br>失くした声<br>枯れた瞼に溢れ出した<br><br>泣き濡れていたのさ<br>この世の終わりでさ<br>虚しく笑う風<br>さらば 心は歪んだ<br><br>咲き乱れし夜の街に真昼間の眼<br>届くはずもない心情障害よ<br>招かれざる援護射撃に 足を撃たれ<br>悲しくも希望を託した<br><br>立ち止まるあの人は戻るだろうか<br>いまさらだと前向くだろうか<br>空を見た 鳥に呼ばれ<br>この心は 眩しさの色にこぼれゆく<br><br>泣き濡れていたのさ<br>この世の終わりでさ<br>静かに目を閉じたならば<br>心はうたった<br><br>咲き乱れし夜の街に真昼間の眼<br>届くはずもない心情 論外だ<br><br>泣き濡れていたのさ<br>この世の終わりでさ<br>風待つこともない<br>さらば 心は巣立った</div>
-
-
- title = [
-   { section: 'LX', title: 'Language Event Bago' },
-   { section: 'SC', title: 'Social Event Bago' },
- ]
- section = ['SC', 'LX']
- Event.find(1).update(title: title.to_json, section: section)
-
-
-
-明日リモートワークするつもりです。なんかありましたら、slackで連絡してください。
-明日リモートワークするつもりです。運営会議に参加できないものの、開発チームの分を記載しました。
-よろしくお願いいたします。
-
-
 Hello guys and good Golden Week if you are in Japan ! This time we need a rideshare from Tokyo to Osaka. Passenger is willing to cost share until 4500yen. Can speak English and Japanese. If you are going to Osaka for golden week, that's a good opportunity to cost share and find new friend :).
 #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel
 #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
 
-今仕方確認したが、過去の投稿を見れば通常は毎週の月曜日7時50分にスクリプトが実行されそうなので、おそらく毎週の月曜日に待つ必要があると思います
-
-
-
-- add setform in dialog and display picture
-- find a way to handle large data with base64
-- tanslate japanese address to englishand the backend with geocoder
-
-img.future(:src="event.pictures[0]" style="border-radius:10px")
-
 heroku pg:reset DATABASE_URL --confirm omoroi-be
 
-
-繰り返し言葉
-擬態語　ぎたいご
-擬音語　ぎおんご
-おのまとぺ
 learn less, speak more
 
 social event at shimoda from Bago
@@ -144,35 +112,6 @@ From Izukyu-Shimoda station 5mins
 
 下田へ遊びに行こう！
 Let's have fun at shimoda !
-
-HMJ8N88BKW
-
-
-
-Hello guys. This saturday, we are going to celebrate me and my friend Cedric birthday.
-Come over have some drinks and fun with us  at Plegio Waseda apartement !
-
-今晩は！今週末の土曜日に私とCedricの誕生会を開催致します！
-是非皆様のご来場をお待ちしておりまーす！
-
-Address : 〒162-0801 新宿区 (Japan・東京都)山吹町340、プレジオ早稲田5F
-Start : 19h
-Fee: 1000yen
-Stuff to bring: Only drinks (no food)
-Planned Food: paella, yakitori, cake, nachos, takoyaki, salad, sangria, french fries, Cup sushi, etc..
-
-住所 : 〒162-0801 新宿区 (Japan・東京都)山吹町340、プレジオ早稲田
-開始 : 19時
-会員制: 1000円
-持った方がいい物: 飲み物（お酒・ソフトドリンクのみ）
-作り出す食べ物: パエリア , 焼き鳥, ケーキ, ナチョス, タコ焼き, サラダ, サングリア, フライドポテト, カップ寿司, etc..
-
-Yop ! J'ai cree l'event facebook et tu es dedans. Check les infos et tiens moi au jus s'il te manque d'autre infos.
-
-お疲れ様です！facebookイベントを作りました。誕生会の情報を記載しましたので、是非ご覧ください。
-質問などあれ私までば連絡頂戴。
-
-https://www.facebook.com/events/348425552366423/
 
 pip3 install --upgrade "urllib3==1.22" awscli
 
@@ -206,3 +145,38 @@ end
 EventPicture.where(event_id: nil).count
 ids = EventPicture.where(event_id: nil).pluck(:id)
 EventPicture.where(id: ids).destroy_all
+
+Topic.__elasticsearch__.search({query: { match_all: {}}}).total_count
+Topic.__elasticsearch__.search({query: { match_all: {}}}).first
+
+Topic.__elasticsearch__.search({
+      query: {
+        bool: {
+          must: [
+            {
+              query_string: {
+                query: 'HMKHSASQ5D',
+                fields: [
+                  "account.login",
+                  "guest.first_name",
+                  "guest.last_name",
+                  "guest.full_name",
+                  :confirmation_codes,
+                  :listing_iops
+                ],
+                default_operator: :and
+              }
+            }
+          ]
+        }
+      }
+    }).first
+
+
+b.ourognao+omoroi@gmail.com
+
+this.sectionItems.push(
+        { text: 'SC', value: 'SC' },
+        { text: 'LX', value: 'LX' },
+        { text: 'SP', value: 'SP' }
+      )

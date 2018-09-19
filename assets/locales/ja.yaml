@@ -14,6 +14,7 @@ attr:
   event-title: タイトル
   event-section: 区分
   event-date: 日付
+  event-location: 場所
   event-access-jp: アクセス（日本語）
   event-access-en: アクセス（英語）
   event-start-time: 開始時間

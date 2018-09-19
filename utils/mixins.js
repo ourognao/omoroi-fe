@@ -62,7 +62,6 @@ export default {
           text = locale === 'ja' ? object.explanationJp : object.explanationEn
           break
       }
-      console.log(locale)
       return text.split('\n').join('<br/>')
     },
     formatDatetime (date, formatString = 'YYYY/MM/DD HH:mm') {
