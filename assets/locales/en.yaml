@@ -52,6 +52,9 @@ labels:
     other: Other
   event:
     tags: Tags
+    tabs:
+      upcoming-event: Upcoming Events
+      past-event: Past Events
 
 base:
   head:
@@ -73,6 +76,8 @@ base:
     title: Confirm
     agree: Agree
     disagree: Disagree
+  waiting:
+    text: Please wait for a while..
   logout:
     confirm: Are you sure ?
   axios:
