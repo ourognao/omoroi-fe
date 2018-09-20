@@ -27,6 +27,10 @@ export const state = () => ({
       visible: false,
       agreed: null,
       disagreed: null
+    },
+    waiting: {
+      text: null,
+      visible: false
     }
   },
 

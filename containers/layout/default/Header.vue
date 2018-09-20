@@ -105,6 +105,16 @@
               v-btn.ma-0.grey--text.darken-1.l-confirm-btn(flat @click.stop.native="closeConfirm(true)" style="width:100%")
                 v-icon check_circle
                 span.ml-1 {{ $t('base.confirm.agree') }}
+
+  v-dialog(v-model="waitingVisible" persistent content-class="l-waiting")
+    v-card
+      v-layout(row)
+        v-flex.text-xs-center.pa-3(xs12)
+          img(src="/images/logo/simplified.jpg" style="width:100%")
+      v-card-text.text-xs-center.title {{ $store.state.base.waiting.text }}
+      v-layout(row)
+        v-flex(xs6 offset-xs3 offset-lg3)
+          v-progress-linear(v-bind:indeterminate="true" color="blue")
 </template>
 
 <!-- ============================================================================ -->
@@ -115,6 +125,7 @@
     height: 26px
     width: 26px
     margin-left: 5px
+  
   .half-scaled
     transform: scale(0.5, 0.5)  translate(100px, 0px)
     -ms-transform: scale(0.5, 0.5) translate(100px, 0px)
@@ -174,6 +185,16 @@ export default {
       },
       set (val) {
         this.$store.commit('merge', ['base.snackbar', {
+          visible: val
+        }])
+      }
+    },
+    waitingVisible: {
+      get () {
+        return this.$store.state.base.waiting.visible
+      },
+      set (val) {
+        this.$store.commit('merge', ['base.waiting', {
           visible: val
         }])
       }

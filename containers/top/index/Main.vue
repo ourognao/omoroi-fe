@@ -350,6 +350,7 @@ export default {
     },
     async getThreeNextEvents () {
       try {
+        this.openWaitingScreen({ onDialog: false })
         let bom = this.currentMonth.date === this.$actualMonth
           ? this.$currentDay
           : moment(this.currentMonth.date).format('YYYY-MM-DD')
@@ -361,6 +362,7 @@ export default {
         let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
         this.$store.commit('merge', ['top.index', { events: data.data.events }])
         this.getEventsByMonth()
+        this.closeWaitingScreen()
       } catch (error) {
         if (error.message === 'Request failed with status code 401') this.reload()
       }

@@ -52,6 +52,9 @@ labels:
     other: その他
   event:
     tags: タグ
+    tabs:
+      upcoming-event: 近づくイベント
+      past-event: 過去のイベント
 
 base:
   head:
@@ -73,6 +76,8 @@ base:
     title: 確認
     agree: はい
     disagree: いいえ
+  waiting:
+    text: しばらくお待ちください..
   logout:
     confirm: 本当ですか？
   axios:

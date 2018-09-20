@@ -5,6 +5,28 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    openWaitingScreen (options) {
+      return new Promise((resolve, reject) => {
+        this.$store.commit('merge', ['base.waiting', {
+          text: this.$t('base.waiting.text'),
+          visible: true
+        }])
+        setTimeout(() => {
+          let dialogContent = document.getElementsByClassName('l-waiting')[0].parentElement
+          dialogContent.style.zIndex = 1001
+          if (!options.onDialog) {
+            let overlays = document.getElementsByClassName('overlay')
+            let overlay = overlays[overlays.length - 1]
+            overlay.style.zIndex = 1000
+          }
+        }, 0)
+      })
+    },
+    closeWaitingScreen () {
+      this.$store.commit('merge', ['base.waiting', {
+        visible: false
+      }])
+    },
     setGmapMarker (positions) {
       this.gmap.markers[0].position.lat = this.gmap.center.lat = this.lat = parseFloat(positions[0])
       this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])

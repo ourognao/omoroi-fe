@@ -1,39 +1,114 @@
 <template lang="pug">
 v-container#events-index-main(fluid)
   v-layout(wrap)
-    v-flex.text-xs-right(xs12)
-      v-btn.primary(@click.stop.prevent.native="create()")
-        v-icon(dark) create
-        span {{ $t('events.index.i01') }}
+    v-tabs(dark fixed icons centered)
+      v-tabs-bar
+        v-tabs-slider(class="white")
+        v-tabs-item(href="#upcoming-event-tab" @click.stop.prevent.native="updateEvents()")
+          span {{ $t('labels.event.tabs.upcoming-event') }}
+        v-tabs-item(href="#past-event-tab" @click.stop.prevent.native="updateEvents('past')")
+          span {{ $t('labels.event.tabs.past-event') }}
+      v-tabs-items
+        v-tabs-content(:id="'upcoming-event-tab'")
+          v-flex.text-xs-center.mt-3(xs12)
+            v-pagination(
+              :length.number="$s.totalPages"
+              v-model="page"
+              @input="pagerClicked"
+              :total-visible="pageVisible"
+              circle
+            )
 
-    v-flex.mb-5(xs12 v-for="event in $s.events" :key="event.id")
-      v-card(:class="selected === event.id ? 'f-flash' : ''")
-        v-card-title.grey.white--text
-          v-container(fluid)
-            v-layout(wrap)
-              v-flex(xs3 sm2)
-                span [ {{ event.id }} ]
-              v-flex(xs9 sm3)
-                span {{ event.date }}
-              v-flex(xs12 sm4)
-                span {{ event.location }}
-              v-flex.text-xs-right(xs12 sm3)
-                span {{ formatDatetime(event.createdAt) }}
+          v-flex.text-xs-right(xs12)
+            v-btn.primary(@click.stop.prevent.native="create()")
+              v-icon(dark) create
+              span {{ $t('events.index.i01') }}
 
-        v-card-text
-          v-container(fluid)
-            v-layout(wrap)
-              v-flex(xs12 md6)
-              v-flex(xs12 md6 text-md-right)
-              v-flex(xs12).grey.lighten-4(v-html="nl2br(event, 'explanation')")
+          v-flex.mb-5(xs12 v-for="event in $s.events" :key="event.id")
+            v-card(:class="selected === event.id ? 'f-flash' : ''")
+              v-card-title.grey.white--text
+                v-container(fluid)
+                  v-layout(wrap)
+                    v-flex(xs3 sm2)
+                      span [ {{ event.id }} ]
+                    v-flex(xs9 sm3)
+                      span {{ event.date }}
+                    v-flex(xs12 sm4)
+                      span {{ event.location }}
+                    v-flex.text-xs-right(xs12 sm3)
+                      span {{ formatDatetime(event.createdAt) }}
 
-        v-card-actions
-          v-spacer
+              v-card-text
+                v-container(fluid)
+                  v-layout(wrap)
+                    v-flex(xs12 md6)
+                    v-flex(xs12 md6 text-md-right)
+                    v-flex(xs12).grey.lighten-4(v-html="nl2br(event, 'explanation')")
 
-          v-btn(flat primary @click.stop.prevent.native="edit(event)")
-            span {{ $t('events.index.i02') }}
-            span
-              v-icon edit
+              v-card-actions
+                v-spacer
+
+                v-btn(flat primary @click.stop.prevent.native="edit(event)")
+                  span {{ $t('events.index.i02') }}
+                  span
+                    v-icon edit
+
+          v-flex.text-xs-center.mb-2(xs12)
+            v-pagination(
+              :length.number="$s.totalPages"
+              v-model="page"
+              @input="pagerClicked"
+              :total-visible="pageVisible"
+              circle
+            )
+
+        v-tabs-content(:id="'past-event-tab'")
+          v-flex.text-xs-center.mt-3(xs12)
+            v-pagination(
+              :length.number="$s.totalPages"
+              v-model="page"
+              @input="pagerClicked"
+              :total-visible="pageVisible"
+              circle
+            )
+
+          v-flex.mb-5(xs12 v-for="event in $s.events" :key="event.id")
+            v-card(:class="selected === event.id ? 'f-flash' : ''")
+              v-card-title.grey.white--text
+                v-container(fluid)
+                  v-layout(wrap)
+                    v-flex(xs3 sm2)
+                      span [ {{ event.id }} ]
+                    v-flex(xs9 sm3)
+                      span {{ event.date }}
+                    v-flex(xs12 sm4)
+                      span {{ event.location }}
+                    v-flex.text-xs-right(xs12 sm3)
+                      span {{ formatDatetime(event.createdAt) }}
+
+              v-card-text
+                v-container(fluid)
+                  v-layout(wrap)
+                    v-flex(xs12 md6)
+                    v-flex(xs12 md6 text-md-right)
+                    v-flex(xs12).grey.lighten-4(v-html="nl2br(event, 'explanation')")
+
+              v-card-actions
+                v-spacer
+
+                v-btn(flat primary @click.stop.prevent.native="edit(event)")
+                  span {{ $t('events.index.i02') }}
+                  span
+                    v-icon edit
+
+          v-flex.text-xs-center.mb-2(xs12)
+            v-pagination(
+              :length.number="$s.totalPages"
+              v-model="page"
+              @input="pagerClicked"
+              :total-visible="pageVisible"
+              circle
+            )
 </template>
 
 <!-- ============================================================================ -->
@@ -45,15 +120,17 @@ v-container#events-index-main(fluid)
 
 <script>
 import mixins from '~/utils/mixins'
-// import axios from '~/plugins/axios'
-// import queryString from 'query-string'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
 
 export default {
   mixins: [mixins],
   data () {
     return {
       currentUser: this.$store.getters.currentUser,
-      selected: null
+      selected: null,
+      pageVisible: 10,
+      direction: null
     }
   },
   computed: {
@@ -62,6 +139,14 @@ export default {
     },
     dialog () {
       return this.$s.dialog
+    },
+    page: {
+      get () {
+        return this.$s.page
+      },
+      set (val) {
+        this.$store.commit('merge', ['events.index', { page: val }])
+      }
     }
   },
   watch: {
@@ -79,25 +164,58 @@ export default {
     window.scrollTo(0, this.$s.scroll)
   },
   methods: {
-    // async reloadList () {
-    //   try {
-    //     let params = queryString.stringify({
-    //       page: this.$s.page,
-    //       q: this.$s.q
-    //     }, { arrayFormat: 'bracket' })
-    //     let { data } = await axios.get(`/users?${params}`, this.$store.getters.options)
-    //     this.$store.commit('merge', ['users.index', {
-    //       users: data.data.users,
-    //       totalPages: data.data.totalPages
-    //     }])
-    //     window.scrollTo(0, 0)
-    //   } catch (error) {
-    //     if (error.message === 'Request failed with status code 401') {
-    //       this.$router.replace(this.path('/auth/login'))
-    //     }
-    //     console.error(error.message)
-    //   }
-    // },
+    async updateEvents (direction) {
+      try {
+        this.openWaitingScreen({ onDialog: false })
+        this.direction = direction
+        let params = queryString.stringify({
+          page: 1,
+          direction: direction
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
+        this.$store.commit('merge', ['events.index', {
+          events: data.data.events,
+          scroll: 0,
+          eventId: null,
+          page: 1,
+          totalPages: data.data.totalPages,
+          dialog: false
+        }])
+        this.closeWaitingScreen()
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') {
+          this.$router.replace(this.path('/auth/login'))
+        }
+        console.error(error.message)
+      }
+    },
+    pagerClicked (page) {
+      this.push(this.$store, 'events.index', '/events', {
+        page: page
+      })
+      this.reloadList()
+    },
+    async reloadList () {
+      try {
+        this.openWaitingScreen({ onDialog: false })
+        let params = queryString.stringify({
+          page: this.$s.page,
+          direction: this.direction
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
+        this.$store.commit('merge', ['events.index', {
+          events: data.data.events,
+          totalPages: data.data.totalPages
+        }])
+        this.closeWaitingScreen()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') {
+          this.$router.replace(this.path('/auth/login'))
+        }
+        console.error(error.message)
+      }
+    },
     create () {
       this.push(this.$store, 'events.index', '/events', {
         scroll: window.pageYOffset,
