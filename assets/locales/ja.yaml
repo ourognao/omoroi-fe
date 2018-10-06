@@ -72,6 +72,7 @@ base:
     send: 送信
     select-anytime: いつでも
     add: 追加
+    unlimited: 無制限
   confirm:
     title: 確認
     agree: はい

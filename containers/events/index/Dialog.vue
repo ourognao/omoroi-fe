@@ -169,7 +169,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
             
             v-flex(xs12 md6)
               v-select(
-                :disabled="capacity ? false : true"
+                :disabled="(capacity && capacity !== 0) ? false : true"
                 :items="thresholdItems"
                 v-model="threshold"
                 name="event-threshold"
@@ -315,7 +315,7 @@ export default {
       cost: null,
       costItems: this.costOptions({ min: 0, max: 10000, step: 500 }),
       capacity: null,
-      capacityItems: this.rangeOptionsForSelect(0, 20),
+      capacityItems: this.rangeOptionsForSelect(1, 60, { includeUnlimitedOption: true }),
       threshold: null,
       thresholdItems: [],
       positions: [],
@@ -488,8 +488,14 @@ export default {
     },
     setThresholdItems () {
       this.$nextTick(function () {
-        if (this.capacity <= this.threshold) this.threshold = null
-        this.thresholdItems = this.rangeOptionsForSelect(0, this.capacity - 1)
+        if (this.capacity === 0 || this.capacity <= this.threshold) {
+          this.threshold = null
+        }
+        if (this.capacity >= 1) {
+          this.thresholdItems = this.rangeOptionsForSelect(
+            0, this.capacity - 1, { includeUnlimitedOption: false }
+          )
+        }
       })
     },
     isSportEvent () {
@@ -507,6 +513,7 @@ export default {
           !context.isLocationAutocompleted ||
           !context.isPictureUploaded) return
         try {
+          this.openWaitingScreen({ onDialog: false })
           let newEvent = {
             user_id: this.currentUser.id,
             title: JSON.stringify(this.titles),
@@ -537,7 +544,7 @@ export default {
             },
             ...this.$store.getters.options
           })
-
+          this.closeWaitingScreen()
           if (res.data.status === 'error') {
             res.data.errors.name && this.veeErrors.add('event-access', `${this.$t('attr.event-access')}${res.data.errors.access[0]}`)
             return
@@ -647,7 +654,6 @@ export default {
         { text: 'LX', value: 'LX' },
         { text: 'SP', value: 'SP' }
       ]
-      console.log(this.sectionItems)
       if (this.event) {
         this.titles = []
         JSON.parse(this.event.title).forEach(function (titleItem) {

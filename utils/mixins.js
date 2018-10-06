@@ -32,10 +32,12 @@ export default {
       this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])
       // Vue.$gmapDefaultResizeBus.$emit('resize')
     },
-    rangeOptionsForSelect (start, end, suffixForMore = '') {
-      let selectOptions = []
+    rangeOptionsForSelect (start, end, options) {
+      let selectOptions = options.includeUnlimitedOption === true
+        ? [{ text: this.$t('base.form.unlimited'), value: 0 }]
+        : []
       for (let i = start; i <= end; i++) {
-        const text = i === end ? i + suffixForMore : i
+        const text = i === end ? i : i
         selectOptions.push({text: text, value: i})
       }
       return selectOptions
@@ -52,7 +54,7 @@ export default {
     },
     timeOptions () {
       let timeItems = []
-      let timeTypes = ['00', '30']
+      let timeTypes = ['00', '15', '30', '45']
       let timeOtherItem = {
         text: this.$t('base.form.select-anytime'),
         value: 'any'
@@ -173,6 +175,7 @@ export default {
     },
     setAttending (event) {
       if (!event) return
+      if (!event.threshold && event.capacity === 0) return this.$t('base.form.unlimited')
       let remainingSpaces = this.setRemainingSpaces(event)
       let participants = event.capacity - remainingSpaces
       let format = this.setThreshold(event) === 'red-text'
@@ -195,7 +198,7 @@ export default {
     },
     formatDate (date) {
       let locale = this.$store.state.base.locale.selected
-      let formatted = locale === 'ja' ? 'YYYY年MM月DD (dd)' : 'ddd, MMMM D, YYYY'
+      let formatted = locale === 'ja' ? 'YYYY年MM月DD (dd)' : 'ddd, MMM D, YYYY'
       moment.locale(locale)
       return moment(date).format(formatted)
     },
