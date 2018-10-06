@@ -81,7 +81,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
               span {{ $t('top.dialog.details.title') }}
           div(class="details")
             v-layout.mt-2(row)
-              v-flex(xs12 v-html="event.explanation")
+              v-flex(xs12 v-html="nl2br(event, 'explanation')")
             v-layout.mt-2(row)
               v-flex(xs12)
                 span.bold.underline.mr-1 {{ $t('top.dialog.details.i01') }}
@@ -94,7 +94,9 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
               v-flex(xs12)
                 span.bold.underline.mr-1 {{ $t('top.dialog.details.i03') }}
                 span {{ getOrganizerInfos(event.userId).name }}
-                span.ml-1 {{ $t('top.dialog.details.i04') }}:
+            v-layout.mt-2(row v-if="getOrganizerInfos(event.userId).line")
+              v-flex(xs12)
+                span.bold.underline.mr-1 {{ $t('top.dialog.details.i04') }}
                 span {{ getOrganizerInfos(event.userId).line }}
                 
 
@@ -104,7 +106,7 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
               span {{ $t('top.dialog.reservation.title') }}
           div(class="reservation" v-if="$s.futurEvent && $currentUser.id")
             v-layout(row)
-              v-flex(xs6)
+              v-flex(xs7)
                 v-text-field(
                   type="text"
                   v-model="name"
@@ -112,12 +114,12 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
                   :readonly="true"
                   hide-details
                 )
-              v-flex(xs6)
+              v-flex(xs5)
                 div(class="sns")
                   v-layout(row)
-                    v-flex.ml-2.mt-3(xs4)
+                    v-flex.ml-2.mt-2(xs6)
                       span {{ $t('top.dialog.common.share') }}:
-                    v-flex.mt-2(xs8)
+                    v-flex.mt-2(xs6)
                       social-sharing(
                         :url="$fullPath"
                         :title="event.title"
@@ -214,11 +216,12 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
 
     .reservation
       .sns img
-        height: 26px
-        width: 26px
-        margin-right 15px
+        height: 18px
+        width: 18px
+        margin-right 5px
+        margin-top 5px
       span
-        font-size 12px
+        font-size 10px
       i
         font-size 18px
       input[type="text"]
