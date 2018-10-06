@@ -104,6 +104,7 @@ export default {
       this.$validator.validateAll().then(async result => {
         if (!result) return
         try {
+          this.openWaitingScreen({ onDialog: false })
           await axios.post('/auth', {
             name: this.name,
             email: this.email,
@@ -112,8 +113,11 @@ export default {
             confirm_success_url: `${window.location.origin}/auth/start`,
             locale: this.$store.state.base.locale.selected
           })
+          this.closeWaitingScreen()
           this.message(this.$t('auth.sign-up.i03'))
-          this.$router.push(this.path(`/auth/login`))
+          setTimeout(() => {
+            window.location.href = '/'
+          }, 1000)
         } catch (error) {
           let names = {
             'user-name': 'user',

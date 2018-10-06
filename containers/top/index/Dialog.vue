@@ -1,5 +1,5 @@
 <template lang="pug">
-v-dialog(v-model="visible" scrollable persistent width="100%")
+v-dialog(v-model="visible" scrollable persistent width="auto")
   v-card#top-index-dialog
     v-card-title.pa-0.grey.lighten-5
       span.ml-2 {{ $t('top.dialog.title')}}
@@ -181,12 +181,12 @@ v-dialog(v-model="visible" scrollable persistent width="100%")
         height auto
     
     .sub-pictures-view
-      max-width 100%
+      max-width 210vh
       overflow-x auto
       overflow-y hidden
     
     .sub-pictures
-      width p(1500, 312)
+      width p(1100, 312)
     
     .sub-image
       img
