@@ -40,12 +40,11 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                   v-if="originalPictures.length >= 2 && index > 0")
                   img(:src="originalPictures[index].original")
 
-          v-layout(row)
-            v-flex.caption(xs12)
+          v-layout(row class="border-blue-bottom")
+            v-flex.caption(xs6)
               v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
               span {{ displayEventTitle($s.section, event) }}
-          v-layout(row class="border-blue-bottom")
-            v-flex.caption(xs12 class="text-xs-left")
+            v-flex.caption(xs6 class="text-xs-right")
               v-flex.attending(xs12)
                 v-icon people_outline
                 span.ml-1 {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
@@ -201,16 +200,9 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
         margin-right 3px
 
     .gmap-section
-      a[href^="http://maps.google.com/maps"],
-      a[href^="https://maps.google.com/maps"],
-      a[href^="https://www.google.com/maps"]
+      .gmnoprint
         display: none !important
       
-      .gm-bundled-control .gmnoprint
-        display: block
-      
-      .gmnoprint:not(.gm-bundled-control)
-        display: none
     
     .details
       font-size 10px
@@ -254,7 +246,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
   
   i.icon-blue
     color #1a237e
-    font-size 18px
+    font-size 12px
     margin 3px 3px 0 0
   
   .top-event-view
@@ -369,12 +361,14 @@ export default {
       if (val) {
         setTimeout(() => {
           document.querySelector('#top-index-dialog .top-event-view').scrollTop = 0
+          document.body.classList.add('freeze-body')
         }, 0)
         return
       }
       this.push(this.$store, 'top.index', '/top', {
         dialog: false
       })
+      document.body.classList.remove('freeze-body')
     }
   },
   mounted () {
@@ -386,7 +380,6 @@ export default {
   },
   methods: {
     async getOriginalPictures () {
-      console.log(this.$store.getters.options)
       try {
         this.openWaitingScreen({ onDialog: true })
         let params = queryString.stringify({
@@ -395,14 +388,12 @@ export default {
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/pictures/show?${params}`, this.$store.getters.options)
         if (data.status === 'error') {
-          console.log(data)
           return
         }
         this.originalPictures = data.data.pictures
         this.closeWaitingScreen()
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
-        console.log(error)
       }
     },
     setForm () {
@@ -489,7 +480,6 @@ export default {
               this.getThreeNextEvents()
             } catch (error) {
               this.message(this.$t('base.axios.failure'))
-              console.error(error)
             }
           }
         })
@@ -523,7 +513,6 @@ export default {
           this.message(this.$t('top.dialog.reservation.i02'))
         } catch (error) {
           this.message(this.$t('base.axios.failure'))
-          console.error(error)
         }
       })
     },

@@ -186,7 +186,6 @@ export default {
         if (error.message === 'Request failed with status code 401') {
           this.$router.replace(this.path('/auth/login'))
         }
-        console.error(error.message)
       }
     },
     pagerClicked (page) {
@@ -213,7 +212,6 @@ export default {
         if (error.message === 'Request failed with status code 401') {
           this.$router.replace(this.path('/auth/login'))
         }
-        console.error(error.message)
       }
     },
     create () {
