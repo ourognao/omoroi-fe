@@ -31,7 +31,6 @@ export default {
         bom: moment().format('YYYY-MM-DD'),
         eom: moment().add(2, 'months').format('YYYY-MM')
       }, { arrayFormat: 'bracket' })
-      console.log(store.getters.options)
       let { data } = await axios.get(`/events?${params}`, store.getters.options)
       store.commit('merge', ['top.index', {
         events: data.data.events,

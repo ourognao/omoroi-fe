@@ -180,3 +180,8 @@ this.sectionItems.push(
         { text: 'LX', value: 'LX' },
         { text: 'SP', value: 'SP' }
       )
+
+```
+- can the blue circle next to the event title, details and registration be smaller?
+```
+Done
