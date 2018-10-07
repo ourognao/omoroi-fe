@@ -161,7 +161,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                   span {{ $t('top.dialog.reservation.button.i04') }}
           div(class="reservation" v-if="$s.futurEvent && !$currentUser.id")
             v-layout(row)
-              v-flex(xs12) 
+              v-flex(xs12)
                 span {{ $t('top.dialog.reservation.i01') }}
             v-layout(row)
               v-flex.text-xs-center(xs12)
@@ -277,7 +277,7 @@ export default {
       name: null,
       email: null,
       expectedPeople: null,
-      expectedPeopleItems: this.getSelectOptionsFor(1, 10),
+      expectedPeopleItems: [],
       reservationId: null,
       hasAlreadyReserved: null,
       remainingSpaces: null,
@@ -368,6 +368,7 @@ export default {
       this.push(this.$store, 'top.index', '/top', {
         dialog: false
       })
+      this.expectedPeopleItems = []
       document.body.classList.remove('freeze-body')
     }
   },
@@ -399,6 +400,7 @@ export default {
     setForm () {
       if (!this.$s.eventId) return
       this.getOriginalPictures()
+      this.expectedPeopleItems = this.getSelectOptionsFor(1, 10)
       let context = this
       context.getFuturEvents()
       context.getPastEvents()
