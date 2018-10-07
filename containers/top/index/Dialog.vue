@@ -40,26 +40,27 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                   v-if="originalPictures.length >= 2 && index > 0")
                   img(:src="originalPictures[index].original")
 
-          v-layout(row class="border-blue-bottom")
-            v-flex.caption(xs6)
+          v-layout(row)
+            v-flex.caption(xs12)
               v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
               span {{ displayEventTitle($s.section, event) }}
-            v-flex.caption(xs6 class="text-xs-right")
+          v-layout(row class="border-blue-bottom")
+            v-flex.caption(xs12 class="text-xs-left")
               v-flex.attending(xs12)
                 v-icon people_outline
                 span.ml-1 {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
           v-layout.mt-2(row)
             v-flex(xs6 class="date-location")
-              v-layout(row)
+              v-layout(row).mb-1.mt-2
                 v-flex(xs12)
                   v-icon event
                   span {{ formatDate(event.date) }}
-              v-layout(row)
+              v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon access_time
                   span {{ setTime(event) }}
-              v-layout(row)
+              v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon location_on
                   span {{ $local === 'ja' ? event.locationJp : event.locationEn }}
@@ -385,6 +386,7 @@ export default {
   },
   methods: {
     async getOriginalPictures () {
+      console.log(this.$store.getters.options)
       try {
         this.openWaitingScreen({ onDialog: true })
         let params = queryString.stringify({

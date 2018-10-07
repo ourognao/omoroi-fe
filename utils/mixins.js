@@ -175,9 +175,9 @@ export default {
     },
     setAttending (event) {
       if (!event) return
-      if (!event.threshold && event.capacity === 0) return this.$t('base.form.unlimited')
       let remainingSpaces = this.setRemainingSpaces(event)
       let participants = event.capacity - remainingSpaces
+      if (!event.threshold && event.capacity === 0) return participants
       let format = this.setThreshold(event) === 'red-text'
         ? `${participants}/${event.capacity}`
         : `${participants}`
