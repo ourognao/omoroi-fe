@@ -46,7 +46,7 @@ module.exports = {
     { src: '~plugins/viewer', ssr: false }
   ],
   env: {
-    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000',
+    baseUrl: process.env.BASE_URL || 'http://192.168.1.8:4000',
     real: process.env.REAL_ENV || 'development'
   },
   css: [

@@ -423,12 +423,14 @@ export default {
       if (val) {
         setTimeout(() => {
           document.querySelector('#events-index-dialog .event-view').scrollTop = 0
+          document.body.classList.add('freeze-body')
         }, 0)
         return
       }
       this.push(this.$store, 'events.index', '/events', {
         dialog: false
       })
+      document.body.classList.remove('freeze-body')
     }
   },
   methods: {
@@ -554,7 +556,6 @@ export default {
           this.visible = false
         } catch (error) {
           this.message(this.$t('base.axios.failure'))
-          console.error(error)
         }
       })
     },
@@ -573,7 +574,6 @@ export default {
         if (error.message === 'Request failed with status code 401') {
           this.$router.replace(this.path('/auth/login'))
         }
-        console.error(error.message)
       }
     },
     async linkPicturesToEvent (qquuids) {
@@ -585,7 +585,6 @@ export default {
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.put(`/pictures/update?${params}`, this.$store.getters.options)
         if (data.status === 'error') {
-          console.error(data)
           return
         }
         this.getOriginalPictures(this.event.id)
@@ -596,7 +595,6 @@ export default {
         if (error.message === 'Request failed with status code 401') {
           this.$router.replace(this.path('/auth/login'))
         }
-        console.error(error.message)
       }
     },
     clearPreviewPicture () {
@@ -616,14 +614,12 @@ export default {
             try {
               let { data } = await axios.post(`/pictures/delete?qquuid=${qquuid}`, this.$store.getters.options)
               if (data.status === 'error') {
-                console.error(data)
                 return
               }
               this.getOriginalPictures(this.event.id)
               this.message(this.$t('base.axios.success'))
             } catch (error) {
               this.message(this.$t('base.axios.failure'))
-              console.error(error)
             }
           }
         })
@@ -636,13 +632,11 @@ export default {
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/pictures/show?${params}`, this.$store.getters.options)
         if (data.status === 'error') {
-          console.log(data)
           return
         }
         this.originalPictures = data.data.pictures
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
-        console.log(error)
       }
     },
     setForm () {
