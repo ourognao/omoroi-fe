@@ -8,9 +8,9 @@
     v-list.f-pa0
       v-list-tile(avatar tag="div")
         v-list-tile-avatar
-          img(src="/images/logo/simplified.jpg")
+          img(src="/images/logo/simplified.jpg").l-logo.img
         v-list-tile-content
-          v-list-tile-title.l-logo.grey--text {{ $t('base.head.title') }}
+          v-list-tile-title.l-logo.title.grey--text {{ $t('base.head.title') }}
         v-list-tile-action
           v-btn(icon @click.native.stop="drawer = false")
             v-icon close
@@ -121,6 +121,9 @@
 
 <style lang="stylus">
 #layout-default-header
+  .navigation-drawer
+    width 230px
+  
   .menu-icons
     height: 26px
     width: 26px
@@ -144,8 +147,12 @@
     border-top: 5px solid #1a237e
   
   .l-logo
-    font-weight 600
-    font-size t(28)
+    &.img
+      width: 50%
+      height: auto
+    &.title
+      font-weight 600
+      font-size t(15)
   
   .l-list-tile
     cursor pointer
@@ -167,10 +174,30 @@ export default {
   data () {
     return {
       items: [
-        { titleKey: 'top.index.title', icon: 'dashboard', href: '/', visible: true },
-        { titleKey: 'auth.login.title', icon: 'input', href: '/auth/login', visible: !this.$store.getters.isLogined },
-        { titleKey: 'auth.sign-up.title', icon: 'person_add', href: '/auth/sign-up', visible: !this.$store.getters.isLogined },
-        { titleKey: 'events.index.title', icon: 'event', href: '/events', visible: this.$store.getters.currentUser.kind !== 'customer' }
+        {
+          titleKey: 'top.index.title',
+          icon: 'dashboard',
+          href: '/',
+          visible: true
+        },
+        {
+          titleKey: 'auth.login.title',
+          icon: 'input',
+          href: '/auth/login',
+          visible: !this.$store.getters.isLogined
+        },
+        {
+          titleKey: 'auth.sign-up.title',
+          icon: 'person_add',
+          href: '/auth/sign-up',
+          visible: !this.$store.getters.isLogined
+        },
+        {
+          titleKey: 'events.index.title',
+          icon: 'event',
+          href: '/events',
+          visible: this.$store.getters.isLogined && this.$store.getters.screenRightsFor('events')
+        }
       ],
       drawer: false
     }
