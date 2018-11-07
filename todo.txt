@@ -146,48 +146,9 @@ EventPicture.where(event_id: nil).count
 ids = EventPicture.where(event_id: nil).pluck(:id)
 EventPicture.where(id: ids).destroy_all
 
-Topic.__elasticsearch__.search({query: { match_all: {}}}).total_count
-Topic.__elasticsearch__.search({query: { match_all: {}}}).first
-
-Topic.__elasticsearch__.search({
-      query: {
-        bool: {
-          must: [
-            {
-              query_string: {
-                query: 'HMKHSASQ5D',
-                fields: [
-                  "account.login",
-                  "guest.first_name",
-                  "guest.last_name",
-                  "guest.full_name",
-                  :confirmation_codes,
-                  :listing_iops
-                ],
-                default_operator: :and
-              }
-            }
-          ]
-        }
-      }
-    }).first
-
-
-b.ourognao+omoroi@gmail.com
-
-this.sectionItems.push(
-        { text: 'SC', value: 'SC' },
-        { text: 'LX', value: 'LX' },
-        { text: 'SP', value: 'SP' }
-      )
-
 ```
-- when i closed the event box (the number selection remained)
+Just checked again, now it’s only 1 event
 ```
-Done
-
-- when i closed the event box (the number selection remained)
-
-
-15 Rue Louis Dumont
-Bellegarde-sur-Valserine, Auvergne-Rhône-Alpes 01200
+That's really weird, I've never met this issue.
+Try to logout and login again.
+Then check on the desktop as well and tell me if you have the same issue.

@@ -61,5 +61,5 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
-  loading: { color: '#3B8070' }
+  loading: { color: '#FFFFFF' }
 }
