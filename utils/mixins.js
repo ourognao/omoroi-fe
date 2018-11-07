@@ -5,6 +5,9 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    getGoogleMapHref (positions) {
+      return `https://maps.google.com/?q=${positions[0]},${positions[1]}`
+    },
     openWaitingScreen (options) {
       return new Promise((resolve, reject) => {
         this.$store.commit('merge', ['base.waiting', {
