@@ -1,14 +1,8 @@
 const { join } = require('path')
 const webpack = require('webpack')
 module.exports = {
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   build: {
-    vendor: [
-      'vuetify',
-      'axios',
-      'vue-i18n',
-      'vue-social-sharing',
-      'v-uploader'
-    ],
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
@@ -46,7 +40,7 @@ module.exports = {
     { src: '~plugins/viewer', ssr: false }
   ],
   env: {
-    baseUrl: process.env.BASE_URL || 'http://192.168.1.8:4000',
+    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:4000',
     real: process.env.REAL_ENV || 'development'
   },
   css: [

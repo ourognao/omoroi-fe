@@ -109,6 +109,14 @@ export const mutations = {
 }
 
 export const getters = {
+  screenRightsFor: (state) => (screen) => {
+    switch (screen) {
+      case 'events':
+        return state.base.auth.kind !== 'customer'
+      default:
+        return true
+    }
+  },
   isLogined (state) {
     return !!state.base.auth.uid
   },

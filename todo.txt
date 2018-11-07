@@ -182,6 +182,12 @@ this.sectionItems.push(
       )
 
 ```
-- can the blue circle next to the event title, details and registration be smaller?
+- when i closed the event box (the number selection remained)
 ```
 Done
+
+- when i closed the event box (the number selection remained)
+
+
+15 Rue Louis Dumont
+Bellegarde-sur-Valserine, Auvergne-Rhône-Alpes 01200

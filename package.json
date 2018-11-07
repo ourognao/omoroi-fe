@@ -26,6 +26,7 @@
     "npm": "^6.4.1",
     "nuxt": "latest",
     "pug": "^2.0.0-rc.4",
+    "query-string": "^5.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "v-uploader": "^1.7.0",
@@ -53,7 +54,8 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "less": "^3.8.1",
-    "less-loader": "^4.0.5"
+    "less-loader": "^4.0.5",
+    "pug-plain-loader": "^1.0.0"
   },
   "config": {
     "nuxt": {
