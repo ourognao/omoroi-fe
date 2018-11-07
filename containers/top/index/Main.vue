@@ -202,6 +202,11 @@ $dot-space = 2px
     top 60px
     width 100%
     z-index 2
+    .selected
+      background-color white!important
+      border-top 1px solid #1a237e
+      border-bottom 1px solid #1a237e
+      color #1a237e
   
   .delimitor
     position relative
@@ -330,7 +335,7 @@ export default {
       this.getEventsByMonth()
     },
     sectionFilterColor (section) {
-      return this.section === section ? 'grey' : ''
+      return this.section === section ? 'selected' : ''
     },
     details (event, futurEvent) {
       this.push(this.$store, 'top.index', '/top', {
