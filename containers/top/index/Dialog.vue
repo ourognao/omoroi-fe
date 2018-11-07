@@ -62,7 +62,8 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
               v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon location_on
-                  span {{ $local === 'ja' ? event.locationJp : event.locationEn }}
+                  a(:href="getGoogleMapHref(event.positions)" target="_blank")
+                    span {{ $local === 'ja' ? event.locationJp : event.locationEn }}
             v-flex(xs6 class="gmap-section")
               gmap-map(
                 :center="gmap['center']"
