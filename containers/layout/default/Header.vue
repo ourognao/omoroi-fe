@@ -65,7 +65,7 @@
           v-list-tile-title.f-fw2 {{ $t('base.menu.sign_out') }}
 
   v-toolbar(fixed class="border-blue")
-    img.pointable(src="/images/logo/original.png" height="100%" @click="goto($router, '/')")
+    img.pointable(src="/images/logo/original.png" height="100%" @click="goToTopPage()")
     v-spacer
     a(href="https://www.instagram.com/omoroilife" target="_blank")
       img.pointable(src="/images/sns/instagram.png" class="menu-icons mt-1")
@@ -206,6 +206,9 @@ export default {
     fullPath () {
       return this.$store.state.base.layout.fullPath
     },
+    currentLanguage () {
+      return this.$store.state.base.locale.selected
+    },
     snackbarVisible: {
       get () {
         return this.$store.state.base.snackbar.visible
@@ -250,6 +253,21 @@ export default {
     }
   },
   methods: {
+    goToTopPage () {
+      if (this.currentLanguage === 'ja') {
+        if (this.fullPath === '/' || this.fullPath.substr(0, 2) === '/?') {
+          window.location.reload()
+        } else {
+          this.goto(this.$router, '/')
+        }
+      } else {
+        if (this.fullPath.substr(0, 5) === '/en/?') {
+          window.location.reload()
+        } else {
+          this.goto(this.$router, '/')
+        }
+      }
+    },
     signOut (e) {
       let confirmationText = this.$t('base.logout.confirm')
       this.confirm({ text: confirmationText })

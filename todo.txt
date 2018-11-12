@@ -146,9 +146,14 @@ EventPicture.where(event_id: nil).count
 ids = EventPicture.where(event_id: nil).pluck(:id)
 EventPicture.where(id: ids).destroy_all
 
-```
-Just checked again, now it’s only 1 event
-```
-That's really weird, I've never met this issue.
-Try to logout and login again.
-Then check on the desktop as well and tell me if you have the same issue.
+```- can we keep the event title only never be more then one line```
+We already talked about it. we tried to put the 参加予定 item below the title and you said you don't want anymore. That's whay with this design, we can not have a title on 1 line.
+you have 2 choices,
+-reduce the title to X letters and dispaly '...'
+-put the 参加予定 item somewhere else to gain more space for the title
+
+```- can delete attendees text next to title and just have people icon: number```
+We already talked about it. delete attendees will have other consequences
+because according to the total of people that will attend, the text will change.
+'Spaces Remaining:' Or Waiting list' Or 'Attending:'.
+Are you sure you want to delete that as well ?
