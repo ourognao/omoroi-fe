@@ -15,12 +15,14 @@ export default {
           visible: true
         }])
         setTimeout(() => {
-          let dialogContent = document.getElementsByClassName('l-waiting')[0].parentElement
-          dialogContent.style.zIndex = 1001
-          if (!options.onDialog) {
-            let overlays = document.getElementsByClassName('overlay')
-            let overlay = overlays[overlays.length - 1]
-            overlay.style.zIndex = 1000
+          if (typeof document !== 'undefined') {
+            let dialogContent = document.getElementsByClassName('l-waiting')[0].parentElement
+            dialogContent.style.zIndex = 1001
+            if (!options.onDialog) {
+              let overlays = document.getElementsByClassName('overlay')
+              let overlay = overlays[overlays.length - 1]
+              overlay.style.zIndex = 1000
+            }
           }
         }, 0)
       })

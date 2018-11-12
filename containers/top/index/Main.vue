@@ -451,7 +451,10 @@ export default {
         currentThreeMonths = forward ? currentThreeMonths : currentThreeMonths.reverse()
         context.currentMonth = currentThreeMonths[0]
         context.currentMonths = currentThreeMonths
-        if (date) context.getThreeNextEvents()
+        if (!date) {
+          date = context.currentMonths[0].date
+        }
+        context.getThreeNextEvents()
         context.setPastEvents()
         context.getEventsByMonth()
       }, 100)
