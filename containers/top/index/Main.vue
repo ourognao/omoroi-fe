@@ -204,10 +204,7 @@ $dot-space = 2px
     z-index 2
     .selected
       background-color #f5f5f5!important
-      border-top 1px solid #1a237e
-      border-bottom 1px solid #1a237e
-      border-left 1px solid #1a237e
-      border-right 1px solid #1a237e
+      border 1px solid #1a237e
       color #1a237e
   
   .delimitor
@@ -409,7 +406,7 @@ export default {
     setPastEvents () {
       if (!this.$events) return
       this.pastEvents = this.$events.filter(
-        event => event.date.substr(0, 10) < this.$currentDay
+        event => moment(event.date).format('YYYY-MM-DD') < this.$currentDay
       )
     },
     setMonth (date) {

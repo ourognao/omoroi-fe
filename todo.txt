@@ -157,3 +157,14 @@ We already talked about it. delete attendees will have other consequences
 because according to the total of people that will attend, the text will change.
 'Spaces Remaining:' Or Waiting list' Or 'Attending:'.
 Are you sure you want to delete that as well ?
+
+
+```
+- also... but the “view all past events” link still going to a non-existent page
+```
+where the 'view all past events' is suppose to bring you ?
+
+```
+- can the attendance text in a past event change to “went”?
+```
+Done.

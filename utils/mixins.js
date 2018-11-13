@@ -97,6 +97,7 @@ export default {
       return moment(date).format(formatString)
     },
     displayEventTitle (currentSection, event) {
+      if (!event) return
       let eventTitles = JSON.parse(event.title)
       let section = !currentSection ? event.section[0] : currentSection
       let index = eventTitles.findIndex(arr => arr.section === section)
