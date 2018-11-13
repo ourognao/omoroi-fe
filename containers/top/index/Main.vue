@@ -203,9 +203,11 @@ $dot-space = 2px
     width 100%
     z-index 2
     .selected
-      background-color white!important
+      background-color #f5f5f5!important
       border-top 1px solid #1a237e
       border-bottom 1px solid #1a237e
+      border-left 1px solid #1a237e
+      border-right 1px solid #1a237e
       color #1a237e
   
   .delimitor
