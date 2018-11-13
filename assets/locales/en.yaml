@@ -161,6 +161,7 @@ top:
           i01: 'Spaces Remaining:'
           i02: Waiting list
           i03: 'Attending:'
+          i04: 'Went:'
   dialog:
     title: Event Details
     common:

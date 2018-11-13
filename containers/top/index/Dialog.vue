@@ -47,7 +47,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
             v-flex.caption(xs6 class="text-xs-right")
               v-flex.attending(xs12)
                 v-icon people_outline
-                span.ml-1 {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
+                span.ml-1 {{ displayAttedanceInfos(event) }}
                 span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
           v-layout.mt-2(row)
             v-flex(xs6 class="date-location")
@@ -381,6 +381,14 @@ export default {
     }, 500)
   },
   methods: {
+    displayAttedanceInfos (event) {
+      if (event.date < this.$currentDay) {
+        return this.$t('top.index.events.list.info.i04')
+      }
+      return this.setThreshold(event) === 'red-text'
+        ? this.$t('top.index.events.list.info.i01')
+        : this.$t('top.index.events.list.info.i03')
+    },
     async getOriginalPictures () {
       try {
         this.openWaitingScreen({ onDialog: true })
