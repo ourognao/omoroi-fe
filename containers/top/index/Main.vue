@@ -1,15 +1,15 @@
 <template lang="pug">
   div#top-index-main(fluid)
     v-layout.tabs(row class="hidden-md-only hidden-lg-only hidden-xl-only fixedTabs")
-      v-flex.primary.delimitor(
+      v-flex.primary.after-delimitor(
         xs4
         :class="sectionFilterColor('SC')"
         @click="changeSection('SC')") {{ $t('top.index.tabs.social') }}
-      v-flex.primary.delimitor(
+      v-flex.primary.before-delimitor.after-delimitor(
         xs4
         :class="sectionFilterColor('LX')"
         @click="changeSection('LX')") {{ $t('top.index.tabs.language') }}
-      v-flex.primary(
+      v-flex.primary.before-delimitor(
         xs4
         :class="sectionFilterColor('SP')"
         @click="changeSection('SP')") {{ $t('top.index.tabs.sports') }}
@@ -207,10 +207,22 @@ $dot-space = 2px
       border 1px solid #1a237e
       color #1a237e
   
-  .delimitor
+  .before-delimitor
+    position relative
+
+  .after-delimitor
     position relative
   
-  .delimitor:after
+  .before-delimitor:before
+    content ''
+    height 40%
+    width 1px
+    position absolute
+    left 0
+    top 6px
+    background-color #FFF!important
+    
+  .after-delimitor:after
     content ''
     height 40%
     width 1px
