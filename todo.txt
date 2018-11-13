@@ -168,3 +168,6 @@ where the 'view all past events' is suppose to bring you ?
 - can the attendance text in a past event change to “went”?
 ```
 Done.
+
+I also tried to fix the quantity of past events that you are viewing.
+Can you tell me how many events you can see now ? (with a screenshot please)
