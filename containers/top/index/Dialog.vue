@@ -57,7 +57,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
               v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon location_on
-                  a(:href="getGoogleMapHref(event.positions)" target="_blank")
+                  a(:href="jumpToGoogleMap('fromLink')" target="_blank")
                     span {{ $local === 'ja' ? event.locationJp : event.locationEn }}
               v-layout(row).mb-1
                 v-flex(xs12)
@@ -69,7 +69,8 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 :center="gmap['center']"
                 :zoom="gmap['zoom']"
                 :options="gmap['options']"
-                style="height: 100px")
+                style="height: 100px"
+                @click="jumpToGoogleMap('fromMap')")
                 gmap-marker(
                   v-for="(marker, index) in gmap['markers']"
                   :key="index"
@@ -201,6 +202,10 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
         margin-right 3px
 
     .gmap-section
+      a[href^="http://maps.google.com/maps"],
+      a[href^="https://maps.google.com/maps"],
+      a[href^="https://www.google.com/maps"]
+        display: none !important
       .gmnoprint
         display: none !important
       
@@ -381,6 +386,11 @@ export default {
     }, 500)
   },
   methods: {
+    jumpToGoogleMap (origin) {
+      let googleMapUrl = this.getGoogleMapHref(this.event.positions)
+      if (origin === 'fromLink') return googleMapUrl
+      window.open(googleMapUrl, '_blank')
+    },
     displayAttedanceInfos (event) {
       if (event.date < this.$currentDay) {
         return this.$t('top.index.events.list.info.i04')
