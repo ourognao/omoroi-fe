@@ -28,6 +28,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   )
                 v-flex.pl-4(xs7)
                   v-text-field(
+                    :maxlength="titleMaxlength"
                     type="text"
                     v-model="title"
                     name="event-title"
@@ -299,6 +300,7 @@ export default {
   data () {
     return {
       visible: false,
+      titleMaxlength: 33,
       section: null,
       sectionItems: [],
       title: null,

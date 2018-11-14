@@ -171,3 +171,675 @@ Done.
 
 I also tried to fix the quantity of past events that you are viewing.
 Can you tell me how many events you can see now ? (with a screenshot please)
+
+
+https://github.com/google/material-design-icons/issues/205
+
+create user development with password 'omoroi2018';
+grant select on all tables in schema public to development;
+alter role development with superuser;
+
+picture:
+title:
+location:
+date:
+startTime:
+endTime:
+capacity:
+type:
+tags:
+explanation:
+
+
+ln -s ../top/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../events/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../auth/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../index.vue /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/top/
+
+a(
+  href="https://www.facebook.com/dialog/share?app_id=662150777228299&display=popup&href=https%3A%2F%2Fwww.noritomosan.com%2Flifts%2Fsearch%3Flocale%3D<%= I18n.locale %>%26lid%3D<%= @lift_details.id %>"
+  title="<%= @og_title %>"
+  target="_blank"
+  @click="window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+)
+  img.pointable(src="/images/sns/facebook.png" class="menu-icons border-grey mt-1")
+
+
+if (process.browser) {
+  window.onNuxtReady(() => {
+    const VueFullCalendar = require('vue-fullcalendar')
+    Vue.component('full-calendar', VueFullCalendar)
+    Vue.use(VueFullCalendar)
+  })
+}
+
+/* Migration */
+heroku run rake db:migrate --app omoroi-be
+heroku run rake db:migrate --app omoroi-be-staging
+
+/* Reset Staging Database */
+heroku pg:reset DATABASE_URL --app omoroi-be
+heroku pg:reset DATABASE_URL --app omoroi-be-staging
+
+/* Load Schema Staging Database */
+heroku run rake db:schema:load --app omoroi-be
+heroku run rake db:schema:load --app omoroi-be-staging
+
+/* Seed Staging Database */
+heroku run rake db:seed --app omoroi-be
+heroku run rake db:seed --app omoroi-be-staging
+
+
+git remote add omoroi-be git@github.com:ourognao/omoroi-be
+git remote add omoroi-be git@heroku.com:omoroi-be
+
+git remote remove heroku
+
+
+heroku run console --app omoroi-be
+heroku logs --tail --app omoroi-be
+
+heroku restart --app omoroi-fe
+
+
+04/27（Fri.）Tōkyō → Kyoto Ridesharing wanted !
+Passenger can cost share until 3000yen. She has small lugguage.
+Can speak French and english. Save money and find friends :) !
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel
+#sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+#osaka #kansai 
+
+04/27（金）東京都 → 京都府 に行く方を募集しています！同乗者は3000円までコストシェアができます。
+移動費を節約したい方若しくは新しい友達を作りたいなら是非ご覧ください。
+#国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+Date.parse("2018/04").beginning_of_month
+Date.parse("2018/06").end_of_month
+
+startMonth  = Date.parse("2018/04/14")
+endMonth    = Date.parse("2018/06").end_of_month
+@events     = Event.where('date BETWEEN ? AND ?', startMonth, endMonth)
+
+
+05/06（Sun.）Osaka → Hamamatsu, rideshare (1 seat) wanted ! Passenger can cost share until 2000yen. If you are travelling by car this day, meet a new girl and save money at the same time ! Small luggage, can speak english, spanish and japanese.
+
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+#新体験 #節約しながら #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+1) fix design of details screen
+2) create event maker screen
+3) create facebook login
+
+
+Hello guys and good Golden Week if you are in Japan ! This time we need a rideshare from Tokyo to Osaka. Passenger is willing to cost share until 4500yen. Can speak English and Japanese. If you are going to Osaka for golden week, that's a good opportunity to cost share and find new friend :).
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel
+#sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+
+heroku pg:reset DATABASE_URL --confirm omoroi-be
+
+learn less, speak more
+
+social event at shimoda from Bago
+
+伊豆急下田駅から徒歩5分
+From Izukyu-Shimoda station 5mins
+
+下田へ遊びに行こう！
+Let's have fun at shimoda !
+
+pip3 install --upgrade "urllib3==1.22" awscli
+
+
+恵比寿駅から徒歩7分
+Sport event by bago at Ebisu
+7min from Ebisu station
+恵比寿はすごくいい街ですよ。ぜひ遊びに来てください
+
+Ebisu es a really cool town. As foreigner I suggest you consider it as a best place to live in Tokyo
+
+style="overflow-x:auto"
+
+heroku pg:reset DATABASE_URL --app omoroi-be --confirm omoroi-be
+heroku rake db:migrate --app omoroi-be
+heroku rake db:seed --app omoroi-be
+heroku run console --app omoroi-be
+
+7.times {
+  for i in 1..14 do
+    dupPicture = EventPicture.find(i).dup
+    dupPicture.save
+  end 
+}
+
+Event.all.each_with_index do |event, index|
+  i = index + 1
+  EventPicture.find(i).update(event_id: i)
+end
+
+EventPicture.where(event_id: nil).count
+ids = EventPicture.where(event_id: nil).pluck(:id)
+EventPicture.where(id: ids).destroy_all
+
+```- can we keep the event title only never be more then one line```
+We already talked about it. we tried to put the 参加予定 item below the title and you said you don't want anymore. That's whay with this design, we can not have a title on 1 line.
+you have 2 choices,
+-reduce the title to X letters and dispaly '...'
+-put the 参加予定 item somewhere else to gain more space for the title
+
+```- can delete attendees text next to title and just have people icon: number```
+We already talked about it. delete attendees will have other consequences
+because according to the total of people that will attend, the text will change.
+'Spaces Remaining:' Or Waiting list' Or 'Attending:'.
+Are you sure you want to delete that as well ?
+
+outline: 1px solid #1a237e
+      outline-offset: -2px
+
+
+<template lang="pug">
+  div#top-index-main(fluid)
+    v-layout.tabs(row class="hidden-md-only hidden-lg-only hidden-xl-only fixedTabs")
+      v-flex#social-tab.primary.after-delimitor(
+        xs4
+        :class="sectionFilterColor('SC')"
+        @click="changeSection('SC')") {{ $t('top.index.tabs.social') }}
+      v-flex#language-tab.primary(
+        xs4
+        :class="sectionFilterColor('LX')"
+        @click="changeSection('LX')") {{ $t('top.index.tabs.language') }}
+      v-flex#sports-tab.primary.before-delimitor(
+        xs4
+        :class="sectionFilterColor('SP')"
+        @click="changeSection('SP')") {{ $t('top.index.tabs.sports') }}
+    v-carousel(delimiter-icon="lens" class="hidden-sm-and-down delimiter-background")
+      v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
+    v-carousel(
+      class="carouselHeight hidden-md-only hidden-lg-only hidden-xl-only"
+      hide-controls
+      style="box-shadow:")
+      v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
+    v-container.pt-3
+      div(v-if="section === 'SP'")
+        v-layout(row class="eventHeader")
+          v-flex.caption(xs12)
+            v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+            | {{ $t('top.index.events.list.title.i04') }}
+        div.ma-2.mb-3(class="search-container dotted-background")
+          v-layout.pl-2(row wrap)
+            v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
+              v-checkbox.pt-0(
+                color="primary"
+                :label="sport.text"
+                v-model="sports"
+                :value="sport.value"
+                hide-details
+                @change="getEventsBySport()"
+              )
+      
+      v-layout(row class="eventHeader")
+        v-flex.caption(xs5)
+          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+          | {{ $t('top.index.events.list.title.i01') }}
+        v-flex.caption(xs7 class="text-xs-right")
+          a(
+            href="#"
+            v-if="!$currentDate.includes(currentMonth.date)"
+            @click.stop.prevent="setMonths(false, currentMonths[0].date)")
+            v-icon.mb-1(class="icon-blue icons events") navigate_before
+          span(v-for="(month, index) in currentMonths" :key="index")
+            a.month(
+              href="#"
+              :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
+              @click.stop.prevent="setMonth(month.date)")
+              | {{ $t(`labels.common.months.${month.name}`) }}
+          a.next-months(
+            href="#"
+            @click.stop.prevent="setMonths(true, currentMonths[2].date)")
+            v-icon.mb-1(class="icon-blue icons events") navigate_next
+      
+      div(class="event-container")
+        v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
+          v-flex(xs3)
+            img(:src="event.thumbnail" style="border-radius:10px")
+          v-flex.ml-4(xs8)
+            v-layout.mb-1(row)
+              v-flex.caption.future(xs12) {{ displayEventTitle(section, event) }}
+            v-layout(row)
+              v-flex(xs12)
+                v-icon event
+                span {{ formatDate(event.date) }}
+            v-layout(row)
+              v-flex(xs12)
+                v-icon access_time
+                span {{ setTime(event) }}
+            v-layout(row)
+              v-flex.location(xs12)
+                v-icon location_on
+                span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
+                span(class="hidden-sm-and-down") {{ $local === 'ja' ? event.locationJp : event.locationEn }}
+            v-layout(row)
+              v-flex.attending(xs12)
+                v-icon people_outline
+                span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
+                span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
+          v-flex(xs1 style="line-height: 75px")
+            v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+              v-icon.details(class="icon-blue icons events") chevron_right
+
+      v-layout.mt-3(row class="eventHeader")
+        v-flex.caption(xs5)
+          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+          | {{ $t('top.index.events.list.title.i02') }}
+        v-flex.caption(xs7 class="text-xs-right")
+          a(:href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
+      v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
+        v-flex(xs1)
+          img.past(:src="event.thumbnail" style="border-radius:10px")
+        v-flex.ml-4(xs10)
+          v-layout(row)
+            v-flex.grey-text.dark(xs12) {{ event.date }}
+          v-layout(row)
+            v-flex.caption(xs12) {{ displayEventTitle(null, event) }}
+          v-layout(row)
+            v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event, 30, 'explanation') }}
+            v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event, 160, 'explanation') }}
+        v-flex(xs1 style="line-height: 50px")
+          v-btn(flat icon @click.stop.prevent.native="details(event, false)")
+            v-icon.details(class="icon-blue icons events") chevron_right
+    
+    
+</template>
+
+<!-- ============================================================================ -->
+
+<style lang="stylus">
+$bg-color = white
+$dot-color = #bdbdbd
+$dot-size = 1px
+$dot-space = 2px
+
+#top-index-main
+  .eventHeader
+    border-bottom 1px solid #1a237e
+    .month
+      padding 0 3px 0 3px
+    .next-months
+      margin-right -6px
+    button
+      width 20px
+  
+  .search-container
+    border 3px solid #bdbdbd
+    i
+      font-size 17px
+      width 11px
+      height 11px
+      &.material-icons
+        background: white
+    label
+      margin-left -10px
+      font-size 10px
+      font-weight 500
+      color black
+    &.dotted-background
+      background:
+        linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+        $dot-color;
+      background-size: $dot-space $dot-space;
+
+  .event-container
+    height 15em
+    overflow scroll
+    max-width 100%
+    overflow-x hidden
+  
+  .eventDetails
+    font-size 10px
+    padding 5px 0 2px 0
+    border-bottom 1px solid #bdbdbd
+    .explanation
+      font-size:11px
+    .caption
+      &.future
+        margin-left:2px
+    img
+      &.future
+        width 80px
+        height 80px
+      &.past
+        width 40px
+        height 40px
+    i
+      font-size 15px
+      margin 0 5px 1px 0
+      &.details
+        color #bdbdbd
+        font-size 35px
+        margin-left -20px
+  
+  .table tr
+    border 0
+  
+  .grey-text
+    color #bdbdbd
+    &.dark
+      color #616161
+  
+  i.icon-blue
+    color #1a237e
+    font-size 12px
+    margin 3px 3px 0 0
+  
+  .icons
+    &.events
+      font-weight bold
+  
+  .fixedTabs
+    position fixed
+    top 60px
+    width 100%
+    z-index 2
+    .selected
+      background-color #f5f5f5!important
+      border 1px solid #1a237e
+      color #1a237e
+  
+  .before-delimitor
+    position relative
+
+  .after-delimitor
+    position relative
+  
+  .before-delimitor:before
+    content ''
+    height 40%
+    width 1px
+    position absolute
+    left 0
+    top 6px
+    background-color #FFF!important
+
+  .after-delimitor:after
+    content ''
+    height 40%
+    width 1px
+    position absolute
+    right 0
+    top 6px
+    background-color #FFF!important
+  
+  .tabs div
+    color: #FFF
+    text-align center
+    font-size 12px
+    font-weight 500
+    min-height 20px
+    padding-top 2px
+  
+  .delimiter-background div.carousel__controls
+    background none
+    transform scale(0.5, 0.5)
+    -ms-transform scale(0.5, 0.5)
+    -webkit-transform scale(0.5, 0.5)
+  
+  .carouselHeight
+    height 200px
+</style>
+
+<!-- ============================================================================ -->
+
+<script>
+import mixins from '~/utils/mixins'
+import moment from 'moment'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
+
+export default {
+  mixins: [mixins],
+  data () {
+    return {
+      section: null,
+      sectionItems: [
+        { text: this.$t('top.index.tabs.social'), value: 'SC' },
+        { text: this.$t('top.index.tabs.language'), value: 'LX' },
+        { text: this.$t('top.index.tabs.sports'), value: 'SP' }
+      ],
+      sports: [],
+      sportItems: [
+        { text: this.$t('labels.sports.volleyball'), value: 'volleyball' },
+        { text: this.$t('labels.sports.kickboxing'), value: 'kickboxing' },
+        { text: this.$t('labels.sports.basketball'), value: 'basketball' },
+        { text: this.$t('labels.sports.pingpong'), value: 'pingpong' },
+        { text: this.$t('labels.sports.badminton'), value: 'badminton' },
+        { text: this.$t('labels.sports.futsal'), value: 'futsal' },
+        { text: this.$t('labels.sports.tennis'), value: 'tennis' },
+        { text: this.$t('labels.sports.other'), value: 'other' }
+      ],
+      pastEventsHref: '/team/login',
+      pictures: [
+        { language: 'jp', src: '/images/top/carousel/1.jpg' },
+        { language: 'jp', src: '/images/top/carousel/2.jpg' },
+        { language: 'jp', src: '/images/top/carousel/3.jpg' },
+        { language: 'jp', src: '/images/top/carousel/4.jpg' },
+        { language: 'en', src: '/images/top/carousel/5.jpg' },
+        { language: 'en', src: '/images/top/carousel/6.jpg' },
+        { language: 'en', src: '/images/top/carousel/7.jpg' }
+      ],
+      currentMonth: [],
+      currentMonths: this.setMonths(true),
+      months: [
+        { text: this.$t('labels.common.months.jan'), value: 'jan', calendarMonth: '01' },
+        { text: this.$t('labels.common.months.feb'), value: 'feb', calendarMonth: '02' },
+        { text: this.$t('labels.common.months.mar'), value: 'mar', calendarMonth: '03' },
+        { text: this.$t('labels.common.months.apr'), value: 'apr', calendarMonth: '04' },
+        { text: this.$t('labels.common.months.may'), value: 'may', calendarMonth: '05' },
+        { text: this.$t('labels.common.months.jun'), value: 'jun', calendarMonth: '06' },
+        { text: this.$t('labels.common.months.jul'), value: 'jul', calendarMonth: '07' },
+        { text: this.$t('labels.common.months.aug'), value: 'aug', calendarMonth: '08' },
+        { text: this.$t('labels.common.months.sept'), value: 'sept', calendarMonth: '09' },
+        { text: this.$t('labels.common.months.oct'), value: 'oct', calendarMonth: '10' },
+        { text: this.$t('labels.common.months.nov'), value: 'nov', calendarMonth: '11' },
+        { text: this.$t('labels.common.months.dec'), value: 'dec', calendarMonth: '12' }
+      ],
+      futurEvents: [],
+      pastEvents: []
+    }
+  },
+  computed: {
+    $currentDay () {
+      return moment().format('YYYY-MM-DD')
+    },
+    $actualMonth () {
+      return moment().format('YYYY-MM')
+    },
+    $currentDate () {
+      return [
+        moment().format('YYYY-MM'),
+        moment().add(1, 'months').format('YYYY-MM'),
+        moment().add(2, 'months').format('YYYY-MM')
+      ]
+    },
+    $events () {
+      return this.$store.state.top.index.events
+    },
+    $s () {
+      return this.$store.state.top.index
+    },
+    dialog () {
+      return this.$s.dialog
+    },
+    $local () {
+      return this.$store.state.base.locale.selected
+    }
+  },
+  watch: {
+    $events () {
+      this.getEventsByMonth()
+    }
+  },
+  methods: {
+    changeSection (section) {
+      this.section = section
+      this.getEventsByMonth()
+    },
+    removeAll () {
+      ['social-tab', 'language-tab', 'sports-tab'].forEach(function (tab) {
+        ['before-delimitor', 'after-delimitor'].forEach(function (tabClass) {
+          document.getElementById(tab).classList.remove(tabClass)
+        })
+      })
+    },
+    test () {
+      this.removeAll()
+    },
+    async sectionFilterColor (section) {
+      let final = ''
+      if (this.section === section) {
+        await this.test()
+        final = 'selected'
+        switch (this.section) {
+          case 'SC':
+            document.getElementById('language-tab').classList.add('before-delimitor')
+            document.getElementById('sports-tab').classList.add('before-delimitor')
+            break
+          case 'LX':
+            document.getElementById('social-tab').classList.add('after-delimitor')
+            document.getElementById('sports-tab').classList.add('before-delimitor')
+            break
+          case 'SP':
+            document.getElementById('language-tab').classList.add('after-delimitor')
+            document.getElementById('social-tab').classList.add('after-delimitor')
+            break
+        }
+      }
+      console.log(final)
+      return final
+      // return this.section === section ? 'selected' : ''
+    },
+    details (event, futurEvent) {
+      this.push(this.$store, 'top.index', '/top', {
+        scroll: window.pageYOffset,
+        dialog: true,
+        eventId: event.id,
+        section: this.section,
+        futurEvent: futurEvent,
+        currentMonth: this.currentMonth,
+        currentMonths: this.currentMonths
+      })
+    },
+    getEventsBySport () {
+      this.$nextTick(function () {
+        this.getEventsByMonth()
+      })
+    },
+    async getThreeNextEvents () {
+      try {
+        this.openWaitingScreen({ onDialog: false })
+        let bom = this.currentMonth.date === this.$actualMonth
+          ? this.$currentDay
+          : moment(this.currentMonth.date).format('YYYY-MM-DD')
+        let params = queryString.stringify({
+          screen: 'top',
+          bom: bom,
+          eom: this.currentMonths[this.currentMonths.length - 1].date
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
+        this.$store.commit('merge', ['top.index', { events: data.data.events }])
+        this.getEventsByMonth()
+        this.closeWaitingScreen()
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') this.reload()
+      }
+    },
+    getEventFilter () {
+      switch (this.section) {
+        case 'SC':
+          return []
+        case 'LX':
+          return []
+        case 'SP':
+          return this.sports.length === 0 ? this.sportItems.map(sport => sport.value) : this.sports
+      }
+    },
+    getEventsByMonth () {
+      let context = this
+      let futurEvents = []
+      let section = this.section
+      let eventFilter = this.getEventFilter()
+      if (!this.$events) return
+      this.$events.filter(function (event) {
+        if ((event.date.substr(0, 7) === context.currentMonth.date) &&
+          (event.date >= context.$currentDay)) {
+          if (!section) {
+            futurEvents.push(event)
+          } else if (event.section.includes(section)) {
+            event.tags.forEach(function (tags) {
+              if (eventFilter.length === 0 || eventFilter.includes(tags)) {
+                futurEvents.push(event)
+              }
+            })
+          }
+        }
+      })
+      this.futurEvents = futurEvents
+    },
+    setPastEvents () {
+      if (!this.$events) return
+      this.pastEvents = this.$events.filter(
+        event => moment(event.date).format('YYYY-MM-DD') < this.$currentDay
+      )
+    },
+    setMonth (date) {
+      this.currentMonth = {
+        name: this.getMonth(this.extractMonth(date)).value,
+        date: date
+      }
+      this.getEventsByMonth()
+    },
+    getMonth (calendarMonth) {
+      let index = this.months.findIndex(arr => arr.calendarMonth === calendarMonth)
+      return this.months[index]
+    },
+    extractMonth (date) {
+      return date.split('-')[1]
+    },
+    setMonths (forward, date) {
+      let context = this
+      let currentThreeMonths = []
+      let monthIndex = moment(date)
+      let currentMonth = moment().format('YYYY-MM')
+      setTimeout(function () {
+        let currentDate = !date ? context.$actualMonth : date
+        for (let i = 0; i < 3; i++) {
+          if (currentDate === currentMonth) {
+            currentThreeMonths.push({
+              name: context.getMonth(context.extractMonth(currentMonth)).value,
+              date: currentMonth
+            })
+            currentDate = null
+            continue
+          }
+          let monthIndexDate = forward
+            ? monthIndex.add(1, 'months').format('YYYY-MM')
+            : monthIndex.subtract(1, 'months').format('YYYY-MM')
+          currentThreeMonths.push({
+            name: context.getMonth(context.extractMonth(monthIndexDate)).value,
+            date: monthIndexDate
+          })
+        }
+        currentThreeMonths = forward ? currentThreeMonths : currentThreeMonths.reverse()
+        context.currentMonth = currentThreeMonths[0]
+        context.currentMonths = currentThreeMonths
+        if (!date) {
+          date = context.currentMonths[0].date
+        }
+        // context.getThreeNextEvents()
+        // context.setPastEvents()
+        // context.getEventsByMonth()
+      }, 100)
+    }
+  }
+}
+</script>
