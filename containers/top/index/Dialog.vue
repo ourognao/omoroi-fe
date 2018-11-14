@@ -203,10 +203,6 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
     .gmap-section
       border 1px solid grey
-      a[href^="http://maps.google.com/maps"],
-      a[href^="https://maps.google.com/maps"],
-      a[href^="https://www.google.com/maps"]
-        display: none !important
       .gmnoprint
         display: none !important
       
