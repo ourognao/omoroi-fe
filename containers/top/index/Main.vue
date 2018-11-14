@@ -78,7 +78,7 @@
               v-flex.location(xs12)
                 v-icon location_on
                 span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
-                span(class="hidden-sm-and-down") {{ $local === 'ja' ? event.locationJp : event.locationEn }}
+                span(class="hidden-sm-and-down") {{ $local === 'ja' ? reduceLocationAddress(event.locationJp) : reduceLocationAddress(event.locationEn) }}
             v-layout(row)
               v-flex.attending(xs12)
                 v-icon people_outline
@@ -239,7 +239,7 @@ $dot-space = 2px
     min-height 20px
     padding-top 2px
   
-  .delimiter-background div.carousel__controls
+  .v-carousel__controls
     background none
     transform scale(0.5, 0.5)
     -ms-transform scale(0.5, 0.5)

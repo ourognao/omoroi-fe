@@ -222,8 +222,8 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   )
 
             v-flex(xs12 md6)
-              v-text-field(
-                textarea
+              v-textarea(
+                outline
                 rows="13"
                 v-model="explanationJp"
                 name="event-explanation-jp"
@@ -234,8 +234,8 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               )
 
             v-flex.pl-4(xs12 md6)
-              v-text-field(
-                textarea
+              v-textarea(
+                outline
                 rows="13"
                 v-model="explanationEn"
                 name="event-explanation-en"

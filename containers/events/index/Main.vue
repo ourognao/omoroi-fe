@@ -1,15 +1,14 @@
 <template lang="pug">
 v-container#events-index-main(fluid)
   v-layout(wrap)
-    v-tabs(dark fixed icons centered)
-      v-tabs-bar
-        v-tabs-slider(class="white")
-        v-tabs-item(href="#upcoming-event-tab" @click.stop.prevent.native="updateEvents()")
-          span {{ $t('labels.event.tabs.upcoming-event') }}
-        v-tabs-item(href="#past-event-tab" @click.stop.prevent.native="updateEvents('past')")
-          span {{ $t('labels.event.tabs.past-event') }}
+    v-tabs(fixed light icons centered)
+      v-tabs-slider(class="black")
+      v-tab(href="#upcoming-event-tab" @click.stop.prevent.native="updateEvents()" ripple)
+        span {{ $t('labels.event.tabs.upcoming-event') }}
+      v-tab(href="#past-event-tab" @click.stop.prevent.native="updateEvents('past')" ripple)
+        span {{ $t('labels.event.tabs.past-event') }}
       v-tabs-items
-        v-tabs-content(:id="'upcoming-event-tab'")
+        v-tab-item(:value="'upcoming-event-tab'")
           v-flex.text-xs-center.mt-3(xs12)
             v-pagination(
               :length.number="$s.totalPages"
@@ -62,7 +61,7 @@ v-container#events-index-main(fluid)
               circle
             )
 
-        v-tabs-content(:id="'past-event-tab'")
+        v-tab-item(:value="'past-event-tab'")
           v-flex.text-xs-center.mt-3(xs12)
             v-pagination(
               :length.number="$s.totalPages"
