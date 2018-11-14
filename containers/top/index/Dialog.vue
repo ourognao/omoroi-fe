@@ -389,7 +389,6 @@ export default {
     jumpToGoogleMap (origin) {
       let googleMapUrl = this.getGoogleMapHref(this.event.positions)
       if (origin === 'fromLink') return googleMapUrl
-      console.log('googleMapUrl', googleMapUrl)
       window.open(googleMapUrl, '_blank')
     },
     displayAttedanceInfos (event) {
