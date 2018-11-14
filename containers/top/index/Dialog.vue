@@ -202,6 +202,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
         margin-right 3px
 
     .gmap-section
+      border 1px solid grey
       a[href^="http://maps.google.com/maps"],
       a[href^="https://maps.google.com/maps"],
       a[href^="https://www.google.com/maps"]
