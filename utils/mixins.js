@@ -5,6 +5,9 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    reduceLocationAddress (location) {
+      return location.includes(',') ? location.split(',')[0] : location
+    },
     getGoogleMapHref (positions) {
       return `https://maps.google.com/?q=${positions[0]},${positions[1]}`
     },
@@ -19,7 +22,7 @@ export default {
             let dialogContent = document.getElementsByClassName('l-waiting')[0].parentElement
             dialogContent.style.zIndex = 1001
             if (!options.onDialog) {
-              let overlays = document.getElementsByClassName('overlay')
+              let overlays = document.getElementsByClassName('v-overlay')
               let overlay = overlays[overlays.length - 1]
               overlay.style.zIndex = 1000
             }
@@ -131,7 +134,7 @@ export default {
         setTimeout(() => {
           let dialogContent = document.getElementsByClassName('l-confirm')[0].parentElement
           dialogContent.style.zIndex = 1001
-          let overlays = document.getElementsByClassName('overlay')
+          let overlays = document.getElementsByClassName('v-overlay')
           let overlay = overlays[overlays.length - 1]
           overlay.style.zIndex = 1000
         }, 0)

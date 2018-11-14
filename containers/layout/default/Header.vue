@@ -1,10 +1,6 @@
 <template lang="pug">
 #layout-default-header
-  v-navigation-drawer(
-    right
-    temporary
-    v-model="drawer"
-  )
+  v-navigation-drawer(app temporary right v-model="drawer" width="230")
     v-list.f-pa0
       v-list-tile(avatar tag="div")
         v-list-tile-avatar
@@ -108,7 +104,7 @@
 
   v-dialog(v-model="waitingVisible" persistent content-class="l-waiting")
     v-card
-      v-layout(row)
+      v-layout#omoroiLogo(row)
         v-flex.text-xs-center.pa-3(xs12)
           img(src="/images/logo/simplified.jpg" style="width:100%")
       v-card-text.text-xs-center.title {{ $store.state.base.waiting.text }}
@@ -121,9 +117,20 @@
 
 <style lang="stylus">
 #layout-default-header
-  .navigation-drawer
-    width 230px
+  .l-waiting
+    border-radius 20px
+    width 20%
+
+  #omoroiLogo
+    img
+      width 100%
   
+  .l-confirm
+    width auto
+  
+  .l-confirm-btn
+    width 100%
+    
   .menu-icons
     height: 26px
     width: 26px

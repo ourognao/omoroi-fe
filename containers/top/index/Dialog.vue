@@ -58,7 +58,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 v-flex(xs12)
                   v-icon location_on
                   a(:href="jumpToGoogleMap('fromLink')" target="_blank")
-                    span {{ $local === 'ja' ? event.locationJp : event.locationEn }}
+                    span {{ $local === 'ja' ? reduceLocationAddress(event.locationJp) : reduceLocationAddress(event.locationEn) }}
               v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon people_outline
@@ -203,10 +203,6 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
     .gmap-section
       border 1px solid grey
-      a[href^="http://maps.google.com/maps"],
-      a[href^="https://maps.google.com/maps"],
-      a[href^="https://www.google.com/maps"]
-        display: none !important
       .gmnoprint
         display: none !important
       
