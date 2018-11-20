@@ -163,7 +163,6 @@ top:
           i03: 参加予定：
           i04: 参加した人数：
   dialog:
-    title: イベント詳細
     common:
       next: 次のイベント
       previous: 前のイベント

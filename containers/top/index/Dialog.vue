@@ -1,8 +1,7 @@
 <template lang="pug">
 v-dialog(v-model="visible" scrollable persistent width="auto")
   v-card#top-index-dialog
-    v-card-title.pa-0.grey.lighten-5
-      span.ml-2 {{ $t('top.dialog.title')}}
+    v-card-title.pa-0.top-event-section.primary
       v-spacer
       v-btn(small icon flat @click.stop.prevent.native="cancel")
         v-icon close
@@ -176,6 +175,12 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
 <style lang="stylus">
 #top-index-dialog
+  .top-event-section
+    height 20px
+    .v-icon
+      font-size 15px
+      color white
+  
   .event
     .main-image
       img
