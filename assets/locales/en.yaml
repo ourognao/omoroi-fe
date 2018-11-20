@@ -163,7 +163,6 @@ top:
           i03: 'Attending:'
           i04: 'Went:'
   dialog:
-    title: Event Details
     common:
       next: Next Event
       previous: Previous Event
