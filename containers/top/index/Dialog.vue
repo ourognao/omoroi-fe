@@ -166,7 +166,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 span {{ $t('top.dialog.reservation.i01') }}
             v-layout(row)
               v-flex.text-xs-center(xs12)
-                v-btn.primary.mt-3(small :@click="goToPage('/auth/sign-up')")
+                v-btn.primary.mt-3(small @click.stop.prevent.native="goToPage('/auth/sign-up')")
                   span {{ $t('top.dialog.reservation.button.i02') }}
 
 </template>
