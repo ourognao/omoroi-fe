@@ -274,7 +274,7 @@ export default {
     },
     signOut (e) {
       let confirmationText = this.$t('base.logout.confirm')
-      this.confirm({ text: confirmationText })
+      this.confirm({ text: confirmationText, onDialog: true })
         .then(async agreed => {
           if (agreed) {
             try {
