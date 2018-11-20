@@ -1,19 +1,19 @@
 <template lang="pug">
 #layout-default-header
-  v-navigation-drawer(app temporary right v-model="drawer" width="230")
+  v-navigation-drawer(app temporary right v-model="drawer" width="210").primary
     v-list.f-pa0
       v-list-tile(avatar tag="div")
         v-list-tile-avatar
           img(src="/images/logo/simplified.jpg").l-logo.img
         v-list-tile-content
-          v-list-tile-title.l-logo.title.grey--text {{ $t('base.head.title') }}
+          v-list-tile-title.l-logo.title.white--text {{ $t('base.head.title') }}
         v-list-tile-action
           v-btn(icon @click.native.stop="drawer = false")
             v-icon close
 
     v-list.f-pt0(dense)
-      v-divider
-      v-list-tile.l-list-tile(
+      v-divider(color="white")
+      v-list-tile.l-list-tile.white--text(
         v-for="item in items"
         :key="item.titleKey"
         v-if="item.visible"
@@ -27,7 +27,7 @@
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t(item.titleKey) }}
 
-      v-list-tile(
+      v-list-tile.white--text(
         key="100"
         v-if="$store.state.base.locale.selected === 'ja'"
         nuxt
@@ -40,7 +40,7 @@
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.english') }}
 
-      v-list-tile(
+      v-list-tile.white--text(
         key="101"
         v-else
         nuxt
@@ -54,7 +54,7 @@
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
 
-      v-list-tile.l-list-tile(key="102" v-if="$store.getters.isLogined" ripple @click.stop.prevent.native="signOut")
+      v-list-tile.l-list-tile.white--text(key="102" v-if="$store.getters.isLogined" ripple @click.stop.prevent.native="signOut")
         v-list-tile-action
           v-icon directions_run
         v-list-tile-content
@@ -117,6 +117,9 @@
 
 <style lang="stylus">
 #layout-default-header
+  .v-icon
+    color white
+  
   .l-waiting
     border-radius 20px
     width 20%
@@ -146,9 +149,6 @@
     margin-right: 1px
     padding-right: 5px
     width: 32px
-  
-  .white-background
-    background-color: #f5f5f5
   
   .border-blue
     border-top: 5px solid #1a237e
@@ -183,7 +183,7 @@ export default {
       items: [
         {
           titleKey: 'top.index.title',
-          icon: 'dashboard',
+          icon: 'home',
           href: '/',
           visible: true
         },
