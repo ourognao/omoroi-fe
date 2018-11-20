@@ -5,6 +5,9 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    goToPage (path) {
+      window.location.href = path
+    },
     reduceLocationAddress (location) {
       return location.includes(',') ? location.split(',')[0] : location
     },
@@ -134,9 +137,11 @@ export default {
         setTimeout(() => {
           let dialogContent = document.getElementsByClassName('l-confirm')[0].parentElement
           dialogContent.style.zIndex = 1001
-          let overlays = document.getElementsByClassName('v-overlay')
-          let overlay = overlays[overlays.length - 1]
-          overlay.style.zIndex = 1000
+          if (!options.onDialog) {
+            let overlays = document.getElementsByClassName('v-overlay')
+            let overlay = overlays[overlays.length - 1]
+            overlay.style.zIndex = 1000
+          }
         }, 0)
       })
     },
