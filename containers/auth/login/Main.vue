@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container#auth-login-main(fluid)
-  v-layout.p-layout(wrap justify-center align-center)
+  v-layout(wrap justify-center align-center)
     v-flex(xs12 sm7 md4)
       v-card
         v-card-title.grey.white--text
@@ -29,7 +29,7 @@ v-container#auth-login-main(fluid)
                 v-validate="'required'"
                 :error-messages="veeErrors.first('user-password') || []"
                 :append-icon="mask ? 'visibility' : 'visibility_off'"
-                :append-icon-cb="() => (mask = !mask)"
+                @click:append="() => (mask = !mask)"
                 @keypress.enter.native="signIn"
               )
             v-flex(xs12)
@@ -63,9 +63,6 @@ v-container#auth-login-main(fluid)
 <!-- ============================================================================ -->
 
 <style lang="stylus">
-#auth-login-main
-  .p-layout
-    height vmax()
 </style>
 
 <!-- ============================================================================ -->

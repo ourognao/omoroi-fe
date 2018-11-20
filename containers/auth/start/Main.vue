@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container#auth-start-main(fluid)
-  v-layout.p-layout(justify-center align-center)
+  v-layout(justify-center align-center)
     v-flex(xs12 sm7 md4)
       v-layout
         v-flex(xs12)
@@ -17,9 +17,6 @@ v-container#auth-start-main(fluid)
 <!-- ============================================================================ -->
 
 <style lang="stylus">
-#auth-start-main
-  .p-layout
-    height vmax()
 </style>
 
 <!-- ============================================================================ -->
