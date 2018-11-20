@@ -58,7 +58,7 @@ labels:
 
 base:
   head:
-    title: omoroi
+    title: Omoroi
   common:
     yen: ¥
   menu:
@@ -75,8 +75,8 @@ base:
     unlimited: Unlimited
   confirm:
     title: Confirm
-    agree: Agree
-    disagree: Disagree
+    agree: 'Yes'
+    disagree: 'No'
   waiting:
     text: Please wait for a while..
   logout:
@@ -179,7 +179,7 @@ top:
       i02: Successfully registered
       i03: Are you sure ?
       button:
-        i01: Reservation
+        i01: Reserve
         i02: Sign-up
         i03: Edit
         i04: Cancel
