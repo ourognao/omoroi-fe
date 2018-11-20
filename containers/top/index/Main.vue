@@ -16,7 +16,8 @@
     v-carousel(delimiter-icon="lens" class="hidden-sm-and-down delimiter-background")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
     v-carousel(
-      class="carouselHeight hidden-md-only hidden-lg-only hidden-xl-only"
+      class="hidden-md-only hidden-lg-only hidden-xl-only"
+      height="200"
       hide-controls
       style="box-shadow:")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
@@ -244,9 +245,7 @@ $dot-space = 2px
     transform scale(0.5, 0.5)
     -ms-transform scale(0.5, 0.5)
     -webkit-transform scale(0.5, 0.5)
-  
-  .carouselHeight
-    height 200px
+
 </style>
 
 <!-- ============================================================================ -->
