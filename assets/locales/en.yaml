@@ -64,8 +64,8 @@ base:
   menu:
     english: English
     japanese: 日本語
-    sign_up: Sign up
-    sign_out: Sign out
+    sign_up: Sign-up
+    sign_out: Sign-out
   form:
     more: ' or more'
     close: Close
@@ -87,8 +87,8 @@ base:
 
 auth:
   login:
-    title: Sign in
-    i01: Sign in
+    title: Sign-in
+    i01: Sign-in
     i02: Wrong credentials.
     i03: Remember me
     i04: Reset password
@@ -96,14 +96,14 @@ auth:
     i06: Send
     i07: Cancel
     i08: Sent confirmation mail for password reset.
-    i09: Sign up
+    i09: Sign-up
 
   sign-up:
-    title: Sign up
-    i01: Sign up
+    title: Sign-up
+    i01: Sign-up
     i02: Send
     i03: Sent confirmation mail for signing up.
-    i04: Sign in
+    i04: Sign-in
 
   update:
     title: Update account
@@ -117,7 +117,7 @@ auth:
     i01: Password reset
     i02: Send
     i03: Reset password done.
-    i04: Sign in
+    i04: Sign-in
 
   start:
     title: Signing up completed
@@ -180,7 +180,7 @@ top:
       i03: Are you sure ?
       button:
         i01: Reservation
-        i02: Sign up
+        i02: Sign-up
         i03: Edit
         i04: Cancel
 
