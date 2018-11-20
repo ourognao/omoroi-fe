@@ -6,7 +6,7 @@
         v-list-tile-avatar
           img(src="/images/logo/simplified.jpg").l-logo.img
         v-list-tile-content
-          v-list-tile-title.l-logo.title.white--text {{ $t('base.head.title') }}
+          v-list-tile-title.l-logo.white--text {{ $t('base.head.title') }}
         v-list-tile-action
           v-btn(icon @click.native.stop="drawer = false")
             v-icon close
