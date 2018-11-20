@@ -9,7 +9,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
     v-divider
     
     no-ssr
-      v-card-text.top-event-view
+      v-card-text.top-event-view.pt-0
         v-container.pa-0(fluid class="event" v-if="event")
           v-layout(row class="border-blue-bottom")
             v-flex.caption(xs6)
