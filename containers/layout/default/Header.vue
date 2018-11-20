@@ -9,7 +9,7 @@
           v-list-tile-title.l-logo.white--text {{ $t('base.head.title') }}
         v-list-tile-action
           v-btn(icon @click.native.stop="drawer = false")
-            v-icon close
+            v-icon.white--text close
 
     v-list.f-pt0(dense)
       v-divider(color="white")
@@ -23,7 +23,7 @@
         v-model="selected[item.name]"
       )
         v-list-tile-action
-          v-icon {{ item.icon }}
+          v-icon.white--text {{ item.icon }}
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t(item.titleKey) }}
 
@@ -36,7 +36,7 @@
         exact
       )
         v-list-tile-action
-          v-icon public
+          v-icon.white--text public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.english') }}
 
@@ -50,13 +50,13 @@
         exact
       )
         v-list-tile-action
-          v-icon public
+          v-icon.white--text public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
 
       v-list-tile.l-list-tile.white--text(key="102" v-if="$store.getters.isLogined" ripple @click.stop.prevent.native="signOut")
         v-list-tile-action
-          v-icon directions_run
+          v-icon.white--text directions_run
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.sign_out') }}
 
@@ -117,9 +117,6 @@
 
 <style lang="stylus">
 #layout-default-header
-  .v-icon
-    color white
-  
   .l-waiting
     border-radius 20px
     width 20%
