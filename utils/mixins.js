@@ -5,6 +5,15 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    scrollToTop (view) {
+      let windowView = document.getElementsByClassName(view)[0]
+      if (!windowView) return
+      windowView.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
+    },
     goToPage (path) {
       window.location.href = path
     },

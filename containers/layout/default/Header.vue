@@ -105,9 +105,9 @@
   v-dialog(v-model="waitingVisible" persistent content-class="l-waiting")
     v-card
       v-layout#omoroiLogo(row)
-        v-flex.text-xs-center.pa-3(xs12)
-          img(src="/images/logo/simplified.jpg" style="width:100%")
-      v-card-text.text-xs-center.title {{ $store.state.base.waiting.text }}
+        v-flex.text-xs-center.pb-2.pt-2(xs12)
+          img(src="/images/logo/simplified.jpg" style="width:30%")
+      v-card-text.text-xs-center.pb-0.pt-0(style="font-size:10px") {{ $store.state.base.waiting.text }}
       v-layout(row)
         v-flex(xs6 offset-xs3 offset-lg3)
           v-progress-linear(v-bind:indeterminate="true" color="blue")
@@ -117,13 +117,9 @@
 
 <style lang="stylus">
 #layout-default-header
-  .l-waiting
-    border-radius 20px
-    width 20%
-
   #omoroiLogo
     img
-      width 100%
+      width 50%
   
   .l-confirm
     width auto

@@ -394,3 +394,10 @@ Waiting list(キャンセル待ち名簿): when full
 So we cannot use Attending and Spaces Remaining as you say...
 
 tell me what word yo uwant in japanese and english for the 3 of them..
+
+
+
+```Looks dark, can’t select yes```
+Fixed
+```- but if accessed from event dialog box (top space is ok), but can’t scroll down to the send button```
+Fixed

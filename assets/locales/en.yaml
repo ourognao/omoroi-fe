@@ -78,7 +78,7 @@ base:
     agree: 'Yes'
     disagree: 'No'
   waiting:
-    text: Please wait for a while..
+    text: Just a moment...
   logout:
     confirm: Are you sure ?
   axios:
