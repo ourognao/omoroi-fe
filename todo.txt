@@ -384,20 +384,18 @@ outline: 1px solid #1a237e
 
 
 
-We have a situation with 
-Spaces Remaining, Waiting list, Attending
-
-Attending (参加予定): when the number is below the threadshold
-Spaces Remaining (残り枠) : when the tyhread is reaached 
-Waiting list(キャンセル待ち名簿): when full
-
-So we cannot use Attending and Spaces Remaining as you say...
-
-tell me what word yo uwant in japanese and english for the 3 of them..
 
 
 
-```Looks dark, can’t select yes```
-Fixed
-```- but if accessed from event dialog box (top space is ok), but can’t scroll down to the send button```
-Fixed
+```after pushing “Reserve” in the background please change text to “Nice. You’re in!”```
+Still don't really understand the meaning of this -> Nt done.
+
+```- the confirmation text is behind the loading “please wait”, so don’t always see when it comes up.
+**- to solve this, can you please make the please wait box much smaller (*on all screens when it comes up)```
+Done
+
+```**- on all English wait boxes, please change text... “please wait for awhile...” to “Just a moment...”```
+Done
+
+```- after pushing “reserve”, in the event window, can the event automatically return to the top of the event (currently it stays scrolled to the bottom)?```
+Waiting for your screenshot... -> Not done
