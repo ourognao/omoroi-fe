@@ -345,6 +345,7 @@ export default {
     changeSection (section) {
       this.section = section
       this.getEventsByMonth()
+      this.setPastEvents()
     },
     sectionFilterColor (section) {
       return this.section === section ? 'selected' : ''
@@ -418,9 +419,24 @@ export default {
     },
     setPastEvents () {
       if (!this.$events) return
-      this.pastEvents = this.$events.filter(
-        event => moment(event.date).format('YYYY-MM-DD') < this.$currentDay
-      )
+      let context = this
+      let pastEvents = []
+      let section = this.section
+      let eventFilter = this.getEventFilter()
+      this.$events.filter(function (event) {
+        if (pastEvents.length < 3 && moment(event.date).format('YYYY-MM-DD') < context.$currentDay) {
+          if (!section) {
+            pastEvents.push(event)
+          } else if (event.section.includes(section)) {
+            event.tags.forEach(function (tags) {
+              if (eventFilter.length === 0 || eventFilter.includes(tags)) {
+                pastEvents.push(event)
+              }
+            })
+          }
+        }
+      })
+      this.pastEvents = pastEvents
     },
     setMonth (date) {
       this.currentMonth = {
