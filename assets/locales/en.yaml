@@ -45,7 +45,7 @@ labels:
     volleyball: Volleyball
     kickboxing: Kickboxing
     basketball: Basketball
-    pingpong: Ping Pong
+    pingpong: Table Tennis
     badminton: Badminton
     futsal: Futsal
     tennis: Tennis
@@ -152,6 +152,7 @@ top:
         common:
           more: More Info
           frame: ''
+          no-event: No events scheduled at this time, please check back later.
         title:
           i01: Events
           i02: Past Events

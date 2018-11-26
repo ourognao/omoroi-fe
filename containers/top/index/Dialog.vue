@@ -123,9 +123,9 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                     v-flex.mt-2(xs6)
                       social-sharing(
                         :url="$fullPath"
-                        :title="event.title"
+                        :title="getTitleForSns(event.title)"
                         :description="event.explanation"
-                        :quote="event.title"
+                        :quote="getTitleForSns(event.title)"
                         :hashtags="hashtags"
                         twitter-user="lifeomoroi"
                         inline-template
@@ -165,7 +165,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
               v-flex(xs12)
                 span {{ $t('top.dialog.reservation.i01') }}
             v-layout(row)
-              v-flex.text-xs-center(xs12)
+              v-flex.text-xs-center(xs12).mb-1
                 v-btn.primary.mt-3(small @click.stop.prevent.native="goToPage('/auth/sign-up')")
                   span {{ $t('top.dialog.reservation.button.i02') }}
 
@@ -388,6 +388,10 @@ export default {
     }, 500)
   },
   methods: {
+    getTitleForSns (titles) {
+      let titleBySection = JSON.parse(titles).filter(title => title.section === this.$s.section)[0]
+      if (titleBySection) return titleBySection.title
+    },
     jumpToGoogleMap (origin) {
       let googleMapUrl = this.getGoogleMapHref(this.event.positions)
       if (origin === 'fromLink') return googleMapUrl

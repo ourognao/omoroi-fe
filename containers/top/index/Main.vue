@@ -61,6 +61,8 @@
             v-icon.mb-1(class="icon-blue icons events") navigate_next
       
       div(class="event-container")
+        v-layout(v-if="futurEvents.length === 0")
+          v-flex(xs12).text-xs-center.caption.mt-2 {{ $t('top.index.events.list.common.no-event') }}
         v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
           v-flex(xs3)
             img(:src="event.thumbnail" style="border-radius:10px")
