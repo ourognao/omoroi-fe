@@ -153,6 +153,7 @@ top:
           more: More Info
           frame: ''
           no-event: No events scheduled at this time, please check back later.
+          no-past-event: No events found.
         title:
           i01: Events
           i02: Past Events

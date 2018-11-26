@@ -97,6 +97,8 @@
           | {{ $t('top.index.events.list.title.i02') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(:href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
+      v-layout(v-if="pastEvents.length === 0")
+          v-flex(xs12).text-xs-center.caption.mt-2 {{ $t('top.index.events.list.common.no-past-event') }}
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
         v-flex(xs1)
           img.past(:src="event.thumbnail" style="border-radius:10px")
