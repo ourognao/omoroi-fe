@@ -120,9 +120,19 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                   v-layout(row)
                     v-flex.ml-2.mt-2(xs6)
                       span {{ $t('top.dialog.common.share') }}:
-                    v-flex.mt-2(xs6)
+                    v-flex.mt-2(xs6)#shareable-links
                       social-sharing(
                         :url="$fullPath"
+                        :title="getTitleForSns(event.title)"
+                        :description="event.explanation"
+                        :quote="getTitleForSns(event.title)"
+                        inline-template
+                      )
+                        div
+                          network(network="facebook")
+                            img.pointable(src="/images/sns/facebook.png" class="border-grey mt-1")
+                      social-sharing(
+                        :url="snsShortenedUrl"
                         :title="getTitleForSns(event.title)"
                         :description="event.explanation"
                         :quote="getTitleForSns(event.title)"
@@ -131,8 +141,6 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                         inline-template
                       )
                         div
-                          network(network="facebook")
-                            img.pointable(src="/images/sns/facebook.png" class="border-grey mt-1")
                           network(network="twitter")
                             img.pointable(src="/images/sns/twitter.png" class="border-grey mt-1")
             v-layout(row)
@@ -216,6 +224,8 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
       font-size 10px
 
     .reservation
+      .sns #shareable-links div
+        display inline
       .sns img
         height: 18px
         width: 18px
@@ -272,6 +282,8 @@ import constants from '~/utils/constants'
 import moment from 'moment'
 import axios from '~/plugins/axios'
 import queryString from 'query-string'
+import { BitlyClient } from 'bitly'
+const bitly = new BitlyClient(`${constants.bitly.accessToken}`, {})
 
 export default {
   mixins: [mixins],
@@ -323,6 +335,7 @@ export default {
         options: { fullscreenControl: false, clickableIcons: false }
       },
       hashtags: constants.sns.hashtags,
+      snsShortenedUrl: null,
       event: null,
       originalPictures: []
     }
@@ -347,7 +360,7 @@ export default {
       return this.$store.state.top.index.currentMonths
     },
     $fullPath () {
-      return `${this.defaultUrl('frontend')}/${this.$store.state.base.layout.fullPath}`
+      return `${this.defaultUrl('frontend')}${this.$store.state.base.layout.fullPath}`
     },
     $users () {
       return this.$store.state.users.index.users
@@ -413,9 +426,12 @@ export default {
           picture_type: 'event'
         }, { arrayFormat: 'bracket' })
         let { data } = await axios.get(`/pictures/show?${params}`, this.$store.getters.options)
+        let dataSnsShortenedUrl = await bitly.shorten(this.$fullPath)
         if (data.status === 'error') {
           return
         }
+        this.snsShortenedUrl = dataSnsShortenedUrl.url
+        console.log(this.snsShortenedUrl)
         this.originalPictures = data.data.pictures
         this.closeWaitingScreen()
       } catch (error) {
