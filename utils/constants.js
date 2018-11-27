@@ -23,5 +23,8 @@ export default {
     positions: {
       osaka: [34.6937378, 135.50216509999996]
     }
+  },
+  bitly: {
+    accessToken: 'ef5929a21f0352d2f95ca408f930a07316f989de'
   }
 }

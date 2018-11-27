@@ -5,6 +5,7 @@ module.exports = {
   build: {
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
+        config.node = { fs: 'empty' }
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
