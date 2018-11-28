@@ -90,6 +90,20 @@ export const state = () => ({
       eventId: null,
       dialog: false
     }
+  },
+
+  about: {
+    index: {
+      scroll: 0,
+      dialog: false
+    }
+  },
+
+  contactus: {
+    index: {
+      scroll: 0,
+      dialog: false
+    }
   }
 })
 

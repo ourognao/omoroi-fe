@@ -138,6 +138,16 @@ events:
       location: 場所は必須項目です
       picture: 写真は必須項目です
 
+about:
+  index:
+    title: 運営会社について
+    i01: 運営会社についての内容
+
+contact-us:
+  index:
+    title: お問い合わせ
+    i01: お問い合わせの内容
+
 top:
   index:
     title: トップ
