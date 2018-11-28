@@ -20,7 +20,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.$t('base.head.title')} | ${this.$t('events.index.title')}`
+      title: `${this.$t('base.head.title')}`
     }
   },
   async asyncData ({ query, route, store, redirect }) {

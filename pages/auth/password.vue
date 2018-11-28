@@ -14,7 +14,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.$t('base.head.title')} | ${this.$t('auth.password.title')}`
+      title: `${this.$t('base.head.title')}`
     }
   },
   async asyncData ({ query, route, store, redirect }) {
