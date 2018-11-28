@@ -154,7 +154,7 @@
       width: 75%
       height: auto
     &.title
-      font-weight 600
+      font-weight 500
       font-size t(23)!important
       margin-top 2px
   
