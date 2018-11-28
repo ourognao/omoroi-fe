@@ -3,10 +3,10 @@
   v-navigation-drawer(app temporary right v-model="drawer" width="210").primary
     v-list.f-pa0
       v-list-tile(avatar tag="div")
-        v-list-tile-avatar
+        v-list-tile-avatar.avatar-omoroi
           img(src="/images/logo/simplified.jpg").l-logo.img
         v-list-tile-content
-          v-list-tile-title.l-logo.white--text {{ $t('base.head.title') }}
+          v-list-tile-title.l-logo.title.white--text {{ $t('base.head.title') }}
         v-list-tile-action
           v-btn(icon @click.native.stop="drawer = false")
             v-icon.white--text close
@@ -117,6 +117,9 @@
 
 <style lang="stylus">
 #layout-default-header
+  .avatar-omoroi
+    min-width 42px!important
+  
   #omoroiLogo
     img
       width 50%
@@ -148,11 +151,12 @@
   
   .l-logo
     &.img
-      width: 50%
+      width: 75%
       height: auto
     &.title
       font-weight 600
-      font-size t(15)
+      font-size t(23)!important
+      margin-top 2px
   
   .l-list-tile
     cursor pointer
