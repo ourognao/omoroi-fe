@@ -1,4 +1,4 @@
-ln -s ../about/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../contact-us/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
 
 if (process.browser) {
   window.onNuxtReady(() => {
