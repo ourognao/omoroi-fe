@@ -432,9 +432,7 @@ export default {
         }
         this.snsShortenedUrl = dataSnsShortenedUrl.url
         this.originalPictures = data.data.pictures
-        console.log(document.querySelector('.gmap-section .gm-style a'))
         document.querySelector('.gmap-section .gm-style a').href = this.getGoogleMapHref(this.event)
-        console.log(document.querySelector('.gmap-section .gm-style a'))
         this.closeWaitingScreen()
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
