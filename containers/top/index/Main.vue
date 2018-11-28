@@ -41,14 +41,14 @@
       
       v-layout(row class="eventHeader")
         v-flex.caption(xs5)
-          v-icon.mb-1(class="icon-blue ajusted-months icons events") panorama_fish_eye
+          v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
           | {{ $t('top.index.events.list.title.i01') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(
             href="#"
             v-if="!$currentDate.includes(currentMonth.date)"
             @click.stop.prevent="setMonths(false, currentMonths[0].date)")
-            v-icon.mb-1(class="icon-blue ajusted-months icons events") navigate_before
+            v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_before
           span(v-for="(month, index) in currentMonths" :key="index")
             a.month(
               href="#"
@@ -58,7 +58,7 @@
           a.next-months(
             href="#"
             @click.stop.prevent="setMonths(true, currentMonths[2].date)")
-            v-icon.mb-1(class="icon-blue ajusted icons events") navigate_next
+            v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_next
       
       div(class="event-container")
         v-layout(v-if="futurEvents.length === 0")
@@ -93,7 +93,7 @@
 
       v-layout.mt-3(row class="eventHeader")
         v-flex.caption(xs5)
-          v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
+          v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
           | {{ $t('top.index.events.list.title.i02') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(:href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
@@ -199,7 +199,7 @@ $dot-space = 2px
     margin 3px 3px 0 0
     &.ajusted
       margin-bottom 2px!important
-    &.ajusted-months
+    &.more-ajusted
       margin-bottom 1px!important
   
   .icons
