@@ -381,3 +381,7 @@ outline: 1px solid #1a237e
 
 -fix title in responsive in event uploader screen
 - force clear cache in nuxt.js
+
+https://maps.google.com/?q=豊能町役場
+
+<a target="_blank" rel="noopener" href="https://maps.google.com/maps?ll=39.700226,140.732259&amp;z=16&amp;t=m&amp;hl=ja&amp;gl=US&amp;mapclient=apiv3" title="Open this area in Google Maps (opens a new window)" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img alt="" src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a>
