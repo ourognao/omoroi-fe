@@ -197,6 +197,18 @@ export default {
           icon: 'event',
           href: '/events',
           visible: this.$store.getters.isLogined && this.$store.getters.screenRightsFor('events')
+        },
+        {
+          titleKey: 'about.index.title',
+          icon: 'library_books',
+          href: '/about',
+          visible: true
+        },
+        {
+          titleKey: 'contact-us.index.title',
+          icon: 'phone',
+          href: '/contact-us',
+          visible: true
         }
       ],
       drawer: false

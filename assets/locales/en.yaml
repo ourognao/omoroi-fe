@@ -138,6 +138,16 @@ events:
       location: Location is required.
       picture: Picture is required.
 
+about:
+  index:
+    title: About
+    i01: About Content Here
+
+contact-us:
+  index:
+    title: Contact Us
+    i01: Contact Us Content Here
+
 top:
   index:
     title: Top
