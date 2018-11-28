@@ -58,7 +58,7 @@ labels:
 
 base:
   head:
-    title: Omoroi
+    title: omoroi
   common:
     yen: ¥
   menu:
