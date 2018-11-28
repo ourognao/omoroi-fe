@@ -17,11 +17,14 @@ export default {
     goToPage (path) {
       window.location.href = path
     },
-    reduceLocationAddress (location) {
-      return location.includes(',') ? location.split(',')[0] : location
+    reduceLocationAddress (event) {
+      let locale = this.$store.state.base.locale.selected
+      let eventLocation = locale === 'ja' ? event.locationJp : event.locationEn
+      return eventLocation.includes(',') ? eventLocation.split(',')[0] : eventLocation
     },
-    getGoogleMapHref (positions) {
-      return `https://maps.google.com/?q=${positions[0]},${positions[1]}`
+    getGoogleMapHref (event) {
+      let location = this.reduceLocationAddress(event).replace(/ /g, '')
+      return `https://maps.google.com/?q=${location}`
     },
     openWaitingScreen (options) {
       return new Promise((resolve, reject) => {

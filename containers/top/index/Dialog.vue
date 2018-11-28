@@ -57,7 +57,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 v-flex(xs12)
                   v-icon location_on
                   a(:href="jumpToGoogleMap('fromLink')" target="_blank")
-                    span {{ $local === 'ja' ? reduceLocationAddress(event.locationJp) : reduceLocationAddress(event.locationEn) }}
+                    span {{ reduceLocationAddress(event) }}
               v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon people_outline
@@ -406,7 +406,7 @@ export default {
       if (titleBySection) return titleBySection.title
     },
     jumpToGoogleMap (origin) {
-      let googleMapUrl = this.getGoogleMapHref(this.event.positions)
+      let googleMapUrl = this.getGoogleMapHref(this.event)
       if (origin === 'fromLink') return googleMapUrl
       window.open(googleMapUrl, '_blank')
     },
@@ -431,8 +431,10 @@ export default {
           return
         }
         this.snsShortenedUrl = dataSnsShortenedUrl.url
-        console.log(this.snsShortenedUrl)
         this.originalPictures = data.data.pictures
+        console.log(document.querySelector('.gmap-section .gm-style a'))
+        document.querySelector('.gmap-section .gm-style a').href = this.getGoogleMapHref(this.event)
+        console.log(document.querySelector('.gmap-section .gm-style a'))
         this.closeWaitingScreen()
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
