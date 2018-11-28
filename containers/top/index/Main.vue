@@ -25,7 +25,7 @@
       div(v-if="section === 'SP'")
         v-layout(row class="eventHeader")
           v-flex.caption(xs12)
-            v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+            v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
             | {{ $t('top.index.events.list.title.i04') }}
         div.ma-2.mb-3(class="search-container dotted-background")
           v-layout.pl-2(row wrap)
@@ -41,14 +41,14 @@
       
       v-layout(row class="eventHeader")
         v-flex.caption(xs5)
-          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+          v-icon.mb-1(class="icon-blue ajusted-months icons events") panorama_fish_eye
           | {{ $t('top.index.events.list.title.i01') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(
             href="#"
             v-if="!$currentDate.includes(currentMonth.date)"
             @click.stop.prevent="setMonths(false, currentMonths[0].date)")
-            v-icon.mb-1(class="icon-blue icons events") navigate_before
+            v-icon.mb-1(class="icon-blue ajusted-months icons events") navigate_before
           span(v-for="(month, index) in currentMonths" :key="index")
             a.month(
               href="#"
@@ -58,7 +58,7 @@
           a.next-months(
             href="#"
             @click.stop.prevent="setMonths(true, currentMonths[2].date)")
-            v-icon.mb-1(class="icon-blue icons events") navigate_next
+            v-icon.mb-1(class="icon-blue ajusted icons events") navigate_next
       
       div(class="event-container")
         v-layout(v-if="futurEvents.length === 0")
@@ -93,7 +93,7 @@
 
       v-layout.mt-3(row class="eventHeader")
         v-flex.caption(xs5)
-          v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+          v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
           | {{ $t('top.index.events.list.title.i02') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(:href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
@@ -197,6 +197,10 @@ $dot-space = 2px
     color #1a237e
     font-size 12px
     margin 3px 3px 0 0
+    &.ajusted
+      margin-bottom 2px!important
+    &.ajusted-months
+      margin-bottom 1px!important
   
   .icons
     &.events
