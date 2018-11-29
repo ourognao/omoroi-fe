@@ -119,3 +119,26 @@ EventPicture.where(id: ids).destroy_all
 -fix title in responsive in event uploader screen
 - force clear cache in nuxt.js
 
+
+
+```- japanese Menu: please change おもろい —-> omoroi (with lower case o)```
+Done
+
+```- English menu: first o should be lower case```
+Done
+
+```
+- both pages: 
+1) omoroi text bottom is same horizontal bottom as closing X to its right
+```
+Done
+
+```2) font size is just a little but larger ```
+Done
+
+```3) omoroi text is moved just a little to the left closer to logo (not necessary to line up with icons, same kinda of distance as the omoroi on the top of the Top page)
+```
+Done
+
+```- both pages: logo should be bigger (most left side, is along same vertical as icons below it)```
+Done
