@@ -130,9 +130,6 @@ events:
     i01: New
     i02: Edit
   dialog:
-    title:
-      new: Create new event
-      edit: Edit an event
     errors:
       title: ADD button must be clicked.
       location: Location is required.
