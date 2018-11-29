@@ -414,11 +414,15 @@ export default {
           if (!section) {
             futurEvents.push(event)
           } else if (event.section.includes(section)) {
-            event.tags.forEach(function (tags) {
-              if (eventFilter.length === 0 || eventFilter.includes(tags)) {
-                futurEvents.push(event)
-              }
-            })
+            if (eventFilter.length === 0) {
+              futurEvents.push(event)
+            } else {
+              event.tags.forEach(function (tags) {
+                if (eventFilter.length === 0 || eventFilter.includes(tags)) {
+                  futurEvents.push(event)
+                }
+              })
+            }
           }
         }
       })
