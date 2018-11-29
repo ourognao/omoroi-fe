@@ -14,7 +14,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
           v-layout.pa-0(fluid wrap)
             v-flex(xs12 v-if="sectionItems.length > 0")
               v-layout(row wrap)
-                v-flex(xs12 md3)
+                v-flex(xs12 md2)
                    v-select(
                     :items="sectionItems"
                     v-model="section"
@@ -24,7 +24,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     :error-messages="veeErrors.first('event-section') || []"
                     prepend-icon="hdr_weak"
                   )
-                v-flex.pl-4(xs12 md7)
+                v-flex(xs12 md7 offset-md1)
                   v-text-field(
                     :maxlength="titleMaxlength"
                     type="text"
@@ -35,7 +35,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     :error-messages="veeErrors.first('event-title') || []"
                     hide-details
                   )
-                v-flex.text-xs-center(xs12 md2)
+                v-flex.text-xs-center(xs12 md1 offset-md1).mt-2
                   v-btn.primary(
                     :disabled="section && title ? false : true"
                     @click.stop.prevent.native="addSectionTitle()"
@@ -52,7 +52,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
                     v-icon close
             
-            v-flex(xs12 md3)
+            v-flex(xs12 md2)
               v-menu(
                 lazy
                 :close-on-content-click="true"
@@ -73,7 +73,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 )
                 v-date-picker(v-model="date" no-title scrollable actions)
             
-            v-flex.mb-2(class="hidden-sm-and-down" xs12 md8 offset-md1 pt-4)
+            v-flex.mb-2(class="hidden-sm-and-down" xs12 md9 offset-md1 pt-4)
               div
                 gmap-autocomplete(
                   id="gmap-location"
@@ -218,7 +218,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     ) delete
                     img(:src="originalPictures[index].original")
 
-            v-flex(xs12 v-if="isSportEvent()")
+            v-flex(xs12 v-if="isSportEvent()").mb-4
               div.subheading {{ $t('labels.event.tags') }}
               div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
                 | {{ veeErrors.first('event-sport-tags') }}
