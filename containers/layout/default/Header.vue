@@ -153,6 +153,7 @@
     &.img
       width: 75%
       height: auto
+      margin-left -10px
     &.title
       font-weight 500
       font-size t(23)!important
