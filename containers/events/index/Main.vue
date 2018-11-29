@@ -19,7 +19,7 @@ v-container#events-index-main(fluid)
             )
 
           v-flex.text-xs-right(xs12)
-            v-btn.primary(@click.stop.prevent.native="create()")
+            v-btn.primary(small @click.stop.prevent.native="create()")
               v-icon(dark) create
               span {{ $t('events.index.i01') }}
 

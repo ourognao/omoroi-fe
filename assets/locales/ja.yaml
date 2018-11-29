@@ -130,9 +130,6 @@ events:
     i01: 新規イベント
     i02: 編集
   dialog:
-    title:
-      new: 新規イベントを登録する
-      edit: イベントを変種する
     errors:
       title: 追加ボタンを押してください
       location: 場所は必須項目です

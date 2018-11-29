@@ -2,21 +2,19 @@
 v-dialog(v-model="visible" persistent scrollable width="auto")
   no-ssr
     v-card#events-index-dialog
-      v-card-title.grey.lighten-5
-        v-icon edit
-        span {{ $s.eventId ? $t('events.dialog.title.edit') : $t('events.dialog.title.new') }}
+      v-card-title.pa-0.event-dialog-section.primary
         v-spacer
         v-btn(small icon flat @click.stop.prevent.native="cancel")
           v-icon close
 
       v-divider
       
-      v-card-text.event-view
+      v-card-text.event-view.pt-0
         v-container.pa-0(fluid)
-          v-layout.pa-1(wrap align-center)
+          v-layout.pa-0(fluid wrap)
             v-flex(xs12 v-if="sectionItems.length > 0")
-              v-layout(row)
-                v-flex(xs3)
+              v-layout(row wrap)
+                v-flex(xs12 md3)
                    v-select(
                     :items="sectionItems"
                     v-model="section"
@@ -26,7 +24,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     :error-messages="veeErrors.first('event-section') || []"
                     prepend-icon="hdr_weak"
                   )
-                v-flex.pl-4(xs7)
+                v-flex.pl-4(xs12 md7)
                   v-text-field(
                     :maxlength="titleMaxlength"
                     type="text"
@@ -35,8 +33,9 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     :label="$t('attr.event-title')"
                     v-validate="titles.length > 0 ? '' : 'required'"
                     :error-messages="veeErrors.first('event-title') || []"
+                    hide-details
                   )
-                v-flex.pl-4(xs2)
+                v-flex.text-xs-center(xs12 md2)
                   v-btn.primary(
                     :disabled="section && title ? false : true"
                     @click.stop.prevent.native="addSectionTitle()"
@@ -44,11 +43,11 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     span {{ $t('base.form.add') }}
                   div.mt-1(class="errorColor" v-if="!isTitleAdded")
                     | {{ $t('events.dialog.errors.title') }}
-
-            v-flex(xs12 v-for="(title, index) in titles" :key="index")
-              v-layout(row)
-                v-flex(xs2) {{ title.section }}
-                v-flex(xs9) {{ title.title }}
+            
+            v-flex.border-blue-bottom(xs12 v-for="(title, index) in titles" :key="index")
+              v-layout(row wrap)
+                v-flex(xs2).pt-2 {{ title.section }}
+                v-flex(xs9).pt-2 {{ title.title }}
                 v-flex(xs1)
                   v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
                     v-icon close
@@ -74,8 +73,21 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 )
                 v-date-picker(v-model="date" no-title scrollable actions)
             
-            v-flex.pl-4(xs12 md9)
-              div(class="input-group__input")
+            v-flex.mb-2(class="hidden-sm-and-down" xs12 md8 offset-md1 pt-4)
+              div
+                gmap-autocomplete(
+                  id="gmap-location"
+                  @place_changed="setPlace"
+                  :select-first-on-enter="true"
+                  :placeholder="$t('attr.event-location')"
+                  :value="locationJp"
+                  style="width: 100%"
+                )
+              div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
+                | {{ $t('events.dialog.errors.location') }}
+
+            v-flex.mb-2(class="hidden-md-only hidden-lg-only hidden-xl-only" xs12 md8 offset-md1)
+              div
                 gmap-autocomplete(
                   id="gmap-location"
                   @place_changed="setPlace"
@@ -123,7 +135,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @keypress.enter.native="send()"
               )
             
-            v-flex(xs12 md6)
+            v-flex(xs12 md2)
               v-select(
                 :items="eventTimeItems"
                 v-model="startTime"
@@ -134,7 +146,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="access_time"
               )
             
-            v-flex.pl-4(xs12 md6)
+            v-flex(xs12 md2 offset-md1)
               v-select(
                 :items="eventTimeItems"
                 v-model="endTime"
@@ -145,7 +157,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="access_time"
               )
             
-            v-flex(xs12 md6)
+            v-flex(xs12 md2 offset-md1)
               v-select(
                 :items="costItems"
                 v-model="cost"
@@ -156,7 +168,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="attach_money"
               )
             
-            v-flex.pl-4(xs12 md6)
+            v-flex(xs12 md2 offset-md1)
               v-select(
                 :items="capacityItems"
                 v-model="capacity"
@@ -168,7 +180,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @change="setThresholdItems()"
               )
             
-            v-flex(xs12 md6)
+            v-flex(xs12 md2)
               v-select(
                 :disabled="(capacity && capacity !== 0) ? false : true"
                 :items="thresholdItems"
@@ -180,7 +192,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="hdr_weak"
               )
             
-            v-flex.pl-4(xs12 md6).mt-3
+            v-flex(xs12 md9 offset-md1)
               v-uploader(:setting="uploadConfig" @done="uploadDone")
               div.mt-1(class="errorColor" v-if="!isPictureUploaded")
                 | {{ $t('events.dialog.errors.picture') }}
@@ -221,7 +233,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     hide-details
                   )
 
-            v-flex(xs12 md6)
+            v-flex(xs12 md5).mb-3
               v-textarea(
                 outline
                 rows="13"
@@ -233,7 +245,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 hide-details
               )
 
-            v-flex.pl-4(xs12 md6)
+            v-flex(xs12 md5 offset-md2)
               v-textarea(
                 outline
                 rows="13"
@@ -263,8 +275,17 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
 
 <style lang="stylus">
 #events-index-dialog
+  .event-dialog-section
+    height 20px
+    .v-icon
+      font-size 15px
+      color white
+
   .event-view
     max-height 70vh
+
+    .border-blue-bottom
+      border-bottom 1px solid #1a237e
 
     .sub-pictures-view
       max-width 210vh
