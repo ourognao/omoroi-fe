@@ -12,21 +12,23 @@
             v-icon.white--text close
 
     v-list.f-pt0(dense)
+      
       v-divider(color="white")
+      
       v-list-tile.l-list-tile.white--text(
-        v-for="item in items"
-        :key="item.titleKey"
-        v-if="item.visible"
+        v-for="link in firstPartLinks"
+        :key="link.titleKey"
+        v-if="link.visible"
         ripple
-        @click.stop.prevent.native="goto($router, item.href)"
+        @click.stop.prevent.native="goto($router, link.href)"
         active-class="l-active"
-        v-model="selected[item.name]"
+        v-model="selected[link.name]"
       )
         v-list-tile-action
-          v-icon.white--text {{ item.icon }}
+          v-icon.white--text {{ link.icon }}
         v-list-tile-content
-          v-list-tile-title.f-fw2 {{ $t(item.titleKey) }}
-
+          v-list-tile-title.f-fw2 {{ $t(link.titleKey) }}
+      
       v-list-tile.white--text(
         key="100"
         v-if="$store.state.base.locale.selected === 'ja'"
@@ -39,7 +41,6 @@
           v-icon.white--text public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.english') }}
-
       v-list-tile.white--text(
         key="101"
         v-else
@@ -53,6 +54,20 @@
           v-icon.white--text public
         v-list-tile-content
           v-list-tile-title.f-fw2 {{ $t('base.menu.japanese') }}
+
+      v-list-tile.l-list-tile.white--text(
+        v-for="link in secondPartLinks"
+        :key="link.titleKey"
+        v-if="link.visible"
+        ripple
+        @click.stop.prevent.native="goto($router, link.href)"
+        active-class="l-active"
+        v-model="selected[link.name]"
+      )
+        v-list-tile-action
+          v-icon.white--text {{ link.icon }}
+        v-list-tile-content
+          v-list-tile-title.f-fw2 {{ $t(link.titleKey) }}
 
       v-list-tile.l-list-tile.white--text(key="102" v-if="$store.getters.isLogined" ripple @click.stop.prevent.native="signOut")
         v-list-tile-action
@@ -178,7 +193,7 @@ export default {
   mixins: [mixins],
   data () {
     return {
-      items: [
+      firstPartLinks: [
         {
           titleKey: 'top.index.title',
           icon: 'home',
@@ -202,7 +217,9 @@ export default {
           icon: 'event',
           href: '/events',
           visible: this.$store.getters.isLogined && this.$store.getters.screenRightsFor('events')
-        },
+        }
+      ],
+      secondPartLinks: [
         {
           titleKey: 'about.index.title',
           icon: 'library_books',
