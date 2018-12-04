@@ -5,6 +5,12 @@ import constants from '~/utils/constants'
 
 export default {
   methods: {
+    getOrganizerInfos (organizerId) {
+      let users = this.$store.state.users.index.users
+      let organizer = users.filter(user => user.id === organizerId)
+      if (!organizer) return
+      return organizer[0]
+    },
     scrollToTop (view) {
       let windowView = document.getElementsByClassName(view)[0]
       if (!windowView) return
@@ -64,6 +70,16 @@ export default {
         selectOptions.push({text: text, value: i})
       }
       return selectOptions
+    },
+    staffOptions (store) {
+      let staffItems = []
+      let users = store.state.users.index.users
+      users.forEach(
+        function (staff) {
+          staffItems.push({ text: `${staff.name} (${staff.email})`, value: staff.id })
+        }
+      )
+      return staffItems
     },
     costOptions (args) {
       let costItems = []
