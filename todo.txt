@@ -117,3 +117,8 @@ ids = EventPicture.where(event_id: nil).pluck(:id)
 EventPicture.where(id: ids).destroy_all
 
 -fix title in responsive in event uploader screen
+
+
+
+
+un new pot pour le the

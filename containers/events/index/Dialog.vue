@@ -44,14 +44,30 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   div.mt-1(class="errorColor" v-if="!isTitleAdded")
                     | {{ $t('events.dialog.errors.title') }}
             
-            v-flex.border-blue-bottom(xs12 v-for="(title, index) in titles" :key="index")
+            v-flex.border-blue-bottom(xs12 md11 v-for="(title, index) in titles" :key="index")
               v-layout(row wrap)
                 v-flex(xs2).pt-2 {{ title.section }}
                 v-flex(xs9).pt-2 {{ title.title }}
-                v-flex(xs1)
+                v-flex(xs1).text-md-right
                   v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
                     v-icon close
             
+            
+            v-flex(xs12 v-if="isSportEvent()").mt-3
+              div.subheading {{ $t('labels.event.tags') }}
+              div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
+                | {{ veeErrors.first('event-sport-tags') }}
+              v-layout(row wrap)
+                v-flex(xs12 md3 v-for="(tag, index) in sportTags" :key="tag.value")
+                  v-checkbox(
+                    :label="tag.text"
+                    v-model="desiredSportTags"
+                    v-validate="'required'"
+                    :value="tag.value"
+                    name="event-sport-tags"
+                    hide-details
+                  )
+
             v-flex(xs12 md2)
               v-menu(
                 lazy
@@ -86,7 +102,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
                 | {{ $t('events.dialog.errors.location') }}
 
-            v-flex.mb-2(class="hidden-md-only hidden-lg-only hidden-xl-only" xs12 md8 offset-md1)
+            v-flex.mb-2(class="hidden-md-only hidden-lg-only hidden-xl-only" xs12 md7 offset-md1)
               div
                 gmap-autocomplete(
                   id="gmap-location"
@@ -99,7 +115,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
                 | {{ $t('events.dialog.errors.location') }}
 
-            v-flex(xs12 class="gmap-section")
+            v-flex(xs12 md11 class="gmap-section")
               gmap-map(
                 :center="gmap['center']"
                 :zoom="gmap['zoom']"
@@ -111,7 +127,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   :icon="gmap['icon']"
                   :position="marker.position")
 
-            v-flex(xs12)
+            v-flex(xs12 md11)
               v-text-field(
                 type="text"
                 v-model="accessJp"
@@ -123,7 +139,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @keypress.enter.native="send()"
               )
 
-            v-flex(xs12)
+            v-flex(xs12 md11)
               v-text-field(
                 type="text"
                 v-model="accessEn"
@@ -142,7 +158,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 name="event-start-time"
                 :label="$t('attr.event-start-time')"
                 v-validate="'required'"
-                :error-messages="veeErrors.collect('event-start-time')"
+                :error-messages="veeErrors.first('event-start-time') || []"
                 prepend-icon="access_time"
               )
             
@@ -180,7 +196,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @change="setThresholdItems()"
               )
             
-            v-flex(xs12 md2)
+            v-flex(xs12 md5)
               v-select(
                 :disabled="(capacity && capacity !== 0) ? false : true"
                 :items="thresholdItems"
@@ -191,11 +207,41 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 :error-messages="veeErrors.first('event-threshold') || []"
                 prepend-icon="hdr_weak"
               )
+
+            v-flex(xs12 md5 offset-md1)
+              v-autocomplete(
+                :items="organizerItems"
+                v-model="organizer"
+                :label="$t('attr.event-organizer')"
+                prepend-icon="face"
+                :error-messages="veeErrors.first('event-organizer') || []"
+                v-validate="'required'"
+                name="event-organizer"
+              )
             
-            v-flex(xs12 md9 offset-md1)
-              v-uploader(:setting="uploadConfig" @done="uploadDone")
-              div.mt-1(class="errorColor" v-if="!isPictureUploaded")
-                | {{ $t('events.dialog.errors.picture') }}
+            v-flex(xs12 md5).mb-3.mt-2
+              v-textarea(
+                outline
+                rows="13"
+                v-model="explanationJp"
+                name="event-explanation-jp"
+                :label="$t('attr.event-explanation-jp')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-explanation-jp') || []"
+                hide-details
+              )
+
+            v-flex(xs12 md5 offset-md1).mb-3.mt-2
+              v-textarea(
+                outline
+                rows="13"
+                v-model="explanationEn"
+                name="event-explanation-en"
+                :label="$t('attr.event-explanation-en')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-explanation-en') || []"
+                hide-details
+              )
 
             viewer(:images="originalPictures.map(picture => picture.original)" v-if="originalPictures")
               div.sub-pictures-view.mt-2
@@ -218,44 +264,10 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     ) delete
                     img(:src="originalPictures[index].original")
 
-            v-flex(xs12 v-if="isSportEvent()").mb-4
-              div.subheading {{ $t('labels.event.tags') }}
-              div(class="errorColor" v-show="veeErrors.has('event-sport-tags')")
-                | {{ veeErrors.first('event-sport-tags') }}
-              v-layout(row wrap)
-                v-flex(xs12 md3 v-for="(tag, index) in sportTags" :key="tag.value")
-                  v-checkbox(
-                    :label="tag.text"
-                    v-model="desiredSportTags"
-                    v-validate="'required'"
-                    :value="tag.value"
-                    name="event-sport-tags"
-                    hide-details
-                  )
-
-            v-flex(xs12 md5).mb-3
-              v-textarea(
-                outline
-                rows="13"
-                v-model="explanationJp"
-                name="event-explanation-jp"
-                :label="$t('attr.event-explanation-jp')"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('event-explanation-jp') || []"
-                hide-details
-              )
-
-            v-flex(xs12 md5 offset-md2)
-              v-textarea(
-                outline
-                rows="13"
-                v-model="explanationEn"
-                name="event-explanation-en"
-                :label="$t('attr.event-explanation-en')"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('event-explanation-en') || []"
-                hide-details
-              )
+            v-flex(xs12 md11)
+              v-uploader(:setting="uploadConfig" @done="uploadDone")
+              div.mt-1(class="errorColor" v-if="!isPictureUploaded")
+                | {{ $t('events.dialog.errors.picture') }}
       
       v-divider
 
@@ -341,6 +353,8 @@ export default {
       capacityItems: this.rangeOptionsForSelect(1, 60, { includeUnlimitedOption: true }),
       threshold: null,
       thresholdItems: [],
+      organizer: null,
+      organizerItems: this.staffOptions(this.$store),
       positions: [],
       uploadConfig: {
         multiple: true,
@@ -533,6 +547,7 @@ export default {
       context.hasUploadedPicture()
       this.locationForm = document.getElementById('gmap-location').value
       this.$validator.validateAll().then(async result => {
+        console.log(this.veeErrors)
         if (!result ||
           !context.isTitleAdded ||
           !context.isLocationAutocompleted ||
@@ -540,7 +555,7 @@ export default {
         try {
           this.openWaitingScreen({ onDialog: false })
           let newEvent = {
-            user_id: this.currentUser.id,
+            user_id: this.organizer,
             title: JSON.stringify(this.titles),
             date: this.date,
             location_jp: this.locationJp,
@@ -686,6 +701,7 @@ export default {
         this.cost = this.event.cost
         this.capacity = this.event.capacity
         this.setThresholdItems()
+        this.organizer = this.event.userId
         this.explanationJp = this.event.explanationJp
         this.explanationEn = this.event.explanationEn
         this.positions = this.event.positions
@@ -709,6 +725,7 @@ export default {
         this.cost = null
         this.capacity = null
         this.threshold = null
+        this.organizer = null
         this.explanationJp = null
         this.explanationEn = null
         this.positions = constants.gmap.positions.osaka

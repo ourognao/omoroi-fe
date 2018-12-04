@@ -22,6 +22,7 @@ attr:
   event-cost: Cost
   event-capacity: Capacity
   event-threshold: Threshold
+  event-organizer: Organizer
   event-sport-tags: Sport Tags
   event-explanation-jp: Details (JP)
   event-explanation-en: Details (EN)

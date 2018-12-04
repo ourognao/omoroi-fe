@@ -472,11 +472,6 @@ export default {
         event => event.date.substr(0, 10) < this.$currentDay
       )
     },
-    getOrganizerInfos (organizerId) {
-      let organizer = this.$users.filter(user => user.id === organizerId)
-      if (!organizer) return
-      return organizer[0]
-    },
     setExpectedPeople (reservations) {
       let reservation = reservations.filter(arr => arr.userId === this.$currentUser.id)
       if (reservation.length) {

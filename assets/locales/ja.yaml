@@ -22,6 +22,7 @@ attr:
   event-cost: コスト
   event-capacity: 最大参加人数
   event-threshold: 閾値
+  event-organizer: 担当者
   event-sport-tags: スポーツタグ
   event-explanation-jp: 詳細（日本語）
   event-explanation-en: 詳細（英語）

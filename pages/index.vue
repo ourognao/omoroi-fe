@@ -41,7 +41,7 @@ export default {
         dialog: (query.dialog === 'true')
       }])
       store.commit('merge', ['users.index', {
-        users: data.data.users
+        users: data.data.staff
       }])
     } catch (error) {
       if (error.message === 'Request failed with status code 401') {
