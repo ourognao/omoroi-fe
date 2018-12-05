@@ -11,7 +11,8 @@ attr:
   user-status: ステータス
 
   # イベント画面
-  event-title: タイトル
+  event-title-jp: タイトル（日本語）
+  event-title-en: タイトル（英語）
   event-section: 区分
   event-date: 日付
   event-location: 場所

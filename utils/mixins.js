@@ -132,10 +132,11 @@ export default {
     },
     displayEventTitle (currentSection, event) {
       if (!event) return
+      let locale = this.$store.state.base.locale.selected
       let eventTitles = JSON.parse(event.title)
       let section = !currentSection ? event.section[0] : currentSection
       let index = eventTitles.findIndex(arr => arr.section === section)
-      return eventTitles[index].title
+      return locale === 'ja' ? eventTitles[index].titleJp : eventTitles[index].titleEn
     },
     truncate (event, maxCharacters, type) {
       let locale = this.$store.state.base.locale.selected
