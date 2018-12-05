@@ -100,8 +100,9 @@ heroku rake db:migrate --app omoroi-be
 heroku rake db:seed --app omoroi-be
 heroku run console --app omoroi-be
 
+
 7.times {
-  for i in 1..14 do
+  for i in 1..26 do
     dupPicture = EventPicture.find(i).dup
     dupPicture.save
   end 
@@ -122,3 +123,6 @@ EventPicture.where(id: ids).destroy_all
 
 
 un new pot pour le the
+
+
+#costoco #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #sharefood #japan #japon  #japantravel #コストコ #イベント #国際交流 #ドライブ #英会話 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア

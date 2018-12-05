@@ -24,33 +24,56 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     :error-messages="veeErrors.first('event-section') || []"
                     prepend-icon="hdr_weak"
                   )
-                v-flex(xs12 md7 offset-md1)
+                v-flex(xs12 md3 offset-md1)
                   v-text-field(
                     :maxlength="titleMaxlength"
                     type="text"
-                    v-model="title"
-                    name="event-title"
-                    :label="$t('attr.event-title')"
+                    v-model="titleJp"
+                    name="event-title-jp"
+                    :label="$t('attr.event-title-jp')"
                     v-validate="titles.length > 0 ? '' : 'required'"
-                    :error-messages="veeErrors.first('event-title') || []"
+                    :error-messages="veeErrors.first('event-title-jp') || []"
+                    prepend-icon="speaker_notes"
+                    hide-details
+                  )
+                v-flex(xs12 md3 offset-md1)
+                  v-text-field(
+                    :maxlength="titleMaxlength"
+                    type="text"
+                    v-model="titleEn"
+                    name="event-title-en"
+                    :label="$t('attr.event-title-en')"
+                    v-validate="titles.length > 0 ? '' : 'required'"
+                    :error-messages="veeErrors.first('event-title-en') || []"
+                    prepend-icon="speaker_notes"
                     hide-details
                   )
                 v-flex.text-xs-center(xs12 md1 offset-md1).mt-2
                   v-btn.primary(
-                    :disabled="section && title ? false : true"
+                    :disabled="section && (titleJp && titleEn) ? false : true"
                     @click.stop.prevent.native="addSectionTitle()"
                   )
                     span {{ $t('base.form.add') }}
                   div.mt-1(class="errorColor" v-if="!isTitleAdded")
                     | {{ $t('events.dialog.errors.title') }}
             
-            v-flex.border-blue-bottom(xs12 md11 v-for="(title, index) in titles" :key="index")
-              v-layout(row wrap)
-                v-flex(xs2).pt-2 {{ title.section }}
-                v-flex(xs9).pt-2 {{ title.title }}
-                v-flex(xs1).text-md-right
+            v-flex(xs12 v-for="(title, index) in titles" :key="index")
+              v-layout(row wrap class="hidden-sm-and-down delimiter-background")
+                v-flex(md2).border-blue-bottom.pt-3 {{ title.section }}
+                v-flex(md3 offset-md1).border-blue-bottom.pt-3 {{ title.titleJp }}
+                v-flex(md3 offset-md1).border-blue-bottom.pt-3 {{ title.titleEn }}
+                v-flex(md1 offset-md1).text-md-right
                   v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
                     v-icon close
+
+              v-layout(row wrap class="hidden-md-only hidden-lg-only hidden-xl-only")
+                v-flex(xs10).title.pt-2 {{ title.section }}
+                v-flex(xs2).text-md-right
+                  v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
+                    v-icon close
+                v-flex(xs12).pt-2 {{ title.titleJp }}
+                v-flex(xs12).border-blue-bottom.pt-2.pb-2 {{ title.titleEn }}
+                
             
             
             v-flex(xs12 v-if="isSportEvent()").mt-3
@@ -89,7 +112,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 )
                 v-date-picker(v-model="date" no-title scrollable actions)
             
-            v-flex.mb-2(class="hidden-sm-and-down" xs12 md9 offset-md1 pt-4)
+            v-flex.mb-2(class="hidden-sm-and-down" xs12 md8 offset-md1 pt-4)
               div
                 gmap-autocomplete(
                   id="gmap-location"
@@ -115,7 +138,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
                 | {{ $t('events.dialog.errors.location') }}
 
-            v-flex(xs12 md11 class="gmap-section")
+            v-flex(xs12 class="gmap-section")
               gmap-map(
                 :center="gmap['center']"
                 :zoom="gmap['zoom']"
@@ -127,7 +150,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   :icon="gmap['icon']"
                   :position="marker.position")
 
-            v-flex(xs12 md11)
+            v-flex(xs12)
               v-text-field(
                 type="text"
                 v-model="accessJp"
@@ -139,7 +162,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @keypress.enter.native="send()"
               )
 
-            v-flex(xs12 md11)
+            v-flex(xs12)
               v-text-field(
                 type="text"
                 v-model="accessEn"
@@ -151,7 +174,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @keypress.enter.native="send()"
               )
             
-            v-flex(xs12 md2)
+            v-flex(md5 class="hidden-sm-and-down delimiter-background")
               v-select(
                 :items="eventTimeItems"
                 v-model="startTime"
@@ -161,30 +184,6 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 :error-messages="veeErrors.first('event-start-time') || []"
                 prepend-icon="access_time"
               )
-            
-            v-flex(xs12 md2 offset-md1)
-              v-select(
-                :items="eventTimeItems"
-                v-model="endTime"
-                name="event-end-time"
-                :label="$t('attr.event-end-time')"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('event-end-time') || []"
-                prepend-icon="access_time"
-              )
-            
-            v-flex(xs12 md2 offset-md1)
-              v-select(
-                :items="costItems"
-                v-model="cost"
-                name="event-cost"
-                :label="$t('attr.event-cost')"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('event-cost') || []"
-                prepend-icon="attach_money"
-              )
-            
-            v-flex(xs12 md2 offset-md1)
               v-select(
                 :items="capacityItems"
                 v-model="capacity"
@@ -196,7 +195,16 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 @change="setThresholdItems()"
               )
             
-            v-flex(xs12 md5)
+            v-flex(md5 offset-md2 class="hidden-sm-and-down delimiter-background")
+              v-select(
+                :items="eventTimeItems"
+                v-model="endTime"
+                name="event-end-time"
+                :label="$t('attr.event-end-time')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-end-time') || []"
+                prepend-icon="access_time"
+              )
               v-select(
                 :disabled="(capacity && capacity !== 0) ? false : true"
                 :items="thresholdItems"
@@ -208,7 +216,58 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 prepend-icon="hdr_weak"
               )
 
-            v-flex(xs12 md5 offset-md1)
+            v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only")
+              v-select(
+                :items="eventTimeItems"
+                v-model="startTime"
+                name="event-start-time"
+                :label="$t('attr.event-start-time')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-start-time') || []"
+                prepend-icon="access_time"
+              )
+              v-select(
+                :items="eventTimeItems"
+                v-model="endTime"
+                name="event-end-time"
+                :label="$t('attr.event-end-time')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-end-time') || []"
+                prepend-icon="access_time"
+              )
+              v-select(
+                :items="capacityItems"
+                v-model="capacity"
+                name="event-capacity"
+                :label="$t('attr.event-capacity')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-capacity') || []"
+                prepend-icon="people_outline"
+                @change="setThresholdItems()"
+              )
+              v-select(
+                :disabled="(capacity && capacity !== 0) ? false : true"
+                :items="thresholdItems"
+                v-model="threshold"
+                name="event-threshold"
+                :label="$t('attr.event-threshold')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-threshold') || []"
+                prepend-icon="hdr_weak"
+              )
+            
+            v-flex(xs12 md5)
+              v-select(
+                :items="costItems"
+                v-model="cost"
+                name="event-cost"
+                :label="$t('attr.event-cost')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-cost') || []"
+                prepend-icon="attach_money"
+              )
+            
+            v-flex(xs12 md5 offset-md2)
               v-autocomplete(
                 :items="organizerItems"
                 v-model="organizer"
@@ -231,7 +290,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 hide-details
               )
 
-            v-flex(xs12 md5 offset-md1).mb-3.mt-2
+            v-flex(xs12 md5 offset-md2).mb-3.mt-2
               v-textarea(
                 outline
                 rows="13"
@@ -264,7 +323,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     ) delete
                     img(:src="originalPictures[index].original")
 
-            v-flex(xs12 md11)
+            v-flex(xs12)
               v-uploader(:setting="uploadConfig" @done="uploadDone")
               div.mt-1(class="errorColor" v-if="!isPictureUploaded")
                 | {{ $t('events.dialog.errors.picture') }}
@@ -336,7 +395,8 @@ export default {
       titleMaxlength: 33,
       section: null,
       sectionItems: [],
-      title: null,
+      titleJp: null,
+      titleEn: null,
       titles: [],
       date: null,
       locationJp: null,
@@ -472,7 +532,7 @@ export default {
   },
   methods: {
     hasAddedTitle () {
-      if ((this.section && this.section.length === 0) || !this.title) return true
+      if ((this.section && this.section.length === 0) || (!this.titleJp || !this.titleEn)) return true
       this.isTitleAdded = this.titles.length >= this.titles.length + 1
     },
     hasUploadedPicture () {
@@ -506,10 +566,15 @@ export default {
       }
     },
     addSectionTitle () {
-      this.titles.push({ section: this.section, title: this.title })
+      this.titles.push({
+        section: this.section,
+        titleJp: this.titleJp,
+        titleEn: this.titleEn
+      })
       this.updateSectionTitle(this.section, 'add')
       this.section = null
-      this.title = null
+      this.titleJp = null
+      this.titleEn = null
       this.isTitleAdded = true
     },
     removeSectionTitle (section) {
@@ -690,7 +755,11 @@ export default {
         this.titles = []
         JSON.parse(this.event.title).forEach(function (titleItem) {
           context.updateSectionTitle(titleItem.section, 'add')
-          context.titles.push({ section: titleItem.section, title: titleItem.title })
+          context.titles.push({
+            section: titleItem.section,
+            titleJp: titleItem.titleJp,
+            titleEn: titleItem.titleEn
+          })
         })
         this.date = this.event.date
         this.locationJp = this.locationForm = this.locationHidden = this.event.locationJp
@@ -714,7 +783,8 @@ export default {
           this.threshold = this.event.threshold
         }, 500)
       } else {
-        this.title = null
+        this.titleJp = null
+        this.titleEn = null
         this.titles = []
         this.date = null
         this.locationJp = null

@@ -11,8 +11,9 @@ attr:
   user-status: Status
 
   # Event Screen
+  event-title-jp: Title (JP)
+  event-title-en: Title (EN)
   event-section: Section
-  event-title: Title
   event-date: Date
   event-location: Location
   event-access-jp: Access (JP)
