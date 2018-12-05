@@ -14,14 +14,14 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
           v-layout(row class="border-blue-bottom")
             v-flex.caption(xs6)
               span(v-if="!firstEventIds.includes($s.eventId)")
-                v-icon.mb-1(class="icon-blue icons events") navigate_before
+                v-icon.mb-1(class="icon-blue ajusted icons events") navigate_before
                 a(href="#" @click.stop.prevent="navigate('before')")
                   | {{ $t('top.dialog.common.previous') }}
             v-flex.caption(xs6 class="text-xs-right")
               span(v-if="!lastEventIds.includes($s.eventId)")
                 a(href="#" @click.stop.prevent="navigate('next')")
                   | {{ $t('top.dialog.common.next') }}
-                v-icon.mb-1(class="icon-blue icons events") navigate_next
+                v-icon.mb-1(class="icon-blue ajusted icons events") navigate_next
 
           viewer(:images="originalPictures.map(picture => picture.original)")
             v-layout(row class="main-image" v-if="originalPictures.length > 0")
@@ -41,7 +41,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
           v-layout(row class="border-blue-bottom")
             v-flex.caption(xs12)
-              v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+              v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
               span {{ displayEventTitle($s.section, event) }}
           v-layout.mt-2(row)
             v-flex(xs6 class="date-location")
@@ -78,7 +78,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
           
           v-layout(row class="border-blue-bottom")
             v-flex.caption(xs12)
-              v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+              v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
               span {{ $t('top.dialog.details.title') }}
           div(class="details")
             v-layout.mt-2(row)
@@ -103,7 +103,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
           v-layout.mt-2(row class="border-blue-bottom" v-if="$s.futurEvent")
             v-flex.caption(xs12)
-              v-icon.mb-1(class="icon-blue icons events") panorama_fish_eye
+              v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
               span {{ $t('top.dialog.reservation.title') }}
           div(class="reservation" v-if="$s.futurEvent && $currentUser.id")
             v-layout(row)
@@ -266,6 +266,10 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
     color #1a237e
     font-size 12px
     margin 3px 3px 0 0
+    &.ajusted
+      margin-bottom 2px!important
+    &.more-ajusted
+      margin-bottom 1px!important
   
   .top-event-view
     max-height 70vh
