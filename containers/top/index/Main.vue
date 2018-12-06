@@ -81,7 +81,7 @@
               v-flex.location(xs12)
                 v-icon location_on
                 span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
-                span(class="hidden-sm-and-down") {{ reduceLocationAddress(event) }}
+                span(class="hidden-sm-and-down") {{ displayLocationName(event) }}
             v-layout(row)
               v-flex.attending(xs12)
                 v-icon people_outline
