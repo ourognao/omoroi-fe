@@ -29,8 +29,9 @@ export default {
       return eventLocation.includes(',') ? eventLocation.split(',')[0] : eventLocation
     },
     getGoogleMapHref (event) {
-      let location = this.reduceLocationAddress(event).replace(/ /g, '')
-      return `https://maps.google.com/?q=${location}`
+      // let location = this.reduceLocationAddress(event).replace(/ /g, '')
+      let eventLocationName = this.displayLocationName(event)
+      return `https://maps.google.com/?q=${eventLocationName}`
     },
     openWaitingScreen (options) {
       return new Promise((resolve, reject) => {
@@ -129,6 +130,11 @@ export default {
     },
     formatDatetime (date, formatString = 'YYYY/MM/DD HH:mm') {
       return moment(date).format(formatString)
+    },
+    displayLocationName (event) {
+      if (!event) return
+      let locale = this.$store.state.base.locale.selected
+      return locale === 'ja' ? event.eventLocationNameJp : event.eventLocationNameEn
     },
     displayEventTitle (currentSection, event) {
       if (!event) return

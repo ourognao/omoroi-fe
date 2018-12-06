@@ -15,7 +15,9 @@ attr:
   event-title-en: タイトル（英語）
   event-section: 区分
   event-date: 日付
-  event-location: 場所
+  event-location: 場所（住所）
+  event-location-name-jp: 場所名（日本語）
+  event-location-name-en: 場所名（英語）
   event-access-jp: アクセス（日本語）
   event-access-en: アクセス（英語）
   event-start-time: 開始時間

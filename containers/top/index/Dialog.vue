@@ -57,7 +57,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 v-flex(xs12)
                   v-icon location_on
                   a(:href="jumpToGoogleMap('fromLink')" target="_blank")
-                    span {{ reduceLocationAddress(event) }}
+                    span {{ displayLocationName(event) }}
               v-layout(row).mb-1
                 v-flex(xs12)
                   v-icon people_outline

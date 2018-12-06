@@ -67,7 +67,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                     v-icon close
 
               v-layout(row wrap class="hidden-md-only hidden-lg-only hidden-xl-only")
-                v-flex(xs10).title.pt-2 {{ title.section }}
+                v-flex(xs10).subheading.pt-2 {{ title.section }}
                 v-flex(xs2).text-md-right
                   v-btn(small icon flat @click.stop.prevent.native="removeSectionTitle(title.section)")
                     v-icon close
@@ -112,8 +112,30 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                 )
                 v-date-picker(v-model="date" no-title scrollable actions)
             
-            v-flex.mb-2(class="hidden-sm-and-down" xs12 md8 offset-md1 pt-4)
-              div
+            v-flex(class="hidden-sm-and-down" md2 offset-md1)
+              v-text-field(
+                type="text"
+                v-model="eventLocationNameJp"
+                name="event-location-name-jp"
+                :label="$t('attr.event-location-name-jp')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-location-name-jp') || []"
+                prepend-icon="location_city"
+              )
+
+            v-flex(class="hidden-sm-and-down" md2 offset-md1)
+              v-text-field(
+                type="text"
+                v-model="eventLocationNameEn"
+                name="event-location-name-en"
+                :label="$t('attr.event-location-name-en')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-location-name-en') || []"
+                prepend-icon="location_city"
+              )
+
+            v-flex.mb-2(class="hidden-sm-and-down" md3 offset-md1 pt-4)
+              div.border-grey-bottom.pt-1
                 gmap-autocomplete(
                   id="gmap-location"
                   @place_changed="setPlace"
@@ -125,8 +147,28 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               div.mt-1(class="errorColor" v-if="!isLocationAutocompleted")
                 | {{ $t('events.dialog.errors.location') }}
 
-            v-flex.mb-2(class="hidden-md-only hidden-lg-only hidden-xl-only" xs12 md7 offset-md1)
-              div
+            v-flex.mb-2(class="hidden-md-only hidden-lg-only hidden-xl-only" xs12)
+              v-text-field.pt-0(
+                type="text"
+                v-model="eventLocationNameJp"
+                name="event-location-name-jp"
+                :label="$t('attr.event-location-name-jp')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-location-name-jp') || []"
+                prepend-icon="location_city"
+              )
+              v-text-field(
+                type="text"
+                v-model="eventLocationNameEn"
+                name="event-location-name-en"
+                :label="$t('attr.event-location-name-en')"
+                v-validate="'required'"
+                :error-messages="veeErrors.first('event-location-name-en') || []"
+                prepend-icon="location_city"
+              )
+
+            v-flex.mb-2(class="hidden-md-only hidden-lg-only hidden-xl-only" xs12)
+              div.border-grey-bottom.pt-3
                 gmap-autocomplete(
                   id="gmap-location"
                   @place_changed="setPlace"
@@ -358,6 +400,9 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
     .border-blue-bottom
       border-bottom 1px solid #1a237e
 
+    .border-grey-bottom
+      border-bottom 1px solid #9E9E9E
+
     .sub-pictures-view
       max-width 210vh
       overflow-x auto
@@ -399,6 +444,8 @@ export default {
       titleEn: null,
       titles: [],
       date: null,
+      eventLocationNameJp: null,
+      eventLocationNameEn: null,
       locationJp: null,
       locationForm: null,
       locationHidden: null,
@@ -623,6 +670,8 @@ export default {
             user_id: this.organizer,
             title: JSON.stringify(this.titles),
             date: this.date,
+            event_location_name_jp: this.eventLocationNameJp,
+            event_location_name_en: this.eventLocationNameEn,
             location_jp: this.locationJp,
             access_jp: this.accessJp,
             access_en: this.accessEn,
@@ -762,6 +811,8 @@ export default {
           })
         })
         this.date = this.event.date
+        this.eventLocationNameJp = this.event.eventLocationNameJp
+        this.eventLocationNameEn = this.event.eventLocationNameEn
         this.locationJp = this.locationForm = this.locationHidden = this.event.locationJp
         this.accessJp = this.event.accessJp
         this.accessEn = this.event.accessEn
@@ -787,6 +838,8 @@ export default {
         this.titleEn = null
         this.titles = []
         this.date = null
+        this.eventLocationNameJp = null
+        this.eventLocationNameEn = null
         this.locationJp = null
         this.accessJp = null
         this.accessEn = null
