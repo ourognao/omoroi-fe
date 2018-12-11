@@ -122,3 +122,13 @@ EventPicture.where(id: ids).destroy_all
 - display more granulation for cost
 
 恵比寿はすごくいい街ですよぜひ遊びに来てください
+
+
+A) Top page
+JA maxlength 11
+EN maxlength 26
+
+B) Top page details box and/or Event upload screen
+
+JA maxlength 16
+EN maxlength 30

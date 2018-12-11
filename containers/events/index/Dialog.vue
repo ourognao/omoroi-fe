@@ -299,14 +299,14 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
               )
             
             v-flex(xs12 md5)
-              v-select(
+              v-autocomplete(
                 :items="costItems"
                 v-model="cost"
-                name="event-cost"
                 :label="$t('attr.event-cost')"
-                v-validate="'required'"
-                :error-messages="veeErrors.first('event-cost') || []"
                 prepend-icon="attach_money"
+                :error-messages="veeErrors.first('event-cost') || []"
+                v-validate="'required'"
+                name="event-cost"
               )
             
             v-flex(xs12 md5 offset-md2)
@@ -455,7 +455,7 @@ export default {
       endTime: null,
       eventTimeItems: this.timeOptions(),
       cost: null,
-      costItems: this.costOptions({ min: 0, max: 10000, step: 500 }),
+      costItems: this.costOptions({ min: 0, max: 10000, step: 100 }),
       capacity: null,
       capacityItems: this.rangeOptionsForSelect(1, 60, { includeUnlimitedOption: true }),
       threshold: null,
