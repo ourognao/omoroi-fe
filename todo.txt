@@ -117,12 +117,8 @@ EventPicture.where(event_id: nil).count
 ids = EventPicture.where(event_id: nil).pluck(:id)
 EventPicture.where(id: ids).destroy_all
 
--fix title in responsive in event uploader screen
 
+- display 17 max chars for jp
+- display more granulation for cost
 
-
-
-un new pot pour le the
-
-
-#costoco #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #sharefood #japan #japon  #japantravel #コストコ #イベント #国際交流 #ドライブ #英会話 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
+恵比寿はすごくいい街ですよぜひ遊びに来てください

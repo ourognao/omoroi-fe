@@ -4,6 +4,11 @@ import moment from 'moment'
 import constants from '~/utils/constants'
 
 export default {
+  computed: {
+    $locale () {
+      return this.$store.state.base.locale.selected
+    }
+  },
   methods: {
     getOrganizerInfos (organizerId) {
       let users = this.$store.state.users.index.users
@@ -136,13 +141,23 @@ export default {
       let locale = this.$store.state.base.locale.selected
       return locale === 'ja' ? event.eventLocationNameJp : event.eventLocationNameEn
     },
-    displayEventTitle (currentSection, event) {
+    displayEventTitle (currentSection, event, options) {
       if (!event) return
-      let locale = this.$store.state.base.locale.selected
       let eventTitles = JSON.parse(event.title)
       let section = !currentSection ? event.section[0] : currentSection
       let index = eventTitles.findIndex(arr => arr.section === section)
-      return locale === 'ja' ? eventTitles[index].titleJp : eventTitles[index].titleEn
+      let title = null
+      let titleItems = [
+        { locale: 'ja', maxlength: 11, title: eventTitles[index].titleJp },
+        { locale: 'en', maxlength: 26, title: eventTitles[index].titleEn }
+      ]
+      let titleItemsIndex = titleItems.filter(titleItem => titleItem.locale === this.$locale)[0]
+      if (options.fromTopPage && titleItemsIndex.title.length > titleItemsIndex.maxlength) {
+        title = titleItemsIndex.title.substr(0, titleItemsIndex.maxlength) + '...'
+      } else {
+        title = titleItemsIndex.title
+      }
+      return title
     },
     truncate (event, maxCharacters, type) {
       let locale = this.$store.state.base.locale.selected
