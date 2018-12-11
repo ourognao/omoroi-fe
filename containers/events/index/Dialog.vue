@@ -26,7 +26,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   )
                 v-flex(xs12 md3 offset-md1)
                   v-text-field(
-                    :maxlength="titleMaxlength"
+                    :maxlength="titleMaxlength.ja"
                     type="text"
                     v-model="titleJp"
                     name="event-title-jp"
@@ -38,7 +38,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
                   )
                 v-flex(xs12 md3 offset-md1)
                   v-text-field(
-                    :maxlength="titleMaxlength"
+                    :maxlength="titleMaxlength.en"
                     type="text"
                     v-model="titleEn"
                     name="event-title-en"
@@ -437,7 +437,7 @@ export default {
   data () {
     return {
       visible: false,
-      titleMaxlength: 33,
+      titleMaxlength: { ja: 16, en: 30 },
       section: null,
       sectionItems: [],
       titleJp: null,

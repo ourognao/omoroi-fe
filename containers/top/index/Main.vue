@@ -68,7 +68,7 @@
             img(:src="event.thumbnail" style="border-radius:10px")
           v-flex.ml-4(xs8)
             v-layout.mb-1(row)
-              v-flex.caption.future(xs12) {{ displayEventTitle(section, event) }}
+              v-flex.caption.future(xs12) {{ displayEventTitle(section, event, { fromTopPage: true }) }}
             v-layout(row)
               v-flex(xs12)
                 v-icon event
@@ -106,7 +106,7 @@
           v-layout(row)
             v-flex.grey-text.dark(xs12) {{ event.date }}
           v-layout(row)
-            v-flex.caption(xs12) {{ displayEventTitle(null, event) }}
+            v-flex.caption(xs12) {{ displayEventTitle(null, event, { fromTopPage: true }) }}
           v-layout(row)
             v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event, 30, 'explanation') }}
             v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event, 160, 'explanation') }}

@@ -42,7 +42,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
           v-layout(row class="border-blue-bottom")
             v-flex.caption(xs12)
               v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
-              span {{ displayEventTitle($s.section, event) }}
+              span {{ displayEventTitle($s.section, event, { fromTopPage: false }) }}
           v-layout.mt-2(row)
             v-flex(xs6 class="date-location")
               v-layout(row).mb-1.mt-2
