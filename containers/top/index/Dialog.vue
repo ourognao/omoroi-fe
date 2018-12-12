@@ -203,7 +203,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
   .event
     .navigation
       a
-        font-size 10px
+        font-size 8px
     
     .main-image
       img
@@ -542,6 +542,7 @@ export default {
         .then(async agreed => {
           if (agreed) {
             try {
+              console.log('in destroy', this.reservationId)
               await axios({
                 ...{
                   method: 'delete',
@@ -586,6 +587,7 @@ export default {
             return
           }
           this.getThreeNextEvents({ action: 'reservation' })
+          console.log('in send', this.reservationId)
         } catch (error) {
           this.message(this.$t('base.axios.failure'))
         }
