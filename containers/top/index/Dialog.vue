@@ -480,7 +480,7 @@ export default {
     },
     setForm () {
       if (!this.$s.eventId) return
-      // this.getOriginalPictures()
+      this.getOriginalPictures()
       this.expectedPeopleItems = this.getSelectOptionsFor(1, 10)
       let context = this
       context.getFuturEvents()
