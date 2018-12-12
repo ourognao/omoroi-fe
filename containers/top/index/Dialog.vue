@@ -1,27 +1,39 @@
 <template lang="pug">
 v-dialog(v-model="visible" scrollable persistent width="auto")
   v-card#top-index-dialog
-    v-card-title.pa-0.top-event-section.primary
+    v-divider.border-blue-top
+
+    v-card-title.pa-0.top-event-section.grey.border-blue-bottom
       v-spacer
-      v-btn(small icon flat @click.stop.prevent.native="cancel")
-        v-icon close
+      v-btn.pl-3(small icon flat @click.stop.prevent.native="cancel")
+        v-icon.blue-text close
     
-    v-divider
+    v-divider.border-blue-top
     
     no-ssr
       v-card-text.top-event-view.pt-0
         v-container.pa-0(fluid class="event" v-if="event")
-          v-layout(row class="border-blue-bottom")
+          v-layout.mt-2(row wrap v-if="hasAlreadyReserved")
+            v-flex(xs6).text-xs-left
+              v-icon(class="icon-green") check_box
+              span.caption.green-text {{ $t('top.dialog.reservation.i04') }}
+            v-flex(xs6).mt-1.date-location.text-xs-right {{ formatDate(event.date) }}
+            v-flex(xs12).mt-1.caption.text-xs-center
+              | {{ displayEventTitle($s.section, event, { fromTopPage: false }) }}
+            v-flex(xs12).caption.text-xs-center.blue-text
+              a(href="#" @click.stop.prevent="scrollTo('top-event-view', { direction: 'bottom' })")
+                | {{ $t('top.dialog.reservation.button.i03') }}
+          v-layout.navigation(row class="border-blue-bottom").pb-1
             v-flex.caption(xs6)
               span(v-if="!firstEventIds.includes($s.eventId)")
-                v-icon.mb-1(class="icon-blue ajusted icons events") navigate_before
+                v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_before
                 a(href="#" @click.stop.prevent="navigate('before')")
                   | {{ $t('top.dialog.common.previous') }}
             v-flex.caption(xs6 class="text-xs-right")
               span(v-if="!lastEventIds.includes($s.eventId)")
                 a(href="#" @click.stop.prevent="navigate('next')")
                   | {{ $t('top.dialog.common.next') }}
-                v-icon.mb-1(class="icon-blue ajusted icons events") navigate_next
+                v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_next
 
           viewer(:images="originalPictures.map(picture => picture.original)")
             v-layout(row class="main-image" v-if="originalPictures.length > 0")
@@ -39,7 +51,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                   v-if="originalPictures.length >= 2 && index > 0")
                   img(:src="originalPictures[index].original")
 
-          v-layout(row class="border-blue-bottom")
+          v-layout(row class="border-blue-bottom").pb-1
             v-flex.caption(xs12)
               v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
               span {{ displayEventTitle($s.section, event, { fromTopPage: false }) }}
@@ -76,7 +88,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                   :icon="gmap['icon']"
                   :position="marker.position")
           
-          v-layout(row class="border-blue-bottom")
+          v-layout(row class="border-blue-bottom").pb-1
             v-flex.caption(xs12)
               v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
               span {{ $t('top.dialog.details.title') }}
@@ -101,7 +113,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 span {{ getOrganizerInfos(event.userId).line }}
                 
 
-          v-layout.mt-2(row class="border-blue-bottom" v-if="$s.futurEvent")
+          v-layout.mt-2(row class="border-blue-bottom" v-if="$s.futurEvent").pb-1
             v-flex.caption(xs12)
               v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
               span {{ $t('top.dialog.reservation.title') }}
@@ -165,7 +177,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
                 )
               v-flex.text-xs-right(xs6)
                 v-btn.primary.mt-3(small @click.stop.prevent.native="send()")
-                  span {{ hasAlreadyReserved ? $t('top.dialog.reservation.button.i03') : $t('top.dialog.reservation.button.i01') }}
+                  span {{ hasAlreadyReserved ? $t('top.dialog.reservation.button.i05') : $t('top.dialog.reservation.button.i01') }}
                 v-btn.red.white--text.mt-3(v-if="hasAlreadyReserved" small @click.stop.prevent.native="destroy()")
                   span {{ $t('top.dialog.reservation.button.i04') }}
           div(class="reservation" v-if="$s.futurEvent && !$currentUser.id")
@@ -187,9 +199,12 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
     height 20px
     .v-icon
       font-size 15px
-      color white
   
   .event
+    .navigation
+      a
+        font-size 5px
+    
     .main-image
       img
         width 100%
@@ -262,6 +277,10 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
   .border-blue-top
     border-top 1px solid #1a237e
   
+  i.icon-green
+    color #00C853
+    font-size 15px
+
   i.icon-blue
     color #1a237e
     font-size 12px
@@ -341,7 +360,19 @@ export default {
       hashtags: constants.sns.hashtags,
       snsShortenedUrl: null,
       event: null,
-      originalPictures: []
+      originalPictures: [],
+      reservationActions: [
+        {
+          action: 'reservation',
+          hasAlreadyReserved: true,
+          message: this.$t('top.dialog.reservation.i02')
+        },
+        {
+          action: 'cancellation',
+          hasAlreadyReserved: false,
+          message: this.$t('top.dialog.reservation.i05')
+        }
+      ]
     }
   },
   computed: {
@@ -436,9 +467,12 @@ export default {
         }
         this.snsShortenedUrl = dataSnsShortenedUrl.url
         this.originalPictures = data.data.pictures
-        document.querySelector('.gmap-section .gm-style a').href = this.getGoogleMapHref(this.event)
+        if (document.querySelector('.gmap-section .gm-style a')) {
+          document.querySelector('.gmap-section .gm-style a').href = this.getGoogleMapHref(this.event)
+        }
         this.closeWaitingScreen()
       } catch (error) {
+        console.log(error)
         this.message(this.$t('base.axios.failure'))
       }
     },
@@ -504,7 +538,7 @@ export default {
     },
     destroy () {
       let confirmationText = this.$t('top.dialog.reservation.i03')
-      this.confirm({ text: confirmationText })
+      this.confirm({ text: confirmationText, onDialog: true })
         .then(async agreed => {
           if (agreed) {
             try {
@@ -519,7 +553,7 @@ export default {
                 ...this.$store.getters.options
               })
               this.reservationId = null
-              this.getThreeNextEvents()
+              this.getThreeNextEvents({ action: 'cancellation' })
             } catch (error) {
               this.message(this.$t('base.axios.failure'))
             }
@@ -551,14 +585,13 @@ export default {
             this.message(this.$t('base.axios.failure'))
             return
           }
-          this.getThreeNextEvents()
-          this.message(this.$t('top.dialog.reservation.i02'))
+          this.getThreeNextEvents({ action: 'reservation' })
         } catch (error) {
           this.message(this.$t('base.axios.failure'))
         }
       })
     },
-    async getThreeNextEvents () {
+    async getThreeNextEvents (options) {
       try {
         this.openWaitingScreen({ onDialog: true })
         let bom = this.$currentMonth.date === this.$actualMonth
@@ -572,7 +605,10 @@ export default {
         let { data } = await axios.get(`/events?${params}`, this.$store.getters.options)
         this.$store.commit('merge', ['top.index', { events: data.data.events }])
         this.closeWaitingScreen()
-        this.scrollToTop('top-event-view')
+        this.scrollTo('top-event-view', { direction: 'top' })
+        let reservationAction = this.reservationActions.filter(button => button.action === options.action)[0]
+        this.hasAlreadyReserved = reservationAction.hasAlreadyReserved
+        this.message(reservationAction.message)
       } catch (error) {
         if (error.message === 'Request failed with status code 401') this.reload()
       }

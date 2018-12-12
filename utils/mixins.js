@@ -16,11 +16,11 @@ export default {
       if (!organizer) return
       return organizer[0]
     },
-    scrollToTop (view) {
+    scrollTo (view, options) {
       let windowView = document.getElementsByClassName(view)[0]
       if (!windowView) return
       windowView.scroll({
-        top: 0,
+        top: options.direction === 'top' ? 0 : windowView.scrollHeight,
         left: 0,
         behavior: 'smooth'
       })
@@ -47,7 +47,7 @@ export default {
         setTimeout(() => {
           if (typeof document !== 'undefined') {
             let dialogContent = document.getElementsByClassName('l-waiting')[0].parentElement
-            dialogContent.style.zIndex = 1001
+            dialogContent.style.zIndex = 1004
             if (!options.onDialog) {
               let overlays = document.getElementsByClassName('v-overlay')
               let overlay = overlays[overlays.length - 1]
@@ -186,7 +186,7 @@ export default {
         }])
         setTimeout(() => {
           let dialogContent = document.getElementsByClassName('l-confirm')[0].parentElement
-          dialogContent.style.zIndex = 1001
+          dialogContent.style.zIndex = 1004
           if (!options.onDialog) {
             let overlays = document.getElementsByClassName('v-overlay')
             let overlay = overlays[overlays.length - 1]

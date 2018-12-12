@@ -665,7 +665,7 @@ export default {
           !context.isLocationAutocompleted ||
           !context.isPictureUploaded) return
         try {
-          this.openWaitingScreen({ onDialog: false })
+          this.openWaitingScreen({ onDialog: true })
           let newEvent = {
             user_id: this.organizer,
             title: JSON.stringify(this.titles),
@@ -700,7 +700,9 @@ export default {
           })
           this.closeWaitingScreen()
           if (res.data.status === 'error') {
+            if (res.data.errors.picture_ids) this.isPictureUploaded = false
             res.data.errors.name && this.veeErrors.add('event-access', `${this.$t('attr.event-access')}${res.data.errors.access[0]}`)
+            this.message(this.$t('base.axios.failure'))
             return
           }
           this.reloadList()
@@ -760,7 +762,7 @@ export default {
     },
     async deletePicture (qquuid) {
       let confirmationText = this.$t('base.logout.confirm')
-      this.confirm({ text: confirmationText })
+      this.confirm({ text: confirmationText, onDialog: true })
         .then(async agreed => {
           if (agreed) {
             try {

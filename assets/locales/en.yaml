@@ -191,11 +191,14 @@ top:
       i01: You need to register to make a reservation
       i02: Successfully registered
       i03: Are you sure ?
+      i04: Nice! You're in!
+      i05: Successfully cancelled
       button:
         i01: Reserve
         i02: Sign-up
-        i03: Edit
+        i03: EDIT
         i04: Cancel
+        i05: Update
 
 footer:
   copyright:
