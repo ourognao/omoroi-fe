@@ -117,6 +117,10 @@ EventPicture.where(event_id: nil).count
 ids = EventPicture.where(event_id: nil).pluck(:id)
 EventPicture.where(id: ids).destroy_all
 
+all = []
+Event.all.each do |e|
+  all << e.id if e.event_pictures[0].nil?
+end
 
 - display 17 max chars for jp
 - display more granulation for cost
