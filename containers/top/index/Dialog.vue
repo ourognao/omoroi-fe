@@ -23,17 +23,17 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
             v-flex(xs12).caption.text-xs-center.blue-text
               a(href="#" @click.stop.prevent="scrollTo('top-event-view', { direction: 'bottom' })")
                 | {{ $t('top.dialog.reservation.button.i03') }}
-          v-layout.navigation(row class="border-blue-bottom").pb-1
+          v-layout.navigation(row class="border-blue-bottom").pb-1.pt-1
             v-flex.caption(xs6)
               span(v-if="!firstEventIds.includes($s.eventId)")
-                v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_before
+                v-icon(class="icon-blue zero-ajusted icons events") navigate_before
                 a(href="#" @click.stop.prevent="navigate('before')")
                   | {{ $t('top.dialog.common.previous') }}
             v-flex.caption(xs6 class="text-xs-right")
               span(v-if="!lastEventIds.includes($s.eventId)")
                 a(href="#" @click.stop.prevent="navigate('next')")
                   | {{ $t('top.dialog.common.next') }}
-                v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_next
+                v-icon(class="icon-blue zero-ajusted icons events") navigate_next
 
           viewer(:images="originalPictures.map(picture => picture.original)")
             v-layout(row class="main-image" v-if="originalPictures.length > 0")
@@ -289,6 +289,8 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
       margin-bottom 2px!important
     &.more-ajusted
       margin-bottom 1px!important
+    &.zero-ajusted
+      margin-bottom 0px!important
   
   .top-event-view
     max-height 70vh
@@ -542,7 +544,6 @@ export default {
         .then(async agreed => {
           if (agreed) {
             try {
-              console.log('in destroy', this.reservationId)
               await axios({
                 ...{
                   method: 'delete',
@@ -586,9 +587,8 @@ export default {
             this.message(this.$t('base.axios.failure'))
             return
           }
-          this.getThreeNextEvents({ action: 'reservation' })
           this.reservationId = res.data.reservation.id
-          console.log('in send', this.reservationId)
+          this.getThreeNextEvents({ action: 'reservation' })
         } catch (error) {
           this.message(this.$t('base.axios.failure'))
         }
