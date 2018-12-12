@@ -203,7 +203,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
   .event
     .navigation
       a
-        font-size 5px
+        font-size 10px
     
     .main-image
       img
