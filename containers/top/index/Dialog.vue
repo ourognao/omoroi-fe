@@ -203,7 +203,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
   .event
     .navigation
       a
-        font-size 8px
+        font-size 10px
     
     .main-image
       img
@@ -587,6 +587,7 @@ export default {
             return
           }
           this.getThreeNextEvents({ action: 'reservation' })
+          this.reservationId = res.data.reservation.id
           console.log('in send', this.reservationId)
         } catch (error) {
           this.message(this.$t('base.axios.failure'))
