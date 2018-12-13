@@ -33,12 +33,33 @@ export default {
       }, { arrayFormat: 'bracket' })
       let { data } = await axios.get(`/events?${params}`, store.getters.options)
       store.commit('merge', ['top.index', {
-        events: data.data.events,
         scroll: parseInt(query.scroll) || 0,
+        dialog: (query.dialog === 'true'),
         eventId: parseInt(query.event_id) || 0,
         section: query.section,
+        cmd: query.cmd,
+        cmn: query.cmn,
+        cgmad: query.cgmad,
+        cgman: query.cgman,
+        cgmbd: query.cgmbd,
+        cgmbn: query.cgmbn,
+        cgmcd: query.cgmcd,
+        cgmcn: query.cgmcn,
         futurEvent: (query.futur_event === 'true'),
-        dialog: (query.dialog === 'true')
+        events: data.data.events
+      }])
+      let currentMonth = {
+        name: query.cmn,
+        date: query.cmd
+      }
+      let currentMonths = [
+        { name: query.cgman, date: query.cgmad },
+        { name: query.cgmbn, date: query.cgmbd },
+        { name: query.cgmcn, date: query.cgmcd }
+      ]
+      store.commit('merge', ['top.index', {
+        currentMonth: currentMonth,
+        currentMonths: currentMonths
       }])
       store.commit('merge', ['users.index', {
         users: data.data.staff

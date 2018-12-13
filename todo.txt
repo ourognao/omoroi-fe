@@ -140,11 +140,6 @@ EN maxlength 30
 -limit max people available when making a reservation
 
 
-
-```
-- When registering for an event, when I push on the number of people, the screen super zooms in, and even after I push the reservation button, the screen still stays zoomed in. Can we have the dialogue box not zoom in?
-```
-
 ```
 - I registered for a January 1st event, but when my confirmation came up, the previous event button (Dec 31st) disappeared (it was there before)
 ```

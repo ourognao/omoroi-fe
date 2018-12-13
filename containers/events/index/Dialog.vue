@@ -659,7 +659,6 @@ export default {
       context.hasUploadedPicture()
       this.locationForm = document.getElementById('gmap-location').value
       this.$validator.validateAll().then(async result => {
-        console.log(this.veeErrors)
         if (!result ||
           !context.isTitleAdded ||
           !context.isLocationAutocompleted ||
