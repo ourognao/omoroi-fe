@@ -233,10 +233,21 @@ export default {
           visible: true
         }
       ],
-      drawer: false
+      drawer: false,
+      goToTopPageItems: [
+        { locale: 'ja', patterns: ['/', '/?', '/t'], subStrMaxlength: 2 },
+        { locale: 'en', patterns: ['/en/?'], subStrMaxlength: 5 }
+      ]
     }
   },
   computed: {
+    eventSection: {
+      get: function () { return this.$topIndex.section },
+      set: function (val) { this.$store.commit('merge', ['top.index', { section: val }]) }
+    },
+    $topIndex () {
+      return this.$store.state.top.index
+    },
     fullPath () {
       return this.$store.state.base.layout.fullPath
     },
@@ -288,18 +299,13 @@ export default {
   },
   methods: {
     goToTopPage () {
-      if (this.currentLanguage === 'ja') {
-        if (this.fullPath === '/' || this.fullPath.substr(0, 2) === '/?') {
-          window.location.reload()
-        } else {
-          this.goto(this.$router, '/')
-        }
+      let goToTopPageItem = this.goToTopPageItems.filter(item => item.locale === this.$locale)[0]
+      if (goToTopPageItem.patterns.includes(this.fullPath) ||
+        goToTopPageItem.patterns.includes(this.fullPath.substr(0, goToTopPageItem.subStrMaxlength))) {
+        if (!this.eventSection) return
+        this.eventSection = null
       } else {
-        if (this.fullPath.substr(0, 5) === '/en/?') {
-          window.location.reload()
-        } else {
-          this.goto(this.$router, '/')
-        }
+        this.goto(this.$router, '/')
       }
     },
     signOut (e) {

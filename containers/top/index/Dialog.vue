@@ -494,11 +494,6 @@ export default {
       ]
       let events = context.$s.futurEvent ? context.futurEvents : context.pastEvents
       let event = events.filter(event => event.id === context.$s.eventId)
-      console.log('context.$s', context.$s)
-      console.log('context.$s.futurEvent', context.$s.futurEvent)
-      console.log(events.map(e => e.date))
-      console.log('context.$s.eventId', typeof context.$s.eventId)
-      console.log('this.$s.eventId', typeof this.$s.eventId)
       if (!event.length) return
       context.remainingSpaces = context.setRemainingSpaces(event[0])
       context.setExpectedPeople(event[0].reservations)
@@ -538,8 +533,22 @@ export default {
       this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,
         dialog: true,
-        eventId: events[newIndex].id
+        eventId: events[newIndex].id,
+        section: this.$s.section,
+        cmd: this.$currentMonth.date,
+        cmn: this.$currentMonth.name,
+        cgmad: this.$currentMonths[0].date,
+        cgman: this.$currentMonths[0].name,
+        cgmbd: this.$currentMonths[1].date,
+        cgmbn: this.$currentMonths[1].name,
+        cgmcd: this.$currentMonths[2].date,
+        cgmcn: this.$currentMonths[2].name,
+        futurEvent: this.$s.futurEvent
       })
+      this.$store.commit('merge', ['top.index', {
+        currentMonth: this.$currentMonth,
+        currentMonths: this.$currentMonths
+      }])
       this.setForm()
       this.getOriginalPictures()
     },

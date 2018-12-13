@@ -146,6 +146,10 @@ export default {
       let eventTitles = JSON.parse(event.title)
       let section = !currentSection ? event.section[0] : currentSection
       let index = eventTitles.findIndex(arr => arr.section === section)
+      if (index === -1) {
+        let rootPath = this.$locale === 'en' ? '/en/' : '/'
+        window.location.href = rootPath
+      }
       let title = null
       let titleItems = [
         { locale: 'ja', maxlength: 11, title: eventTitles[index].titleJp },

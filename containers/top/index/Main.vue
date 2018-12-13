@@ -269,7 +269,6 @@ export default {
   mixins: [mixins],
   data () {
     return {
-      section: null,
       sectionItems: [
         { text: this.$t('top.index.tabs.social'), value: 'SC' },
         { text: this.$t('top.index.tabs.language'), value: 'LX' },
@@ -317,6 +316,10 @@ export default {
     }
   },
   computed: {
+    section: {
+      get: function () { return this.$s.section },
+      set: function (val) { this.$store.commit('merge', ['top.index', { section: val }]) }
+    },
     $currentDay () {
       return moment().format('YYYY-MM-DD')
     },
@@ -363,10 +366,20 @@ export default {
         dialog: true,
         eventId: event.id,
         section: this.section,
-        futurEvent: futurEvent,
+        cmd: this.currentMonth.date,
+        cmn: this.currentMonth.name,
+        cgmad: this.currentMonths[0].date,
+        cgman: this.currentMonths[0].name,
+        cgmbd: this.currentMonths[1].date,
+        cgmbn: this.currentMonths[1].name,
+        cgmcd: this.currentMonths[2].date,
+        cgmcn: this.currentMonths[2].name,
+        futurEvent: futurEvent
+      })
+      this.$store.commit('merge', ['top.index', {
         currentMonth: this.currentMonth,
         currentMonths: this.currentMonths
-      })
+      }])
     },
     getEventsBySport () {
       this.$nextTick(function () {
