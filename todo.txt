@@ -136,3 +136,32 @@ B) Top page details box and/or Event upload screen
 
 JA maxlength 16
 EN maxlength 30
+
+-limit max people available when making a reservation
+
+
+
+```
+- When registering for an event, when I push on the number of people, the screen super zooms in, and even after I push the reservation button, the screen still stays zoomed in. Can we have the dialogue box not zoom in?
+```
+
+```
+- I registered for a January 1st event, but when my confirmation came up, the previous event button (Dec 31st) disappeared (it was there before)
+```
+
+```
+- also similar, was browsing January events, then closed the dialogue box, but when I pushed December it showed no events. If I refreshed the page though, the events appeared.
+```
+
+```
+Cosmetic:
+- can we put just a small space between the green checkbox and the text?
+- can we please insert a little more space under the Title and EDIT link?
+- can the EDIT text be smaller (same size as “previous event” text?
+- can we please have a thin blue line reaching edge to edge of the dialogue box (longer than the thin blue line below the segment titles)
+```
+
+
+```
+- super small detail: the X closing button is perfectly placed, but when pressing it the circler shadow highlight thing is situated just left of the X
+```
