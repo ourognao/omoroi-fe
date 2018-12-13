@@ -494,6 +494,11 @@ export default {
       ]
       let events = context.$s.futurEvent ? context.futurEvents : context.pastEvents
       let event = events.filter(event => event.id === context.$s.eventId)
+      console.log('context.$s', context.$s)
+      console.log('context.$s.futurEvent', context.$s.futurEvent)
+      console.log(events.map(e => e.date))
+      console.log('context.$s.eventId', typeof context.$s.eventId)
+      console.log('this.$s.eventId', typeof this.$s.eventId)
       if (!event.length) return
       context.remainingSpaces = context.setRemainingSpaces(event[0])
       context.setExpectedPeople(event[0].reservations)
