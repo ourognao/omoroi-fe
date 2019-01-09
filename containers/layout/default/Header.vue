@@ -221,15 +221,9 @@ export default {
       ],
       secondPartLinks: [
         {
-          titleKey: 'about.index.title',
+          titleKey: 'about-and-contact-us.index.title',
           icon: 'library_books',
           href: '/about',
-          visible: true
-        },
-        {
-          titleKey: 'contact-us.index.title',
-          icon: 'phone',
-          href: '/contact-us',
           visible: true
         }
       ],

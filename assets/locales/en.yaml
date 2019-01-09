@@ -139,15 +139,30 @@ events:
       location: Location is required.
       picture: Picture is required.
 
-about:
+about-and-contact-us:
   index:
-    title: About
-    i01: About Content Here
-
-contact-us:
-  index:
-    title: Contact Us
-    i01: Contact Us Content Here
+    title: About / Contact
+    contact-us:
+      title: Contact Us
+      i01: For any inquiries, please contact us at info[at]omoroi-life.com
+    about-us:
+      title: About Us
+      i01: What is omoroi?
+      i02: 'Omoroi (adjective | o-mo-ro-i | oumouroi): From a dialect of west Japan, originating from the i-adjective "omoshiroi" おもしろい, which means interesting, funny or amusing.'
+      i03: This group is for locals, travelers, Japanese and foreigners alike...for anyone who enjoys having fun, exploring, meeting new people, learning new things and enjoying life.
+      i04: Our goal is to bring you to some of the more unheard of parts of Osaka;places that are truly unique.
+      i05: Hope you can join us!
+    our-friends:
+      title: Our Friends
+      noritomosan:
+        title: Noritomosan
+        explanation: Find friends to travel around Japan (Rideshare・Events・Infos).
+      pierstand:
+        title: Pier STAND
+        explanation: Great little coffee/beer bar along the Doutonbori River.Only place in Osaka selling Tremmens Delirium beer on tap.
+      localirishpub:
+        title: The Local Irish Pub
+        explanation: Osaka's best Irish pub, serving-up a fresh pint of Guinness and other Irish favorites.
 
 top:
   index:

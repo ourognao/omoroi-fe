@@ -113,8 +113,6 @@
         v-flex(xs1 style="line-height: 50px")
           v-btn(flat icon @click.stop.prevent.native="details(event, false)")
             v-icon.details(class="icon-blue icons events") chevron_right
-    
-    
 </template>
 
 <!-- ============================================================================ -->
