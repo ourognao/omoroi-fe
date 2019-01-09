@@ -233,10 +233,6 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
       border 1px solid grey
       .gmnoprint
         display: none !important
-      
-    
-    .details
-      font-size 10px
 
     .reservation
       .sns #shareable-links div
@@ -271,26 +267,9 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
     &.underline
       text-decoration: underline
   
-  .border-blue-bottom
-    border-bottom 1px solid #1a237e
-
-  .border-blue-top
-    border-top 1px solid #1a237e
-  
   i.icon-green
     color #00C853
     font-size 15px
-
-  i.icon-blue
-    color #1a237e
-    font-size 12px
-    margin 3px 3px 0 0
-    &.ajusted
-      margin-bottom 2px!important
-    &.more-ajusted
-      margin-bottom 1px!important
-    &.zero-ajusted
-      margin-bottom 0px!important
   
   .top-event-view
     max-height 70vh
