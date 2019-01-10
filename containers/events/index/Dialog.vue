@@ -700,7 +700,10 @@ export default {
           this.closeWaitingScreen()
           if (res.data.status === 'error') {
             if (res.data.errors.picture_ids) this.isPictureUploaded = false
-            res.data.errors.name && this.veeErrors.add('event-access', `${this.$t('attr.event-access')}${res.data.errors.access[0]}`)
+            res.data.errors.name.length && this.$validator.errors.add({
+              field: 'event-access',
+              msg: `${this.$t('attr.event-access')}${res.data.errors.access[0]}`
+            })
             this.message(this.$t('base.axios.failure'))
             return
           }

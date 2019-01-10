@@ -109,7 +109,10 @@ export default {
               let attr = this.$t(`attr.${key}`)
               let message = error.response.data.errors[names[key]][0]
               let delim = this.$store.state.base.locale.selected === 'ja' ? '' : ' '
-              this.veeErrors.add(key, `${attr}${delim}${message}`)
+              this.$validator.errors.add({
+                field: key,
+                msg: `${attr}${delim}${message}`
+              })
             }
           }
           console.error(error)

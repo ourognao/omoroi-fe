@@ -188,3 +188,6 @@ Not only it will take me some times but also it will male the code less readable
 Event.order('date asc').pluck(:date)
 
 - add noritomosan partners
+
+
+cd1d55a0bbcde25fa0a14b445af1a33d2b194278cb98d762b27a0a52d0a208fc0ae416ef5cc8f689856514a136fb96bd7e60b42eac67b58a303435b0842efab3

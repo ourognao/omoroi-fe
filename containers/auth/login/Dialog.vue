@@ -104,7 +104,10 @@ export default {
           this.message(this.$t('auth.login.i08'))
           this.visible = false
         } catch (error) {
-          this.veeErrors.add('user-email', error.response.data.errors[0])
+          this.$validator.errors.add({
+            field: 'user-email',
+            msg: error.response.data.errors[0]
+          })
           console.error(error)
         }
       })
