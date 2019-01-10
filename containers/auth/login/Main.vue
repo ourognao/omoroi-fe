@@ -96,7 +96,10 @@ export default {
           this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
           window.location.href = '/'
         } catch (error) {
-          this.veeErrors.add('user-password', error.response.data.errors[0])
+          this.$validator.errors.add({
+            field: 'user-password',
+            msg: error.response.data.errors[0]
+          })
           console.error(error)
         }
       })
