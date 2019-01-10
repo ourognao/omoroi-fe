@@ -3,7 +3,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyDRg6ovOxmSfR3BxjAXrwIqCWpT1vT3TJ8',
+    key: 'AIzaSyC7qTSt5ktqvRBOY_615b6eBvlpBCtX4kk',
     libraries: 'places'
   }
 })
