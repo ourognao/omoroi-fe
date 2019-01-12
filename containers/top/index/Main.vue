@@ -42,7 +42,7 @@
       v-layout(row class="eventHeader")
         v-flex.caption(xs5)
           v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
-          | {{ $t('top.index.events.list.title.i01') }} {{ bagotest }}
+          | {{ $t('top.index.events.list.title.i01') }}
         v-flex.caption(xs7 class="text-xs-right")
           a(
             href="#"
@@ -267,7 +267,6 @@ export default {
   mixins: [mixins],
   data () {
     return {
-      bagotest: null,
       sectionItems: [
         { text: this.$t('top.index.tabs.social'), value: 'SC' },
         { text: this.$t('top.index.tabs.language'), value: 'LX' },
@@ -313,14 +312,6 @@ export default {
       futurEvents: [],
       pastEvents: []
     }
-  },
-  mounted () {
-    console.log(window.navigator.language)
-    // setTimeout(function () {
-    //   if (window.navigator.language !== 'ja') {
-    //     this.goto(this.$router, '/en')
-    //   }
-    // }, 2000)
   },
   computed: {
     section: {

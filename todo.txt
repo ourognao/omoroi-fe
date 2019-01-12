@@ -24,6 +24,21 @@ heroku run rake db:schema:load --app omoroi-be-staging
 heroku run rake db:seed --app omoroi-be
 heroku run rake db:seed --app omoroi-be-staging
 
+5.times {
+  for i in 1..27 do
+    dupPicture = EventPicture.find(i).dup
+    dupPicture.save
+  end 
+}
+
+Event.all.each_with_index do |event, index|
+  i = index + 1
+  EventPicture.find(i).update(event_id: i)
+end
+
+EventPicture.where(event_id: nil).count
+ids = EventPicture.where(event_id: nil).pluck(:id)
+EventPicture.where(id: ids).destroy_all
 
 04/27（Fri.）Tōkyō → Kyoto Ridesharing wanted !
 Passenger can cost share until 3000yen. She has small lugguage.
@@ -80,35 +95,6 @@ Sport event by bago at Ebisu
 恵比寿はすごくいい街ですよ。ぜひ遊びに来てください
 
 Ebisu es a really cool town. As foreigner I suggest you consider it as a best place to live in Tokyo
-
-style="overflow-x:auto"
-
-heroku pg:reset DATABASE_URL --app omoroi-be --confirm omoroi-be
-heroku rake db:migrate --app omoroi-be
-heroku rake db:seed --app omoroi-be
-heroku run console --app omoroi-be
-
-
-5.times {
-  for i in 1..25 do
-    dupPicture = EventPicture.find(i).dup
-    dupPicture.save
-  end 
-}
-
-Event.all.each_with_index do |event, index|
-  i = index + 1
-  EventPicture.find(i).update(event_id: i)
-end
-
-EventPicture.where(event_id: nil).count
-ids = EventPicture.where(event_id: nil).pluck(:id)
-EventPicture.where(id: ids).destroy_all
-
-all = []
-Event.all.each do |e|
-  all << e.id if e.event_pictures[0].nil?
-end
 
 - display 17 max chars for jp
 - display more granulation for cost
