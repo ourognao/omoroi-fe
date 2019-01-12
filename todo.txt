@@ -188,3 +188,9 @@ Not only it will take me some times but also it will male the code less readable
 Event.order('date asc').pluck(:date)
 
 - add noritomosan partners
+
+git remote add staging git@heroku.com:omoroi-fe-staging.git
+git remote add production git@heroku.com:omoroi-fe.git
+
+git remote add staging git@heroku.com:omoroi-be-staging.git
+git remote add production git@heroku.com:omoroi-be.git

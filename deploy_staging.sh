@@ -15,7 +15,7 @@ git commit -m $current_branch
 git push origin $current_branch
 
 echo "########## HEROKU PUSH BRANCH TO OMOROI (FRONTEND - STAGING) ##########"
-git push omoroi-fe-staging "$current_branch":master
+git push staging "$current_branch":master
 
 echo "CURRENT_BRANCH: $current_branch"
 
