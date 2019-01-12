@@ -10,8 +10,8 @@ git pull origin master
 echo "########## GIT STATUS ##########"
 git status
 
-#echo "########## HEROKU PUSH BRANCH TO OMOROI (FRONTEND - PRODUCTION) ##########"
-#git push omoroi-fe master
+echo "########## HEROKU PUSH BRANCH TO OMOROI (FRONTEND - PRODUCTION) ##########"
+git push omoroi-fe master
 
 echo "########## DESTROY MERGED BRANCH ##########"
 git branch -D $merged_branch
