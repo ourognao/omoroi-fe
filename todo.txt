@@ -25,18 +25,6 @@ heroku run rake db:seed --app omoroi-be
 heroku run rake db:seed --app omoroi-be-staging
 
 
-git remote add omoroi-be git@github.com:ourognao/omoroi-be
-git remote add omoroi-be git@heroku.com:omoroi-be
-
-git remote remove heroku
-
-
-heroku run console --app omoroi-be
-heroku logs --tail --app omoroi-be
-
-heroku restart --app omoroi-fe
-
-
 04/27（Fri.）Tōkyō → Kyoto Ridesharing wanted !
 Passenger can cost share until 3000yen. She has small lugguage.
 Can speak French and english. Save money and find friends :) !

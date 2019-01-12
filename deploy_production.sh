@@ -11,7 +11,7 @@ echo "########## GIT STATUS ##########"
 git status
 
 echo "########## HEROKU PUSH BRANCH TO OMOROI (FRONTEND - PRODUCTION) ##########"
-git push omoroi-fe master
+git push production master
 
 echo "########## DESTROY MERGED BRANCH ##########"
 git branch -D $merged_branch
