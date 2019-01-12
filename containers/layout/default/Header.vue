@@ -77,7 +77,6 @@
 
   v-toolbar(fixed class="border-blue")
     img.pointable(src="/images/logo/original.png" height="100%" @click="goToTopPage()")
-    span.ml-3.mt-2 {{ realEnv }} 4
     v-spacer
     a(href="https://www.instagram.com/omoroilife" target="_blank")
       img.pointable(src="/images/sns/instagram.png" class="menu-icons mt-1")
@@ -194,7 +193,6 @@ export default {
   mixins: [mixins],
   data () {
     return {
-      realEnv: process.env.real,
       firstPartLinks: [
         {
           titleKey: 'top.index.title',
