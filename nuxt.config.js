@@ -2,6 +2,9 @@ const { join } = require('path')
 const webpack = require('webpack')
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  modules: [
+    '@nuxtjs/dotenv'
+  ],
   build: {
     extend (config, ctx) {
       config.node = { fs: 'empty' }

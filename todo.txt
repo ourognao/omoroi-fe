@@ -24,18 +24,21 @@ heroku run rake db:schema:load --app omoroi-be-staging
 heroku run rake db:seed --app omoroi-be
 heroku run rake db:seed --app omoroi-be-staging
 
+5.times {
+  for i in 1..27 do
+    dupPicture = EventPicture.find(i).dup
+    dupPicture.save
+  end 
+}
 
-git remote add omoroi-be git@github.com:ourognao/omoroi-be
-git remote add omoroi-be git@heroku.com:omoroi-be
+Event.all.each_with_index do |event, index|
+  i = index + 1
+  EventPicture.find(i).update(event_id: i)
+end
 
-git remote remove heroku
-
-
-heroku run console --app omoroi-be
-heroku logs --tail --app omoroi-be
-
-heroku restart --app omoroi-fe
-
+EventPicture.where(event_id: nil).count
+ids = EventPicture.where(event_id: nil).pluck(:id)
+EventPicture.where(id: ids).destroy_all
 
 04/27（Fri.）Tōkyō → Kyoto Ridesharing wanted !
 Passenger can cost share until 3000yen. She has small lugguage.
@@ -92,35 +95,6 @@ Sport event by bago at Ebisu
 恵比寿はすごくいい街ですよ。ぜひ遊びに来てください
 
 Ebisu es a really cool town. As foreigner I suggest you consider it as a best place to live in Tokyo
-
-style="overflow-x:auto"
-
-heroku pg:reset DATABASE_URL --app omoroi-be --confirm omoroi-be
-heroku rake db:migrate --app omoroi-be
-heroku rake db:seed --app omoroi-be
-heroku run console --app omoroi-be
-
-
-5.times {
-  for i in 1..25 do
-    dupPicture = EventPicture.find(i).dup
-    dupPicture.save
-  end 
-}
-
-Event.all.each_with_index do |event, index|
-  i = index + 1
-  EventPicture.find(i).update(event_id: i)
-end
-
-EventPicture.where(event_id: nil).count
-ids = EventPicture.where(event_id: nil).pluck(:id)
-EventPicture.where(id: ids).destroy_all
-
-all = []
-Event.all.each do |e|
-  all << e.id if e.event_pictures[0].nil?
-end
 
 - display 17 max chars for jp
 - display more granulation for cost
@@ -189,5 +163,8 @@ Event.order('date asc').pluck(:date)
 
 - add noritomosan partners
 
+git remote add staging git@heroku.com:omoroi-fe-staging.git
+git remote add production git@heroku.com:omoroi-fe.git
 
-cd1d55a0bbcde25fa0a14b445af1a33d2b194278cb98d762b27a0a52d0a208fc0ae416ef5cc8f689856514a136fb96bd7e60b42eac67b58a303435b0842efab3
+git remote add staging git@heroku.com:omoroi-be-staging.git
+git remote add production git@heroku.com:omoroi-be.git

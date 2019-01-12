@@ -26,6 +26,7 @@ export default {
   async asyncData ({ query, route, store, redirect }) {
     store.commit('merge', ['base.layout', { current: 'top.index', fullPath: route.fullPath }])
     try {
+      // console.log(window.navigator.language)
       let params = queryString.stringify({
         screen: 'top',
         bom: moment().format('YYYY-MM-DD'),
