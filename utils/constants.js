@@ -3,7 +3,7 @@ export default {
     frontend: {
       development: 'http://127.0.0.1:3000',
       staging: 'https://omoroi-staging-fe.herokuapp.com',
-      production: 'https://omoroi-fe.herokuapp.com'
+      production: 'https://omoroi-life.com'
     },
     backend: {
       development: 'http://127.0.0.1:4000',
