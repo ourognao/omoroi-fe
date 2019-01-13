@@ -1,6 +1,6 @@
 <template lang="pug">
 #layout-default-footer
-  div(v-if="$realEnv !== 'development'")
+  div(v-if="$realEnv !== 'production'")
     v-layout.footer-main.top-arrow(row class="hidden-md-only hidden-lg-only hidden-xl-only")
       v-flex(xs12)
         img(src="/images/top/top-arrow.png" usemap="#top-arrow")

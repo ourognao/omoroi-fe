@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    if (process.env.real === 'development') {
+    if (process.env.real === 'production') {
       document.body.classList.add('freeze-body')
     }
   },

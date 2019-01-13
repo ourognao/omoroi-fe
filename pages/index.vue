@@ -1,10 +1,10 @@
 <template lang="pug">
 #top-index
-  div(v-if="$realEnv !== 'development'")
+  div(v-if="$realEnv === 'production'")
+    top-index-release
+  div(v-else)
     top-index-main
     top-index-dialog
-  div(v-else)
-    top-index-release
 </template>
 
 <!-- ============================================================================ -->

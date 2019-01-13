@@ -94,7 +94,7 @@
         class="menu-icons"
       )
     img.pointable(
-      v-if="$realEnv !== 'development'"
+      v-if="$realEnv !== 'production'"
       src="/images/top/menu.png"
       class="menu-icons v-toolbar-side-icon"
       @click="drawer = !drawer")
