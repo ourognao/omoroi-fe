@@ -5,6 +5,9 @@ import constants from '~/utils/constants'
 
 export default {
   computed: {
+    $realEnv () {
+      return process.env.real
+    },
     $locale () {
       return this.$store.state.base.locale.selected
     }

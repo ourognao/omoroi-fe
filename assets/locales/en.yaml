@@ -214,6 +214,14 @@ top:
         i03: EDIT
         i04: Cancel
         i05: Update
+  release:
+    explanation:
+      i01: Please check back later.
+      i02: Our NEW website will blow your mind!
+    form:
+      title: Notify me for the release day
+      success-registration: Email registered. Thank you very much !
+      send-btn: Send
 
 footer:
   copyright:

@@ -1,7 +1,10 @@
 <template lang="pug">
 #top-index
-  top-index-main
-  top-index-dialog
+  div(v-if="$realEnv !== 'development'")
+    top-index-main
+    top-index-dialog
+  div(v-else)
+    top-index-release
 </template>
 
 <!-- ============================================================================ -->
@@ -9,14 +12,18 @@
 <script>
 import TopIndexMain from '~/containers/top/index/Main'
 import TopIndexDialog from '~/containers/top/index/Dialog'
+import TopIndexRelease from '~/containers/top/index/Release'
 import axios from '~/plugins/axios'
 import queryString from 'query-string'
 import moment from 'moment'
+import mixins from '~/utils/mixins'
 
 export default {
+  mixins: [mixins],
   components: {
     TopIndexMain,
-    TopIndexDialog
+    TopIndexDialog,
+    TopIndexRelease
   },
   head () {
     return {

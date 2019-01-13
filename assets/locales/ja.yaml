@@ -214,6 +214,14 @@ top:
         i03: 編集
         i04: キャンセル
         i05: 更新
+  release:
+    explanation:
+      i01: ホームページ作成中
+      i02: 今しばらくお待ちください
+    form:
+      title: リリース予定日をお知らせします
+      success-registration: メールを登録しました。ありがとうございました
+      send-btn: 送信
 
 footer:
   copyright:
