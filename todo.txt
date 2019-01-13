@@ -1,4 +1,5 @@
-ln -s ../contact-us/ /Users/bago/RailsProjects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../contact-us/  /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/
+ln -s ../index.vue /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/index.vue
 
 if (process.browser) {
   window.onNuxtReady(() => {
@@ -168,4 +169,3 @@ git remote add production git@heroku.com:omoroi-fe.git
 
 git remote add staging git@heroku.com:omoroi-be-staging.git
 git remote add production git@heroku.com:omoroi-be.git
-

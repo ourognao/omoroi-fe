@@ -93,7 +93,11 @@
         src="/images/language/128/jp.png"
         class="menu-icons"
       )
-    img.pointable(src="/images/top/menu.png" class="menu-icons v-toolbar-side-icon" @click="drawer = !drawer")
+    img.pointable(
+      v-if="$realEnv !== 'production'"
+      src="/images/top/menu.png"
+      class="menu-icons v-toolbar-side-icon"
+      @click="drawer = !drawer")
   slot
 
   v-snackbar(top right vertical v-model="snackbarVisible")
