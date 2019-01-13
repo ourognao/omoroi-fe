@@ -19,9 +19,10 @@ v-container#top-index-release(fluid)
                 v-model="email"
                 name="user-email"
                 :label="$t('attr.user-email')"
-                v-validate="'required'"
+                v-validate="'required|email'"
                 :error-messages="veeErrors.first('user-email') || []"
                 prepend-icon="mail"
+                @keypress.enter.native="send"
               )
             v-flex(xs4 offset-xs1)
               v-btn.mt-3(small round color="primary" dark @click.stop.prevent.native="send")
@@ -46,7 +47,7 @@ v-container#top-index-release(fluid)
 <!-- ============================================================================ -->
 
 <script>
-// import axios from '~/plugins/axios'
+import axios from '~/plugins/axios'
 import mixins from '~/utils/mixins'
 export default {
   mixins: [mixins],
@@ -64,31 +65,27 @@ export default {
     send () {
       this.$validator.validateAll().then(async result => {
         try {
-          console.log('register email')
-          // let res = await axios({
-          //   ...{
-          //     method: 'post',
-          //     url: '/top',
-          //     data: {
-          //       email: this.email,
-          //       locale: this.$store.state.base.locale.selected
-          //     }
-          //   },
-          //   ...this.$store.getters.options
-          // })
-          // this.openWaitingScreen({ onDialog: true })
-          // if (res.data.status === 'error') {
-          //   res.data.errors.email.length && this.$validator.errors.add({
-          //     field: 'user-email',
-          //     msg: `${res.data.errors.access[0]}`
-          //   })
-          //   return
-          // }
-          // this.message(this.$t('top.release.form.success-registration'))
+          if (!result) return
+          await axios.post('/utils/release_email', {
+            email: this.email,
+            locale: this.$store.state.base.locale.selected
+          }).then(response => {
+            let { data } = response
+            if (data.status === 'error') {
+              this.$validator.errors.add({
+                field: 'user-email',
+                msg: `${this.$t('attr.user-email')}${data.errors.email[0]}`
+              })
+              return
+            }
+            this.message(this.$t('top.release.form.success-registration'))
+            this.email = null
+          }).catch(error => {
+            console.error(error)
+          })
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
-        this.closeWaitingScreen()
       })
     }
   }
