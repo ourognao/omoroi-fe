@@ -32,8 +32,7 @@ export default {
       window.location.href = path
     },
     reduceLocationAddress (event) {
-      let locale = this.$store.state.base.locale.selected
-      let eventLocation = locale === 'ja' ? event.locationJp : event.locationEn
+      let eventLocation = this.$locale === 'ja' ? event.locationJp : event.locationEn
       return eventLocation.includes(',') ? eventLocation.split(',')[0] : eventLocation
     },
     getGoogleMapHref (event) {
@@ -124,14 +123,13 @@ export default {
     },
     nl2br (object, type) {
       if (!object) return
-      let locale = this.$store.state.base.locale.selected
       let text = null
       switch (type) {
         case 'location':
-          text = locale === 'ja' ? object.locationJp : object.locationEn
+          text = this.$locale === 'ja' ? object.locationJp : object.locationEn
           break
         case 'explanation':
-          text = locale === 'ja' ? object.explanationJp : object.explanationEn
+          text = this.$locale === 'ja' ? object.explanationJp : object.explanationEn
           break
       }
       return text.split('\n').join('<br/>')
@@ -141,8 +139,7 @@ export default {
     },
     displayLocationName (event) {
       if (!event) return
-      let locale = this.$store.state.base.locale.selected
-      return locale === 'ja' ? event.eventLocationNameJp : event.eventLocationNameEn
+      return this.$locale === 'ja' ? event.eventLocationNameJp : event.eventLocationNameEn
     },
     displayEventTitle (currentSection, event, options) {
       if (!event) return
@@ -167,14 +164,13 @@ export default {
       return title
     },
     truncate (event, maxCharacters, type) {
-      let locale = this.$store.state.base.locale.selected
       let text = null
       switch (type) {
         case 'location':
-          text = locale === 'ja' ? event.locationJp : event.locationEn
+          text = this.$locale === 'ja' ? event.locationJp : event.locationEn
           break
         case 'explanation':
-          text = locale === 'ja' ? event.explanationJp : event.explanationEn
+          text = this.$locale === 'ja' ? event.explanationJp : event.explanationEn
           break
       }
       return text.length > maxCharacters ? text.substr(0, maxCharacters) + '...' : text
@@ -268,14 +264,12 @@ export default {
       return expectedPeoples.length > 0 ? (event.capacity - expectedPeoples.reduce(reducer)) : event.capacity
     },
     formatDate (date) {
-      let locale = this.$store.state.base.locale.selected
-      let formatted = locale === 'ja' ? 'YYYY年MM月DD (dd)' : 'ddd, MMM D, YYYY'
-      moment.locale(locale)
+      let formatted = this.$locale === 'ja' ? 'YYYY年MM月DD (dd)' : 'ddd, MMM D, YYYY'
+      moment.locale(this.$locale)
       return moment(date).format(formatted)
     },
     path (url) {
-      let locale = this.$store.state.base.locale.selected
-      return (locale === 'ja' ? url : '/' + locale + url)
+      return (this.$locale === 'ja' ? url : '/' + this.$locale + url)
     },
     push (store, key, path, hash) {
       store.commit('merge', [key, hash])
@@ -285,7 +279,7 @@ export default {
         hash2[changeCase.snakeCase(key)] = hash[key]
       }
       let params = queryString.stringify(hash2)
-      let localePath = store.state.base.locale.selected === 'en' ? `/en${path}` : path
+      let localePath = this.$locale === 'en' ? `/en${path}` : path
       window.history.pushState(null, null, `${localePath}?${params}`)
       store.commit('merge', ['base.layout', {
         fullPath: `${localePath}?${params}`

@@ -30,10 +30,27 @@ export default {
       title: `${this.$t('base.head.title')}`
     }
   },
+  mounted () {
+    this.setLanguageBasedOnBrowser()
+  },
+  methods: {
+    setLanguageBasedOnBrowser () {
+      let navigatorLanguage = window.navigator.language
+      let preferredLanguage = JSON.parse(window.sessionStorage.getItem('preferred-language'))
+      if (preferredLanguage && preferredLanguage[0].nl === navigatorLanguage) return
+      window.sessionStorage.setItem(
+        'preferred-language',
+        JSON.stringify([{
+          nl: navigatorLanguage,
+          dl: navigatorLanguage === 'ja' ? 'ja' : 'en'
+        }])
+      )
+      if (navigatorLanguage !== 'ja') this.goto(this.$router, '/en')
+    }
+  },
   async asyncData ({ query, route, store, redirect }) {
     store.commit('merge', ['base.layout', { current: 'top.index', fullPath: route.fullPath }])
     try {
-      // console.log(window.navigator.language)
       let params = queryString.stringify({
         screen: 'top',
         bom: moment().format('YYYY-MM-DD'),
