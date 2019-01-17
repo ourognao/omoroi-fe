@@ -8,6 +8,16 @@ v-container#auth-sign-up-main(fluid)
 
         v-card-text.f-px4.f-py3
           v-layout(wrap)
+            v-flex(xs12).text-xs-center
+              div(
+                class="fb-login-button"
+                data-max-rows="1"
+                data-size="medium"
+                data-button-type="continue_with"
+                data-show-faces="false"
+                data-auto-logout-link="false"
+                data-use-continue-as="false")
+              div(id="status")
             v-flex(xs12)
               v-text-field(
                 type="text"

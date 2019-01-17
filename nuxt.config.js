@@ -39,6 +39,7 @@ module.exports = {
     '~plugins/vee-validate',
     '~plugins/social-sharing',
     '~plugins/i18n',
+    { src: '~plugins/facebook-sdk', ssr: false },
     { src: '~plugins/v-uploader', ssr: false },
     { src: '~plugins/gmap', ssr: false },
     { src: '~plugins/viewer', ssr: false }

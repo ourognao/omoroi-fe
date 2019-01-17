@@ -169,5 +169,3 @@ git remote add production git@heroku.com:omoroi-fe.git
 
 git remote add staging git@heroku.com:omoroi-be-staging.git
 git remote add production git@heroku.com:omoroi-be.git
-
-{%22token%22:%22hPu-PP5lqS5Py910yZzo5g%22%2C%22uid%22:%22b.ourognao@gmail.com%22%2C%22client%22:%22wH8GrlbfJYuwNDjhjqiOgg%22%2C%22id%22:1%2C%22email%22:%22b.ourognao@gmail.com%22%2C%22name%22:%22Bago%22%2C%22kind%22:%22engineer%22}
