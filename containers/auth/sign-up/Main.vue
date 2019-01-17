@@ -118,7 +118,7 @@ export default {
         console.log(response)
         if (response.authResponse) {
           console.log('Connected! Hitting /auth/facebook/callback)...')
-          context.getOmniAuthCallBack()
+          context.getOmniAuthCallBack(response)
           // $('#connect').html('Connected! Hitting OmniAuth callback (GET /auth/facebook/callback)...')
           // since we have cookies enabled, this request will allow omniauth to parse
           // out the auth code from the signed request in the fbsr_XXX cookie
@@ -129,9 +129,9 @@ export default {
         }
       })
     },
-    async getOmniAuthCallBack () {
+    async getOmniAuthCallBack (response) {
       try {
-        let { data } = await axios.get('/auth/facebook/callback')
+        let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         console.log('getOmniAuthCallBack', data)
       } catch (error) {
         console.error(error)

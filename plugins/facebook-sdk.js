@@ -29,7 +29,7 @@ Vue.use(vueFb, {
   appId: '171853377070172',
   cookie: true,
   xfbml: true,
-  version: 'v3.2'
+  version: 'v3.1'
 })
 
 function statusChangeCallback (response) {
