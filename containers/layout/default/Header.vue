@@ -229,6 +229,12 @@ export default {
           icon: 'library_books',
           href: '/about',
           visible: true
+        },
+        {
+          titleKey: 'privacy-policy.index.title',
+          icon: 'info',
+          href: '/privacy-policy',
+          visible: true
         }
       ],
       drawer: false,
