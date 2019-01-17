@@ -9,6 +9,12 @@ v-container#auth-sign-up-main(fluid)
         v-card-text.f-px4.f-py3
           v-layout(wrap)
             v-flex(xs12).text-xs-center
+              p(id="connect")
+                v-btn(flat @click.stop.prevent.native="facebookSignUp")
+                  span.f-mr1 Connect to FB!
+                  v-icon check_circle
+              p(id="results")
+            v-flex(xs12).text-xs-center
               div(
                 class="fb-login-button"
                 data-max-rows="1"
@@ -106,6 +112,31 @@ export default {
     }
   },
   methods: {
+    facebookSignUp () {
+      let context = this
+      window.FB.login(function (response) {
+        console.log(response)
+        if (response.authResponse) {
+          console.log('Connected! Hitting /auth/facebook/callback)...')
+          context.getOmniAuthCallBack()
+          // $('#connect').html('Connected! Hitting OmniAuth callback (GET /auth/facebook/callback)...')
+          // since we have cookies enabled, this request will allow omniauth to parse
+          // out the auth code from the signed request in the fbsr_XXX cookie
+          // $.getJSON('/auth/facebook/callback', function (json) {
+          //   $('#connect').html('Connected! Callback complete.')
+          //   $('#results').html(JSON.stringify(json));
+          // })
+        }
+      })
+    },
+    async getOmniAuthCallBack () {
+      try {
+        let { data } = await axios.get('/auth/facebook/callback')
+        console.log('getOmniAuthCallBack', data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     signUp (e) {
       this.veeErrors.clear()
       this.$validator.validateAll().then(async result => {
