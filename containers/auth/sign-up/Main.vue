@@ -125,9 +125,10 @@ export default {
         let params = queryString.stringify({
           code: response.authResponse.signedRequest
         }, { arrayFormat: 'bracket' })
-        let { data } = await axios.get(`/auth/facebook/callback?${params}`)
+        console.log(params)
+        // let { data } = await axios.get(`/auth/facebook/callback?${params}`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
-        // let { data } = await axios.get(`/auth/facebook/callback`)
+        let { data } = await axios.get(`/auth/facebook/callback`)
         console.log('getOmniAuthCallBack', data)
       } catch (error) {
         console.error(error)
