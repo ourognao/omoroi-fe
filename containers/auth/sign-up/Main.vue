@@ -14,16 +14,6 @@ v-container#auth-sign-up-main(fluid)
                   span.f-mr1 Connect to FB!
                   v-icon check_circle
               p(id="results")
-            v-flex(xs12).text-xs-center
-              div(
-                class="fb-login-button"
-                data-max-rows="1"
-                data-size="medium"
-                data-button-type="continue_with"
-                data-show-faces="false"
-                data-auto-logout-link="false"
-                data-use-continue-as="false")
-              div(id="status")
             v-flex(xs12)
               v-text-field(
                 type="text"
