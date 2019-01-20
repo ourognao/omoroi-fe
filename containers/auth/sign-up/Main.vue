@@ -121,7 +121,8 @@ export default {
     },
     async getOmniAuthCallBack (response) {
       try {
-        let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
+        // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
+        let { data } = await axios.get(`/auth/facebook/callback`)
         console.log('getOmniAuthCallBack', data)
       } catch (error) {
         console.error(error)
