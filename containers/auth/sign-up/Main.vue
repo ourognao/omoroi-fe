@@ -10,12 +10,6 @@ v-container#auth-sign-up-main(fluid)
           v-layout(wrap)
             v-flex(xs12).text-xs-center
               p(id="connect")
-                v-btn(flat @click.stop.prevent.native="launchFB")
-                  span.f-mr1 Connect to FB!
-                  v-icon check_circle
-              p(id="results")
-            v-flex(xs12).text-xs-center
-              p(id="connect")
                 v-btn(flat @click.stop.prevent.native="facebookSignUp")
                   span.f-mr1 Connect to FB!
                   v-icon check_circle
@@ -105,16 +99,16 @@ export default {
       name: null,
       email: null,
       password: null,
-      passwordConfirm: null,
-      authWindow: Window,
-      code: null
+      passwordConfirm: null
+      // authWindow: Window,
+      // code: null
     }
   },
   methods: {
-    launchFB () {
-      console.log('the code', this.code)
-      this.authWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&code=${this.code}&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email`, '', 'width=600,height=400')
-    },
+    // launchFB () {
+    //   console.log('the code', this.code)
+    //   this.authWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&code=${this.code}&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email`, '', 'width=600,height=400')
+    // },
     facebookSignUp () {
       let context = this
       window.FB.login(function (response) {
