@@ -129,7 +129,7 @@ export default {
         document.cookie = `fbsr_171853377070172=${response.authResponse.signedRequest}`
         console.log('cookie', document.cookie)
         console.log('params', params)
-        let { data } = await axios.get(`/auth/facebook/callback?${params}&resource_class=User&redirect_uri=https://omoroi-fe.herokuapp.com/auth/facebook/callback`)
+        let { data } = await axios.get(`/auth/facebook/callback?${params}&resource_class=User&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
         console.log('getOmniAuthCallBack', data)
