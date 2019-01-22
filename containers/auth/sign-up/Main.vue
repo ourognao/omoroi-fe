@@ -106,12 +106,14 @@ export default {
       email: null,
       password: null,
       passwordConfirm: null,
-      authWindow: Window
+      authWindow: Window,
+      code: null
     }
   },
   methods: {
     launchFB () {
-      this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email', '', 'width=600,height=400')
+      console.log('the code', this.code)
+      this.authWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&code=${this.code}&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email`, '', 'width=600,height=400')
     },
     facebookSignUp () {
       let context = this
@@ -136,6 +138,7 @@ export default {
           code: response.authResponse.signedRequest
         }, { arrayFormat: 'bracket' })
         console.log('first', response.authResponse.signedRequest)
+        this.code = response.authResponse.signedRequest
         document.cookie = `fbsr_171853377070172=${response.authResponse.signedRequest}`
         console.log('cookie', document.cookie)
         console.log('params', params)
