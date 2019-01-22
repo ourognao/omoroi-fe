@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     launchFB () {
-      this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback&scope=email', '', 'width=600,height=400')
+      this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email', '', 'width=600,height=400')
     },
     facebookSignUp () {
       let context = this
