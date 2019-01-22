@@ -128,9 +128,10 @@ export default {
         console.log('first', response.authResponse.signedRequest)
         document.cookie = `fbsr_171853377070172=${response.authResponse.signedRequest}`
         console.log('cookie', document.cookie)
-        let { data } = await axios.get(`/auth/facebook/callback?${params}`)
+        console.log('params', params)
+        // let { data } = await axios.get(`/auth/facebook/callback?${params}`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
-        // let { data } = await axios.get(`/auth/facebook/callback`)
+        let { data } = await axios.get(`/auth/facebook/callback`)
         console.log('getOmniAuthCallBack', data)
       } catch (error) {
         console.error(error)

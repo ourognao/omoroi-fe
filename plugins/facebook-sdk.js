@@ -28,7 +28,7 @@ vueFb.install = function install (Vue, options) {
 Vue.use(vueFb, {
   appId: '171853377070172',
   cookie: true,
-  // xfbml: true,
+  xfbml: true,
   version: 'v3.1'
 })
 
