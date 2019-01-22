@@ -10,6 +10,12 @@ v-container#auth-sign-up-main(fluid)
           v-layout(wrap)
             v-flex(xs12).text-xs-center
               p(id="connect")
+                v-btn(flat @click.stop.prevent.native="launchFB")
+                  span.f-mr1 Connect to FB!
+                  v-icon check_circle
+              p(id="results")
+            v-flex(xs12).text-xs-center
+              p(id="connect")
                 v-btn(flat @click.stop.prevent.native="facebookSignUp")
                   span.f-mr1 Connect to FB!
                   v-icon check_circle
@@ -99,10 +105,14 @@ export default {
       name: null,
       email: null,
       password: null,
-      passwordConfirm: null
+      passwordConfirm: null,
+      authWindow: Window
     }
   },
   methods: {
+    launchFB () {
+      this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback&scope=email', '', 'width=600,height=400')
+    },
     facebookSignUp () {
       let context = this
       window.FB.login(function (response) {
@@ -129,7 +139,7 @@ export default {
         document.cookie = `fbsr_171853377070172=${response.authResponse.signedRequest}`
         console.log('cookie', document.cookie)
         console.log('params', params)
-        let { data } = await axios.get(`/auth/facebook/callback?${params}&resource_class=User&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/`)
+        let { data } = await axios.get(`/auth/facebook/callback?${params}&resource_class=User`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
         console.log('getOmniAuthCallBack', data)
