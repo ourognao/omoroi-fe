@@ -147,7 +147,7 @@ export default {
       } catch (error) {
         console.error(error)
       }
-    }
+    },
     async getOmniAuthCallBack (response) {
       try {
         let params = queryString.stringify({
