@@ -55,6 +55,16 @@ export default {
       // code: null
     }
   },
+  computed: {
+    $facebookLoginDialog () {
+      return this.$store.state.auth.facebook.dialog
+    }
+  },
+  mounted () {
+    console.log('bacher', this.$facebookLoginDialog)
+    let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
+    facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
+  },
   methods: {
     // launchFB () {
     //   console.log('the code', this.code)
