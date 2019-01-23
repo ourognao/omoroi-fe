@@ -140,7 +140,7 @@ export default {
         let params = queryString.stringify({
           code: code
         }, { arrayFormat: 'bracket' })
-        let { data } = await axios.get(`/auth/facebook/callback`)
+        let { data } = await axios.get(`/auth/facebook/callback?code=${params}`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
         console.log('getOmniAuthCallBack', data)
