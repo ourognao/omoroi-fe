@@ -23,6 +23,7 @@ export default {
     try {
       let { data } = await axios.get('/auth/facebook')
       console.log(data)
+      console.log('IN FACEBOOK PAGE')
       store.commit('merge', ['auth.facebook', {
         dialog: data
       }])

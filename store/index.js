@@ -35,6 +35,9 @@ export const state = () => ({
   },
 
   auth: {
+    facebook: {
+      dialog: null
+    },
     login: {
       dialog: false
     },

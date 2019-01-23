@@ -4,7 +4,7 @@ v-container#auth-facebook-callback-main(fluid)
     v-flex(xs12 sm7 md4)
       v-card
         v-card-title.grey.white--text
-          span.f-fw2 {{ $t('auth.sign-up.i01') }}
+          span.f-fw2 FACEBOOK CALLBACK PAGE
 
         v-card-text.f-px4.f-py3
           v-layout(wrap)
@@ -61,9 +61,10 @@ export default {
     }
   },
   mounted () {
-    console.log('bacher', this.$facebookLoginDialog)
-    let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
-    facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
+  	console.log('callbacl mounted')
+    // console.log('bacher', this.$facebookLoginDialog)
+    // let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
+    // facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
   },
   methods: {
     // launchFB () {

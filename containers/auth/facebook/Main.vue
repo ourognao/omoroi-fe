@@ -4,7 +4,7 @@ v-container#auth-facebook-main(fluid)
     v-flex(xs12 sm7 md4)
       v-card
         v-card-title.grey.white--text
-          span.f-fw2 {{ $t('auth.sign-up.i01') }}
+          span.f-fw2 FACEBOOK LOGIN PAGE
 
         v-card-text.f-px4.f-py3
           v-layout(wrap)
