@@ -83,6 +83,7 @@ export default {
     if (this.getUrlParams().hasOwnProperty('code')) {
       console.log('IN FACEBOOK PAGE :: CODE RECEIVED')
       console.log(this.getUrlParams().code)
+      this.getOmniAuthCallBack2(this.getUrlParams().code)
     } else {
       console.log('IN FACEBOOK PAGE :: CODE NOT RECEIVED')
       console.log()
@@ -134,6 +135,19 @@ export default {
         }
       })
     },
+    async getOmniAuthCallBack2 (code) {
+      try {
+        let params = queryString.stringify({
+          code: code
+        }, { arrayFormat: 'bracket' })
+        let { data } = await axios.get(`/auth/facebook/callback?code=${params}&final=bacher`)
+        // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
+        // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
+        console.log('getOmniAuthCallBack', data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
     async getOmniAuthCallBack (response) {
       try {
         let params = queryString.stringify({
