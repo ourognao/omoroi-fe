@@ -61,9 +61,15 @@ export default {
     }
   },
   mounted () {
-    console.log('bacher', this.$facebookLoginDialog)
-    let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
-    facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
+    // console.log('bacher', this.$facebookLoginDialog)
+    // let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
+    // facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
+    console.log('bababab')
+    window.open(
+      'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/',
+      'facebook-login-dialog',
+      'height=600,width=800'
+    )
   },
   methods: {
     // launchFB () {
@@ -97,7 +103,7 @@ export default {
         document.cookie = `fbsr_171853377070172=${response.authResponse.signedRequest}`
         console.log('cookie', document.cookie)
         console.log('params', params)
-        let { data } = await axios.get(`/auth/facebook/callback?code=${params}&resource_class=User`)
+        let { data } = await axios.get(`/auth/facebook/callback?code=${params}`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
         console.log('getOmniAuthCallBack', data)
