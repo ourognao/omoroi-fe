@@ -10,6 +10,18 @@ v-container#auth-facebook-main(fluid)
           v-layout(wrap)
             v-flex(xs12).text-xs-center
               p(id="connect")
+                v-btn(flat @click.stop.prevent.native="launchFBFE")
+                  span.f-mr1 Connect to FB! (launchFBFE)
+                  v-icon check_circle
+              p(id="results")
+            v-flex(xs12).text-xs-center
+              p(id="connect")
+                v-btn(flat @click.stop.prevent.native="launchFBBE")
+                  span.f-mr1 Connect to FB! (launchFBBE)
+                  v-icon check_circle
+              p(id="results")
+            v-flex(xs12).text-xs-center
+              p(id="connect")
                 v-btn(flat @click.stop.prevent.native="facebookSignUp")
                   span.f-mr1 Connect to FB!
                   v-icon check_circle
@@ -64,12 +76,20 @@ export default {
     // console.log('bacher', this.$facebookLoginDialog)
     // let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
     // facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
-    console.log('IN FACEBOOK PAGE :: Mounted')
-    window.open(
-      'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/'
-    )
   },
   methods: {
+    launchFBFE () {
+      console.log('IN FACEBOOK PAGE :: Mounted')
+      window.open(
+        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/'
+      )
+    },
+    launchFBBE () {
+      console.log('IN FACEBOOK PAGE :: Mounted')
+      window.open(
+        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback/'
+      )
+    },
     // launchFB () {
     //   console.log('the code', this.code)
     //   this.authWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&code=${this.code}&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email`, '', 'width=600,height=400')
