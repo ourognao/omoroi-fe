@@ -61,7 +61,7 @@ export default {
     }
   },
   mounted () {
-  	console.log('callbacl mounted')
+    console.log('callbacl mounted')
     // console.log('bacher', this.$facebookLoginDialog)
     // let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
     // facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog

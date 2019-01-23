@@ -7,7 +7,7 @@
 
 <script>
 import AuthFacebookCallbackMain from '~/containers/auth/facebook/callback/Main'
-import axios from '~/plugins/axios'
+// import axios from '~/plugins/axios'
 
 export default {
   components: {
@@ -23,7 +23,7 @@ export default {
     try {
       // let { data } = await axios.get('/auth/facebook')
       console.log('IN CALLBACK PAGE')
-      console.log(data)
+      // console.log(data)
       // store.commit('merge', ['auth.facebook', {
       //   dialog: data
       // }])
