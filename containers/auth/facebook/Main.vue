@@ -16,8 +16,14 @@ v-container#auth-facebook-main(fluid)
               p(id="results")
             v-flex(xs12).text-xs-center
               p(id="connect")
-                v-btn(flat @click.stop.prevent.native="launchFBBE")
-                  span.f-mr1 Connect to FB! (launchFBBE)
+                v-btn(flat @click.stop.prevent.native="launchFBBE1")
+                  span.f-mr1 Connect to FB! (launchFBBE1)
+                  v-icon check_circle
+              p(id="results")
+            v-flex(xs12).text-xs-center
+              p(id="connect")
+                v-btn(flat @click.stop.prevent.native="launchFBBE2")
+                  span.f-mr1 Connect to FB! (launchFBBE2)
                   v-icon check_circle
               p(id="results")
             v-flex(xs12).text-xs-center
@@ -84,11 +90,20 @@ export default {
         'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback'
       )
     },
-    launchFBBE () {
+    launchFBBE1 () {
       console.log('IN FACEBOOK PAGE :: Mounted')
       window.open(
         'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback'
       )
+    },
+    launchFBBE2 () {
+      console.log('IN FACEBOOK PAGE :: Mounted')
+      window.open(
+        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/omniauth/facebook/callback'
+      )
+      // window.open(
+      //   'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback'
+      // )
     },
     // launchFB () {
     //   console.log('the code', this.code)
