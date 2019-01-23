@@ -79,6 +79,14 @@ export default {
     }
   },
   mounted () {
+    console.log('IN FACEBOOK PAGE :: MOUNTED')
+    if (this.getUrlParams().hasOwnProperty('code')) {
+      console.log('IN FACEBOOK PAGE :: CODE RECEIVED')
+      console.log(this.getUrlParams().code)
+    } else {
+      console.log('IN FACEBOOK PAGE :: CODE NOT RECEIVED')
+      console.log()
+    }
     // console.log('bacher', this.$facebookLoginDialog)
     // let facebookLoginDialog = window.open('', 'facebook-login-dialog', 'height=600,width=800')
     // facebookLoginDialog.document.body.innerHTML = this.$facebookLoginDialog
