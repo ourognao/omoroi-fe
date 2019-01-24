@@ -128,7 +128,7 @@ export default {
           //   $('#results').html(JSON.stringify(json));
           // })
         }
-      }, { scope: 'email, user_likes' })
+      }, { scope: 'email' })
     },
     async getOmniAuthCallBack (response) {
       try {
