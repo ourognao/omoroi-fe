@@ -110,12 +110,16 @@ export default {
     //   this.authWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&code=${this.code}&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email`, '', 'width=600,height=400')
     // },
     facebookSignUp () {
-      let context = this
+      // let context = this
       window.FB.login(function (response) {
         console.log(response)
         if (response.authResponse) {
-          console.log('Connected! Hitting /auth/facebook/callback)...')
-          context.getOmniAuthCallBack(response)
+          window.FB.api('/me', function (response) {
+            console.log('Successful login for: ' + response.name)
+            console.log('reponse', response)
+          })
+          // console.log('Connected! Hitting /auth/facebook/callback)...')
+          // context.getOmniAuthCallBack(response)
           // $('#connect').html('Connected! Hitting OmniAuth callback (GET /auth/facebook/callback)...')
           // since we have cookies enabled, this request will allow omniauth to parse
           // out the auth code from the signed request in the fbsr_XXX cookie
