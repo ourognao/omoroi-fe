@@ -37,7 +37,17 @@ function statusChangeCallback (response) {
   console.log(response)
   if (response.status === 'connected') {
     console.log('FB :: connected')
+    testAPI()
   } else {
     console.log('Please log ' + 'into this app.')
   }
+}
+
+function testAPI () {
+  console.log('Welcome!  Fetching your information.... ')
+  window.FB.api('/me', function (response) {
+    console.log('Successful login for: ' + response.name)
+    document.getElementById('status').innerHTML =
+      'Thanks for logging in, ' + response.name + '!'
+  })
 }
