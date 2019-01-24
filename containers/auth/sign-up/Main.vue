@@ -114,10 +114,11 @@ export default {
       window.FB.login(function (response) {
         console.log(response)
         if (response.authResponse) {
-          window.FB.api('/me', function (response) {
-            console.log('Successful login for: ' + response.name)
-            console.log('reponse', response)
-          })
+          window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+            function (response) {
+              console.log('Successful login for: ' + response.name)
+              console.log('reponse', response)
+            })
           // console.log('Connected! Hitting /auth/facebook/callback)...')
           // context.getOmniAuthCallBack(response)
           // $('#connect').html('Connected! Hitting OmniAuth callback (GET /auth/facebook/callback)...')
@@ -128,7 +129,7 @@ export default {
           //   $('#results').html(JSON.stringify(json));
           // })
         }
-      }, { scope: 'email' })
+      })
     },
     async getOmniAuthCallBack (response) {
       try {
