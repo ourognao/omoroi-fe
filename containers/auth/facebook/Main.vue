@@ -96,7 +96,8 @@ export default {
     launchFBFE () {
       console.log('IN FACEBOOK PAGE :: Mounted')
       let uri = 'https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/'
-      let encodeURICallback = encodeURI(uri)
+      let encodeURICallback = encodeURIComponent(uri)
+      console.log(encodeURICallback)
       window.open(
         `https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=${encodeURICallback}`
       )
