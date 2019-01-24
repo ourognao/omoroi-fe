@@ -96,19 +96,19 @@ export default {
     launchFBFE () {
       console.log('IN FACEBOOK PAGE :: Mounted')
       window.open(
-        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback'
+        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/'
       )
     },
     launchFBBE1 () {
       console.log('IN FACEBOOK PAGE :: Mounted')
       window.open(
-        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback'
+        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback/'
       )
     },
     launchFBBE2 () {
       console.log('IN FACEBOOK PAGE :: Mounted')
       window.open(
-        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/omniauth/facebook/callback'
+        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/omniauth/facebook/callback/'
       )
       // window.open(
       //   'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback'
@@ -140,8 +140,7 @@ export default {
         let params = queryString.stringify({
           code: code
         }, { arrayFormat: 'bracket' })
-        console.log(params)
-        let { data } = await axios.get(`/auth/facebook/callback`)
+        let { data } = await axios.get(`/auth/facebook/callback?${params}`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
         console.log('getOmniAuthCallBack', data)
