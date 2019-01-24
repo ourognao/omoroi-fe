@@ -140,7 +140,7 @@ export default {
         let params = queryString.stringify({
           code: code
         }, { arrayFormat: 'bracket' })
-        let { data } = await axios.get(`/auth/facebook/callback?code=${params}`)
+        let { data } = await axios.get(`/auth/facebook/callback?code=${params}&client_secret=c9e0a29b78705ca3c2d3f8e6af0d3e3d&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback&client_id=171853377070172`)
         // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
         // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
         console.log('getOmniAuthCallBack', data)
