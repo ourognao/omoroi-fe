@@ -1,3 +1,4 @@
+ln -s ../privacy-policy/  /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../contact-us/  /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../index.vue /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/index.vue
 
@@ -101,73 +102,3 @@ Ebisu es a really cool town. As foreigner I suggest you consider it as a best pl
 - display more granulation for cost
 
 恵比寿はすごくいい街ですよぜひ遊びに来てください
-
-
-A) Top page
-JA maxlength 11
-EN maxlength 26
-
-B) Top page details box and/or Event upload screen
-
-JA maxlength 16
-EN maxlength 30
-
--limit max people available when making a reservation
-
-
-```
-- I registered for a January 1st event, but when my confirmation came up, the previous event button (Dec 31st) disappeared (it was there before)
-```
-
-```
-- also similar, was browsing January events, then closed the dialogue box, but when I pushed December it showed no events. If I refreshed the page though, the events appeared.
-```
-
-```
-Cosmetic:
-- can we put just a small space between the green checkbox and the text?
-- can we please insert a little more space under the Title and EDIT link?
-- can the EDIT text be smaller (same size as “previous event” text?
-- can we please have a thin blue line reaching edge to edge of the dialogue box (longer than the thin blue line below the segment titles)
-```
-
-
-```
-- super small detail: the X closing button is perfectly placed, but when pressing it the circler shadow highlight thing is situated just left of the X
-```
-
-
-12/26（Wed.）Tanabe → Osaka  →  Gujo
-Rideshare for 0yen ! 3 seats available. 
-Driver can speak english and japanese.
-So if you want to save money while traveling, it's your time now :).
-#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel
-#sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア
-
-
-12/26（水）田辺市 → 大阪府 → 郡上市
-皆さんこんばんは！メリークリスマス！今回ライドシェア（車の相乗り）として０円ドライブです！３募集！日本語。英語もOK。移動費を節約したいまたは新しい友人を作りたい方へ、ぜひご覧ください #カーシェア
-https://www.noritomosan.com/lifts/search?lid=399&locale=jp @noritomosan_JPさんから
-
-Francoisのラクレットパーティについて
-住所：〒223-0057 神奈川県横浜市港北区新羽町2090
-ビル：オークフィールド 205
-開始：19時
-
-It's not that it's impossible but it's not recommended. 
-Change the layout for desktop means write twice the same code but in a different way.
-Not only it will take me some times but also it will male the code less readable :/.
-
-
-
-Event.order('date asc').pluck(:date)
-
-- add noritomosan partners
-
-git remote add staging git@heroku.com:omoroi-fe-staging.git
-git remote add production git@heroku.com:omoroi-fe.git
-
-git remote add staging git@heroku.com:omoroi-be-staging.git
-git remote add production git@heroku.com:omoroi-be.git
-
-{%22token%22:%22hPu-PP5lqS5Py910yZzo5g%22%2C%22uid%22:%22b.ourognao@gmail.com%22%2C%22client%22:%22wH8GrlbfJYuwNDjhjqiOgg%22%2C%22id%22:1%2C%22email%22:%22b.ourognao@gmail.com%22%2C%22name%22:%22Bago%22%2C%22kind%22:%22engineer%22}

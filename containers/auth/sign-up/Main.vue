@@ -8,6 +8,12 @@ v-container#auth-sign-up-main(fluid)
 
         v-card-text.f-px4.f-py3
           v-layout(wrap)
+            v-flex(xs12).text-xs-center
+              p(id="connect")
+                v-btn(flat @click.stop.prevent.native="facebookSignUp")
+                  span.f-mr1 Connect to FB!
+                  v-icon check_circle
+              p(id="results")
             v-flex(xs12)
               v-text-field(
                 type="text"
@@ -96,6 +102,19 @@ export default {
     }
   },
   methods: {
+    facebookSignUp () {
+      window.FB.login(function (response) {
+        console.log(response)
+        if (response.authResponse) {
+          window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+            function (response) {
+              console.log('login: ', response.name)
+              console.log('password: ', response.email)
+              console.log('reponse', response)
+            })
+        }
+      })
+    },
     signUp (e) {
       this.veeErrors.clear()
       this.$validator.validateAll().then(async result => {
