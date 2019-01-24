@@ -88,7 +88,6 @@ v-container#auth-sign-up-main(fluid)
 <script>
 import mixins from '~/utils/mixins'
 import axios from '~/plugins/axios'
-import queryString from 'query-string'
 
 export default {
   mixins: [mixins],
