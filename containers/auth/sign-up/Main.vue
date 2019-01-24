@@ -100,54 +100,21 @@ export default {
       email: null,
       password: null,
       passwordConfirm: null
-      // authWindow: Window,
-      // code: null
     }
   },
   methods: {
-    // launchFB () {
-    //   console.log('the code', this.code)
-    //   this.authWindow = window.open(`https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&code=${this.code}&client_id=171853377070172&display=popup&redirect_uri=https://omoroi-be-staging.herokuapp.com/auth/facebook/callback&scope=email`, '', 'width=600,height=400')
-    // },
     facebookSignUp () {
-      // let context = this
       window.FB.login(function (response) {
         console.log(response)
         if (response.authResponse) {
           window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
             function (response) {
-              console.log('Successful login for: ' + response.name)
+              console.log('login: ', response.name)
+              console.log('password: ', response.email)
               console.log('reponse', response)
             })
-          // console.log('Connected! Hitting /auth/facebook/callback)...')
-          // context.getOmniAuthCallBack(response)
-          // $('#connect').html('Connected! Hitting OmniAuth callback (GET /auth/facebook/callback)...')
-          // since we have cookies enabled, this request will allow omniauth to parse
-          // out the auth code from the signed request in the fbsr_XXX cookie
-          // $.getJSON('/auth/facebook/callback', function (json) {
-          //   $('#connect').html('Connected! Callback complete.')
-          //   $('#results').html(JSON.stringify(json));
-          // })
         }
       })
-    },
-    async getOmniAuthCallBack (response) {
-      try {
-        let params = queryString.stringify({
-          code: response.authResponse.signedRequest
-        }, { arrayFormat: 'bracket' })
-        console.log('first', response.authResponse.signedRequest)
-        this.code = response.authResponse.signedRequest
-        document.cookie = `fbsr_171853377070172=${response.authResponse.signedRequest}`
-        console.log('cookie', document.cookie)
-        console.log('params', params)
-        let { data } = await axios.get(`/auth/facebook/callback?code=${params}`)
-        // let { data } = await axios.get(`/auth/facebook/callback?code=${response.authResponse.signedRequest}`)
-        // let { data } = await axios.get(`/auth/facebook/callback?resource_class=User`)
-        console.log('getOmniAuthCallBack', data)
-      } catch (error) {
-        console.error(error)
-      }
     },
     signUp (e) {
       this.veeErrors.clear()
