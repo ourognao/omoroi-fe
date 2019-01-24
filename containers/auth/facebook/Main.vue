@@ -95,8 +95,10 @@ export default {
   methods: {
     launchFBFE () {
       console.log('IN FACEBOOK PAGE :: Mounted')
+      let uri = 'https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback/'
+      let encodeURICallback = encodeURI(uri)
       window.open(
-        'https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=https://omoroi-fe-staging.herokuapp.com/auth/facebook/callback'
+        `https://www.facebook.com/v3.2/dialog/oauth?client_id=171853377070172&redirect_uri=${encodeURICallback}`
       )
     },
     launchFBBE1 () {
