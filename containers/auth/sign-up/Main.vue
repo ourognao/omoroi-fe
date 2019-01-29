@@ -9,11 +9,9 @@ v-container#auth-sign-up-main(fluid)
         v-card-text.f-px4.f-py3
           v-layout(wrap)
             v-flex(xs12).text-xs-center
-              p(id="connect")
-                v-btn(flat @click.stop.prevent.native="facebookSignUp")
-                  span.f-mr1 Connect to FB!
-                  v-icon check_circle
-              p(id="results")
+              img(
+                @click="connectToFacebookSDK()"
+                src="/images/sign-up/facebook-login-button.png").facebook-login-button
             v-flex(xs12)
               v-text-field(
                 type="text"
@@ -81,6 +79,9 @@ v-container#auth-sign-up-main(fluid)
 <!-- ============================================================================ -->
 
 <style lang="stylus">
+#auth-sign-up-main
+  .facebook-login-button
+    width: 100%
 </style>
 
 <!-- ============================================================================ -->
@@ -88,6 +89,8 @@ v-container#auth-sign-up-main(fluid)
 <script>
 import mixins from '~/utils/mixins'
 import axios from '~/plugins/axios'
+import { setToken } from '~/utils/auth'
+import constants from '~/utils/constants'
 
 export default {
   mixins: [mixins],
@@ -98,18 +101,60 @@ export default {
       name: null,
       email: null,
       password: null,
-      passwordConfirm: null
+      passwordConfirm: null,
+      rememberMe: true
     }
   },
   methods: {
-    facebookSignUp () {
+    async signUpViaFacebook (response) {
+      try {
+        let newUser = {
+          provider: constants.sns.provider.facebook,
+          name: response.name,
+          email: response.email,
+          password: response.id
+        }
+        let res = await axios({
+          ...{
+            method: 'post',
+            url: '/users',
+            data: {
+              user: newUser,
+              locale: this.$store.state.base.locale.selected
+            }
+          },
+          ...this.$store.getters.options
+        })
+        if (res.data.status === 'error') {
+          this.message(this.$t('base.axios.failure'))
+          return
+        }
+        let { data, headers } = await axios.post('/auth/sign_in', {
+          email: response.email,
+          password: response.id,
+          locale: this.$store.state.base.locale.selected
+        })
+        setToken(this.auth(headers, data), this.rememberMe)
+        this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
+        console.log('correctly registered')
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 500)
+      } catch (error) {
+        this.message(this.$t('base.axios.failure'))
+        console.error(error)
+      }
+    },
+    connectToFacebookSDK () {
+      let context = this
       window.FB.login(function (response) {
         console.log(response)
         if (response.authResponse) {
           window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
             function (response) {
-              console.log('login: ', response.name)
-              console.log('password: ', response.email)
+              context.signUpViaFacebook(response)
+              console.log('name: ', response.name)
+              console.log('email: ', response.email)
               console.log('reponse', response)
             })
         }
