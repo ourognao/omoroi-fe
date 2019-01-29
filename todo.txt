@@ -102,3 +102,8 @@ Ebisu es a really cool town. As foreigner I suggest you consider it as a best pl
 - display more granulation for cost
 
 恵比寿はすごくいい街ですよぜひ遊びに来てください
+
+
+u = User.find_or_initialize_by(email: "chepiman_2_007@hotmail.com")
+u.preference_id = 1811
+u.save(validate: false)
