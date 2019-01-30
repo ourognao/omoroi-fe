@@ -9,9 +9,10 @@ v-container#auth-sign-up-main(fluid)
         v-card-text.f-px4.f-py3
           v-layout(wrap)
             v-flex(xs12).text-xs-center
-              img(
+              img.pointable(
                 @click="connectToFacebookSDK()"
                 src="/images/sign-up/facebook-login-button.png").facebook-login-button
+              div.mt-2.red-text.caption(v-if="providerErrorMessage").red-text {{ providerErrorMessage }}
             v-flex(xs12)
               v-text-field(
                 type="text"
@@ -102,11 +103,13 @@ export default {
       email: null,
       password: null,
       passwordConfirm: null,
-      rememberMe: true
+      rememberMe: true,
+      providerErrorMessage: null
     }
   },
   methods: {
     async signUpViaFacebook (response) {
+      this.providerErrorMessage = null
       try {
         let newUser = {
           provider: constants.sns.provider.facebook,
@@ -127,8 +130,8 @@ export default {
           ...this.$store.getters.options
         })
         if (res.data.status === 'error') {
+          this.providerErrorMessage = res.data.errors['email'][0]
           console.log('first error', res.data)
-          this.message(this.$t('base.axios.failure'))
           return
         }
         let { data, headers } = await axios.post('/auth/sign_in', {
@@ -164,6 +167,7 @@ export default {
     },
     signUp (e) {
       this.veeErrors.clear()
+      this.providerErrorMessage = null
       this.$validator.validateAll().then(async result => {
         if (!result) return
         try {
