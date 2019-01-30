@@ -127,6 +127,7 @@ export default {
           ...this.$store.getters.options
         })
         if (res.data.status === 'error') {
+          console.log('first error', res.data)
           this.message(this.$t('base.axios.failure'))
           return
         }
