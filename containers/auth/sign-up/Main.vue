@@ -155,7 +155,7 @@ export default {
             context.signUpViaFacebook(response)
           })
         }
-      })
+      }, { scope: 'email' })
     },
     signUp (e) {
       this.veeErrors.clear()
