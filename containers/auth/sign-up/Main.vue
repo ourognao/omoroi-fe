@@ -111,7 +111,6 @@ export default {
       this.providerErrorMessage = null
       try {
         let newUser = {
-          // uid: response.email,
           name: response.name,
           email: response.email,
           password: response.id
@@ -129,9 +128,9 @@ export default {
         })
         if (res.data.status === 'error') {
           this.providerErrorMessage = res.data.errors['email'][0]
-          console.log('first error', res.data)
           return
         }
+        this.openWaitingScreen({ onDialog: false })
         let { data, headers } = await axios.post('/auth/sign_in', {
           email: response.email,
           password: response.id,
@@ -139,10 +138,7 @@ export default {
         })
         setToken(this.auth(headers, data), this.rememberMe)
         this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-        console.log('correctly registered')
-        setTimeout(() => {
-          window.location.href = '/'
-        }, 500)
+        window.location.href = '/'
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
         console.error(error)
@@ -151,14 +147,10 @@ export default {
     connectToFacebookSDK () {
       let context = this
       window.FB.login(function (response) {
-        console.log(response)
         if (response.authResponse) {
           window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
             function (response) {
               context.signUpViaFacebook(response)
-              console.log('name: ', response.name)
-              console.log('email: ', response.email)
-              console.log('reponse', response)
             })
         }
       })
