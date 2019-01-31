@@ -12,10 +12,7 @@ export default {
     }
   },
   sns: {
-    hashtags: 'omoroi,party,sport,social,japan',
-    provider: {
-      facebook: 'facebook'
-    }
+    hashtags: 'omoroi,party,sport,social,japan'
   },
   gmap: {
     markerIcon: 'http://maps.google.com/mapfiles/ms/icons/red.png',
