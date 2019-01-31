@@ -308,8 +308,8 @@ export default {
       console.log('uprovider triggered', val)
       if (!val) {
         console.log('clear session')
-        // this.clearUserTokenSession()
-        // window.location.href = '/auth/login?session=expired'
+        this.clearUserTokenSession()
+        window.location.href = '/auth/login?session=expired'
       } else {
         console.log('user still logged')
       }
