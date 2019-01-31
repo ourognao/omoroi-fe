@@ -151,12 +151,11 @@ export default {
       let context = this
       window.FB.login(function (response) {
         if (response.authResponse) {
-          window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
-            function (response) {
-              context.signUpViaFacebook(response)
-            })
+          window.FB.api('/me', function (response) {
+            context.signUpViaFacebook(response)
+          })
         }
-      })
+      }, { scope: 'email' })
     },
     signUp (e) {
       this.veeErrors.clear()
