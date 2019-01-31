@@ -19,6 +19,7 @@ export default {
       this.$store.commit('merge', ['base.auth', {
         token: null,
         uid: null,
+        uprovider: null,
         client: null,
         email: null,
         name: null,
@@ -224,7 +225,8 @@ export default {
         id: data.data.id,
         email: data.data.email,
         name: data.data.name,
-        kind: data.data.kind
+        kind: data.data.kind,
+        uprovider: data.data.uprovider
       }
     },
     defaultUrl (layer) {

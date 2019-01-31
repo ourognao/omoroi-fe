@@ -248,6 +248,9 @@ export default {
       get: function () { return this.$topIndex.section },
       set: function (val) { this.$store.commit('merge', ['top.index', { section: val }]) }
     },
+    uprovider () {
+      return this.$store.state.base.auth.uprovider
+    },
     $topIndex () {
       return this.$store.state.top.index
     },
@@ -297,6 +300,18 @@ export default {
         }
         menus[this.$route.name] = true
         return menus
+      }
+    }
+  },
+  watch: {
+    uprovider (val) {
+      console.log('uprovider triggered', val)
+      if (!val) {
+        console.log('clear session')
+        // this.clearUserTokenSession()
+        // window.location.href = '/auth/login?session=expired'
+      } else {
+        console.log('user still logged')
       }
     }
   },

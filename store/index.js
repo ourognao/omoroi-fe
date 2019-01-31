@@ -5,6 +5,7 @@ export const state = () => ({
       locales: ['ja', 'en']
     },
     auth: {
+      uprovider: null,
       token: null,
       client: null,
       uid: null,

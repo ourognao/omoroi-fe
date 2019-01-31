@@ -91,6 +91,7 @@ v-container#auth-sign-up-main(fluid)
 import mixins from '~/utils/mixins'
 import axios from '~/plugins/axios'
 import { setToken } from '~/utils/auth'
+import constants from '~/utils/constants'
 
 export default {
   mixins: [mixins],
@@ -111,6 +112,7 @@ export default {
       this.providerErrorMessage = null
       try {
         let newUser = {
+          uprovider: constants.sns.provider.facebook,
           name: response.name,
           email: response.email,
           password: response.id
