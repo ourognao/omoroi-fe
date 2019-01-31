@@ -110,6 +110,7 @@ export default {
   methods: {
     async signUpViaFacebook (response) {
       this.providerErrorMessage = null
+      console.log(response)
       try {
         let newUser = {
           uprovider: constants.sns.provider.facebook,
