@@ -191,11 +191,14 @@
 
 <script>
 import mixins from '~/utils/mixins'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
 
 export default {
   mixins: [mixins],
   data () {
     return {
+      currentUser: this.$store.getters.currentUser,
       firstPartLinks: [
         {
           titleKey: 'top.index.title',
@@ -308,8 +311,7 @@ export default {
       console.log('uprovider triggered', val)
       if (!val) {
         console.log('clear session')
-        this.clearUserTokenSession()
-        window.location.href = '/auth/login?session=expired'
+        this.invalidOmniauthSession()
       } else {
         console.log('user still logged')
       }
@@ -324,6 +326,19 @@ export default {
         this.eventSection = null
       } else {
         this.goto(this.$router, '/')
+      }
+    },
+    async invalidOmniauthSession () {
+      this.clearUserTokenSession()
+      try {
+        let params = queryString.stringify({
+          email: this.currentUser.email
+        }, { arrayFormat: 'bracket' })
+        await axios.get(`/users/invalid_omniauth_session?${params}`)
+        window.location.href = '/auth/login?session=expired'
+      } catch (error) {
+        this.message(this.$t('base.axios.failure'))
+        console.error(error)
       }
     },
     signOut (e) {

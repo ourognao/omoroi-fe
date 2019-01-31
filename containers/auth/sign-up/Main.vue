@@ -114,6 +114,7 @@ export default {
       try {
         let newUser = {
           uprovider: constants.sns.provider.facebook,
+          facebook_id: response.id,
           name: response.name,
           email: response.email,
           password: response.id
