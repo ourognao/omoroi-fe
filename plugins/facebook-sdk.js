@@ -35,6 +35,8 @@ function statusChangeCallback (response) {
   if (response.status === 'connected') {
     console.log('FB :: connected')
   } else {
-    console.log('Please log ' + 'into this app.')
+    this.clearUserTokenSession()
+    console.log('FB :: not connected')
+    window.location.href = '/auth/login?session=expired'
   }
 }

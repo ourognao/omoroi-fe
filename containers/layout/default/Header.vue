@@ -191,7 +191,6 @@
 
 <script>
 import mixins from '~/utils/mixins'
-import { unsetToken } from '~/utils/auth'
 
 export default {
   mixins: [mixins],
@@ -318,15 +317,7 @@ export default {
         .then(async agreed => {
           if (agreed) {
             try {
-              unsetToken()
-              this.$store.commit('merge', ['base.auth', {
-                token: null,
-                uid: null,
-                client: null,
-                email: null,
-                name: null,
-                kind: null
-              }])
+              this.clearUserTokenSession()
               this.reload()
             } catch (error) {
               this.message(this.$t('base.axios.failure'))

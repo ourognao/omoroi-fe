@@ -2,6 +2,7 @@ import changeCase from 'change-case'
 import queryString from 'query-string'
 import moment from 'moment'
 import constants from '~/utils/constants'
+import { unsetToken } from '~/utils/auth'
 
 export default {
   computed: {
@@ -13,6 +14,17 @@ export default {
     }
   },
   methods: {
+    clearUserTokenSession () {
+      unsetToken()
+      this.$store.commit('merge', ['base.auth', {
+        token: null,
+        uid: null,
+        client: null,
+        email: null,
+        name: null,
+        kind: null
+      }])
+    },
     getOrganizerInfos (organizerId) {
       let users = this.$store.state.users.index.users
       let organizer = users.filter(user => user.id === organizerId)
