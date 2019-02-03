@@ -20,7 +20,7 @@
         :key="link.titleKey"
         v-if="link.visible"
         ripple
-        @click.stop.prevent.native="goto($router, link.href)"
+        @click.stop.prevent.native="link.externalHref ? externalGoTo(link.href) : goto($router, link.href)"
         active-class="l-active"
         v-model="selected[link.name]"
       )
@@ -60,7 +60,7 @@
         :key="link.titleKey"
         v-if="link.visible"
         ripple
-        @click.stop.prevent.native="goto($router, link.href)"
+        @click.stop.prevent.native="link.externalHref ? externalGoTo(link.href) : goto($router, link.href)"
         active-class="l-active"
         v-model="selected[link.name]"
       )
@@ -205,39 +205,52 @@ export default {
           titleKey: 'top.index.title',
           icon: 'home',
           href: '/',
-          visible: true
+          visible: true,
+          externalHref: false
         },
         {
           titleKey: 'auth.login.title',
           icon: 'input',
           href: '/auth/login',
-          visible: !this.$store.getters.isLogined
+          visible: !this.$store.getters.isLogined,
+          externalHref: false
         },
         {
           titleKey: 'auth.sign-up.title',
           icon: 'person_add',
           href: '/auth/sign-up',
-          visible: !this.$store.getters.isLogined
+          visible: !this.$store.getters.isLogined,
+          externalHref: false
         },
         {
           titleKey: 'events.index.title',
           icon: 'event',
           href: '/events',
-          visible: this.$store.getters.isLogined && this.$store.getters.screenRightsFor('events')
+          visible: this.$store.getters.isLogined && this.$store.getters.screenRightsFor('events'),
+          externalHref: false
         }
       ],
       secondPartLinks: [
         {
+          titleKey: 'base.menu.facebook-event-photos',
+          icon: 'photo_camera',
+          href: 'http://www.facebook.com/pg/omoroilife/photos',
+          visible: true,
+          externalHref: true
+        },
+        {
           titleKey: 'about-and-contact-us.index.title',
           icon: 'library_books',
           href: '/about',
-          visible: true
+          visible: true,
+          externalHref: false
         },
         {
           titleKey: 'privacy-policy.index.title',
           icon: 'info',
           href: '/privacy-policy',
-          visible: true
+          visible: true,
+          externalHref: false
         }
       ],
       drawer: false,

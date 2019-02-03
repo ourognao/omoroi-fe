@@ -70,6 +70,7 @@ base:
     japanese: 日本語
     sign_up: ユーザー登録
     sign_out: ログアウト
+    facebook-event-photos: イベント写真
   form:
     more: 以上
     close: 閉じる
