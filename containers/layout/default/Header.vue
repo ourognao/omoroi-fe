@@ -309,7 +309,7 @@ export default {
   },
   watch: {
     uprovider (val) {
-      if (!val && this.manuallyClearSession === false) {
+      if (!val) {
         this.invalidOmniauthSession()
       }
     }
@@ -331,8 +331,11 @@ export default {
         let params = queryString.stringify({
           email: this.currentUser.email
         }, { arrayFormat: 'bracket' })
+        let hrefPath = this.manuallyClearSession === false
+          ? '/auth/login'
+          : '/auth/login?session=expired'
         await axios.get(`/users/invalid_omniauth_session?${params}`)
-        window.location.href = '/auth/login?session=expired'
+        window.location.href = hrefPath
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
         console.error(error)
