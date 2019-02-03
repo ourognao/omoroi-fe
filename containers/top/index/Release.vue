@@ -34,7 +34,7 @@ v-container#top-index-release(fluid)
 <style lang="stylus">
 #top-index-release
   height 100vh
-  background-image url(/images/top/fort-st-andre.jpg)
+  background-image url(/images/top/release-bg.jpg)
   background-repeat no-repeat
   background-attachment fixed
   background-size auto 100%

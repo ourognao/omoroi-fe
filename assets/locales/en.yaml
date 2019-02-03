@@ -88,6 +88,8 @@ base:
   axios:
     success: Success
     failure: An error has occured
+  session:
+    expired: Session Expired
 
 auth:
   login:

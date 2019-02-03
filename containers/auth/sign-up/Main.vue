@@ -9,11 +9,10 @@ v-container#auth-sign-up-main(fluid)
         v-card-text.f-px4.f-py3
           v-layout(wrap)
             v-flex(xs12).text-xs-center
-              p(id="connect")
-                v-btn(flat @click.stop.prevent.native="facebookSignUp")
-                  span.f-mr1 Connect to FB!
-                  v-icon check_circle
-              p(id="results")
+              img.pointable(
+                @click="connectToFacebookSDK()"
+                src="/images/sign-up/facebook-login-button.png").facebook-login-button
+              div.mt-2.red-text.caption(v-if="providerErrorMessage").red-text {{ providerErrorMessage }}
             v-flex(xs12)
               v-text-field(
                 type="text"
@@ -81,6 +80,9 @@ v-container#auth-sign-up-main(fluid)
 <!-- ============================================================================ -->
 
 <style lang="stylus">
+#auth-sign-up-main
+  .facebook-login-button
+    width: 100%
 </style>
 
 <!-- ============================================================================ -->
@@ -98,25 +100,15 @@ export default {
       name: null,
       email: null,
       password: null,
-      passwordConfirm: null
+      passwordConfirm: null,
+      rememberMe: true,
+      providerErrorMessage: null
     }
   },
   methods: {
-    facebookSignUp () {
-      window.FB.login(function (response) {
-        console.log(response)
-        if (response.authResponse) {
-          window.FB.api('/me', { locale: 'en_US', fields: 'name, email' },
-            function (response) {
-              console.log('login: ', response.name)
-              console.log('password: ', response.email)
-              console.log('reponse', response)
-            })
-        }
-      })
-    },
     signUp (e) {
       this.veeErrors.clear()
+      this.providerErrorMessage = null
       this.$validator.validateAll().then(async result => {
         if (!result) return
         try {

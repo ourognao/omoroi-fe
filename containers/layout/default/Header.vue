@@ -191,12 +191,15 @@
 
 <script>
 import mixins from '~/utils/mixins'
-import { unsetToken } from '~/utils/auth'
+import axios from '~/plugins/axios'
+import queryString from 'query-string'
 
 export default {
   mixins: [mixins],
   data () {
     return {
+      currentUser: this.$store.getters.currentUser,
+      manuallyClearSession: false,
       firstPartLinks: [
         {
           titleKey: 'top.index.title',
@@ -248,6 +251,9 @@ export default {
     eventSection: {
       get: function () { return this.$topIndex.section },
       set: function (val) { this.$store.commit('merge', ['top.index', { section: val }]) }
+    },
+    uprovider () {
+      return this.$store.state.base.auth.uprovider
     },
     $topIndex () {
       return this.$store.state.top.index
@@ -301,6 +307,13 @@ export default {
       }
     }
   },
+  watch: {
+    uprovider (val) {
+      if (!val) {
+        this.invalidOmniauthSession()
+      }
+    }
+  },
   methods: {
     goToTopPage () {
       let goToTopPageItem = this.goToTopPageItems.filter(item => item.locale === this.$locale)[0]
@@ -312,21 +325,30 @@ export default {
         this.goto(this.$router, '/')
       }
     },
+    async invalidOmniauthSession () {
+      this.clearUserTokenSession()
+      try {
+        let params = queryString.stringify({
+          email: this.currentUser.email
+        }, { arrayFormat: 'bracket' })
+        let hrefPath = this.manuallyClearSession === false
+          ? '/auth/login?session=expired'
+          : '/auth/login'
+        await axios.get(`/users/invalid_omniauth_session?${params}`)
+        window.location.href = hrefPath
+      } catch (error) {
+        this.message(this.$t('base.axios.failure'))
+        console.error(error)
+      }
+    },
     signOut (e) {
       let confirmationText = this.$t('base.logout.confirm')
       this.confirm({ text: confirmationText, onDialog: true })
         .then(async agreed => {
           if (agreed) {
             try {
-              unsetToken()
-              this.$store.commit('merge', ['base.auth', {
-                token: null,
-                uid: null,
-                client: null,
-                email: null,
-                name: null,
-                kind: null
-              }])
+              this.manuallyClearSession = true
+              this.clearUserTokenSession()
               this.reload()
             } catch (error) {
               this.message(this.$t('base.axios.failure'))

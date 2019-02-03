@@ -102,3 +102,15 @@ Ebisu es a really cool town. As foreigner I suggest you consider it as a best pl
 - display more granulation for cost
 
 恵比寿はすごくいい街ですよぜひ遊びに来てください
+
+
+u = User.find_or_initialize_by(email: "dorota.vandenbroek@live.nl")
+u.preference_id = 1816
+u.save(validate: false)
+
+b.ourognao@gmail.com
+2119898608072013
+User.last.update(provider: nil)
+
+@user = User.find_or_initialize_by(email: 'b.ourognao@gmail.com')
+User.find(1).update(provider: 'facebook')
