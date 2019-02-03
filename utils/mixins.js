@@ -350,6 +350,9 @@ export default {
         fullPath: `${localePath}?${params}`
       }])
     },
+    externalGoTo (url) {
+      window.open(url, '_blank')
+    },
     goto (router, url) {
       let t = Date.now()
       url = url.indexOf('?') === -1 ? `${url}?t=${t}` : `${url}&t=${t}`
