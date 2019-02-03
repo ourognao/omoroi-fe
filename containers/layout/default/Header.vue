@@ -332,8 +332,8 @@ export default {
           email: this.currentUser.email
         }, { arrayFormat: 'bracket' })
         let hrefPath = this.manuallyClearSession === false
-          ? '/auth/login'
-          : '/auth/login?session=expired'
+          ? '/auth/login?session=expired'
+          : '/auth/login'
         await axios.get(`/users/invalid_omniauth_session?${params}`)
         window.location.href = hrefPath
       } catch (error) {
