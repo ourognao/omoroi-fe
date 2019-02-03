@@ -88,6 +88,8 @@ base:
   axios:
     success: 成功
     failure: エラーが発生しました
+  session:
+    expired: セッションの有効期限が切れています
 
 auth:
   login:

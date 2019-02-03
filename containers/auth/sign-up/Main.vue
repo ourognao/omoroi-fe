@@ -90,8 +90,6 @@ v-container#auth-sign-up-main(fluid)
 <script>
 import mixins from '~/utils/mixins'
 import axios from '~/plugins/axios'
-import { setToken } from '~/utils/auth'
-import constants from '~/utils/constants'
 
 export default {
   mixins: [mixins],
@@ -108,56 +106,6 @@ export default {
     }
   },
   methods: {
-    async signUpViaFacebook (response) {
-      this.providerErrorMessage = null
-      console.log(response)
-      try {
-        let newUser = {
-          uprovider: constants.sns.provider.facebook,
-          facebook_id: response.id,
-          name: response.name,
-          email: response.email,
-          password: response.id
-        }
-        let res = await axios({
-          ...{
-            method: 'post',
-            url: '/users',
-            data: {
-              user: newUser,
-              locale: this.$store.state.base.locale.selected
-            }
-          },
-          ...this.$store.getters.options
-        })
-        if (res.data.status === 'error') {
-          this.providerErrorMessage = res.data.errors['email'][0]
-          return
-        }
-        this.openWaitingScreen({ onDialog: false })
-        let { data, headers } = await axios.post('/auth/sign_in', {
-          email: response.email,
-          password: response.id,
-          locale: this.$store.state.base.locale.selected
-        })
-        setToken(this.auth(headers, data), this.rememberMe)
-        this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-        window.location.href = '/'
-      } catch (error) {
-        this.message(this.$t('base.axios.failure'))
-        console.error(error)
-      }
-    },
-    connectToFacebookSDK () {
-      let context = this
-      window.FB.login(function (response) {
-        if (response.authResponse) {
-          window.FB.api('/me?fields=id,name,email,permissions', function (response) {
-            context.signUpViaFacebook(response)
-          })
-        }
-      }, { scope: 'email' })
-    },
     signUp (e) {
       this.veeErrors.clear()
       this.providerErrorMessage = null

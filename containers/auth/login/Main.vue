@@ -8,6 +8,11 @@ v-container#auth-login-main(fluid)
 
         v-card-text.f-px4.f-py3
           v-layout(wrap)
+            v-flex(xs12).text-xs-center
+              img.pointable(
+                @click="connectToFacebookSDK()"
+                src="/images/sign-up/facebook-login-button.png").facebook-login-button
+              div.mt-2.red-text.caption(v-if="providerErrorMessage").red-text {{ providerErrorMessage }}
             v-flex(xs12)
               v-text-field(
                 type="email"
@@ -63,6 +68,9 @@ v-container#auth-login-main(fluid)
 <!-- ============================================================================ -->
 
 <style lang="stylus">
+#auth-login-main
+  .facebook-login-button
+    width: 100%
 </style>
 
 <!-- ============================================================================ -->
@@ -79,7 +87,13 @@ export default {
       mask: true,
       email: '',
       password: '',
-      rememberMe: true
+      rememberMe: true,
+      session: this.getUrlParams().session
+    }
+  },
+  mounted () {
+    if (this.session === 'expired') {
+      this.message(this.$t('base.session.expired'))
     }
   },
   methods: {
