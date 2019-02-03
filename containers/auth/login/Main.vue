@@ -88,6 +88,7 @@ export default {
       email: '',
       password: '',
       rememberMe: true,
+      providerErrorMessage: null,
       session: this.getUrlParams().session
     }
   },
@@ -98,6 +99,8 @@ export default {
   },
   methods: {
     signIn (e) {
+      this.veeErrors.clear()
+      this.providerErrorMessage = null
       this.$validator.validateAll().then(async result => {
         if (!result) return
         try {
