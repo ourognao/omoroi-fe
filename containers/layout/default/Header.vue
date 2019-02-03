@@ -199,6 +199,7 @@ export default {
   data () {
     return {
       currentUser: this.$store.getters.currentUser,
+      manuallyClearSession: false,
       firstPartLinks: [
         {
           titleKey: 'top.index.title',
@@ -309,7 +310,7 @@ export default {
   watch: {
     uprovider (val) {
       console.log('uprovider triggered', val)
-      if (!val) {
+      if (!val && this.manuallyClearSession) {
         console.log('clear session')
         this.invalidOmniauthSession()
       } else {
@@ -347,6 +348,7 @@ export default {
         .then(async agreed => {
           if (agreed) {
             try {
+              this.manuallyClearSession = true
               this.clearUserTokenSession()
               this.reload()
             } catch (error) {
