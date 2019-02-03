@@ -309,12 +309,8 @@ export default {
   },
   watch: {
     uprovider (val) {
-      console.log('uprovider triggered', val)
-      if (!val && this.manuallyClearSession) {
-        console.log('clear session')
+      if (!val && this.manuallyClearSession === false) {
         this.invalidOmniauthSession()
-      } else {
-        console.log('user still logged')
       }
     }
   },

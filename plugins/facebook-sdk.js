@@ -34,10 +34,7 @@ export default ({ app, store }) => {
   })
 
   function statusChangeCallback (response, store) {
-    if (response.status === 'connected') {
-      console.log('FB :: connected')
-    } else {
-      console.log('FB :: not connected')
+    if (response.status !== 'connected') {
       store.commit('merge', ['base.auth', { uprovider: null }])
     }
   }

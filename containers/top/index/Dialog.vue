@@ -453,7 +453,7 @@ export default {
         }
         this.closeWaitingScreen()
       } catch (error) {
-        console.log(error)
+        console.error(error)
         this.message(this.$t('base.axios.failure'))
       }
     },
