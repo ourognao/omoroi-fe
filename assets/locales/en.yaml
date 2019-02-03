@@ -170,6 +170,126 @@ about-and-contact-us:
 privacy-policy:
   index:
     title: Privacy Policy
+    introduction:
+      i01: 'The privacy policy of the service (hereafter referred to as “this service”) offered by the Omoroi Life (Hereafter referred to as “this site”) is defined according to the following articles:'
+    article1:
+      title: Article 1 (Definition of private information)
+      explanation:
+        i01: '1. The privacy policy of Omoroi Life defines “Personal Information”,
+          in accordance with The Private Information Protection Law, as personal
+          data that can be used to ascertain the identity of a particular living
+          person such as last name, first name, mailing address, email, driving
+          license, meeting photo, SNS account and/or telephone number.'
+        i02: '2. The privacy policy of Omoroi Life defines browsing history and
+          other specific data such as services used, pages visited, ad history,
+          keywords searched, hours and minutes of use, methods of use,
+          environment of use, postal code, nationality, gender, job position,
+          age, IP address of the member, cookie information, location
+          information, terminal identification number, etc.. as falling outside
+          the definition of “Personal Information” stated above.'
+    article2:
+      title: Article 2 (Methods of collecting private information)
+      explanation:
+        i01: '1. When a member registers through this site, this service may ask for
+          personal information such as first name, last name, address, phone
+          number, email, SNS account, etc.'
+        i02: '2. While members browse through pages of this site, and use our
+          software and/or services (including those of our business partners)
+          characteristic information such as history of viewed pages and ads,
+          keywords searched, hours and minutes of use, methods of use,
+          environment of use (in the case of accessing via a mobile device, the
+          form of communication will be retrieved, including some
+          characteristics of the mobile device, etc.), IP address, cookie
+          information, location information, terminal identification number,
+          etc. will be collected.'
+    article3:
+      title: Article 3 (Purpose of collection and use of personal information)
+      explanation:
+        i01: 'The purpose of collection of personal information and of its use are described below:'
+        i02: '（1） To improve the services offered by this site and other related services.'
+        i03: '（2） To confirm members’ identities we may use the full name, email,
+          SNS account information, mailing address, etc. of members.'
+        i04: '（3） To contact the member by email in case of notification or of
+          shipping a product during a sales campaign, members’ names, addresses
+          and contact information may be used.'
+        i05: （4） To improve safety between members.
+    article4:
+      title: Article 4 (About security)
+      explanation:
+        i01: 'This club, uses various tools (such as encryption, passwords, and
+          physical security methods) to protect members’ privacy policy and
+          prevent unauthorized access or leakage. However, regardless of these
+          security measures, be aware that this service makes no guarantees
+          about the security of members’ information.'
+    article5:
+      title: Article 5 (Provision of personal information to third parties)
+      explanation:
+        i01: 'This service, with the exception of the following cases, will not
+          submit any personal information without prior consent from the member.
+          However, if recognized, The Private Information Protection Law as well
+          as other laws and regulations will be excepted.'
+        i02: '（1） If it is required by law.'
+        i03: '（2） If it is required for the protection of human life, health or
+          property, and when the consent cannot be obtained from the member in
+          question.'
+        i04: '（3） If it is required for the achievement of main purposes of this
+          service, only the minimum amount of necessary personal information
+          will be outsourced.'
+        i05: '（4） In the event of a merger or for other reasons such as business
+          succession, personal information may be provided.'
+    article6:
+      title: Article 6 (Disclosure of personal information to serviced members)
+      explanation:
+        i01: '1. If personal information of a member is requested by proper legal
+          authorities, we will immediately disclose such information. However,
+          except for the following cases, some or all of the member’s
+          information will not be disclosed. The legal authority will be
+          notified promptly in the case of non-disclosure.'
+        i02: '（1） A member’s or a third party’s life, bodily health, rights,
+          benefits and or personal assets, etc. will be put at risk.'
+        i03: '（2） If it will cause significant hindrance to the proper conduct of
+          this service’s operation.'
+        i04: （3） If it will result in a violation of any other laws or regulations.
+        i05: '2. Apart from the above cases, with the exception of use history
+          information and other such characteristic information, as a rule we do
+          not disclose any other personal information.'
+    article7:
+      title: Article 7 (Correction and deletion of personal information)
+      explanation:
+        i01: '1. If a member thinks that his or her personal information is listed
+          incorrectly he can request for such information to be edited or
+          deleted in accordance with the procedures determined by this service.'
+        i02: '2. If this service receives such a request and determines that such a
+          request is warranted, this service will conduct the correction or
+          deletion within a reasonable amount of time and within reasonable
+          means, and then notify the member of this change.'
+    article8:
+      title: Article 8 (Suspension of use of personal information)
+      explanation:
+        i01: 'If for any reason, a member believes that his or her personal
+          information is being used beyond the scope of this policy or for
+          illegal or fraudulent purposes, the member may request to have the use
+          of his/ her personal information suspended or ceased. In such a case,
+          this service will make the necessary inquiries and if necessary will
+          suspend or cease (below, designated as “Suspension of Use”) the use of
+          the member’s personal information and notification will be sent to the
+          member within a reasonable period of time. Moreover, depending on the
+          relevant laws and regulations, it may not be possible to grant a
+          suspension of use request.'
+    article9:
+      title: Article 9 (Change of privacy policy)
+      explanation:
+        i01: '1. The content of this privacy policy can be edited without prior
+          notification to members.'
+        i02: '2. With exception of such cases determined by this service, all
+          modifications to the privacy policy will take effect immediately upon
+          publication to this site.'
+    article10:
+      title: Article 10 (Contact us)
+      explanation:
+        i01: 'For any questions regarding this privacy policy, please contact the following:'
+        i02: Omoroi Life Privacy Policy Administrator
+        i03: 'E-mail: info@omoroi-life.com'
 
 top:
   index:
