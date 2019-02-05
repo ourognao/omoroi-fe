@@ -114,3 +114,5 @@ User.last.update(provider: nil)
 
 @user = User.find_or_initialize_by(email: 'b.ourognao@gmail.com')
 User.find(1).update(provider: 'facebook')
+
+
