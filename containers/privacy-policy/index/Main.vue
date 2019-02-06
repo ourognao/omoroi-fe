@@ -115,20 +115,4 @@ v-container#privacy-policy-index-main(fluid)
 <!-- ============================================================================ -->
 
 <script>
-import mixins from '~/utils/mixins'
-
-export default {
-  mixins: [mixins],
-  data () {
-    return {
-      currentUser: this.$store.getters.currentUser,
-      selected: null,
-      partners: [
-        { name: 'noritomosan', thumbnail: '/images/partners/logo/noritomosan_original.png' },
-        { name: 'pierstand', thumbnail: '/images/partners/logo/pier_stand_simplified.png' },
-        { name: 'localirishpub', thumbnail: '/images/partners/logo/local_irish_pub_simplified.png' }
-      ]
-    }
-  }
-}
 </script>
