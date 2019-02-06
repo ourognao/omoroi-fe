@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container#about-index-main(fluid)
-  img(src="/images/about-us/header.jpg").about-us-header
+  img(src="/images/about-us/header.jpg")
   v-layout(row class="border-blue-bottom").pb-1
     v-flex.caption(xs12)
       v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
@@ -38,8 +38,6 @@ v-container#about-index-main(fluid)
 
 <style lang="stylus">
 #about-index-main
-  .about-us-header
-    height 100%
   .partnerDetails
     border-bottom 1px solid #bdbdbd
     img
