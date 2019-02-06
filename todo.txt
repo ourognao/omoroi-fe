@@ -1,3 +1,4 @@
+ln -s ../terms-of-service/  /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../privacy-policy/  /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../contact-us/  /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/
 ln -s ../index.vue /Users/bago/Projects/omoroi/omoroi-fe/pages/_locale/index.vue
@@ -116,3 +117,9 @@ User.last.update(provider: nil)
 User.find(1).update(provider: 'facebook')
 
 
+- Privacy Policy (JP)
+- Terms of Use・Privacy (JP and EN)
+- About Us (partners logo)
+
+- Desktop adjustement
+- Final last tests

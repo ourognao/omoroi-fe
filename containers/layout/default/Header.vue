@@ -244,13 +244,6 @@ export default {
           href: '/about',
           visible: true,
           externalHref: false
-        },
-        {
-          titleKey: 'privacy-policy.index.title',
-          icon: 'info',
-          href: '/privacy-policy',
-          visible: true,
-          externalHref: false
         }
       ],
       drawer: false,

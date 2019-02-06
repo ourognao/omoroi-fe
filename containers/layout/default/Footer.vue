@@ -23,9 +23,17 @@
           img.pointable(src="/images/sns/youtube-mc.png")
         a(href="https://www.linkedin.com/company/omoroilife" target="_blank")
           img.pointable(src="/images/sns/linked-in-mc.png")
-    v-layout.footer-main.dotted-background.copyright(row)
+    v-layout.footer-main.dotted-background.copyright(row wrap)
       v-flex.ma-0(xs12 class="text-xs-center grey-text")
-        | {{ $t('footer.copyright.i01') }} {{ $currentYear }} {{ $t('footer.copyright.i02') }}
+        | {{ $t('footer.copyright.i01') }} {{ $currentYear }} {{ $t('footer.copyright.i02') }}. {{ $t('footer.copyright.i03') }} 
+      v-flex(xs12 class="text-xs-center grey-text").mt-2
+        nuxt-link(:to="setLinks('home')") {{ $t('footer.links.home') }}
+        span.mr-2.ml-2 |
+        nuxt-link(:to="setLinks('about')") {{ $t('footer.links.about') }}
+        span.mr-2.ml-2 |
+        nuxt-link(:to="setLinks('privacy-policy')").mt-2.ml-2 {{ $t('footer.links.privacy-policy') }}
+        span.mr-2.ml-2 |
+        nuxt-link(:to="setLinks('terms-of-service')").mt-2.ml-2 {{ $t('footer.links.terms-of-service') }}
 </template>
 
 <!-- ============================================================================ -->
@@ -93,6 +101,19 @@ export default {
     }
   },
   methods: {
+    setLinks (linkName) {
+      let prefixLanguage = this.$locale === 'en' ? '/en' : ''
+      switch (linkName) {
+        case 'home':
+          return `${prefixLanguage}/`
+        case 'about':
+          return `${prefixLanguage}/${linkName}`
+        case 'privacy-policy':
+          return `${prefixLanguage}/${linkName}`
+        case 'terms-of-service':
+          return `${prefixLanguage}/${linkName}`
+      }
+    },
     scrollTop () {
       window.scroll({
         top: 0,
