@@ -18,6 +18,7 @@ v-container#about-index-main(fluid)
     v-layout.mt-2(row) {{ $t('about-and-contact-us.index.about-us.i03') }}
     v-layout.mt-2(row) {{ $t('about-and-contact-us.index.about-us.i04') }}
     v-layout.mt-2(row) {{ $t('about-and-contact-us.index.about-us.i05') }}
+    v-layout.mt-2(row) {{ $t('about-and-contact-us.index.about-us.i06') }}
 
   v-layout(row class="border-blue-bottom").pb-1.pt-3
     v-flex.caption(xs12)
