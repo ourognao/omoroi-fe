@@ -20,7 +20,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
             v-flex(xs6).mt-1.date-location.text-xs-right {{ formatDate(event.date) }}
             v-flex(xs12).mt-1.caption.text-xs-center
               | {{ displayEventTitle($s.section, event, { fromTopPage: false }) }}
-            v-flex(xs12).caption.text-xs-center.blue-text.mb-1.border-blue-bottom
+            v-flex(xs12).caption.text-xs-center.blue-text.mb-1.border-blue-bottom.pb-1
               a(href="#" @click.stop.prevent="scrollTo('top-event-view', { direction: 'bottom' })")
                 | {{ $t('top.dialog.reservation.button.i03') }}
           v-layout.navigation(row class="border-blue-bottom").pb-1
