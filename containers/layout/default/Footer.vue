@@ -31,9 +31,9 @@
         span.mr-2.ml-2 |
         nuxt-link(:to="setLinks('about')") {{ $t('footer.links.about') }}
         span.mr-2.ml-2 |
-        nuxt-link(:to="setLinks('privacy-policy')").mt-2.ml-2 {{ $t('footer.links.privacy-policy') }}
+        nuxt-link(:to="setLinks('privacy-policy')") {{ $t('footer.links.privacy-policy') }}
         span.mr-2.ml-2 |
-        nuxt-link(:to="setLinks('terms-of-service')").mt-2.ml-2 {{ $t('footer.links.terms-of-service') }}
+        nuxt-link(:to="setLinks('terms-of-service')") {{ $t('footer.links.terms-of-service') }}
 </template>
 
 <!-- ============================================================================ -->
