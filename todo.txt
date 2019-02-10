@@ -105,8 +105,8 @@ Ebisu es a really cool town. As foreigner I suggest you consider it as a best pl
 恵比寿はすごくいい街ですよぜひ遊びに来てください
 
 
-u = User.find_or_initialize_by(email: "dorota.vandenbroek@live.nl")
-u.preference_id = 1816
+u = User.find_or_initialize_by(email: "jeuxinscription2011@hotmail.fr")
+u.preference_id = 1825
 u.save(validate: false)
 
 b.ourognao@gmail.com
@@ -123,3 +123,38 @@ User.find(1).update(provider: 'facebook')
 
 - Desktop adjustement
 - Final last tests
+
+
+
+```
+Yah please just hide the “see all past events” link (upper right corner)
+```
+Done
+
+```
+Also made I made a mistake... please do not include “Inc”
+```
+Done
+
+```
+Well let’s just leave both dates :grin:
+```
+Done
+
+```
+Do you have a link to the production env privacy policy page?
+Want to link it from Facebook
+```
+We cannot do that before release.
+Otherwise people will be access the website even tough it is not open yet.
+
+
+Bha ecoute pour travailler au Japon ca ne depend pas de la duree de ton sejour mais de ton type de visa.
+Donc si tu comptes venir en visa touriste pour travailler, ca va pas le faire du tout :/.
+Apres il y a le probleme de la langue, tu parles un peu le Japonais ?
+
+Aussi, est ce que tu comptes juste rester sur Tokyo ou tu comptes aussi bouger dans d'autres villes ?
+
+Mon job ? Je suis CTO (Chief Techinal Officier) pour une boite de proxy immobilier dans l'industrie de la sharing economy (Airbnb etc...).
+
+Et toi ?
