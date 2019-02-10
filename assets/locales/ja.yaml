@@ -150,22 +150,24 @@ about-and-contact-us:
       i01: For any inquiries, please contact us at info[at]omoroi-life.com
     about-us:
       title: 運営会社について
-      i01: おもろいとは
-      i02: 'Omoroi (adjective | o-mo-ro-i | oumouroi): From a dialect of west Japan, originating from the i-adjective "omoshiroi" おもしろい, which means interesting, funny or amusing.'
-      i03: This group is for locals, travelers, Japanese and foreigners alike...for anyone who enjoys having fun, exploring, meeting new people, learning new things and enjoying life.
-      i04: Our goal is to bring you to some of the more unheard of parts of Osaka;places that are truly unique.
-      i05: Hope you can join us!
+      i01: Enjoy Life! Omoroi.
+      i02: 世界中のインターナショナルな仲間と友達になって、今までにない出会いを体験しよう！
+      i03: Omoroiイベントチームはインターナショナルな仲間たちとみんなが楽しく仲良くなれるようなイベントを提供しています！素敵な場所で美味しいご飯を食べながら楽しい時間を共に過ごしましょう！
+      i04: 私たちのイベントは毎回 日本人、外国の人、世界中から来日している旅行者など様々な人との出会いがあり、言語レベルも様々です！
+      i05: 私ちちはあなたの参加を待っています！!
+      i06: Omoroi Team
     our-friends:
       title: 我々の友人
       noritomosan:
         title: のりともさん
         explanation: シェア仲間をみつけよう！（コスト・情報・楽しさ・思い出）
-      pierstand:
-        title: Pier STAND
-        explanation: Great little coffee/beer bar along the Doutonbori River.Only place in Osaka selling Tremmens Delirium beer on tap.
-      localirishpub:
-        title: The Local Irish Pub
-        explanation: Osaka's best Irish pub, serving-up a fresh pint of Guinness and other Irish favorites.
+      stand:
+        shinsaibashi:
+          title: Shinsaibashi
+          explanation: Shinsaibashi explanation
+        tombori-riverwalk:
+          title: Tombori Riverwalk
+          explanation: Tombori Riverwalk explanation
 
 privacy-policy:
   index:
@@ -353,7 +355,7 @@ top:
 footer:
   copyright:
     i01: © 2015 - 
-    i02: Omoroilife, Inc
+    i02: Omoroilife
     i03: All rights Reserved.
   links:
     home: トップ
