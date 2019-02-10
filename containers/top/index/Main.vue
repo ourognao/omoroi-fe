@@ -21,8 +21,8 @@
       hide-controls
       style="box-shadow:")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
-    v-container.pt-3
-      div(v-if="section === 'SP'")
+    v-container.pt-0
+      div(v-if="section === 'SP'" class="hidden-md-only hidden-lg-only hidden-xl-only")
         v-layout(row class="eventHeader")
           v-flex.caption(xs12)
             v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
@@ -39,57 +39,163 @@
                 @change="getEventsBySport()"
               )
       
-      v-layout(row class="eventHeader")
-        v-flex.caption(xs5)
-          v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
-          | {{ $t('top.index.events.list.title.i01') }}
-        v-flex.caption(xs7 class="text-xs-right")
-          a(
-            href="#"
-            v-if="!$currentDate.includes(currentMonth.date)"
-            @click.stop.prevent="setMonths(false, currentMonths[0].date)")
-            v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_before
-          span(v-for="(month, index) in currentMonths" :key="index")
-            a.month(
-              href="#"
-              :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
-              @click.stop.prevent="setMonth(month.date)")
-              | {{ $t(`labels.common.months.${month.name}`) }}
-          a.next-months(
-            href="#"
-            @click.stop.prevent="setMonths(true, currentMonths[2].date)")
-            v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_next
       
-      div(class="event-container")
-        v-layout(v-if="futurEvents.length === 0")
-          v-flex(xs12).text-xs-center.caption.mt-2 {{ $t('top.index.events.list.common.no-event') }}
-        v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
-          v-flex(xs3)
-            img(:src="event.thumbnail" style="border-radius:10px")
-          v-flex.ml-4(xs8)
-            v-layout.mb-1(row)
-              v-flex.caption.future(xs12) {{ displayEventTitle(section, event, { fromTopPage: true }) }}
-            v-layout(row)
-              v-flex(xs12)
-                v-icon event
-                span {{ formatDate(event.date) }}
-            v-layout(row)
-              v-flex(xs12)
-                v-icon access_time
-                span {{ setTime(event) }}
-            v-layout(row)
-              v-flex.location(xs12)
-                v-icon location_on
-                span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
-                span(class="hidden-sm-and-down") {{ displayLocationName(event) }}
-            v-layout(row)
-              v-flex.attending(xs12)
-                v-icon people_outline
-                span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
-                span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
-          v-flex(xs1 style="line-height: 75px")
-            v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
-              v-icon.details(class="icon-blue icons events") chevron_right
+
+
+
+
+      div(class="hidden-sm-and-down")
+        v-layout(row).border-section-blue-bottom
+          v-flex(md4).section-desktop-bg
+            v-layout(row wrap)
+              v-flex(md12).mt-4
+                v-layout(row wrap).text-md-center
+                  v-flex(md12)
+                    v-btn.primary.desktop-section-btn.mt-0(
+                    :class="sectionFilterColor('SC')"
+                    @click="changeSection('SC')")
+                      span {{ $t('top.index.tabs.social') }}
+                  v-flex(md12)
+                    v-btn.primary.desktop-section-btn(
+                    :class="sectionFilterColor('LX')"
+                    @click="changeSection('LX')")
+                      span {{ $t('top.index.tabs.language') }}
+                  v-flex(md12)
+                    v-btn.primary.desktop-section-btn(
+                    :class="sectionFilterColor('SP')"
+                    @click="changeSection('SP')")
+                      span {{ $t('top.index.tabs.sports') }}
+              v-flex(md12).mt-4
+                v-layout(row).text-md-center
+                  v-flex(md12 v-if="section === 'SP'").ml-5.mr-5
+                    div(class="search-container dotted-background")
+                      v-layout.pa-2(row wrap)
+                        v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
+                          v-checkbox.pt-0.mt-0(
+                            color="primary"
+                            :label="sport.text"
+                            v-model="sports"
+                            :value="sport.value"
+                            hide-details
+                            @change="getEventsBySport()"
+                          )
+                  v-flex(md12 v-else)
+                    img(:src="sectionPictureSrc").border-radius.ten.ml-5.mr-5
+          v-flex(md6).offset-md1.eventHeaderBorder.mb-4.mt-4
+            v-layout(row class="eventHeader").pa-2
+              v-flex.caption(md5)
+                v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
+                | {{ $t('top.index.events.list.title.i01') }}
+              v-flex.caption(md7 class="text-md-right")
+                a(
+                  href="#"
+                  v-if="!$currentDate.includes(currentMonth.date)"
+                  @click.stop.prevent="setMonths(false, currentMonths[0].date)")
+                  v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_before
+                span(v-for="(month, index) in currentMonths" :key="index")
+                  a.month(
+                    href="#"
+                    :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
+                    @click.stop.prevent="setMonth(month.date)")
+                    | {{ $t(`labels.common.months.${month.name}`) }}
+                a.next-months(
+                  href="#"
+                  @click.stop.prevent="setMonths(true, currentMonths[2].date)")
+                  v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_next
+            
+            div(class="event-container desktop").pa-2
+              v-layout(v-if="futurEvents.length === 0")
+                v-flex(md12).text-md-center.caption.mt-2 {{ $t('top.index.events.list.common.no-event') }}
+              v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
+                v-flex(md3)
+                  img(:src="event.thumbnail").border-radius.ten
+                v-flex.ml-4(md8)
+                  v-layout.mb-1(row)
+                    v-flex.caption.future(md12) {{ displayEventTitle(section, event, { fromTopPage: true }) }}
+                  v-layout(row)
+                    v-flex(md12)
+                      v-icon event
+                      span {{ formatDate(event.date) }}
+                  v-layout(row)
+                    v-flex(md12)
+                      v-icon access_time
+                      span {{ setTime(event) }}
+                  v-layout(row)
+                    v-flex.location(md12)
+                      v-icon location_on
+                      span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
+                      span(class="hidden-sm-and-down") {{ displayLocationName(event) }}
+                  v-layout(row)
+                    v-flex.attending(md12)
+                      v-icon people_outline
+                      span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
+                      span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
+                v-flex(md1 style="line-height: 75px")
+                  v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+                    v-icon.details(class="icon-blue icons events") chevron_right
+
+      
+
+      div(class="hidden-md-only hidden-lg-only hidden-xl-only")
+        v-layout(row class="eventHeader")
+          v-flex.caption(xs5)
+            v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
+            | {{ $t('top.index.events.list.title.i01') }}
+          v-flex.caption(xs7 class="text-xs-right")
+            a(
+              href="#"
+              v-if="!$currentDate.includes(currentMonth.date)"
+              @click.stop.prevent="setMonths(false, currentMonths[0].date)")
+              v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_before
+            span(v-for="(month, index) in currentMonths" :key="index")
+              a.month(
+                href="#"
+                :class="currentMonth.date === month.date ? 'grey-text' : 'blue-text'"
+                @click.stop.prevent="setMonth(month.date)")
+                | {{ $t(`labels.common.months.${month.name}`) }}
+            a.next-months(
+              href="#"
+              @click.stop.prevent="setMonths(true, currentMonths[2].date)")
+              v-icon.mb-1(class="icon-blue more-ajusted icons events") navigate_next
+        
+        div(class="event-container mobile")
+          v-layout(v-if="futurEvents.length === 0")
+            v-flex(xs12).text-xs-center.caption.mt-2 {{ $t('top.index.events.list.common.no-event') }}
+          v-layout(v-for="(event, index) in futurEvents" :key="index" class="eventDetails")
+            v-flex(xs3)
+              img(:src="event.thumbnail").border-radius.ten
+            v-flex.ml-4(xs8)
+              v-layout.mb-1(row)
+                v-flex.caption.future(xs12) {{ displayEventTitle(section, event, { fromTopPage: true }) }}
+              v-layout(row)
+                v-flex(xs12)
+                  v-icon event
+                  span {{ formatDate(event.date) }}
+              v-layout(row)
+                v-flex(xs12)
+                  v-icon access_time
+                  span {{ setTime(event) }}
+              v-layout(row)
+                v-flex.location(xs12)
+                  v-icon location_on
+                  span(class="hidden-md-only hidden-lg-only hidden-xl-only") {{ truncate(event, 20, 'location') }}
+                  span(class="hidden-sm-and-down") {{ displayLocationName(event) }}
+              v-layout(row)
+                v-flex.attending(xs12)
+                  v-icon people_outline
+                  span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
+                  span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
+            v-flex(xs1 style="line-height: 75px")
+              v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+                v-icon.details(class="icon-blue icons events") chevron_right
+
+      
+
+
+
+
+
+
 
       v-layout.mt-3(row class="eventHeader")
         v-flex.caption(xs5)
@@ -101,7 +207,7 @@
           v-flex(xs12).text-xs-center.caption.mt-2 {{ $t('top.index.events.list.common.no-past-event') }}
       v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
         v-flex(xs1)
-          img.past(:src="event.thumbnail" style="border-radius:10px")
+          img.past(:src="event.thumbnail").border-radius.ten
         v-flex.ml-4(xs10)
           v-layout(row)
             v-flex.grey-text.dark(xs12) {{ event.date }}
@@ -124,6 +230,23 @@ $dot-size = 1px
 $dot-space = 2px
 
 #top-index-main
+  .section-desktop-bg
+    background: url('/images/top/section-desktop-bg.png') no-repeat
+    background-size contain
+  
+  .border-section-blue-bottom
+    border-bottom 2px solid #1a237e
+  
+  .border-radius
+    &.ten
+      border-radius:10px
+  
+  .desktop-section-btn
+    min-width 150px
+  
+  .eventHeaderBorder
+    border 2px solid #1a237e
+  
   .eventHeader
     border-bottom 1px solid #1a237e
     .month
@@ -155,10 +278,14 @@ $dot-space = 2px
       background-size: $dot-space $dot-space;
 
   .event-container
-    height 15em
     overflow scroll
     max-width 100%
     overflow-x hidden
+    &.desktop
+      height 20em
+    &.mobile
+      height 15em
+    
   
   .eventDetails
     font-size 10px
@@ -293,6 +420,13 @@ export default {
         { language: 'en', src: '/images/top/carousel/6.jpg' },
         { language: 'en', src: '/images/top/carousel/7.jpg' }
       ],
+      sectionPictureSrc: '/images/top/omoroi-desktop-all.jpg',
+      sectionPictures: [
+        { language: 'jp', section: 'LX', src: '/images/top/omoroi-desktop-language.jpg' },
+        { language: 'jp', section: 'SC', src: '/images/top/omoroi-desktop-social.jpg' },
+        { language: 'en', section: 'LX', src: '/images/top/omoroi-desktop-language.jpg' },
+        { language: 'en', section: 'SC', src: '/images/top/omoroi-desktop-social.jpg' }
+      ],
       currentMonth: [],
       currentMonths: this.setMonths(true),
       months: [
@@ -350,10 +484,19 @@ export default {
     }
   },
   methods: {
+    displaySectionPicture () {
+      if (this.section === 'SP') return
+      let sectionPicture = this.sectionPictures.filter(
+        sectionPicture => sectionPicture.language === this.$locale &&
+          sectionPicture.section === this.section
+      )[0]
+      this.sectionPictureSrc = sectionPicture.src
+    },
     changeSection (section) {
       this.section = section
       this.getEventsByMonth()
       this.setPastEvents()
+      this.displaySectionPicture()
     },
     sectionFilterColor (section) {
       return this.section === section ? 'selected' : ''
