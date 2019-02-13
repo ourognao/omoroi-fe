@@ -34,7 +34,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "tls": "0.0.1",
-    "v-uploader": "^1.6.0",
+    "v-uploader": "^1.4.0",
     "v-viewer": "^0.3.2",
     "vee-validate": "^2.0.6",
     "vue": "^2.6.3",

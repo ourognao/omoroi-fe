@@ -5,7 +5,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
     v-card-title.pa-0.top-event-section.grey.border-blue-bottom
       v-spacer
-      v-btn.pl-3(small icon flat @click.stop.prevent.native="cancel")
+      v-btn.pl-3(small icon flat @click.stop.prevent.native="cancel").mt-0
         v-icon.blue-text close
     
     v-divider.border-blue-top
@@ -195,8 +195,9 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
 <style lang="stylus">
 #top-index-dialog
+  width 100%
   .top-event-section
-    height 20px
+    height 25px
     .v-icon
       font-size 15px
   
