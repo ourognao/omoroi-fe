@@ -21,28 +21,14 @@
       hide-controls
       style="box-shadow:")
       v-carousel-item(v-for="(picture,i) in pictures" v-bind:src="picture.src" :key="i")
+    
+    
+
     v-container.pt-0
-      div(v-if="section === 'SP'" class="hidden-md-only hidden-lg-only hidden-xl-only")
-        v-layout(row class="eventHeader")
-          v-flex.caption(xs12)
-            v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
-            | {{ $t('top.index.events.list.title.i04') }}
-        div.ma-2.mb-3(class="search-container dotted-background")
-          v-layout.pa-2(row wrap)
-            v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
-              v-checkbox.pt-0.mt-0(
-                color="primary"
-                :label="sport.text"
-                v-model="sports"
-                :value="sport.value"
-                hide-details
-                @change="getEventsBySport()"
-              )
-      
-      
-
-
-
+      v-layout(row wrap).text-xs-center.mt-2
+        v-flex(md12 class="grey-text dark") {{ $t('top.index.subtitles.i01') }}
+        v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i02') }}
+        v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i03') }}
 
       div(class="hidden-sm-and-down")
         v-layout(row).border-section-blue-bottom

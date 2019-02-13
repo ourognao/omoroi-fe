@@ -296,6 +296,10 @@ privacy-policy:
 top:
   index:
     title: Top
+    subtitles:
+      i01: Meet locals, make friends, 
+      i02: explore new places.
+      i03: Enjoy life!
     tabs:
       social: SOCIAL
       language: LANGUAGE
