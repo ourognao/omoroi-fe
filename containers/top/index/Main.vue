@@ -28,7 +28,7 @@
       v-layout(row wrap).text-xs-center.mt-2
         v-flex(md12 class="grey-text dark") {{ $t('top.index.subtitles.i01') }}
         v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i02') }}
-        v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i03') }}
+        v-flex(xs12 class="grey-text dark").mt-2 {{ section ? $t(`top.index.subtitles.section.${section}`) : $t('top.index.subtitles.section.all') }}
 
       div(class="hidden-sm-and-down")
         v-layout(row).border-section-blue-bottom
@@ -398,18 +398,18 @@ export default {
       ],
       pastEventsHref: '/team/login',
       pictures: [
-        { language: 'jp', src: '/images/top/carousel/1.jpg' },
-        { language: 'jp', src: '/images/top/carousel/2.jpg' },
-        { language: 'jp', src: '/images/top/carousel/3.jpg' },
-        { language: 'jp', src: '/images/top/carousel/4.jpg' },
+        { language: 'ja', src: '/images/top/carousel/1.jpg' },
+        { language: 'ja', src: '/images/top/carousel/2.jpg' },
+        { language: 'ja', src: '/images/top/carousel/3.jpg' },
+        { language: 'ja', src: '/images/top/carousel/4.jpg' },
         { language: 'en', src: '/images/top/carousel/5.jpg' },
         { language: 'en', src: '/images/top/carousel/6.jpg' },
         { language: 'en', src: '/images/top/carousel/7.jpg' }
       ],
       sectionPictureSrc: '/images/top/omoroi-desktop-all.jpg',
       sectionPictures: [
-        { language: 'jp', section: 'LX', src: '/images/top/omoroi-desktop-language.jpg' },
-        { language: 'jp', section: 'SC', src: '/images/top/omoroi-desktop-social.jpg' },
+        { language: 'ja', section: 'LX', src: '/images/top/omoroi-desktop-language.jpg' },
+        { language: 'ja', section: 'SC', src: '/images/top/omoroi-desktop-social.jpg' },
         { language: 'en', section: 'LX', src: '/images/top/omoroi-desktop-language.jpg' },
         { language: 'en', section: 'SC', src: '/images/top/omoroi-desktop-social.jpg' }
       ],

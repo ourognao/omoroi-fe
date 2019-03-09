@@ -479,7 +479,11 @@ top:
     subtitles:
       i01: Meet locals, make friends, 
       i02: explore new places.
-      i03: Enjoy life!
+      section:
+        all: Enjoy life!
+        SC: Good food, good drinks, good people, good times!
+        LX: Learn, chat, enjoy!
+        SP: Be active, play sports!
     tabs:
       social: SOCIAL
       language: LANGUAGE
