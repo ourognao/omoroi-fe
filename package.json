@@ -37,7 +37,7 @@
     "v-uploader": "^1.4.0",
     "v-viewer": "^0.3.2",
     "vee-validate": "^2.0.6",
-    "vue": "^2.6.3",
+    "vue": "^2.6.8",
     "vue-i18n": "^7.3.4",
     "vue-server-renderer": "2.5.13",
     "vue-social-sharing": "^2.3.3",
