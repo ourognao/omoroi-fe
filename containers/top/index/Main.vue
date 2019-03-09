@@ -123,6 +123,22 @@
       
 
       div(class="hidden-md-only hidden-lg-only hidden-xl-only")
+        div(v-if="section === 'SP'").mt-2
+          v-layout(row class="eventHeader")
+            v-flex.caption(xs12)
+              v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
+              | {{ $t('top.index.events.list.title.i04') }}
+          div.ma-2.mb-3(class="search-container dotted-background")
+            v-layout.pa-2(row wrap)
+              v-flex(xs6 v-for="sport in sportItems" :key="sport.value")
+                v-checkbox.pt-0.mt-0(
+                  color="primary"
+                  :label="sport.text"
+                  v-model="sports"
+                  :value="sport.value"
+                  hide-details
+                  @change="getEventsBySport()"
+                )
         v-layout(row class="eventHeader")
           v-flex.caption(xs5)
             v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
