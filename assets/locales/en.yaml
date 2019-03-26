@@ -104,6 +104,7 @@ auth:
     i07: Cancel
     i08: Sent confirmation mail for password reset.
     i09: Sign-up
+    i10: or sign in with email
 
   sign-up:
     title: Sign-up
@@ -111,6 +112,7 @@ auth:
     i02: Send
     i03: Sent confirmation mail for signing up.
     i04: Sign-in
+    i05: or sign up with email
 
   update:
     title: Update account

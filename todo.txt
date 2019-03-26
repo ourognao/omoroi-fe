@@ -105,8 +105,8 @@ Ebisu es a really cool town. As foreigner I suggest you consider it as a best pl
 恵比寿はすごくいい街ですよぜひ遊びに来てください
 
 
-u = User.find_or_initialize_by(email: "jeuxinscription2011@hotmail.fr")
-u.preference_id = 1825
+u = User.find_or_initialize_by(email: "nancy-dc@hotmail.it")
+u.preference_id = 1888
 u.save(validate: false)
 
 b.ourognao@gmail.com
@@ -116,3 +116,21 @@ User.last.update(provider: nil)
 @user = User.find_or_initialize_by(email: 'b.ourognao@gmail.com')
 User.find(1).update(provider: 'facebook')
 
+Si il 
+
+Bonjour Pascal, ca va merci et toi ?
+Je suis disponible pour une conversation telephonique ce vendredi 22 vers 18h15 si tu es disponible.
+
+Cordialement,
+
+Bacher
+
+Hi Andrei,
+Thanks for contacting me but we are not currently looking for remote software development assistance right now.
+
+Regards,
+
+
+Hello everyone. Looking for someone going to Hakone from Tokyo for a ridesharing |
+Passenger is willing to cost share until 1000yen. Medium luggage and can speak Italian, French and English. If you have a car and heading in that direction have a look here.
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア #イタリア語

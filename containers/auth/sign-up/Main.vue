@@ -13,6 +13,7 @@ v-container#auth-sign-up-main(fluid)
                 @click="connectToFacebookSDK()"
                 src="/images/sign-up/facebook-login-button.png").facebook-login-button
               div.mt-2.red-text.caption(v-if="providerErrorMessage").red-text {{ providerErrorMessage }}
+            v-flex(xs12).mt-3.pt-3.text-xs-center.border-section-grey-top {{ $t('auth.sign-up.i05') }}
             v-flex(xs12)
               v-text-field(
                 type="text"
@@ -81,6 +82,8 @@ v-container#auth-sign-up-main(fluid)
 
 <style lang="stylus">
 #auth-sign-up-main
+  .border-section-grey-top
+    border-top 2px solid #bdbdbd
   .facebook-login-button
     width: 100%
 </style>
