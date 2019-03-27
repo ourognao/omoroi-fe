@@ -98,13 +98,14 @@ auth:
     i01: Sign-in
     i02: Wrong credentials.
     i03: Remember me
-    i04: Reset password
+    i04: Forgot your password?
     i05: Reset password
     i06: Send
     i07: Cancel
     i08: Sent confirmation mail for password reset.
     i09: Sign-up
-    i10: or sign in with email
+    i10: or sign-in with email
+    i11: Don’t have an account?
 
   sign-up:
     title: Sign-up
@@ -112,7 +113,8 @@ auth:
     i02: Send
     i03: Sent confirmation mail for signing up.
     i04: Sign-in
-    i05: or sign up with email
+    i05: or sign-up with email
+    i06: Already a member?
 
   update:
     title: Update account

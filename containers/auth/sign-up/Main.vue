@@ -72,10 +72,9 @@ v-container#auth-sign-up-main(fluid)
             v-icon check_circle
 
       v-layout.f-mt2(wrap)
-        v-flex(xs12)
-          v-btn(flat nuxt :to="path('/auth/login')")
-            v-icon arrow_back
-            span.f-ml1 {{ $t('auth.sign-up.i04') }}
+        v-flex(xs12).text-xs-center
+          span {{ $t('auth.sign-up.i06') }}
+          nuxt-link(:to="path('/auth/login')").blue-text  {{ $t('auth.sign-up.i04') }}
 </template>
 
 <!-- ============================================================================ -->
