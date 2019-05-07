@@ -134,3 +134,12 @@ Regards,
 Hello everyone. Looking for someone going to Hakone from Tokyo for a ridesharing |
 Passenger is willing to cost share until 1000yen. Medium luggage and can speak Italian, French and English. If you have a car and heading in that direction have a look here.
 #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア #イタリア語
+
+weekness
+I still stuggle to manage project from 'outside',
+manage engineer from inside is fine since I'm still deep in the code, but things
+ get difficutlt when you can just rely on metrics and other managers who report to you
+
+In 5 years
+- I want to become director of engineering (head of engineering) <=> manage several projects
+
