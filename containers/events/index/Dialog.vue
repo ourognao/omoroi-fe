@@ -379,7 +379,7 @@ v-dialog(v-model="visible" persistent scrollable width="auto")
 
         v-spacer
 
-        v-btn(flat @click.stop.prevent.native="send()")
+        v-btn(:disabled="!isPictureUploaded" flat @click.stop.prevent.native="send()")
           span {{ $t('base.form.send') }}
           v-icon.ml-1 check_circle
 </template>
