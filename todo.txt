@@ -134,3 +134,32 @@ Regards,
 Hello everyone. Looking for someone going to Hakone from Tokyo for a ridesharing |
 Passenger is willing to cost share until 1000yen. Medium luggage and can speak Italian, French and English. If you have a car and heading in that direction have a look here.
 #rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア #イタリア語
+
+
+Time.at(JSON.parse(Account.find_by(login: 'familiar-link-corporate').cookies).select {|r| r['name'] == '_gat' }.first.dig('expirationDate'))
+Time.at(JSON.parse(Account.find_by(login: 'familiar-link-corporate').cookies).select {|r| r['name'] == '_gid' }.first.dig('expirationDate'))
+
+JSON.parse(Account.find_by(login: 'familiar-link-corporate').cookies).map {|r| r['expirationDate'] }.compact.map { |r| Time.at(r) }
+
+
+Account.where(platform_id: 4, iop: nil).pluck(:login)
+@bookingMasterAccount
+
+Account.where(platform_id: 4, iop: nil).update_all(
+              iop: "0",
+              web_oauth_token: @bookingMasterAccount.web_oauth_token,
+              status: @bookingMasterAccount.status,
+              cookies: @bookingMasterAccount.cookies,
+              login_state: @bookingMasterAccount.login_state,
+              login_at: Time.current,
+              login_error: nil
+            )
+
+
+faminect11+yamamoto0616@gmail.com", "faminect11+shibatabuilding@gmail.com", "faminect11+teammiran@gmail.com", "familiar-link-corporate", faminect11+hanare@gmail.com", "uotakonome@faminect.jp", "faminect11+luft@gmail.com", "x0.ms.sup.0x+osamuminpaku@gmail.com"
+
+
+Account.find(login: 'x0.ms.sup.0x+osamuminpaku@gmail.com', platform_id: 4)
+
+
+Scraping::Web::Booking::Inbound::TopicJob.new(695).perform
