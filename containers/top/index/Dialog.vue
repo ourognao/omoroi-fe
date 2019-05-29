@@ -273,10 +273,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
     font-size 15px
   
   .top-event-view
-    max-height 70vh
-
-  .p-layout
-    width p(900, 312)
+    max-height 55vh
 </style>
 
 <!-- ============================================================================ -->
