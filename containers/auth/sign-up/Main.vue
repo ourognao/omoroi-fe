@@ -147,6 +147,7 @@ export default {
             }
           }
           console.error(error)
+          this.closeWaitingScreen()
         }
       })
     }
