@@ -70,11 +70,6 @@ export default {
           name: 'stand.shinsaibashi',
           thumbnail: '/images/partners/logo/stand.png',
           href: 'https://www.facebook.com/akari.stand/'
-        },
-        {
-          name: 'stand.tombori-riverwalk',
-          thumbnail: '/images/partners/logo/stand.png',
-          href: 'https://www.facebook.com/StandTomboriRiverWalk/'
         }
       ]
     }

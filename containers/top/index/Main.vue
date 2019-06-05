@@ -25,10 +25,10 @@
     
 
     v-container.pt-0
-      v-layout(row wrap).text-xs-center.mt-2
-        v-flex(md12 class="grey-text dark") {{ $t('top.index.subtitles.i01') }}
+      v-layout(row wrap).text-xs-center.mt-3
+        v-flex(md12 class="grey-text dark").mb-2 {{ $t('top.index.subtitles.i01') }}
         v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i02') }}
-        v-flex(xs12 class="grey-text dark").mt-2 {{ section ? $t(`top.index.subtitles.section.${section}`) : $t('top.index.subtitles.section.all') }}
+        v-flex(xs12 class="grey-text dark" v-if="section").mt-2 {{ $t(`top.index.subtitles.section.${section}`) }}
 
       div(class="hidden-sm-and-down")
         v-layout(row).border-section-blue-bottom

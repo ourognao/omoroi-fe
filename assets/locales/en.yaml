@@ -169,9 +169,6 @@ about-and-contact-us:
         shinsaibashi:
           title: Shinsaibashi
           explanation: Shinsaibashi explanation
-        tombori-riverwalk:
-          title: Tombori Riverwalk
-          explanation: Tombori Riverwalk explanation
 
 terms-of-service:
   index:
@@ -481,10 +478,9 @@ top:
   index:
     title: Top
     subtitles:
-      i01: Meet locals, make friends, 
-      i02: explore new places.
+      i01: Hangout with locals, meet new friends,
+      i02: explore cool places. Enjoy life!
       section:
-        all: Enjoy life!
         SC: Good food, good drinks, good people, good times!
         LX: Learn, chat, enjoy!
         SP: Be active, play sports!

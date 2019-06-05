@@ -148,12 +148,12 @@ events:
 
 about-and-contact-us:
   index:
-    title: 運営会社について・お問い合わせ
+    title: 会社概要・お問い合わせ
     contact-us:
       title: お問い合わせ
       i01: For any inquiries, please contact us at info[at]omoroi-life.com
     about-us:
-      title: 運営会社について
+      title: 会社概要
       i01: Enjoy Life! Omoroi.
       i02: 世界中のインターナショナルな仲間と友達になって、今までにない出会いを体験しよう！
       i03: Omoroiイベントチームはインターナショナルな仲間たちとみんなが楽しく仲良くなれるようなイベントを提供しています！素敵な場所で美味しいご飯を食べながら楽しい時間を共に過ごしましょう！
@@ -167,15 +167,12 @@ about-and-contact-us:
         explanation: シェア仲間をみつけよう！（コスト・情報・楽しさ・思い出）
       stand:
         shinsaibashi:
-          title: Shinsaibashi
-          explanation: Shinsaibashi explanation
-        tombori-riverwalk:
-          title: Tombori Riverwalk
-          explanation: Tombori Riverwalk explanation
+          title: STAND
+          explanation: 心斎橋の町中にありながら、そこは場末な異空間。スタンドへようこそ。
 
 terms-of-service:
   index:
-    title: ご利用規約・個人情報保護方針
+    title: ご利用規約
     introduction:
       i01: 本規約は、Omoroi Life（以下、当ウェブサイト）が運営するウェブサイト（以下、本サイト）のサービスに適用されます。
     term1:
@@ -382,10 +379,9 @@ top:
   index:
     title: トップ
     subtitles:
-      i01: Meet locals, make friends, 
-      i02: explore new places.
+      i01: 友達が欲しい！英語力アップ！国際交流の目的は人それぞれ…
+      i02: Omoroiイベントでおもろい時間を♪
       section:
-        all: Enjoy life!
         SC: Good food, good drinks, good people, good times!
         LX: Learn, chat, enjoy!
         SP: Be active, play sports!
@@ -452,6 +448,6 @@ footer:
     i03: All rights Reserved.
   links:
     home: トップ
-    about: 運営会社について・お問い合わせ
-    privacy-policy: プライバシーポリシー
-    terms-of-service: ご利用規約・個人情報保護方針
+    about: 会社概要・お問い合わせ
+    privacy-policy: 個人情報保護方針
+    terms-of-service: ご利用規約
