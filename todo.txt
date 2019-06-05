@@ -163,37 +163,11 @@ Account.find(login: 'x0.ms.sup.0x+osamuminpaku@gmail.com', platform_id: 4)
 
 
 Scraping::Web::Booking::Inbound::TopicJob.new(695).perform
+      
 
-
-
-
-
-
-
-English Page                
-Top               
-1 Change text to "Hangout with locals, meet new friends, explore cool places. Enjoy life!" …the "Enjoy life!" part comes immediately after the "…cool places." sentence (not on the next line).             
-2 Add a space above and two spaces below "Hangout…" sentence.             
-About / Contact               
-1 Delete Tombori Riverwalk for now              
-2 Here's the text for STAND. Title is "STAND", description "Delicous local craft beer in a local Japanese bar, serving great local homestyle bar foods."              
-                
-                
-Japanese Page               
-Bottom of top page                
-1 Please change the following text in Japanese              
-  a)  "運営会社について" to "会社概要"            
-  b)  "プライバシーポリシー" to "個人情報保護方針"            
-  c)  "ご利用規約　個人情報保護方針"… delete "個人情報保護方針"           
-Terms of Use page               
-1 Delete "個人情報保護方針" on the upper most title, just "ご利用規約"             
-About Contact page                
-1 Delete Tombori friend             
-2 Title of STAND bar is "珈琲ⅹ麦酒スタンド　心斎橋", description "心斎橋の町中にありながら、そこは場末な異空間。スタンドへようこそ。"              
-                
+```
 All pages               
 1 Please change the text that is under the slideshow pics to the following text on all pages:             
   "友達が欲しい！英語力アップ！国際交流の目的は人それぞれ…
 Omoroiイベントでおもろい時間を♪"              
-                
-                
+```             

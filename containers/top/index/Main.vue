@@ -117,7 +117,11 @@
                       span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                       span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
                 v-flex(md1 style="line-height: 75px")
-                  v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+                  v-btn.ma-0.no-hover-btn(
+                    flat
+                    icon
+                    @click.stop.prevent.native="details(event, true)"
+                    :ripple='false')
                     v-icon.details(class="icon-blue icons events") chevron_right
 
       
@@ -188,7 +192,11 @@
                   span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                   span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
             v-flex(xs1 style="line-height: 75px")
-              v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+              v-btn.ma-0.no-hover-btn(
+                flat
+                icon
+                @click.stop.prevent.native="details(event, true)"
+                :ripple='false')
                 v-icon.details(class="icon-blue icons events") chevron_right
 
       
@@ -219,7 +227,11 @@
             v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event, 30, 'explanation') }}
             v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event, 160, 'explanation') }}
         v-flex(xs1 style="line-height: 50px")
-          v-btn(flat icon @click.stop.prevent.native="details(event, false)")
+          v-btn.no-hover-btn(
+            flat
+            icon
+            @click.stop.prevent.native="details(event, false)"
+            :ripple='false')
             v-icon.details(class="icon-blue icons events") chevron_right
 </template>
 

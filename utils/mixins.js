@@ -113,7 +113,7 @@ export default {
         setTimeout(() => {
           if (typeof document !== 'undefined') {
             let dialogContent = document.getElementsByClassName('l-waiting')[0].parentElement
-            dialogContent.style.zIndex = 1004
+            dialogContent.style.zIndex = 1008
             if (!options.onDialog) {
               let overlays = document.getElementsByClassName('v-overlay')
               let overlay = overlays[overlays.length - 1]

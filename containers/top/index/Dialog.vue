@@ -5,7 +5,12 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
 
     v-card-title.pa-0.top-event-section.grey.border-blue-bottom
       v-spacer
-      v-btn.pl-3(small icon flat @click.stop.prevent.native="cancel").mt-0
+      v-btn.pl-3.no-hover-btn(
+        small
+        icon
+        flat
+        @click.stop.prevent.native="cancel"
+        :ripple='false').mt-0
         v-icon.blue-text close
     
     v-divider.border-blue-top
