@@ -45,6 +45,7 @@ export default {
           dl: navigatorLanguage === 'ja' ? 'ja' : 'en'
         }])
       )
+      if (this.$store.state.base.layout.fullPath.substr(0, 3) === '/en') return
       if (navigatorLanguage !== 'ja') this.goto(this.$router, '/en')
     }
   },
