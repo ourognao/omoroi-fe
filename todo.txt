@@ -105,8 +105,8 @@ Ebisu es a really cool town. As foreigner I suggest you consider it as a best pl
 恵比寿はすごくいい街ですよぜひ遊びに来てください
 
 
-u = User.find_or_initialize_by(email: "jeuxinscription2011@hotmail.fr")
-u.preference_id = 1825
+u = User.find_or_initialize_by(email: "nancy-dc@hotmail.it")
+u.preference_id = 1888
 u.save(validate: false)
 
 b.ourognao@gmail.com
@@ -116,45 +116,50 @@ User.last.update(provider: nil)
 @user = User.find_or_initialize_by(email: 'b.ourognao@gmail.com')
 User.find(1).update(provider: 'facebook')
 
+Si il 
 
-- Privacy Policy (JP)
-- Terms of Use・Privacy (JP and EN)
-- About Us (partners logo)
+Bonjour Pascal, ca va merci et toi ?
+Je suis disponible pour une conversation telephonique ce vendredi 22 vers 18h15 si tu es disponible.
 
-- Desktop adjustement
-- Final last tests
+Cordialement,
 
+Bacher
 
+Hi Andrei,
+Thanks for contacting me but we are not currently looking for remote software development assistance right now.
 
-```
-Yah please just hide the “see all past events” link (upper right corner)
-```
-Done
-
-```
-Also made I made a mistake... please do not include “Inc”
-```
-Done
-
-```
-Well let’s just leave both dates :grin:
-```
-Done
-
-```
-Do you have a link to the production env privacy policy page?
-Want to link it from Facebook
-```
-We cannot do that before release.
-Otherwise people will be access the website even tough it is not open yet.
+Regards,
 
 
-Bha ecoute pour travailler au Japon ca ne depend pas de la duree de ton sejour mais de ton type de visa.
-Donc si tu comptes venir en visa touriste pour travailler, ca va pas le faire du tout :/.
-Apres il y a le probleme de la langue, tu parles un peu le Japonais ?
+Hello everyone. Looking for someone going to Hakone from Tokyo for a ridesharing |
+Passenger is willing to cost share until 1000yen. Medium luggage and can speak Italian, French and English. If you have a car and heading in that direction have a look here.
+#rideshare #sharing #covoiturage #japantravel #carsharing #savemoney #japan #japon #nojrpass  #japantravel #sharing #イベント #国際交流 #ドライブ #英会話 #フランス語 #節約 #日本 #シェア #相乗り #カーシェア #ライドシェア #イタリア語
 
-Aussi, est ce que tu comptes juste rester sur Tokyo ou tu comptes aussi bouger dans d'autres villes ?
 
-Mon job ? Je suis CTO (Chief Techinal Officier) pour une boite de proxy immobilier dans l'industrie de la sharing economy (Airbnb etc...).
+Time.at(JSON.parse(Account.find_by(login: 'familiar-link-corporate').cookies).select {|r| r['name'] == '_gat' }.first.dig('expirationDate'))
+Time.at(JSON.parse(Account.find_by(login: 'familiar-link-corporate').cookies).select {|r| r['name'] == '_gid' }.first.dig('expirationDate'))
 
-Et toi ?
+JSON.parse(Account.find_by(login: 'familiar-link-corporate').cookies).map {|r| r['expirationDate'] }.compact.map { |r| Time.at(r) }
+
+
+Account.where(platform_id: 4, iop: nil).pluck(:login)
+@bookingMasterAccount
+
+Account.where(platform_id: 4, iop: nil).update_all(
+              iop: "0",
+              web_oauth_token: @bookingMasterAccount.web_oauth_token,
+              status: @bookingMasterAccount.status,
+              cookies: @bookingMasterAccount.cookies,
+              login_state: @bookingMasterAccount.login_state,
+              login_at: Time.current,
+              login_error: nil
+            )
+
+
+faminect11+yamamoto0616@gmail.com", "faminect11+shibatabuilding@gmail.com", "faminect11+teammiran@gmail.com", "familiar-link-corporate", faminect11+hanare@gmail.com", "uotakonome@faminect.jp", "faminect11+luft@gmail.com", "x0.ms.sup.0x+osamuminpaku@gmail.com"
+
+
+Account.find(login: 'x0.ms.sup.0x+osamuminpaku@gmail.com', platform_id: 4)
+
+
+Scraping::Web::Booking::Inbound::TopicJob.new(695).perform

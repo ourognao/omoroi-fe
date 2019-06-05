@@ -98,12 +98,14 @@ auth:
     i01: ログイン
     i02: ログイン情報が間違っています
     i03: ブラウザに記録する
-    i04: パスワードを忘れた
+    i04: パスワードをお忘れの場合
     i05: パスワードリセット
     i06: 送信
     i07: 閉じる
     i08: パスワード変更用メールを送信しました。
     i09: ユーザー登録
+    i10: またはメールアドレスでログイン
+    i11: 未登録の方
 
   sign-up:
     title: ユーザー登録
@@ -111,6 +113,8 @@ auth:
     i02: 送信
     i03: 確認用メールを送信しました。
     i04: ログイン
+    i05: またはメールアドレスで登録
+    i06: すでにメンバー？
 
   update:
     title: アカウント編集
@@ -169,133 +173,222 @@ about-and-contact-us:
           title: Tombori Riverwalk
           explanation: Tombori Riverwalk explanation
 
+terms-of-service:
+  index:
+    title: ご利用規約・個人情報保護方針
+    introduction:
+      i01: 本規約は、Omoroi Life（以下、当ウェブサイト）が運営するウェブサイト（以下、本サイト）のサービスに適用されます。
+    term1:
+      title: 【Omoroi Lifeとサイト登録について】
+      explanation:
+        i01: 1. Omoroi Life（以下「本サービス」といいます）は、国内でイベントを提供するリソースです。サービスの目的は、Omoroi Lifeイベントサービスを使用して、友達を見つけたり、連絡先を作ったり、ネットワークを構築したり、他の人と共通の利益を共有することです。そのためには、快適で安全で信頼できる環境の中で、他の人とさまざまなイベントに参加することを推奨致します。
+        i02: 2. このサービスは、快適で安全で信頼できる環境の中で、他の人とさまざまなイベントに参加することが目的として作られています。
+        i03: お客様は、当社のサービス（以下、「サービス」といいます）を登録して使用する前に、これらの「利用規約」（以下「利用規約」といいます）を理解している必要があります。
+    term2:
+      title: 【個人情報の取扱規定への同意】
+      explanation:
+        i01: 1. 本サービスは、個人情報保護方針に従って提供され、会員の個人情報は、個人情報保護方針に従って取り扱われます。
+        i02: 2. サービスの利用または本サイトの閲覧の前に、個人情報保護方針を必ず確認し、その内容に同意の上、サービスのご利用または本サイトの閲覧をして下さい。個人情報保護方針に同意できない場合は、当ウェブサイトが提供するサービスのご利用および本サイトの閲覧をしないで下さい。
+    term3:
+      title: 【会員登録料】
+      explanation:
+        i01: 1. 本サイトの利用登録は無料です。
+    term4:
+      title: 【イベント料金】
+      explanation:
+        i01: 1. 特定のイベントに参加するための一人当たりの合計料金は、そのイベントによって決定されます。参加費、およびその他の料金は各イベントに記載されており、交渉することはできません。イベント費用の他に追加費用が必要となる場合があります。これらは個人の責任です。
+    term5:
+      title: 【本規約と本サービス内容の変更等について】
+      explanation:
+        i01: 1. 当ウェブサイトが必要と判断した場合には、メンバーにあらかじめ通知することなく、本規約および本サービス内容についての変更・追加・削除、また提供中の本サービスの停止や中止を行えるものとします。
+        i02: 2. ただし、当ウェブサイトが本サービスご利用中のメンバーに大きな影響を与えるものと判断した場合は、あらかじめ事前に告知を設けるものとし、本サイトに通知内容を掲示した時点から効力を有するものとします。
+        i03: 3. また通知をE-mail配信により実施した場合には、通知がメンバー等に到達した時点から効力を有するものとし、当ウェブサイトからの通知及び連絡の不着や遅延によって生じる損害等においては一切の責任は負いません。
+    term6:
+      title: 【各種登録や変更等について】
+      explanation:
+        i01: 1. メンバー登録には、名前（ニックネーム）、E-mailアドレスの入力、またはFacebookアカウントによる登録をご希望の場合はFacebookのアカウント情報の一部をご提供いただく必要があります。（氏名、E-mailは非公開）
+        i02: 2. イベントに登録すると、参加者の総数がサイトに表示されます。
+        i03: 3. メンバーとなる本人以外が行う登録の手続きは一切認められません。またメンバーは複数のメンバー登録をできないものとします。
+        i04: 4. ユーザー登録中に情報を入力するときは、正確な情報のみを入力する必要があります。個人情報が変更された場合、会員は自分の情報を更新する必要があります。
+        i05: 5. 登録情報の変更について、あなたが自分のステータスの変更を登録しない場合、このサービスは現在登録されているすべての情報を最新のものとして扱います。
+        i06: 6. ユーザーのログイン名とパスワードを使用してこのWebサイトにログインすると、該当するユーザー自身が使用したものと見なされます。
+    term7:
+      title: 【本人確認について】
+      explanation:
+        i01: 1. このWebサイトでは、有効なEメールアカウントを登録し、確認メールを介してユーザー認証チェックを実行する必要があります。
+    term8:
+      title: 【メンバーの資格とマナーについて】
+      explanation:
+        i01: 1. 本サイトに掲載されているイベントに登録した場合、キャンセルをしない限り、出席とみなします。
+        i02: 2. イベント参加するにあたり、直前にキャンセルはしないでください。キャンセルしなければならない場合は、登録ページからキャンセル登録を行う必要があります。
+        i03: 3. 当ウェブサイトは、日本を訪れる旅行客、住んでいる外国人をサポートするためのサービスのため、参加する方は、マナー、言語などの文化の違いに注意する必要があります。
+        i04: 4. このサービスは、開催国のマナー、文化、習慣を尊重するため、すべての参加者にルールを守り、行動をする必要があります。
+        i05: 5. 本サービスを利用することにより、会員間または第三者との間で発生した事故や事件について、本サービスは一切責任を負いません。
+        i06: 6. このサービスは、ユーザーの登録情報（名前、電子メール、送信された情報などを含む）を調べて検証する責任を負いません。
+    term9:
+      title: 【 使用目的 】
+      explanation:
+        i01: このウェブサイトでは、このサービスの使用は投稿されたイベントの調査および可能な参加のみに限定されています
+    term10:
+      title: 【本サービスご利用の制限およびメンバー登録の削除】
+      explanation:
+        i01: 当ウェブサイトは本サービスを適正に運営するため、以下に該当するメンバーやメンバーの行為（それらを誘発や準備する行為も含む）があると判断した場合には、あらかじめ当該メンバーに通知することなく当該メンバーのデータや投稿を削除、または退会処分（複数のメンバー登録がある場合はそれらすべて）するという措置をできるものとし、当ウェブサイトは当該メンバーにその理由を説明する義務を負わないものとします。
+        i02: 18歳未満の方
+        i03: 日本国またはご利用の際にメンバーが所在する地域の法令に違反する行為または本規約に違反する行為
+        i04: 本サイトに登録または投稿した情報が虚偽であると判断した場合
+        i05: 当ウェブサイトの他のメンバーや第三者に不当に迷惑をかけ、トラブルや被害が常識範囲を超えたメンバー、または他のメンバーからの評価が著しく低いメンバー
+        i06: Any user found to be submitting an attending status, yet failing to attend the registered event
+        i07: 社会規範・公序良俗に反するものや、第三者の権利を侵害し、または第三者が迷惑となるものを、投稿、開示、提供または送信する行為
+        i08: 当ウェブサイトのメンバーとして知り得た本サービスの秘密に属すべき情報を収集、投稿、開示、提供または送信する行為
+        i09: 出会い系や異性限定プラン、性行為や性的サービスを想起させる表現、わいせつ、児童ポルノ又は児童虐待に相当する画像、文書、リンク等を投稿する行為
+        i10: 人種差別および国別差別、その他のあらゆる差別を意識させる投稿や行為
+        i11: 本サービスの悪用もしくは、本サービス提供の目的とは異なる目的でご利用する行為
+        i12: 本サービスを無限連鎖講及びマルチ商法、又はそれに類するもの、その恐れのあるものを投稿、勧誘する行為
+        i13: 本サービス若しくは本サービスの一部（コンテンツ・情報・機能・システム・プログラム等）を使用・転用・転売・複製・送信・翻訳・翻案などして、いかなる手法を問わず、商業・営業目的の活動、営利を目的とした利用及びその準備を目的とした利用をすること、その他本サイトの2次利用や複製行為
+        i14: 他のメンバーのメンバー登録を使用して本サービスを利用する行為
+        i15: 第三者からメンバー登録やパスワードを入手したり、第三者にメンバー登録やパスワードを開示したり提供したりする行為
+        i16: 他のメンバーの使用するソフトウエア、ハードウエア等の機能を破壊したり、妨害したりするようなプログラム等の投稿等をする行為
+        i17: 当ウェブサイトのサーバーまたはネットワークの機能を破壊したり、妨害したりする行為
+        i18: 当ウェブサイトの配信する広告、または、本サイト上で提供されている広告を妨害する行為
+        i19: 反社会的勢力の構成員（過去に構成員であった方を含みます）およびその関係者
+        i20: 本サービスを長期期間にわたり利用していない場合
+        i21: その他、メンバーとの信頼関係が失われ、関係維持が困難と判断した場合
+    term11:
+      title: 【投稿コンテンツについて】
+      explanation:
+        i01: 1. 投稿された内容（テキスト、画像、リンクを含む）が当ウェブサイト側で不適切と判断した場合は、削除させていただく場合がありますので、あらかじめご了承ください。
+        i02: 2. 投稿写真はご自身の責任において投稿して下さい。
+        i03: 3. 投稿内容の全部または一部を、当ウェブサイトまたはサイト閲覧者がSNS媒体においてシェアできるものとします。
+        i04: 4. 本サイトに投稿された内容は、当ウェブサイトの公式見解ではなく、正確性、完全性、有用性について保証するものではありません。
+    term12:
+      title: 【投稿の削除権限】
+      explanation:
+        i01: 当サイトは投稿された内容が以下の条件に該当する場合、登録ユーザーのデータを直ちに削除できるものとします。
+        i02: 1. 本規約の各条項に違反した場合
+        i03: 2. 不正な登録または投稿情報の場合
+        i04: 3. 法令と本利用規約が禁じた行為や公序良俗に反する行為を行った場合
+        i05: 4. 本サイトおよび第三者の人権ならびに知的財産権に反する行為
+        i06: 5. 特定の国への摩擦や中傷
+        i07: 6. 許可なく他のユーザーの情報を使ってコンテンツを投稿する場合
+        i08: 7. 内容が公序良俗に反すると判断された場合
+        i09: 8. コンテンツが犯罪に関連している可能性がある場合
+        i10: 9. その他、不適切と当ウェブサイトが判断した場合
+    term13:
+      title: 【損害請求】
+      explanation:
+        i01: メンバーが本サービスやそれらを構成するデータを本サービスの提供目的以外に利用した場合には、当ウェブサイトはユーザーの活動を停止し、それらの行為を差し止める権利ならびにそれらの行為によって当該メンバーが得た利益相当額を請求する権利を有します
+        i02: メンバーの行為が原因で生じたクレーム等に関連して当ウェブサイトに費用が発生した場合、もしくは当ウェブサイトが賠償金等の支払を行った場合、当該メンバーは当ウェブサイトが支払った費用や賠償金等（弁護士費用を含む）を負担するものとします。
+    term14:
+      title: 【知的財産権】
+      explanation:
+        i01: 本サイトに含まれる工業所有権、プログラミング、著作権、その他の知的財産権およびそれらに関連する全ての権利は当ウェブサイトに帰属するものとし、あらかじめ当ウェブサイトより書面による承諾を得た場合を除いて、これらの複製、販売などはできないものとします。
+    term15:
+      title: 【広告の掲載について】
+      explanation:
+        i01: 当ウェブサイトは、本サービスや第三者に関する広告を本サイト上やメンバーへ送信するE-mail上に、WEBサイトに掲載することができるものとします。
+    term16:
+      title: 【その他の免責事項】
+      explanation:
+        i01: 以下事項により、メンバー及び第三者に対し直接的または間接的な損害等が生じた場合、当ウェブサイトは一切責任を負わないものとします。
+        i02: 本サービスおよび情報に欠陥やバグがないことを保証するものではありません。
+        i03: 本サービスに関連する不明または不適切な結果、内容、表現、行為など。
+        i04: 本サイトへのアクセスの妨害またはメンテナンスによって生じた損害。不正アクセス、ウイルス、またはその他のWebサイトのセキュリティへの侵害サーバーからのデータ損失、またはユーザーのコンピュータや通信回線への損害
+        i05: 本サービスまたはこのWebサイトによって送信されたEメールに含まれる広告の内容。クラブは、サーバーに保存されているユーザーのデータをバックアップする義務を負いません。メンバー自身がこのバックアップを実行する必要があります。ただし、改善やメンテナンスが必要な場合は、クラブは以前に保存したデータを適切に複製します。
+    term17:
+      title: 【お問い合わせ先】
+      explanation:
+        i01: 1. このサービスの運営者はAdmin Omoroi Lifeです
+        i02: 2. 本サービスに関するお問い合わせは、本ウェブサイトの連絡先ページから行います。メールアドレス：admin@omoroi-life.com
+    term18:
+      title: 【ユーザー登録解除】
+      explanation:
+        i01: 1. メンバーが退会を希望する場合は、本サイトの基本情報より退会手続きすることができます。
+        i02: 2. ただし未完のプランがある場合は、それらを実施または中止するまで退会手続きを行うことができません。
+        i03: 3. また退会後も本規約の適用をうけるものとします。ただし、E-mailでのご連絡等のコンタクトは特別な理由がない限り、停止させていただきます。
+    term19:
+      title: 【準拠法および管轄】
+      explanation:
+        i01: 1. 本規約の成立、効力発生、解釈にあたっては日本法を準拠法とします。また、本サービス（公開コンテンツ、広告などを含む）または本サービスとそのユーザーとの間のいかなる紛争も、日本国の法律の下に独占的に判断されます。
+    term20:
+      title: 【利用規約の適用制限について】
+      explanation:
+        i01: 本規約の規定がメンバーとの本規約に基づく契約に適用される関連法令に反するとされる場合、当該規定は、その限りにおいて、当該メンバーとの契約には適用されないものとします。ただし、この場合でも、本利用規約の他の規定の効力には影響しないものとします。
 privacy-policy:
   index:
     title: 個人情報保護方針
     introduction:
-      i01: 'The privacy policy of the service (hereafter referred to as “this service”) offered by the Omoroi Life (Hereafter referred to as “this site”) is defined according to the following articles:'
+      i01: Omoroi Life（以下、当Club）は、自らが運営するサービス（以下、本サービス）における プライバシー情報の取扱いについて、以下のとおり個人情報保護方針を定めます。
     article1:
-      title: Article 1 (Definition of private information)
+      title: 第1条（個人情報情報の定義）
       explanation:
-        i01: '1. The privacy policy of Omoroi Life defines “Personal Information”,
-          in accordance with The Private Information Protection Law, as personal
-          data that can be used to ascertain the identity of a particular living
-          person such as last name, first name, mailing address, email, driving
-          license, meeting photo, SNS account and/or telephone number.'
-        i02: '2. The privacy policy of Omoroi Life defines browsing history and
-          other specific data such as services used, pages visited, ad history,
-          keywords searched, hours and minutes of use, methods of use,
-          environment of use, postal code, nationality, gender, job position,
-          age, IP address of the member, cookie information, location
-          information, terminal identification number, etc.. as falling outside
-          the definition of “Personal Information” stated above.'
+        i01: 1.個人情報保護法に基づき、「個人情報」とは、個人情報保護法にいう「個人情報」を指すものとし、生存する個人に関する情報であって、メンバーの氏名、住所、携帯電話番号、E-mailアドレス、SNSアカウント情報等により特定の個人を識別できる情報を指します。
+        i02: 2.プライバシー情報のうち「履歴情報および特性情報」とは、上記に定める「個人情報」以外のものをいい、ご利用いただいたサービス、ご覧になったページや広告の履歴、メンバーが検索されたキーワード、ご利用日時、ご利用の方法、ご利用環境、郵便番号や国籍、性別、職業、年齢、メンバーのIPアドレス、クッキー情報、位置情報、端末の個体識別情報などを指します。
     article2:
-      title: Article 2 (Methods of collecting private information)
+      title: 第2条（個人情報の収集方法）
       explanation:
-        i01: '1. When a member registers through this site, this service may ask for
-          personal information such as first name, last name, address, phone
-          number, email, SNS account, etc.'
-        i02: '2. While members browse through pages of this site, and use our
-          software and/or services (including those of our business partners)
-          characteristic information such as history of viewed pages and ads,
-          keywords searched, hours and minutes of use, methods of use,
-          environment of use (in the case of accessing via a mobile device, the
-          form of communication will be retrieved, including some
-          characteristics of the mobile device, etc.), IP address, cookie
-          information, location information, terminal identification number,
-          etc. will be collected.'
+        i01: 1.当Clubは、メンバーがメンバー登録やご利用の際にメンバーの氏名、住所、携帯電話番号、E-mailアドレス、SNSアカウント情報等の個人情報をお尋ねすることがあります。
+        i02: 2.当Clubは、メンバーについて、ご利用したサービスやソフトウエア、閲覧したページや広告の履歴、検索した検索キーワード、ご利用日時、ご利用方法、ご利用環境（携帯端末を通じてご利用の場合の当該端末の通信状態、利用に際しての各種設定情報なども含みます）、IPアドレス、クッキー情報、位置情報、端末の個体識別情報などの履歴情報および特性情報を、メンバーが当Clubや提携先のサービスを利用しまたはページを閲覧する際に収集します。
     article3:
-      title: Article 3 (Purpose of collection and use of personal information)
+      title: 第3条（個人情報を収集・利用する目的）
       explanation:
-        i01: 'The purpose of collection of personal information and of its use are described below:'
-        i02: '（1） To improve the services offered by this site and other related services.'
-        i03: '（2） To confirm members’ identities we may use the full name, email,
+        i01: 当Clubがプライバシー情報を収集・利用する目的は、以下のとおりです。
+        i02: （1）本サービスならび、それに関連するサービスの提供のため。
+        i03: （2）メンバーの本人確認を行うために、メンバーの氏名、国籍、居住地（都道府県名）、携帯電話番号、E-mailアドレス、SNSアカウント情報等の情報を利用する目的
           SNS account information, mailing address, etc. of members.'
-        i04: '（3） To contact the member by email in case of notification or of
-          shipping a product during a sales campaign, members’ names, addresses
-          and contact information may be used.'
-        i05: （4） To improve safety between members.
+        i04: （3）メンバーにお知らせや連絡をするためにE-mailアドレスを利用する場合やメンバーにキャンペーン商品を送付したり必要に応じて連絡したりするため、氏名や住所等の連絡先情報を利用する目的
+        i05: （4）メンバー間の安全性向上のため。
     article4:
-      title: Article 4 (About security)
+      title: 第4条（セキュリティについて）
       explanation:
-        i01: 'This club, uses various tools (such as encryption, passwords, and
-          physical security methods) to protect members’ privacy policy and
-          prevent unauthorized access or leakage. However, regardless of these
-          security measures, be aware that this service makes no guarantees
-          about the security of members’ information.'
+        i01: 当Clubは、メンバーの個人情報を不正なアクセスや漏洩から守るため、複数のツール (暗号化、パスワード、物理的セキュリティ方法)を使用したセキュリティにより厳格に管理しています。当Clubとしてセキュリティに関する一切の保証は致しかねますのでご了承下さい。
     article5:
-      title: Article 5 (Provision of personal information to third parties)
+      title: 第5条（個人情報の第三者提供）
       explanation:
-        i01: 'This service, with the exception of the following cases, will not
-          submit any personal information without prior consent from the member.
-          However, if recognized, The Private Information Protection Law as well
-          as other laws and regulations will be excepted.'
-        i02: '（1） If it is required by law.'
-        i03: '（2） If it is required for the protection of human life, health or
-          property, and when the consent cannot be obtained from the member in
-          question.'
-        i04: '（3） If it is required for the achievement of main purposes of this
-          service, only the minimum amount of necessary personal information
-          will be outsourced.'
-        i05: '（4） In the event of a merger or for other reasons such as business
-          succession, personal information may be provided.'
+        i01: 当Clubは、次に掲げる場合を除いて、あらかじめメンバーの同意を得ることなく第三者に個人情報を提供することはありません。ただし、個人情報保護法その他の法令で認められる場合を除きます。
+        i02: （1）法令に基づく場合
+        i03: （2）人の生命、身体または財産の保護のために必要がある場合であって、メンバーの同意を得ることが困難であるとき
+        i04: （3）当Clubが利用目的の達成に必要な範囲内において個人情報の取扱いの全部または一部を外部委託する場合
+        i05: （4）合併その他の事由による事業の承継に伴って個人情報が提供される場合
     article6:
-      title: Article 6 (Disclosure of personal information to serviced members)
+      title: 第6条（個人情報の開示）
       explanation:
-        i01: '1. If personal information of a member is requested by proper legal
-          authorities, we will immediately disclose such information. However,
-          except for the following cases, some or all of the member’s
-          information will not be disclosed. The legal authority will be
-          notified promptly in the case of non-disclosure.'
-        i02: '（1） A member’s or a third party’s life, bodily health, rights,
-          benefits and or personal assets, etc. will be put at risk.'
-        i03: '（2） If it will cause significant hindrance to the proper conduct of
-          this service’s operation.'
-        i04: （3） If it will result in a violation of any other laws or regulations.
-        i05: '2. Apart from the above cases, with the exception of use history
-          information and other such characteristic information, as a rule we do
-          not disclose any other personal information.'
+        i01: 1. 当Clubは、適切な法的機関により個人情報の開示を求められた場合、当Clubは遅滞なくこれを開示します。ただし、開示することにより次のいずれかに該当する場合は、その全部または一部を開示しないこともあり、開示しない決定をした場合には、その旨を遅滞なく通知します。
+        i02: （1）メンバーまたは第三者の生命、身体、財産その他の権利利益を害するおそれがある場合
+        i03: （2）当Clubの業務の適正な実施に著しい支障を及ぼすおそれがある場合
+        i04: （3）その他法令に違反する場合
+        i05: 2.前項の定めにかかわらず、履歴情報および特性情報などの個人情報以外の情報については、原則として開示いたしません。
     article7:
-      title: Article 7 (Correction and deletion of personal information)
+      title: 第7条（個人情報の訂正および削除）
       explanation:
-        i01: '1. If a member thinks that his or her personal information is listed
-          incorrectly he can request for such information to be edited or
-          deleted in accordance with the procedures determined by this service.'
-        i02: '2. If this service receives such a request and determines that such a
-          request is warranted, this service will conduct the correction or
-          deletion within a reasonable amount of time and within reasonable
-          means, and then notify the member of this change.'
+        i01: 1.メンバーは、当Clubの保有する自己の個人情報が誤った情報である場合には、当Clubが定める手続きにより、当Clubに対して個人情報の訂正または削除を請求することができます。
+        i02: 2.当Clubは、メンバーから前項の請求を受けてその請求に応じる必要があると判断した場合には、合理的な期間および範囲で、当該個人情報の訂正または削除を行い、これをメンバーに通知します。
     article8:
-      title: Article 8 (Suspension of use of personal information)
+      title: 第8条（個人情報の利用停止等）
       explanation:
-        i01: 'If for any reason, a member believes that his or her personal
-          information is being used beyond the scope of this policy or for
-          illegal or fraudulent purposes, the member may request to have the use
-          of his/ her personal information suspended or ceased. In such a case,
-          this service will make the necessary inquiries and if necessary will
-          suspend or cease (below, designated as “Suspension of Use”) the use of
-          the member’s personal information and notification will be sent to the
-          member within a reasonable period of time. Moreover, depending on the
-          relevant laws and regulations, it may not be possible to grant a
-          suspension of use request.'
+        i01: 当Clubは、メンバーから、個人情報が、利用目的の範囲を超えて取り扱われているという理由、または不正の手段により取得されたものであるという理由により、その利用の停止または消去（以下、「利用停止等」といいます。）を求められた場合には、必要な調査を行い、その結果に基づき、合理的な期間および範囲で個人情報の利用停止等を行い、その旨メンバーに通知します。なお、関係法令に基づき保有しております個人情報については、利用停止又は消去のご請求には応じられない場合があります。
     article9:
-      title: Article 9 (Change of privacy policy)
+      title: 第9条（個人情報保護方針の変更）
       explanation:
-        i01: '1. The content of this privacy policy can be edited without prior
-          notification to members.'
-        i02: '2. With exception of such cases determined by this service, all
-          modifications to the privacy policy will take effect immediately upon
-          publication to this site.'
+        i01: 1.本個人情報保護方針の内容は、メンバーに通知することなく、変更することができるものとします。
+        i02: 2.当Clubが別途定める場合を除いて、変更後の個人情報保護方針は、本サイトに掲載したときから効力を生じるものとします。
     article10:
-      title: Article 10 (Contact us)
+      title: 第10条（お問い合わせ窓口）
       explanation:
-        i01: 'For any questions regarding this privacy policy, please contact the following:'
-        i02: Omoroi Life Privacy Policy Administrator
-        i03: 'E-mail: info@omoroi-life.com'
+        i01: 本個人情報保護方針に関するお問い合わせは、下記の連絡先までお願い致します。
+        i02: Omoroi Life個人情報管理者
+        i03: E-mailアドレス：info@omoroi-life.com
 
 top:
   index:
     title: トップ
+    subtitles:
+      i01: Meet locals, make friends, 
+      i02: explore new places.
+      section:
+        all: Enjoy life!
+        SC: Good food, good drinks, good people, good times!
+        LX: Learn, chat, enjoy!
+        SP: Be active, play sports!
     tabs:
       social: ソーシャル
       language: ランゲージ

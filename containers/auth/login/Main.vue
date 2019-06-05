@@ -13,6 +13,7 @@ v-container#auth-login-main(fluid)
                 @click="connectToFacebookSDK()"
                 src="/images/sign-up/facebook-login-button.png").facebook-login-button
               div.mt-2.red-text.caption(v-if="providerErrorMessage").red-text {{ providerErrorMessage }}
+            v-flex(xs12).mt-3.pt-3.text-xs-center.border-section-grey-top {{ $t('auth.login.i10') }}
             v-flex(xs12)
               v-text-field(
                 type="email"
@@ -54,21 +55,19 @@ v-container#auth-login-main(fluid)
             v-icon input
 
       v-layout.f-mt2(wrap)
-        v-flex(xs12 sm6)
-          v-btn(flat @click.stop.prevent.native="open")
-            v-icon sentiment_very_dissatisfied
-            span.f-ml1 {{ $t('auth.login.i04') }}
-
-        v-flex.text-sm-right(xs12 sm6)
-          v-btn(flat nuxt :to="path('/auth/sign-up')")
-            v-icon person
-            span.f-ml1 {{ $t('auth.login.i09') }}
+        v-flex(xs12).text-xs-center
+          a(href="#" @click="open()").blue-text {{ $t('auth.login.i04') }}
+        v-flex(xs12).mt-3.text-xs-center
+          span {{ $t('auth.login.i11') }}
+          nuxt-link(:to="path('/auth/sign-up')").blue-text  {{ $t('auth.sign-up.i01') }}.
 </template>
 
 <!-- ============================================================================ -->
 
 <style lang="stylus">
 #auth-login-main
+  .border-section-grey-top
+    border-top 2px solid #bdbdbd
   .facebook-login-button
     width: 100%
 </style>

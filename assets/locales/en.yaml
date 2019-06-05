@@ -98,12 +98,14 @@ auth:
     i01: Sign-in
     i02: Wrong credentials.
     i03: Remember me
-    i04: Reset password
+    i04: Forgot your password?
     i05: Reset password
     i06: Send
     i07: Cancel
     i08: Sent confirmation mail for password reset.
     i09: Sign-up
+    i10: or sign-in with email
+    i11: Don’t have an account?
 
   sign-up:
     title: Sign-up
@@ -111,6 +113,8 @@ auth:
     i02: Send
     i03: Sent confirmation mail for signing up.
     i04: Sign-in
+    i05: or sign-up with email
+    i06: Already a member?
 
   update:
     title: Update account
@@ -169,6 +173,186 @@ about-and-contact-us:
           title: Tombori Riverwalk
           explanation: Tombori Riverwalk explanation
 
+terms-of-service:
+  index:
+    title: Terms of Service
+    introduction:
+      i01: These Terms and Conditions apply to Omoroi Life and the services offered by its website.
+    term1:
+      title: 【 About Omoroi Life and site registration 】
+      explanation:
+        i01: 1. Omoroi Life (hereafter referred to as “this service”) is a resource
+          that offers events and social functions within Japan. The aim of this service is to find friends, make contacts, network and/or share common interests with others using Omoroi Life event services.
+        i02: 2. The objective of this service is to participate various events with
+          others, in a comfortable, safe and trustworthy environment.
+        i03: 3. You MUST have a complete comprehension of these Terms of Use (hereinafter referred to as terms of use) before registering and using our service (hereinafter referred to as service).
+    term2:
+      title: 【 Consent for personal data processing 】
+      explanation:
+        i01: 1. This service is provided and member’s personal information will be handled in accordance with the Privacy Policy.
+        i02: 2. Before using or browsing this website, you must read our Privacy
+          Policy and confirm its contents. Once you consent to our Privacy
+          Policy, you can start using and browsing this website. If you don't
+          consent to our Privacy Policy, do not use or browse this website.
+    term3:
+      title: 【 Member registration fees 】
+      explanation:
+        i01: 1. Registration for use of this site is free.
+    term4:
+      title: 【 Fees for events 】
+      explanation:
+        i01: 1. The total fees per person for joining a particular event will be determined by said event. Participation fees, plus any other fees will be listed in each event and are not negotiable. Additional costs may be needed on top of event fees and are the responsibility of the
+          participating individual.
+    term5:
+      title: 【 About changes to this agreement and to the content of this service 】
+      explanation:
+        i01: 1. This service can if needed, at any moment change, add or delete the
+          content of this website without prior notification. This includes the possibility of closing or suspending the website as well.
+        i02: 2. However, if the service has decided that a change will have a significant impact on its users, a prior notification will be sent, and the decision will be effective upon the uploading of such notice to the official website.
+        i03: 3. Moreover, if such notification is delivered by email, the decision
+          will be regarded as effective from the moment the email is delivered.
+          This service will not take any responsibility for damages incurred by late or undelivered emails.
+    term6:
+      title: 【 About user registration and changes to profile information 】
+      explanation:
+        i01: 1. On the registration page, you are required to fill out your last name, first name, email, etc. You can also register via Facebook. In the latter case, only a part of your Facebook information must be submitted (however, last name, first name, email, will not be displayed on the site).
+        i02: 2. In the case of registering for the attending of an event, only a number (pertaining to yourself and any guests) will appear on the
+          site.
+        i03: 3. The registrant must be the same person as the actual member; you
+          may not register using another person’s personal information.
+          Moreover, multiple registrations are forbidden.
+        i04: 4. While entering information during user registration, you must enter
+          only true and exact information. In the event of a change in personal
+          information, members are responsible for keeping their information current.
+        i05: '5. Concerning changes to registered information: if you do not register changes to your status, this service will treat all currently registered information as current.'
+        i06: 6. Log-ins in to this website using a user’s log-in and password will be regarded as having been done by the applicable using themselves.
+    term7:
+      title: 【 About your personal identification 】
+      explanation:
+        i01: 1. On this website, you must register a valid email account and perform a user authenticity check via confirmation email.
+    term8:
+      title: 【 About user requirements and manners 】
+      explanation:
+        i01: 1. In the case of signing-up for any event posted on this site, it will be expected that the individual as well as any guests registered by thus individual will attend the registered event; unless cancellation is submitted.
+        i02: 2. Moreover, because it most likely will effect event organization and
+          dynamics, as well as other participants, please do not cancel at the last minute. If for some reasons you have to cancel, you must use the cancellation button on the registration page.
+        i03: 3. This service supports foreigners visiting or living in Japan as well. Consequently, people attending events with foreigners should be
+          aware of cultural differences such as manners, language, etc..
+        i04: 4. In the like, this service also supports respecting the manners,
+          culture and customs of the hosting country, thus requires all participants to do likewise.
+        i05: 5. This service takes absolutely no responsibility for any accident or
+          incident occurring between members or a third party through the use of this site.
+        i06: 6. This service has no responsibility to examine and verify the registered information of its users (including name, email, submitted information, etc.).
+    term9:
+      title: 【 Purpose of use 】
+      explanation:
+        i01: On this website, the use of this service is limited only to the researching and possible attending of posted events.
+    term10:
+      title: 【 Member restriction of use or member account deletion 】
+      explanation:
+        i01: In order to properly run this service, if any member is judged by this service to fall under any of the categories below or to have performed any of the following acts (including also any kind of incitement or preparation for such acts), the designated member's data will be deleted without prior notification. Your account may also be deleted as well (please note that in the case of multiple registrations, all accounts will be deleted). In such cases this service has no obligation to tell the member any reasons regarding its decision.
+        i02: People under 18 years of age
+        i03: Violating any local laws in Japan or the terms of use of this website
+        i04: Registering or posting any personal information judged by this website to be false or misleading
+        i05: Causing an injustice, trouble or monetary damages to another user or third party exceeding a common sense range
+        i06: Any user found to be submitting an attending status, yet failing to attend the registered event
+        i07: Gross Infringement of social norms, or public order and/or violation of the basic rights of or causing a disturbance to a third party, including all kind of publications, disclosures,
+          electronic submissions
+        i08: Collecting, posting or publishing any secret or proprietary information related to this service gained while a member of this service
+        i09: Any representation or expression related to the selling of sexual acts or the posting of links, online dating websites, etc.. Text or images of obscenity, child pornography or child abuse
+        i10: All conduct and/or posts determined to be promoting discrimination such as based on race or country of origin
+        i11: Using this website for a purpose different from the above “purpose of use” or any abusive utilization of this service
+        i12: Using the website as pyramid scheme or pyramid selling, or any posts or solicitations that are judged to be promoting such activities
+        i13: Using this website for profit or any other methods designed to make profit from this site, including secondary use and reproduction of its content
+        i14: Using the registration of another member to use this service
+        i15: Submission or disclosure of other user’s passwords and registration information (including disclosure to third parties)
+        i16: The destruction or disturbance of any hardware/software functions, or any kind of program interference,
+          etc..
+        i17: The destruction or disturbance of site servers or any network functions
+        i18: Interfering with any advertisements placed on this website, or any advertisement broadcast by members themselves
+        i19: Members of antisocial groups (including past members) as well as persons related to such groups
+        i20: A long period of disuse of this site and or its services
+        i21: When it has been judged that trust has been lost or will be difficult to maintain with a user
+    term11:
+      title: 【 About site content and linked content】
+      explanation:
+        i01: 1. Omoroi Life reserves the right to delete any posted content (texts,
+          images, links) judged inappropriate.
+        i02: 2. Do not upload images you didn't take or don’t have permission to
+          use (copyrighted). If there are people in the picture, make sure you
+          have their consent.
+        i03: 3. The full content or a part of it can be shared on SNS media by Omoroi Life or viewers of the site.
+        i04: 4. All posted content are not the opinions of Omoroi Life. There are
+          no guarantee about the accuracy, completeness and usefulness of thus contents.
+    term12:
+      title: 【 About the right of deletion 】
+      explanation:
+        i01: 'Omoroi Life reserves the right to immediately delete any data of a
+          registered user, if the posted content falls under the following:'
+        i02: 1. In case of violation of our terms and agreements.
+        i03: 2. In case of deceptive registration or post information.
+        i04: 3. Breaks the law and regulations, the terms and conditions of our
+          service, or any act contrary to public order and morality.
+        i05: 4. Any act contrary to this site and the third party human rights as well as any intellectual property rights.
+        i06: 5. Any frictions or defamation toward a specific country.
+        i07: 6. If you use the information of another user to post content without permission.
+        i08: 7. If the content is judged contrary to public order and morality.
+        i09: 8. If the content might be affiliated to a crime.
+        i10: 9. If Omoroi Life has judged the topic as inappropriate.
+    term13:
+      title: 【 Damage claims 】
+      explanation:
+        i01: This service reserves the right to terminate the activities of a user
+          judged to be using this service in a manner inconsistent with its intended purpose and to file a claim to recover any profits thereby
+          obtained by such methods.
+        i02: In the case where an act committed by a member results in a damage
+          claim against this service, the member will be responsible for all monetary damages (including legal fees) accrued.
+    term14:
+      title: 【 Intellectual property rights 】
+      explanation:
+        i01: All technical information, Industrial property rights, programming, copyrights, other property rights as well as any property in association with this service are owned by the service. Any replication or sale of the above is forbidden without explicit written permission acquired in advance.
+    term15:
+      title: 【 About Ads 】
+      explanation:
+        i01: Omoroi Life or (a third party) has the possibility of publishing advertisements on the website as well as sending ads to users via
+          email.
+    term16:
+      title: 【 Other disclaimer 】
+      explanation:
+        i01: This service will not take any responsibility in the following cases
+          for any direct or indirect damages to users or a third party.
+        i02: This service and information is not guaranteed to be free of defects and or bugs
+        i03: Any unclear or inappropriate results, content, expressions, acts, etc.. pertaining to this service
+        i04: Any damages caused by site access interference or maintenance; unauthorized access, viruses, or other compromises to website security; data loss from the server, or any damages to users’ computers or communication lines
+        i05: The content of any advertising included in the emails sent by this service or this website. The club has no obligation to backup any of the user’s data stored on its server;
+          members themselves have to perform this backup. However, if an improvement and/or maintenance is required, the club will perform
+          appropriate duplication of previously stored data
+    term17:
+      title: 【 Contact Representative 】
+      explanation:
+        i01: 1. The organizer of this service is Admin Omoroi Life.
+        i02: '2. Inquiries concerning this service are handled via the contact page
+          of this website; by emailing the given contact address, which should be sent to: admin@omoroi-life.com.'
+    term18:
+      title: 【 User un-subscription 】
+      explanation:
+        i01: 1. In the case of un-subscription, a complete un-subscription
+          (including basic information) can be performed by the member.
+        i02: 2. However, in case of subscribed or attending event subscription, you
+          will not be able to un-subscribe until you cancel all subscribed
+          events.
+        i03: 3. Moreover, once un-subscribed, the terms of use are still applicable
+          to the user. However, unless there is a special reason, we will not send you any further notifications (email, etc.).
+    term19:
+      title: 【 Applicable law and jurisdiction 】
+      explanation:
+        i01: 1. These terms of use, are established, enforced and interpreted under Japanese law. Moreover, this service (including the published content, advertisements, etc.) or any dispute between the service and its users will be judged exclusively under Japanese law.
+    term20:
+      title: 【 Restriction of terms and condition use 】
+      explanation:
+        i01: In case of a discrepancy between Japanese law (in direct relation with
+          the above quoted rule) and a particular section of these terms of use, the Japanese law takes the first priority only in that section. However, any other section of these terms of use must be respected
+          under any and all circumstances.
 privacy-policy:
   index:
     title: Privacy Policy
@@ -296,6 +480,14 @@ privacy-policy:
 top:
   index:
     title: Top
+    subtitles:
+      i01: Meet locals, make friends, 
+      i02: explore new places.
+      section:
+        all: Enjoy life!
+        SC: Good food, good drinks, good people, good times!
+        LX: Learn, chat, enjoy!
+        SP: Be active, play sports!
     tabs:
       social: SOCIAL
       language: LANGUAGE

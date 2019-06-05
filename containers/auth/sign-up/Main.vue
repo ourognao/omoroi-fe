@@ -13,6 +13,7 @@ v-container#auth-sign-up-main(fluid)
                 @click="connectToFacebookSDK()"
                 src="/images/sign-up/facebook-login-button.png").facebook-login-button
               div.mt-2.red-text.caption(v-if="providerErrorMessage").red-text {{ providerErrorMessage }}
+            v-flex(xs12).mt-3.pt-3.text-xs-center.border-section-grey-top {{ $t('auth.sign-up.i05') }}
             v-flex(xs12)
               v-text-field(
                 type="text"
@@ -71,16 +72,17 @@ v-container#auth-sign-up-main(fluid)
             v-icon check_circle
 
       v-layout.f-mt2(wrap)
-        v-flex(xs12)
-          v-btn(flat nuxt :to="path('/auth/login')")
-            v-icon arrow_back
-            span.f-ml1 {{ $t('auth.sign-up.i04') }}
+        v-flex(xs12).text-xs-center
+          span {{ $t('auth.sign-up.i06') }}
+          nuxt-link(:to="path('/auth/login')").blue-text  {{ $t('auth.sign-up.i04') }}
 </template>
 
 <!-- ============================================================================ -->
 
 <style lang="stylus">
 #auth-sign-up-main
+  .border-section-grey-top
+    border-top 2px solid #bdbdbd
   .facebook-login-button
     width: 100%
 </style>
@@ -145,6 +147,7 @@ export default {
             }
           }
           console.error(error)
+          this.closeWaitingScreen()
         }
       })
     }
