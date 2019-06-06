@@ -30,7 +30,7 @@
         v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i02') }}
         v-flex(xs12 class="grey-text dark" v-if="section").mt-2 {{ $t(`top.index.subtitles.section.${section}`) }}
 
-      div(class="hidden-sm-and-down")
+      div(class="hidden-sm-and-down").mt-2
         v-layout(row).border-section-blue-bottom
           v-flex(md4).section-desktop-bg
             v-layout(row wrap)
@@ -126,7 +126,7 @@
 
       
 
-      div(class="hidden-md-only hidden-lg-only hidden-xl-only")
+      div(class="hidden-md-only hidden-lg-only hidden-xl-only").mt-2
         div(v-if="section === 'SP'").mt-2
           v-layout(row class="eventHeader")
             v-flex.caption(xs12)
