@@ -478,12 +478,19 @@ top:
   index:
     title: Top
     subtitles:
-      i01: Hangout with locals, meet new friends,
-      i02: explore cool places. Enjoy life!
       section:
-        SC: Good food, good drinks, good people, good times!
-        LX: Learn, chat, enjoy!
-        SP: Be active, play sports!
+        top:
+          i01: Hangout with locals, meet new friends,
+          i02: explore cool places. Enjoy life!
+        SC:
+          i01: Good food, good drinks, good people
+          i02: good times. Enjoy life!
+        LX:
+          i01: Learn language, improve skils,
+          i02: chat with firends. Enjoy life!
+        SP:
+          i01: Be active, be healthy, enjoy life.
+          i02: Play sports!
     tabs:
       social: SOCIAL
       language: LANGUAGE
