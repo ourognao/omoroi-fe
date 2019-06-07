@@ -33,7 +33,7 @@
           v-flex(md12 class="grey-text dark").mb-2 {{ $t(`top.index.subtitles.section.top.i01`) }}
           v-flex(xs12 class="grey-text dark").mt-2 {{ $t(`top.index.subtitles.section.top.i02`) }}
 
-      div(class="hidden-sm-and-down").mt-2
+      div(class="hidden-sm-and-down").mt-3
         v-layout(row).border-section-blue-bottom
           v-flex(md4).section-desktop-bg
             v-layout(row wrap)
@@ -70,7 +70,7 @@
                           )
                   v-flex(md12 v-else)
                     img(:src="sectionPictureSrc").border-radius.ten.ml-5.mr-5
-          v-flex(md6).offset-md1.eventHeaderBorder.mb-4.mt-4
+          v-flex(md6).offset-md1.eventHeaderBorder.mb-4
             v-layout(row class="eventHeader").pa-2
               v-flex.caption(md5)
                 v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
@@ -129,7 +129,7 @@
 
       
 
-      div(class="hidden-md-only hidden-lg-only hidden-xl-only").mt-2
+      div(class="hidden-md-only hidden-lg-only hidden-xl-only").mt-3
         div(v-if="section === 'SP'").mt-2
           v-layout(row class="eventHeader")
             v-flex.caption(xs12)
