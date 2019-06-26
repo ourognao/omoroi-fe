@@ -1,19 +1,16 @@
 <template lang="pug">
 #about-index
   about-index-main
-  about-index-dialog
 </template>
 
 <!-- ============================================================================ -->
 
 <script>
 import AboutIndexMain from '~/containers/about/index/Main'
-import AboutIndexDialog from '~/containers/about/index/Dialog'
 
 export default {
   components: {
-    AboutIndexMain,
-    AboutIndexDialog
+    AboutIndexMain
   },
   head () {
     return {

@@ -88,11 +88,12 @@
       class="menu-icons"
       @click="goto($router, `/en${fullPath}`)"
     )
-    a(v-else :href="fullPath.replace(/^\\/[^\/]+/, '')")
-      img.pointable(
-        src="/images/language/128/jp.png"
-        class="menu-icons"
-      )
+    img.pointable(
+      v-else
+      src="/images/language/128/jp.png"
+      class="menu-icons"
+      @click="goto($router, `${fullPath.replace(/^\\/[^\/]+/, '')}`)"
+    )
     img.pointable(
       v-if="$realEnv !== 'production'"
       src="/images/top/menu.png"
