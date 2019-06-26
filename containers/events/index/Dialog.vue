@@ -601,8 +601,6 @@ export default {
     uploadDone (files) {
       if (files && Array.isArray(files) && files.length) {
         let uploadedPictureIds = files.map(arr => arr.qquuid)
-        console.log('files', files)
-        console.log('uploadedPictureIds', uploadedPictureIds)
         this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: uploadedPictureIds
         }])
@@ -669,7 +667,6 @@ export default {
           !context.isPictureUploaded) return
         try {
           this.openWaitingScreen({ onDialog: true })
-          console.log('bago', this.$uploadedPictureIds)
           let newEvent = {
             user_id: this.organizer,
             title: JSON.stringify(this.titles),

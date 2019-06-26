@@ -28,7 +28,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
             v-flex(xs12).caption.text-xs-center.blue-text.mb-1.border-blue-bottom.pb-1
               a(href="#" @click.stop.prevent="scrollTo('top-event-view', { direction: 'bottom' })")
                 | {{ $t('top.dialog.reservation.button.i03') }}
-          v-layout.navigation(row class="border-blue-bottom").pb-1
+          v-layout.navigation(row class="border-blue-bottom").pb-1.mt-2
             v-flex.caption(xs6)
               span(v-if="!firstEventIds.includes($s.eventId)")
                 v-icon(class="icon-blue zero-ajusted icons events") navigate_before
