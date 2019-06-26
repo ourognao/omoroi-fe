@@ -539,8 +539,9 @@ export default {
     }, 1000)
   },
   computed: {
-    $uploadedPictureIds () {
-      return this.$store.state.pictures.index.uploadedPictureIds
+    $uploadedPictureIds: {
+      get: function () { return this.$store.state.pictures.index.uploadedPictureIds },
+      set: function (val) { this.$store.commit('merge', ['pictures.index', val]) }
     },
     $s () {
       return this.$store.state.events.index
@@ -600,6 +601,8 @@ export default {
     uploadDone (files) {
       if (files && Array.isArray(files) && files.length) {
         let uploadedPictureIds = files.map(arr => arr.qquuid)
+        console.log('files', files)
+        console.log('uploadedPictureIds', uploadedPictureIds)
         this.$store.commit('merge', ['pictures.index', {
           uploadedPictureIds: uploadedPictureIds
         }])
@@ -666,6 +669,7 @@ export default {
           !context.isPictureUploaded) return
         try {
           this.openWaitingScreen({ onDialog: true })
+          console.log('bago', this.$uploadedPictureIds)
           let newEvent = {
             user_id: this.organizer,
             title: JSON.stringify(this.titles),
@@ -861,9 +865,7 @@ export default {
         this.section = []
         this.isLocationAutocompleted = true
         this.isPictureUploaded = true
-        this.$store.commit('merge', ['pictures.index', {
-          uploadedPictureIds: []
-        }])
+        this.$uploadedPictureIds = []
         this.originalPictures = []
       }
       this.setGmapMarker(this.positions)
