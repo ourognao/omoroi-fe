@@ -536,7 +536,8 @@ export default {
       })
       this.$store.commit('merge', ['top.index', {
         currentMonth: this.currentMonth,
-        currentMonths: this.currentMonths
+        currentMonths: this.currentMonths,
+        futurEvents: this.futurEvents
       }])
     },
     getEventsBySport () {

@@ -71,6 +71,7 @@ export const state = () => ({
       section: null,
       dialog: false,
       futurEvent: null,
+      futurEvents: [],
       currentMonth: null,
       currentMonths: null
     }

@@ -65,6 +65,7 @@ base:
     title: omoroi
   common:
     yen: ¥
+    event-not-available: The event has expired and is no longer available.
   menu:
     english: English
     japanese: 日本語

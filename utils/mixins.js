@@ -15,6 +15,9 @@ export default {
     }
   },
   methods: {
+    isFuturEvent (date) {
+      return date.substr(0, 10) >= moment().format('YYYY-MM-DD')
+    },
     async signUpViaFacebook (response) {
       this.providerErrorMessage = null
       console.log(response)
@@ -210,7 +213,7 @@ export default {
       let eventTitles = JSON.parse(event.title)
       let section = !currentSection ? event.section[0] : currentSection
       let index = eventTitles.findIndex(arr => arr.section === section)
-      if (index === -1) {
+      if (index === -1 && !options.fromTopPage) {
         let rootPath = this.$locale === 'en' ? '/en/' : '/'
         window.location.href = rootPath
       }

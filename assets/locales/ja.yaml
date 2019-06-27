@@ -65,6 +65,7 @@ base:
     title: omoroi
   common:
     yen: ¥
+    event-not-available: イベントの期限は切れのため閲覧できません。
   menu:
     english: English
     japanese: 日本語

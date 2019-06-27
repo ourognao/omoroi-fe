@@ -24,18 +24,18 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
               span.caption.green-text {{ $t('top.dialog.reservation.i04') }}
             v-flex(xs6).mt-1.date-location.text-xs-right {{ formatDate(event.date) }}
             v-flex(xs12).mt-1.caption.text-xs-center
-              | {{ displayEventTitle($s.section, event, { fromTopPage: false }) }}
+              | {{ eventTitle }}
             v-flex(xs12).caption.text-xs-center.blue-text.mb-1.border-blue-bottom.pb-1
               a(href="#" @click.stop.prevent="scrollTo('top-event-view', { direction: 'bottom' })")
                 | {{ $t('top.dialog.reservation.button.i03') }}
           v-layout.navigation(row class="border-blue-bottom").pb-1.mt-2
             v-flex.caption(xs6)
-              span(v-if="!firstEventIds.includes($s.eventId)")
+              span(v-if="eventNavigation('previous', event)")
                 v-icon(class="icon-blue zero-ajusted icons events") navigate_before
                 a(href="#" @click.stop.prevent="navigate('before')")
                   | {{ $t('top.dialog.common.previous') }}
             v-flex.caption(xs6 class="text-xs-right")
-              span(v-if="!lastEventIds.includes($s.eventId)")
+              span(v-if="eventNavigation('next', event)")
                 a(href="#" @click.stop.prevent="navigate('next')")
                   | {{ $t('top.dialog.common.next') }}
                 v-icon(class="icon-blue zero-ajusted icons events") navigate_next
@@ -59,7 +59,7 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
           v-layout(row class="border-blue-bottom").pb-1
             v-flex.caption(xs12)
               v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
-              span {{ displayEventTitle($s.section, event, { fromTopPage: false }) }}
+              span {{ eventTitle }}
           v-layout.mt-2(row)
             v-flex(xs6 class="date-location")
               v-layout(row).mb-1.mt-2
@@ -193,7 +193,9 @@ v-dialog(v-model="visible" scrollable persistent width="auto")
               v-flex.text-xs-center(xs12).mb-1
                 v-btn.primary.mt-3(small @click.stop.prevent.native="goToPage('/auth/sign-up')")
                   span {{ $t('top.dialog.reservation.button.i02') }}
-
+        v-container.pa-0(fluid v-else class="event")
+          v-layout(row)
+            v-flex(xs12).caption.mt-2 {{ $t('base.common.event-not-available') }}
 </template>
 
 <!-- ============================================================================ -->
@@ -298,7 +300,6 @@ export default {
     return {
       visible: false,
       firstEventIds: [],
-      lastEventIds: [],
       futurEvents: [],
       pastEvents: [],
       name: null,
@@ -308,6 +309,7 @@ export default {
       reservationId: null,
       hasAlreadyReserved: null,
       remainingSpaces: null,
+      eventTitle: null,
       lat: 0,
       lng: 0,
       gmap: {
@@ -371,6 +373,9 @@ export default {
     },
     $actualMonth () {
       return moment().format('YYYY-MM')
+    },
+    $futurEvents () {
+      return this.$store.state.top.index.futurEvents
     },
     $currentMonth () {
       return this.$store.state.top.index.currentMonth
@@ -460,6 +465,43 @@ export default {
         this.message(this.$t('base.axios.failure'))
       }
     },
+    eventNavigation (direction, event) {
+      if (direction === 'next') {
+        let hastNextEvent = false
+        if (this.isFuturEvent(event.date)) {
+          let currentEventIndex = this.$futurEvents.findIndex(futurEvent => futurEvent.id === event.id)
+          let nextFuturEvent = currentEventIndex + 1
+          if (this.$futurEvents[nextFuturEvent]) {
+            hastNextEvent = true
+          }
+          return hastNextEvent
+        } else {
+          let currentEventIndex = this.pastEvents.findIndex(pastEvent => pastEvent.id === event.id)
+          let nextPastEvent = currentEventIndex + 1
+          if (this.pastEvents[nextPastEvent]) {
+            hastNextEvent = true
+          }
+          return hastNextEvent
+        }
+      } else {
+        let hasPreviousEvent = false
+        if (this.isFuturEvent(event.date)) {
+          let currentEventIndex = this.$futurEvents.findIndex(futurEvent => futurEvent.id === event.id)
+          let previousFuturEvent = currentEventIndex - 1
+          if (this.$futurEvents[previousFuturEvent]) {
+            hasPreviousEvent = true
+          }
+          return hasPreviousEvent
+        } else {
+          let currentEventIndex = this.pastEvents.findIndex(pastEvent => pastEvent.id === event.id)
+          let previousPastEvent = currentEventIndex - 1
+          if (this.pastEvents[previousPastEvent]) {
+            hasPreviousEvent = true
+          }
+          return hasPreviousEvent
+        }
+      }
+    },
     setForm () {
       if (!this.$s.eventId) return
       this.getOriginalPictures()
@@ -470,13 +512,10 @@ export default {
       context.name = context.$currentUser.name
       context.email = context.$currentUser.email
       context.firstEventIds = [context.futurEvents[0].id, context.pastEvents[0].id]
-      context.lastEventIds = [
-        context.futurEvents[context.futurEvents.length - 1].id,
-        context.pastEvents[context.pastEvents.length - 1].id
-      ]
       let events = context.$s.futurEvent ? context.futurEvents : context.pastEvents
       let event = events.filter(event => event.id === context.$s.eventId)
       if (!event.length) return
+      context.eventTitle = this.displayEventTitle(this.$s.section, event[0], { fromTopPage: false })
       context.remainingSpaces = context.setRemainingSpaces(event[0])
       context.setExpectedPeople(event[0].reservations)
       context.setGmapMarker(event[0].positions)
