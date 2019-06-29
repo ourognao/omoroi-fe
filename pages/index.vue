@@ -53,6 +53,7 @@ export default {
   },
   async asyncData ({ query, route, store, redirect }) {
     store.commit('merge', ['base.layout', { current: 'top.index', fullPath: route.fullPath }])
+    if (process.env.real === 'production') return
     try {
       let params = queryString.stringify({
         screen: 'top',
