@@ -337,7 +337,11 @@ export default {
       return moment(date).format(formatted)
     },
     path (url) {
-      return (this.$locale === 'ja' ? url : '/' + this.$locale + url)
+      let englishUrl = '/' + this.$locale + url
+      if ((url.indexOf('/') === 0 || url.indexOf('/?') === 0) && this.$locale === 'en') {
+        englishUrl = url
+      }
+      return (this.$locale === 'ja' ? url : englishUrl)
     },
     push (store, key, path, hash) {
       store.commit('merge', [key, hash])
@@ -357,8 +361,7 @@ export default {
       window.open(url, '_blank')
     },
     goto (router, url) {
-      let t = Date.now()
-      url = url.indexOf('?') === -1 ? `${url}?t=${t}` : `${url}&t=${t}`
+      url = url.indexOf('?') === -1 ? `${url}` : `${url}`
       router.push(this.path(url))
     }
   }
