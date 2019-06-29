@@ -25,12 +25,15 @@
     
 
     v-container.pt-0
-      v-layout(row wrap).text-xs-center.mt-2
-        v-flex(md12 class="grey-text dark") {{ $t('top.index.subtitles.i01') }}
-        v-flex(xs12 class="grey-text dark") {{ $t('top.index.subtitles.i02') }}
-        v-flex(xs12 class="grey-text dark").mt-2 {{ section ? $t(`top.index.subtitles.section.${section}`) : $t('top.index.subtitles.section.all') }}
+      v-layout(row wrap).text-xs-center.mt-3
+        v-flex(v-if='section')
+          v-flex(md12 class="grey-text dark").mb-2 {{ $t(`top.index.subtitles.section.${section}.i01`) }}
+          v-flex(xs12 class="grey-text dark").mt-2 {{ $t(`top.index.subtitles.section.${section}.i02`) }}
+        v-flex(v-else)
+          v-flex(md12 class="grey-text dark").mb-2 {{ $t(`top.index.subtitles.section.top.i01`) }}
+          v-flex(xs12 class="grey-text dark").mt-2 {{ $t(`top.index.subtitles.section.top.i02`) }}
 
-      div(class="hidden-sm-and-down")
+      div(class="hidden-sm-and-down").mt-3
         v-layout(row).border-section-blue-bottom
           v-flex(md4).section-desktop-bg
             v-layout(row wrap)
@@ -67,7 +70,7 @@
                           )
                   v-flex(md12 v-else)
                     img(:src="sectionPictureSrc").border-radius.ten.ml-5.mr-5
-          v-flex(md6).offset-md1.eventHeaderBorder.mb-4.mt-4
+          v-flex(md6).offset-md1.eventHeaderBorder.mb-4
             v-layout(row class="eventHeader").pa-2
               v-flex.caption(md5)
                 v-icon.mb-1(class="icon-blue ajusted icons events") panorama_fish_eye
@@ -117,12 +120,16 @@
                       span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                       span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
                 v-flex(md1 style="line-height: 75px")
-                  v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+                  v-btn.ma-0.no-hover-btn(
+                    flat
+                    icon
+                    @click.stop.prevent.native="details(event, true)"
+                    :ripple='false')
                     v-icon.details(class="icon-blue icons events") chevron_right
 
       
 
-      div(class="hidden-md-only hidden-lg-only hidden-xl-only")
+      div(class="hidden-md-only hidden-lg-only hidden-xl-only").mt-3
         div(v-if="section === 'SP'").mt-2
           v-layout(row class="eventHeader")
             v-flex.caption(xs12)
@@ -188,7 +195,11 @@
                   span {{ setThreshold(event) === 'red-text' ? $t('top.index.events.list.info.i01') : $t('top.index.events.list.info.i03') }}
                   span.ml-1(:class="setThreshold(event)") {{ setAttending(event) }}
             v-flex(xs1 style="line-height: 75px")
-              v-btn.ma-0(flat icon @click.stop.prevent.native="details(event, true)")
+              v-btn.ma-0.no-hover-btn(
+                flat
+                icon
+                @click.stop.prevent.native="details(event, true)"
+                :ripple='false')
                 v-icon.details(class="icon-blue icons events") chevron_right
 
       
@@ -219,7 +230,11 @@
             v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event, 30, 'explanation') }}
             v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event, 160, 'explanation') }}
         v-flex(xs1 style="line-height: 50px")
-          v-btn(flat icon @click.stop.prevent.native="details(event, false)")
+          v-btn.no-hover-btn(
+            flat
+            icon
+            @click.stop.prevent.native="details(event, false)"
+            :ripple='false')
             v-icon.details(class="icon-blue icons events") chevron_right
 </template>
 
@@ -521,7 +536,8 @@ export default {
       })
       this.$store.commit('merge', ['top.index', {
         currentMonth: this.currentMonth,
-        currentMonths: this.currentMonths
+        currentMonths: this.currentMonths,
+        futurEvents: this.futurEvents
       }])
     },
     getEventsBySport () {

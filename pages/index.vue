@@ -45,7 +45,8 @@ export default {
           dl: navigatorLanguage === 'ja' ? 'ja' : 'en'
         }])
       )
-      if (navigatorLanguage !== 'ja') this.goto(this.$router, '/en')
+      if (this.$store.state.base.layout.fullPath.substr(0, 3) === '/en' || navigatorLanguage === 'ja') return
+      this.goto(this.$router, '/en')
     }
   },
   async asyncData ({ query, route, store, redirect }) {

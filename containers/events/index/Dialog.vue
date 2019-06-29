@@ -539,8 +539,9 @@ export default {
     }, 1000)
   },
   computed: {
-    $uploadedPictureIds () {
-      return this.$store.state.pictures.index.uploadedPictureIds
+    $uploadedPictureIds: {
+      get: function () { return this.$store.state.pictures.index.uploadedPictureIds },
+      set: function (val) { this.$store.commit('merge', ['pictures.index', val]) }
     },
     $s () {
       return this.$store.state.events.index
@@ -861,9 +862,7 @@ export default {
         this.section = []
         this.isLocationAutocompleted = true
         this.isPictureUploaded = true
-        this.$store.commit('merge', ['pictures.index', {
-          uploadedPictureIds: []
-        }])
+        this.$uploadedPictureIds = []
         this.originalPictures = []
       }
       this.setGmapMarker(this.positions)

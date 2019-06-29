@@ -27,7 +27,8 @@ v-container#about-index-main(fluid)
 
   v-layout.mt-2(row v-for="(partner, index) in partners" :key="index" class="partnerDetails")
     v-flex(xs4).pt-2.pb-2
-      img(:src="partner.thumbnail" @click="goToPage(partner.href)")
+      a(:href="partner.href" target="_blank")
+        img.pointable(:src="partner.thumbnail")
     v-flex.ml-4(xs8)
       v-layout.mb-1(row)
         v-flex(xs12)
@@ -72,9 +73,9 @@ export default {
           href: 'https://www.facebook.com/akari.stand/'
         },
         {
-          name: 'stand.tombori-riverwalk',
-          thumbnail: '/images/partners/logo/stand.png',
-          href: 'https://www.facebook.com/StandTomboriRiverWalk/'
+          name: 'reha',
+          thumbnail: '/images/partners/logo/reha.jpg',
+          href: 'https://sisyoga.site/osaka/index.html'
         }
       ]
     }
