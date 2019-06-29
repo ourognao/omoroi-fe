@@ -31,7 +31,9 @@ export default {
     }
   },
   mounted () {
-    this.setLanguageBasedOnBrowser()
+    if (process.env.real !== 'production') {
+      this.setLanguageBasedOnBrowser()
+    }
   },
   methods: {
     setLanguageBasedOnBrowser () {
