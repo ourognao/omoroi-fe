@@ -20,7 +20,7 @@
         :key="link.titleKey"
         v-if="link.visible"
         ripple
-        @click.stop.prevent.native="link.externalHref ? externalGoTo(link.href) : goto($router, link.href)"
+        @click.stop.prevent.native="link.externalHref ? externalGoTo(link.href) : goto($router, setHref(link.href))"
         active-class="l-active"
         v-model="selected[link.name]"
       )
@@ -60,7 +60,7 @@
         :key="link.titleKey"
         v-if="link.visible"
         ripple
-        @click.stop.prevent.native="link.externalHref ? externalGoTo(link.href) : goto($router, link.href)"
+        @click.stop.prevent.native="link.externalHref ? externalGoTo(link.href) : goto($router, setHref(link.href))"
         active-class="l-active"
         v-model="selected[link.name]"
       )
@@ -322,6 +322,10 @@ export default {
     }
   },
   methods: {
+    setHref (href) {
+      let language = this.$locale === 'en' ? '/en' : ''
+      return `${language}${href}`
+    },
     goToTopPage () {
       let goToTopPageItem = this.goToTopPageItems.filter(item => item.locale === this.$locale)[0]
       if (goToTopPageItem.patterns.includes(this.fullPath) ||
@@ -329,7 +333,7 @@ export default {
         if (!this.eventSection) return
         this.eventSection = null
       } else {
-        this.goto(this.$router, '/')
+        this.goto(this.$router, this.$locale === 'en' ? '/en' : '/')
       }
     },
     async invalidOmniauthSession () {
