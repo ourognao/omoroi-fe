@@ -46,14 +46,14 @@ labels:
       nov: Nov
       dec: Dec
   sports:
-    volleyball: Volleyball
-    kickboxing: Kickboxing
-    basketball: Basketball
-    pingpong: Table Tennis
     badminton: Badminton
+    basketball: Basketball
     futsal: Futsal
-    tennis: Tennis
-    other: Other
+    volleyball: Volleyball
+    # kickboxing: Kickboxing
+    # pingpong: Table Tennis
+    # tennis: Tennis
+    # other: Other
   event:
     tags: Tags
     tabs:
@@ -158,7 +158,7 @@ about-and-contact-us:
       i01: What is omoroi?
       i02: 'Omoroi (adjective | o-mo-ro-i | oumouroi): From a dialect of west Japan, originating from the i-adjective "omoshiroi" おもしろい, which means interesting, funny or amusing.'
       i03: This group is for locals, travelers, Japanese and foreigners alike...for anyone who enjoys having fun, exploring, meeting new people, learning new things and enjoying life.
-      i04: Our goal is to bring you to some of the more unheard of parts of Osaka;places that are truly unique.
+      i04: Our goal is for you to experience Osaka like a LOCAL, meet interesting people and enjoy life!
       i05: Hope you can join us!
       i06: Omoroi Team
     our-friends:
