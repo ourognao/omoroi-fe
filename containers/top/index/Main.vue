@@ -418,14 +418,14 @@ export default {
       ],
       sports: [],
       sportItems: [
-        { text: this.$t('labels.sports.volleyball'), value: 'volleyball' },
-        { text: this.$t('labels.sports.kickboxing'), value: 'kickboxing' },
-        { text: this.$t('labels.sports.basketball'), value: 'basketball' },
-        { text: this.$t('labels.sports.pingpong'), value: 'pingpong' },
         { text: this.$t('labels.sports.badminton'), value: 'badminton' },
+        { text: this.$t('labels.sports.basketball'), value: 'basketball' },
         { text: this.$t('labels.sports.futsal'), value: 'futsal' },
-        { text: this.$t('labels.sports.tennis'), value: 'tennis' },
-        { text: this.$t('labels.sports.other'), value: 'other' }
+        { text: this.$t('labels.sports.volleyball'), value: 'volleyball' }
+        // { text: this.$t('labels.sports.kickboxing'), value: 'kickboxing' },
+        // { text: this.$t('labels.sports.pingpong'), value: 'pingpong' },
+        // { text: this.$t('labels.sports.tennis'), value: 'tennis' },
+        // { text: this.$t('labels.sports.other'), value: 'other' }
       ],
       pastEventsHref: '/team/login',
       pictures: [

@@ -46,14 +46,14 @@ labels:
       nov: 11月
       dec: 12月
   sports:
-    volleyball: バレーボール
-    kickboxing: キックボクシング
-    basketball: バスケットボール
-    pingpong: 卓球
     badminton: バドミントン
+    basketball: バスケットボール
     futsal: フットサル
-    tennis: テニス
-    other: その他
+    volleyball: バレーボール
+    # kickboxing: キックボクシング
+    # pingpong: 卓球
+    # tennis: テニス
+    # other: その他
   event:
     tags: タグ
     tabs:
