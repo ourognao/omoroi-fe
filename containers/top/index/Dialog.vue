@@ -377,6 +377,9 @@ export default {
     $futurEvents () {
       return this.$store.state.top.index.futurEvents
     },
+    $events () {
+      return this.$store.state.top.index.events
+    },
     $currentMonth () {
       return this.$store.state.top.index.currentMonth
     },
@@ -465,13 +468,49 @@ export default {
         this.message(this.$t('base.axios.failure'))
       }
     },
+    getEventFilter () {
+      switch (this.$s.section) {
+        case 'SC':
+          return []
+        case 'LX':
+          return []
+        case 'SP':
+          return this.$s.sports.length === 0 ? this.$s.sportItems.map(sport => sport.value) : this.sports
+      }
+    },
+    getAllFuturEvents () {
+      let context = this
+      let allFuturEvents = []
+      let section = this.$s.section
+      let eventFilter = this.getEventFilter()
+      if (!this.$events) return
+      this.$events.filter(function (event) {
+        if (event.date >= context.$currentDay) {
+          if (!section) {
+            allFuturEvents.push(event)
+          } else if (event.section.includes(section)) {
+            if (eventFilter.length === 0) {
+              allFuturEvents.push(event)
+            } else {
+              event.tags.forEach(function (tags) {
+                if (eventFilter.length === 0 || eventFilter.includes(tags)) {
+                  allFuturEvents.push(event)
+                }
+              })
+            }
+          }
+        }
+      })
+      return allFuturEvents
+    },
     eventNavigation (direction, event) {
+      let allFuturEvents = this.getAllFuturEvents()
       if (direction === 'next') {
         let hastNextEvent = false
         if (this.isFuturEvent(event.date)) {
-          let currentEventIndex = this.$futurEvents.findIndex(futurEvent => futurEvent.id === event.id)
+          let currentEventIndex = allFuturEvents.findIndex(futurEvent => futurEvent.id === event.id)
           let nextFuturEvent = currentEventIndex + 1
-          if (this.$futurEvents[nextFuturEvent]) {
+          if (allFuturEvents[nextFuturEvent]) {
             hastNextEvent = true
           }
           return hastNextEvent
@@ -486,9 +525,9 @@ export default {
       } else {
         let hasPreviousEvent = false
         if (this.isFuturEvent(event.date)) {
-          let currentEventIndex = this.$futurEvents.findIndex(futurEvent => futurEvent.id === event.id)
+          let currentEventIndex = allFuturEvents.findIndex(futurEvent => futurEvent.id === event.id)
           let previousFuturEvent = currentEventIndex - 1
-          if (this.$futurEvents[previousFuturEvent]) {
+          if (allFuturEvents[previousFuturEvent]) {
             hasPreviousEvent = true
           }
           return hasPreviousEvent
