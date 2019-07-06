@@ -51,3 +51,19 @@ Date.parse("2018/06").end_of_month
 startMonth  = Date.parse("2018/04/14")
 endMonth    = Date.parse("2018/06").end_of_month
 @events     = Event.where('date BETWEEN ? AND ?', startMonth, endMonth)
+
+
+#Export heroku database (must be inferior to 20Giga)
+heroku pg:backups capture --app noritomosan
+curl -o noritomosan_2016_06_01.dump `heroku pg:backups public-url --app noritomosan`
+
+#Import heroku database
+heroku pg:backups restore 'https://noritomosan.s3.amazonaws.com/db_dump/latest.dump' DATABASE_URL --app noritomosan
+
+#Restore to local database
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U myuser -d mydb latest.dump
+
+
+heroku pg:backups:capture --app omoroi-be
+heroku pg:backups:download --app omoroi-be
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U development -d omoroi_development latest.dump
