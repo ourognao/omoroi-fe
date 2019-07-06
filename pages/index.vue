@@ -1,10 +1,7 @@
 <template lang="pug">
 #top-index
-  div(v-if="$realEnv === 'production'")
-    top-index-release
-  div(v-else)
-    top-index-main
-    top-index-dialog
+  top-index-main
+  top-index-dialog
 </template>
 
 <!-- ============================================================================ -->
@@ -31,9 +28,7 @@ export default {
     }
   },
   mounted () {
-    if (process.env.real !== 'production') {
-      this.setLanguageBasedOnBrowser()
-    }
+    this.setLanguageBasedOnBrowser()
   },
   methods: {
     setLanguageBasedOnBrowser () {
@@ -53,7 +48,6 @@ export default {
   },
   async asyncData ({ query, route, store, redirect }) {
     store.commit('merge', ['base.layout', { current: 'top.index', fullPath: route.fullPath }])
-    if (process.env.real === 'production') return
     try {
       let params = queryString.stringify({
         screen: 'top',
