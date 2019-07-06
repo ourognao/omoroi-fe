@@ -345,7 +345,7 @@ export default {
           ? '/auth/login?session=expired'
           : '/auth/login'
         await axios.get(`/users/invalid_omniauth_session?${params}`)
-        window.location.href = hrefPath
+        window.location.href = this.redirectWithLocale(hrefPath)
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
         console.error(error)

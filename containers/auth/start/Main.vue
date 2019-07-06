@@ -48,7 +48,7 @@ export default {
         })
         setToken(this.auth(headers, data), true)
         this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-        window.location.href = '/'
+        window.location.href = this.redirectWithLocale('/')
       } catch (error) {
         console.error(error)
       }
