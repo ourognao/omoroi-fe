@@ -94,6 +94,9 @@ base:
     expired: セッションの有効期限が切れています
 
 auth:
+  common:
+    error-messages:
+      logged-in-from-other-device: （または他の端末から既にログイン済みです）
   login:
     title: ログイン
     i01: ログイン
