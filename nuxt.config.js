@@ -3,8 +3,12 @@ const webpack  = require('webpack')
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   modules: [
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/google-analytics'
   ],
+  googleAnalytics: {
+    id: 'UA-143366169-1'
+  },
   build: {
     extend (config, ctx) {
       config.node = { fs: 'empty' }
