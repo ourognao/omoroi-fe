@@ -74,7 +74,7 @@ v-container#auth-sign-up-main(fluid)
       v-layout.f-mt2(wrap)
         v-flex(xs12).text-xs-center
           span {{ $t('auth.sign-up.i06') }}
-          nuxt-link(:to="path('/auth/login')").blue-text  {{ $t('auth.sign-up.i04') }}
+          nuxt-link(:to="path(redirectWithLocale('/auth/login'))").blue-text  {{ $t('auth.sign-up.i04') }}
 </template>
 
 <!-- ============================================================================ -->
@@ -126,7 +126,7 @@ export default {
           this.closeWaitingScreen()
           this.message(this.$t('auth.sign-up.i03'))
           setTimeout(() => {
-            window.location.href = '/'
+            window.location.href = this.redirectWithLocale('/')
           }, 1000)
         } catch (error) {
           let names = {

@@ -15,6 +15,9 @@ export default {
     }
   },
   methods: {
+    redirectWithLocale (path) {
+      return this.$locale === 'en' ? `/en${path}` : path
+    },
     isFuturEvent (date) {
       return date.substr(0, 10) >= moment().format('YYYY-MM-DD')
     },
@@ -52,7 +55,7 @@ export default {
         })
         setToken(this.auth(headers, data), this.rememberMe)
         this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-        window.location.href = '/'
+        window.location.href = this.redirectWithLocale('/')
       } catch (error) {
         this.message(this.$t('base.axios.failure'))
         console.error(error)
@@ -96,7 +99,7 @@ export default {
       })
     },
     goToPage (path) {
-      window.location.href = path
+      window.location.href = this.redirectWithLocale(path)
     },
     reduceLocationAddress (event) {
       let eventLocation = this.$locale === 'ja' ? event.locationJp : event.locationEn
@@ -214,8 +217,7 @@ export default {
       let section = !currentSection ? event.section[0] : currentSection
       let index = eventTitles.findIndex(arr => arr.section === section)
       if (index === -1 && !options.fromTopPage) {
-        let rootPath = this.$locale === 'en' ? '/en/' : '/'
-        window.location.href = rootPath
+        window.location.href = this.redirectWithLocale('/')
       }
       let title = null
       let titleItems = [

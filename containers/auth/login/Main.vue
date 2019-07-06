@@ -59,7 +59,7 @@ v-container#auth-login-main(fluid)
           a(href="#" @click="open()").blue-text {{ $t('auth.login.i04') }}
         v-flex(xs12).mt-3.text-xs-center
           span {{ $t('auth.login.i11') }}
-          nuxt-link(:to="path('/auth/sign-up')").blue-text  {{ $t('auth.sign-up.i01') }}.
+          nuxt-link(:to="path(redirectWithLocale('/auth/sign-up'))").blue-text  {{ $t('auth.sign-up.i01') }}.
 </template>
 
 <!-- ============================================================================ -->
@@ -110,7 +110,7 @@ export default {
           })
           setToken(this.auth(headers, data), this.rememberMe)
           this.$store.commit('merge', ['base.auth', this.auth(headers, data)])
-          window.location.href = '/'
+          window.location.href = this.redirectWithLocale('/')
         } catch (error) {
           this.$validator.errors.add({
             field: 'user-password',
