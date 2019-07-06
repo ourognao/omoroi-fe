@@ -299,7 +299,6 @@ export default {
   data () {
     return {
       visible: false,
-      firstEventIds: [],
       futurEvents: [],
       pastEvents: [],
       name: null,
@@ -550,7 +549,6 @@ export default {
       context.getPastEvents()
       context.name = context.$currentUser.name
       context.email = context.$currentUser.email
-      context.firstEventIds = [context.futurEvents[0].id, context.pastEvents[0].id]
       let events = context.$s.futurEvent ? context.futurEvents : context.pastEvents
       let event = events.filter(event => event.id === context.$s.eventId)
       if (!event.length) return
