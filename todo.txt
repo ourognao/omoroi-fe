@@ -53,3 +53,6 @@ endMonth    = Date.parse("2018/06").end_of_month
 @events     = Event.where('date BETWEEN ? AND ?', startMonth, endMonth)
 
 Web site is fast ! Compared to the staging servers. That’s because we actually paid 7$ by month. Check the speed and let me know.
+
+(Or you are already logged in from an other device)
+（または他の端末から既にログイン済みです）

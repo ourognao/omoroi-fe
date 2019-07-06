@@ -41,7 +41,7 @@ export default {
           ...this.$store.getters.options
         })
         if (res.data.status === 'error') {
-          this.providerErrorMessage = res.data.errors['email'][0]
+          this.providerErrorMessage = `${res.data.errors['email'][0]}\n${this.$t('auth.common.error-messages.logged-in-from-other-device')}`
           return
         }
         this.openWaitingScreen({ onDialog: false })
