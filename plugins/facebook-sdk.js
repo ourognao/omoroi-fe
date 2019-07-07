@@ -34,7 +34,7 @@ export default ({ app, store }) => {
   })
 
   function statusChangeCallback (response, store) {
-    if (response.status !== 'connected') {
+    if (response.status !== 'connected' && store.state.base.auth.uprovider !== 'email') {
       store.commit('merge', ['base.auth', { uprovider: null }])
     }
   }

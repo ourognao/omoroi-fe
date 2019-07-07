@@ -88,12 +88,16 @@ export default {
       password: '',
       rememberMe: true,
       providerErrorMessage: null,
-      session: this.getUrlParams().session
+      session: this.getUrlParams().session,
+      accountConfirmationSuccess: this.getUrlParams().account_confirmation_success
     }
   },
   mounted () {
     if (this.session === 'expired') {
       this.message(this.$t('base.session.expired'))
+    }
+    if (this.accountConfirmationSuccess === 'true') {
+      this.message(this.$t('auth.common.success-messages.confirmed-email'))
     }
   },
   methods: {
