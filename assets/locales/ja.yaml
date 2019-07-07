@@ -95,6 +95,8 @@ base:
 
 auth:
   common:
+    success-messages:
+      confirmed-email: アカウントを登録しました。
     error-messages:
       logged-in-from-other-device: （または他の端末から既にログイン済みです）
   login:

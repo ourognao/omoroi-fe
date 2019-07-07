@@ -115,12 +115,15 @@ export default {
         if (!result) return
         try {
           this.openWaitingScreen({ onDialog: false })
+          let path = this.$locale === 'en'
+            ? '/en/auth/login'
+            : '/auth/login'
           await axios.post('/auth', {
             name: this.name,
             email: this.email,
             password: this.password,
             password_confirmation: this.passwordConfirm,
-            confirm_success_url: `${window.location.origin}/auth/start`,
+            confirm_success_url: `${window.location.origin}${path}`,
             locale: this.$store.state.base.locale.selected
           })
           this.closeWaitingScreen()

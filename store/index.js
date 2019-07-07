@@ -43,11 +43,6 @@ export const state = () => ({
       token: null,
       client: null,
       uid: null
-    },
-    start: {
-      token: null,
-      client: null,
-      uid: null
     }
   },
 

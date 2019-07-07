@@ -95,6 +95,8 @@ base:
 
 auth:
   common:
+    success-messages:
+      confirmed-email: Your email address has been successfully confirmed.
     error-messages:
       logged-in-from-other-device: (Or you are already logged in from an other device)
   login:
