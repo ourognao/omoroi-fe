@@ -64,6 +64,7 @@ export const state = () => ({
       scroll: 0,
       eventId: null,
       section: null,
+      sports: [],
       dialog: false,
       futurEvent: null,
       futurEvents: [],

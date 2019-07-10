@@ -416,7 +416,6 @@ export default {
         { text: this.$t('top.index.tabs.language'), value: 'LX' },
         { text: this.$t('top.index.tabs.sports'), value: 'SP' }
       ],
-      sports: [],
       sportItems: [
         { text: this.$t('labels.sports.badminton'), value: 'badminton' },
         { text: this.$t('labels.sports.basketball'), value: 'basketball' },
@@ -465,6 +464,10 @@ export default {
     }
   },
   computed: {
+    sports: {
+      get: function () { return this.$s.sports },
+      set: function (val) { this.$store.commit('merge', ['top.index', { sports: val }]) }
+    },
     section: {
       get: function () { return this.$s.section },
       set: function (val) { this.$store.commit('merge', ['top.index', { section: val }]) }

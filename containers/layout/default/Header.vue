@@ -249,11 +249,15 @@ export default {
       drawer: false,
       goToTopPageItems: [
         { locale: 'ja', patterns: ['/', '/?', '/t'], subStrMaxlength: 2 },
-        { locale: 'en', patterns: ['/en/?'], subStrMaxlength: 5 }
+        { locale: 'en', patterns: ['/en/', '/en/?'], subStrMaxlength: 5 }
       ]
     }
   },
   computed: {
+    sports: {
+      get: function () { return this.$s.sports },
+      set: function (val) { this.$store.commit('merge', ['top.index', { sports: val }]) }
+    },
     eventSection: {
       get: function () { return this.$topIndex.section },
       set: function (val) { this.$store.commit('merge', ['top.index', { section: val }]) }
@@ -323,6 +327,9 @@ export default {
   methods: {
     setHref (href) {
       let language = this.$locale === 'en' ? '/en' : ''
+      if (href === '/') {
+        this.goToTopPage()
+      }
       return `${language}${href}`
     },
     goToTopPage () {
@@ -331,6 +338,7 @@ export default {
         goToTopPageItem.patterns.includes(this.fullPath.substr(0, goToTopPageItem.subStrMaxlength))) {
         if (!this.eventSection) return
         this.eventSection = null
+        this.sports = []
       } else {
         this.goto(this.$router, this.$locale === 'en' ? '/en' : '/')
       }
