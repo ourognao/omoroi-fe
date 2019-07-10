@@ -474,7 +474,7 @@ export default {
         case 'LX':
           return []
         case 'SP':
-          return this.$s.sports.length === 0 ? this.$s.sportItems.map(sport => sport.value) : this.sports
+          return this.$s.sports.length === 0 ? this.$s.sportItems.map(sport => sport.value) : this.$s.sports
       }
     },
     getAllFuturEvents () {
