@@ -588,6 +588,11 @@ export default {
       let events = this.$s.futurEvent ? this.futurEvents : this.pastEvents
       let oldIndex = events.findIndex(arr => arr.id === this.$s.eventId)
       let newIndex = direction === 'next' ? oldIndex + 1 : oldIndex - 1
+      if (this.$s.section && !events[newIndex].section.includes(this.$s.section)) {
+        while (events[newIndex] && !events[newIndex].section.includes(this.$s.section)) {
+          newIndex = direction === 'next' ? newIndex + 1 : newIndex - 1
+        }
+      }
       this.push(this.$store, 'top.index', '/top', {
         scroll: window.pageYOffset,
         dialog: true,
