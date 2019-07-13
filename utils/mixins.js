@@ -105,7 +105,6 @@ export default {
       return eventLocation.includes(',') ? eventLocation.split(',')[0] : eventLocation
     },
     getGoogleMapHref (event) {
-      // let location = this.reduceLocationAddress(event).replace(/ /g, '')
       let eventLocationName = this.displayLocationName(event)
       return `https://maps.google.com/?q=${eventLocationName}`
     },
@@ -136,7 +135,6 @@ export default {
     setGmapMarker (positions) {
       this.gmap.markers[0].position.lat = this.gmap.center.lat = this.lat = parseFloat(positions[0])
       this.gmap.markers[0].position.lng = this.gmap.center.lng = this.lng = parseFloat(positions[1])
-      // Vue.$gmapDefaultResizeBus.$emit('resize')
     },
     rangeOptionsForSelect (start, end, options) {
       let selectOptions = options.includeUnlimitedOption === true
