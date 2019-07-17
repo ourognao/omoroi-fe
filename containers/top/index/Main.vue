@@ -29,9 +29,11 @@
         v-flex(v-if='section')
           v-flex(md12 class="grey-text dark").mb-2 {{ $t(`top.index.subtitles.section.${section}.i01`) }}
           v-flex(xs12 class="grey-text dark").mt-2 {{ $t(`top.index.subtitles.section.${section}.i02`) }}
+          v-flex(xs12 class="grey-text dark" v-if="$locale === 'ja'").mt-2 {{ $t(`top.index.subtitles.section.${section}.i03`) }}
         v-flex(v-else)
           v-flex(md12 class="grey-text dark").mb-2 {{ $t(`top.index.subtitles.section.top.i01`) }}
           v-flex(xs12 class="grey-text dark").mt-2 {{ $t(`top.index.subtitles.section.top.i02`) }}
+          v-flex(xs12 class="grey-text dark" v-if="$locale === 'ja'").mt-2 {{ $t(`top.index.subtitles.section.top.i03`) }}
 
       div(class="hidden-sm-and-down").mt-3
         v-layout(row).border-section-blue-bottom
@@ -301,7 +303,7 @@ $dot-space = 2px
     &.desktop
       height 20em
     &.mobile
-      height 15em
+      height 25em
     
   
   .eventDetails
