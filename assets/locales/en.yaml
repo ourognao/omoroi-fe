@@ -491,15 +491,19 @@ top:
         top:
           i01: Hangout with locals, meet new friends,
           i02: explore cool places. Enjoy life!
+          i03: 
         SC:
           i01: Good food, good drinks, good people,
           i02: good times. Enjoy life!
+          i03: 
         LX:
           i01: Learn language, improve skils,
           i02: chat with friends. Enjoy life!
+          i03: 
         SP:
           i01: Be active, be healthy, enjoy life.
           i02: Play sports!
+          i03: 
     tabs:
       social: SOCIAL
       language: LANGUAGE

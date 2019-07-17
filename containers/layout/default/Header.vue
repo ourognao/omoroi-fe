@@ -337,8 +337,7 @@ export default {
       if (goToTopPageItem.patterns.includes(this.fullPath) ||
         goToTopPageItem.patterns.includes(this.fullPath.substr(0, goToTopPageItem.subStrMaxlength))) {
         if (!this.eventSection) return
-        this.eventSection = null
-        this.sports = []
+        window.location.reload()
       } else {
         this.goto(this.$router, this.$locale === 'en' ? '/en' : '/')
       }

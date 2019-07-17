@@ -157,7 +157,7 @@ about-and-contact-us:
     title: 会社概要
     contact-us:
       title: お問い合わせ
-      i01: For any inquiries, please contact us at info[at]omoroi-life.com
+      i01: お問い合わせはお気軽に、こちらへどうぞ info[at]omoroi-life.com
     about-us:
       title: 会社概要
       i01: Enjoy Life! Omoroi.
@@ -390,17 +390,21 @@ top:
     subtitles:
       section:
         top:
-          i01: 友達が欲しい！英語力アップ！国際交流の目的は人それぞれ…
-          i02: Omoroiイベントでおもろい時間を♪
+          i01: 友達が欲しい！英語力アップ！
+          i02: 国際交流の目的は人それぞれ…
+          i03: Omoroiイベントでおもろい時間を♪
         SC:
-          i01: 友達が欲しい！英語力アップ！国際交流の目的は人それぞれ…
-          i02: Omoroiイベントでおもろい時間を♪
+          i01: 友達が欲しい！英語力アップ！
+          i02: 国際交流の目的は人それぞれ…
+          i03: Omoroiイベントでおもろい時間を♪
         LX:
-          i01: 友達が欲しい！英語力アップ！国際交流の目的は人それぞれ…
-          i02: Omoroiイベントでおもろい時間を♪
+          i01: 友達が欲しい！英語力アップ！
+          i02: 国際交流の目的は人それぞれ…
+          i03: Omoroiイベントでおもろい時間を♪
         SP:
-          i01: 友達が欲しい！英語力アップ！国際交流の目的は人それぞれ…
-          i02: Omoroiイベントでおもろい時間を♪
+          i01: 友達が欲しい！英語力アップ！
+          i02: 国際交流の目的は人それぞれ…
+          i03: Omoroiイベントでおもろい時間を♪
     tabs:
       social: ソーシャル
       language: ランゲージ

@@ -56,11 +56,11 @@ module.exports = {
     { src: join(__dirname, 'assets/css/app.styl'), lang: 'styl' }
   ],
   head: {
-    title: 'Omoroi',
+    title: 'Omoroi Life',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' },
-      { hid: 'description', name: 'description', content: 'Omoroi (おもろい)' }
+      { hid: 'description', name: 'description', content: 'Omoroi Life (おもろい)' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/images/favicon-16.png', sizes: '16x16' },
