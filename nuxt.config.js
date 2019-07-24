@@ -56,15 +56,15 @@ module.exports = {
     { src: join(__dirname, 'assets/css/app.styl'), lang: 'styl' }
   ],
   head: {
-    title: 'Omoroi Life',
+    title: 'Omoroi | Osaka International - Social - Language - Sport - Party',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' },
       { hid: 'description', name: 'description', content: 'Omoroi Life (おもろい)' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/images/favicon-16.png', sizes: '16x16' },
-      { rel: 'icon', type: 'image/png', href: '/images/favicon-32.png', sizes: '32x32' },
+      { rel: 'icon', type: 'image/png', href: '/images/logo/favicon-16.png', sizes: '16x16' },
+      { rel: 'icon', type: 'image/png', href: '/images/logo/favicon-32.png', sizes: '32x32' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
