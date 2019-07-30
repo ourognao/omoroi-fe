@@ -336,7 +336,6 @@ export default {
       let goToTopPageItem = this.goToTopPageItems.filter(item => item.locale === this.$locale)[0]
       if (goToTopPageItem.patterns.includes(this.fullPath) ||
         goToTopPageItem.patterns.includes(this.fullPath.substr(0, goToTopPageItem.subStrMaxlength))) {
-        if (!this.eventSection) return
         window.location.reload()
       } else {
         this.goto(this.$router, this.$locale === 'en' ? '/en' : '/')
