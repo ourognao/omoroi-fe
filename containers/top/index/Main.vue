@@ -204,40 +204,10 @@
                 :ripple='false')
                 v-icon.details(class="icon-blue icons events") chevron_right
 
-      
 
-
-
-
-
-
-
-      v-layout.mt-3(row class="eventHeader")
-        v-flex.caption(xs5)
-          v-icon.mb-1(class="icon-blue more-ajusted icons events") panorama_fish_eye
-          | {{ $t('top.index.events.list.title.i02') }}
-        v-flex.caption(xs7 class="text-xs-right")
-          a(v-if="$realEnv !== 'production'" :href="pastEventsHref") {{ $t('top.index.events.list.title.i03') }}
-      v-layout(v-if="pastEvents.length === 0")
-          v-flex(xs12).text-xs-center.caption.mt-2 {{ $t('top.index.events.list.common.no-past-event') }}
-      v-layout(v-for="(event, index) in pastEvents" :key="index" class="eventDetails")
-        v-flex(xs1)
-          img.past(:src="event.thumbnail").border-radius.ten
-        v-flex.ml-4(xs10)
-          v-layout(row)
-            v-flex.grey-text.dark(xs12) {{ event.date }}
-          v-layout(row)
-            v-flex.caption(xs12) {{ displayEventTitle(null, event, { fromTopPage: true }) }}
-          v-layout(row)
-            v-flex(xs12 class="hidden-md-only hidden-lg-only hidden-xl-only explanation") {{ truncate(event, 30, 'explanation') }}
-            v-flex(xs12 class="hidden-sm-and-down explanation") {{ truncate(event, 160, 'explanation') }}
-        v-flex(xs1 style="line-height: 50px")
-          v-btn.no-hover-btn(
-            flat
-            icon
-            @click.stop.prevent.native="details(event, false)"
-            :ripple='false')
-            v-icon.details(class="icon-blue icons events") chevron_right
+      v-layout.mt-3(row class="eventHeader" v-if="pastEvents.length !== 0")
+        v-flex.caption(xs12 class="text-xs-right")
+          a(href="#" @click.stop.prevent="details(pastEvents[0], false)") {{ $t('top.index.events.list.title.i02') }}
 </template>
 
 <!-- ============================================================================ -->
