@@ -4,8 +4,67 @@ module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   modules: [
     '@nuxtjs/dotenv',
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap'
   ],
+  sitemap: {
+    hostname: 'https://www.omoroi-life.com',
+    gzip: true,
+    exclude: [
+      '/contact-us/**',
+      '/admin/**'
+    ],
+    routes: [
+      {
+        url: '/top',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/auth/login',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/auth/sign-up',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/about',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/privacy-policy',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/terms-of-service',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/auth/password',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      },
+      {
+        url: '/events',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: (new Date()).toISOString()
+      }
+    ]
+  },
   googleAnalytics: {
     id: 'UA-143366169-1'
   },
